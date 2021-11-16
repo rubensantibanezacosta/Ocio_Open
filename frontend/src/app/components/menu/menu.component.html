@@ -1,0 +1,86 @@
+
+
+<div id="menuIcon" class="icon" tabindex="0" (click)="showMenu()">
+    <img src="{{ menuIcon }}" alt="{{ menuIcon }}" />
+</div>
+<div id="slider" class="slider">
+    <div id="menu" class="hideMenu">
+        <div class="menuContainer__items" (click)="navigateTo('/home')">
+            <div class="item-to-animate" tabindex="0">
+                <div class="item__p item-to-animate__sub">
+                    <p>Eventos disponibles</p>
+                </div>
+                <div class="nav-icon item-to-animate__sub">
+                    <img src="{{ viewIcon }}" alt="{{ viewIcon }}" />
+                </div>
+            </div>
+        </div>
+        <div class="menuContainer__items" (click)="navigateTo('/calendar')">
+            <div class="item-to-animate " tabindex="0">
+                <div class="item__p item-to-animate__sub">
+                    <p>Calendario</p>
+                </div>
+                <div class="nav-icon item-to-animate__sub">
+                    <img src="{{ plusIcon }}" alt="{{ plusIcon }}" />
+                </div>
+            </div>
+        </div>
+        <div class="menuContainer__items" (click)="navigateTo('/ranking')">
+            <div class="item-to-animate " tabindex="0">
+                <div class="item__p item-to-animate__sub">
+                    <p>Ranking</p>
+                </div>
+                <div class="nav-icon item-to-animate__sub">
+                    <img src="{{ profileIcon }}" alt="{{ profileIcon }}" />
+                </div>
+            </div>
+        </div>
+        <div class="menuContainer__items" (click)="navigateTo('/myevents')">
+            <div class="item-to-animate" tabindex="0">
+                <div class="item__p item-to-animate__sub">
+                    <p>Mis eventos</p>
+                </div>
+                <div class="nav-icon item-to-animate__sub logout-nav-icon">
+                    <img src="{{ logoutIcon }}" alt="{{ logoutIcon }}" />
+                </div>
+            </div>
+        </div>
+        <div class="menuContainer__items" (click)="navigateTo('/finalizedevents')">
+            <div class="item-to-animate" tabindex="0">
+                <div class="item__p item-to-animate__sub">
+                    <p>Eventos terminados</p>
+                </div>
+                <div class="nav-icon item-to-animate__sub logout-nav-icon">
+                    <img src="{{ logoutIcon }}" alt="{{ logoutIcon }}" />
+                </div>
+            </div>
+        </div>
+        <div class="menuContainer__items">
+            <div class="item-to-animate" tabindex="0">
+                <div class="item__p item-to-animate__sub">
+                    <p>Cerrar sesión</p>
+                </div>
+                <div class="nav-icon item-to-animate__sub logout-nav-icon">
+                    <img src="{{ logoutIcon }}" alt="{{ logoutIcon }}" />
+                </div>
+            </div>
+        </div>
+        <div class="menuContainer__items" (click)="navigateTo('/administration')">
+            <div class="item-to-animate" tabindex="0">
+                <div class="item__p item-to-animate__sub">
+                    <p>Administración</p>
+                </div>
+                <div class="nav-icon item-to-animate__sub logout-nav-icon">
+                    <img src="{{ logoutIcon }}" alt="{{ logoutIcon }}" />
+                </div>
+            </div>
+        </div>
+    
+        
+    </div>
+</div>
+
+
+<div id="collapse-icon" class="collapse-icon" (click)=showMenu()>
+    <img src="{{collapseIcon}}" alt="{{collapseIcon}}" />
+</div>

@@ -1,0 +1,14 @@
+@import "./../../../assets/variablesSass/variables.scss";
+
+.header{
+    display:flex;
+    position: absolute;
+    height: 58px;
+    width: 100%;
+    background-color: $header-footer;
+    box-shadow: 1px 1px 5px black;
+    justify-content: center;
+    align-items: center;
+    color:$color-text-darkmode;
+    font-size: 1.1rem;
+}
