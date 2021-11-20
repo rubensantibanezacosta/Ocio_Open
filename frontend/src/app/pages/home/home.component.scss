@@ -1,78 +1,50 @@
+@import "./../../../assets/variablesSass/variables.scss";
+
+
+
 .slider {
+  color:$color-text-darkmode;
   display: flex;
   overflow-y: hidden;
-  overflow-x: scroll;
+  overflow-x: normal;
   scroll-snap-type: x mandatory;
-  width: 100vw;
-  height: 100vh;
-  max-height: 100vh;
+  height: 80vh;
+  min-height: 468px;
   white-space: nowrap;
+  margin-top: 70px;
+  padding-left: 10px;
+  padding-right: 10px;
+  
 }
 .card-container {
-  min-width: 100vw;
-  min-height: 100vh;
-}
-
-.tittle-container {
-  margin-top: 36px;
-  height: 10%;
-  padding-left: 10%;
-  padding-right: 10%;
-  max-width: 100vw;
-  overflow: hidden;
-}
-
-.profile-tittle {
-  font-size: 1rem;
-  text-shadow: 2px 2px 5px black;
-  color: white;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  overflow-x: auto;
-  white-space: nowrap;
-}
-
-.card-marker {
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  top: 90px;
-}
-
-.card-marker__full-point {
-  background-color: white;
-  width: 6px;
-  height: 6px;
-  border-radius: 100%;
-  margin: 0 2px 0 2px;
-}
-.card-marker__empty-point {
-  border: solid 1px white;
-  width: 4px;
-  height: 4px;
-  border-radius: 100%;
-  margin: 0 2px 0 2px;
+  width: calc(100vw - 20px);
+  height: 78vh;
+  min-height: 368px;
+  max-width: 368px;
+  box-sizing: border-box;
+  padding-right: 20px;
+  
+  
 }
 
 .card {
+  white-space: normal;
   border: solid 2px white;
   border-radius: 12px;
   max-width: 86%;
   margin-left: 7%;
   margin-right: 7%;
   margin-top: 7px;
-  height: 70vh;
+  height: 90vh;
   position: relative;
   overflow: hidden;
-  box-shadow: 1px 1px 15px black;
+  box-shadow: 1px 1px 5px black;
   scroll-snap-align: center;
+  height: 100%;
+  min-width: 280px;
+  margin-right: 15px;
+  
 }
-
 .card-bakground {
   position: absolute;
   width: 100%;
@@ -90,96 +62,86 @@
 
 .card-date {
   color: white;
-  position: absolute;
+  position: relative;
   left: 3%;
   top: -1.5%;
   font-weight: lighter;
 }
 
-.card-temperature {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transform: translateY(-50px) translateX(10px);
+.car-tittle{
   width: 100%;
-  height: 100%;
-  color: white;
-  display: flex;
-  text-shadow: 2px 2px 5px black;
-  font-weight: bold;
+  padding: 2% 5%;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 1.2rem;
+  margin: 0;
 }
-.number {
-  font-size: 5rem;
-}
-.card-text {
-  position: absolute;
+
+
+.card-data-container{
+  width:100%;
+  padding: 0% 5%;
+  height: 60%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow-y: hidden;
+  font-size: 0.8rem;
+  font-weight: lighter;
+}
+
+.card-data-container__row{
+display: flex;
+flex-direction: column;
+box-sizing: border-box;
+max-height: 14%;
+}
+
+.card-data-container__row-last{
+  height: 25%;
+}
+
+.row__div{
   width: 100%;
-  height: 100%;
+  display:flex;
+  align-items: center;
+  }
+
+.star-container{
+  padding-left: 5px;
 }
-.text {
-  color: white;
-  font-size: 1.8rem;
-  text-shadow: 2px 2px 5px black;
+
+.row__a{
+width: 100%;
+display:flex;
+align-items: center;
+color: $color-text-darkmode;
 }
+
+
+.row__div:first-child p{
+ font-weight: bold;
+  }
+
+.row__a--icon{
+  height: 50%;
+}
+.row__a p{
+margin-left: 5px;
+color:$color-text-darkmode;
+
+}
+.row__div p{
+  margin-left: 5px;
+  }
 .transition {
   animation-duration: 0.8s;
   animation-name: jackInTheBox;
 }
 
-.card-forecast {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 30%;
-  width: 100%;
-  display: flex;
-  padding: 5%;
-  flex-direction: column;
-  box-sizing: border-box;
-  color: white;
-  font-size: 0.9em;
-  justify-content: space-evenly;
-}
 
-.card-forecast__line {
-  display: flex;
-  width: 100%;
-  height: 31%;
-  align-items: center;
-  border-radius: 12px;
-  background-color: rgba($color: #ffffff, $alpha: 0.2);
-  text-shadow: 1px 1px 2px black;
-}
 
-.forecast__line--icon {
-  width: 35px;
-  margin-right: 3px;
-  padding-left: 10px;
 
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.forecast__line--icon img {
-  width: 35px;
-  margin-right: 3px;
-}
-
-.forecast__line--text {
-  width: 100%;
-}
-
-.forecast__line--temp {
-  display: flex;
-  justify-content: flex-end;
-  text-align: end;
-  padding-right: 5%;
-}
 
 @keyframes rubberBand {
   from {

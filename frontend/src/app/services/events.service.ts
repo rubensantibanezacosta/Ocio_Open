@@ -1,15 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + './../../../config/config')[env];
+import { Event } from '../models/event';
+import { config } from '../../config/config.js';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventsService {
-  endpoint = config.host+'/api/events';
+  endpoint = '/api/events';
   bearerToken = localStorage.getItem("ocioToken");
   httpOptions = {
     headers: new HttpHeaders({ 
@@ -24,6 +23,7 @@ export class EventsService {
   }
 
   getAllEvents():Observable<Event[]>{
+    console.log(config);
     return this.httpClient.get<Event[]>(this.endpoint, this.httpOptions)
   }
 

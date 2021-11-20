@@ -1,140 +1,74 @@
 <app-header [tittle]="tittle" [image]="image"></app-header>
-<div class="main transition" tabindex="0">
-    <div class="card-marker">
-        <div class="card-marker__full-point"></div>
-        <div class="card-marker__empty-point"></div>
-    </div>
+<div class="main">
     <section class="slider">
-        <div class="card-container">
-            <div class="tittle-container">
-                <p class="profile-tittle" for="mail"><b>Las Palmas</b></p>
-            </div>
-
-
+        <div class="card-container" *ngFor="let event of events">
             <div class="card">
                 <div class="card-bakground">
-                    <img src="">
+                    <img src="" alt="">
                 </div>
-                <p class="card-date">16 de octubre</p>
-                <div class="card-temperature">
-                    <p class="number">2</p>
-                    <p class="unit">ºC</p>
-                </div>
-                <div class="card-text">
-                    <p class="text">Tormenta</p>
-                </div>
-                <div class="card-forecast">
-                    <div class="card-forecast__line">
-                        <div class="forecast__line--icon">
+                <p class="card-date">{{event.date}}</p>
+                <p class="car-tittle">{{event.tittle}}</p>
+                <div class="card-data-container">
+                    <div class="card-data-container__row">
+                        <div class="row__div" href="">
+                            <img class="row__a--icon" src="{{event.image_url}}" alt="icon">
+                            <p>{{event.organizer}}</p>
+                            <div class="star-container">
+                                <img src="{{miniStar}}" alt="">
+                                <img src="{{miniStar}}" alt="">
+                                <img src="{{miniStar}}" alt="">
+                            </div>
                         </div>
-                        <div class="forecast__line--text">Jue. | Soleado</div>
-                        <div class="forecast__line--temp">22º / 23º</div>
                     </div>
-                    <div class="card-forecast__line">
-                        <div class="forecast__line--icon">
-
+                    <div class="card-data-container__row">
+                        <div class="row__div" href="">
+                            <img class="row__a--icon" src="{{profileIcon}}" alt="icon">
+                            <p>{{event.zone}}</p>
+                            <div class="star-container">
+                                <img src="{{miniStar}}" alt="">
+                                <img src="{{miniStar}}" alt="">
+                                <img src="{{miniStar}}" alt="">
+                            </div>
                         </div>
-                        <div class="forecast__line--text">Vie. | Soleado</div>
-                        <div class="forecast__line--temp">22º / 23º</div>
                     </div>
-                    <div class="card-forecast__line">
-                        <div class="forecast__line--icon">
-
+                    <div class="card-data-container__row">
+                        <div class="row__div" href="">
+                            <img class="row__a--icon" src="{{profileIcon}}" alt="icon">
+                            <p>{{event.place}}</p>
                         </div>
-                        <div class="forecast__line--text">Sáb. | Nublado</div>
-                        <div class="forecast__line--temp">22º / 23º</div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="card-container">
-            <div class="tittle-container">
-                <p class="profile-tittle" for="mail"><b>Madrid</b></p>
-            </div>
-
-
-            <div class="card">
-                <div class="card-bakground">
-                    <img src="">
-                </div>
-                <p class="card-date">16 de octubre</p>
-                <div class="card-temperature">
-                    <p class="number">25</p>
-                    <p class="unit">ºC</p>
-                </div>
-                <div class="card-text">
-                    <p class="text">Soleado</p>
-                </div>
-                <div class="card-forecast">
-                    <div class="card-forecast__line">
-                        <div class="forecast__line--icon">
-
-                        </div>
-                        <div class="forecast__line--text">Jue. | Soleado</div>
-                        <div class="forecast__line--temp">22º / 23º</div>
+                    <div class="card-data-container__row">
+                        <a class="row__a" href="">
+                            <img class="row__a--icon" src="{{profileIcon}}" alt="icon">
+                            <p>Assistants</p>
+                        </a>
                     </div>
-                    <div class="card-forecast__line">
-                        <div class="forecast__line--icon">
-
-                        </div>
-                        <div class="forecast__line--text">Vie. | Soleado</div>
-                        <div class="forecast__line--temp">22º / 23º</div>
+                    <div class="card-data-container__row">
+                        <a class="row__a" href="">
+                            <img class="row__a--icon" src="{{profileIcon}}" alt="icon">
+                            <p>Comments</p>
+                        </a>
                     </div>
-                    <div class="card-forecast__line">
-                        <div class="forecast__line--icon">
-
-                        </div>
-                        <div class="forecast__line--text">Sáb. | Nublado</div>
-                        <div class="forecast__line--temp">22º / 23º</div>
+                    <div class="card-data-container__row card-data-container__row-last">
+                       
+                            <p>Description Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus provident nemo</p>
+                       
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="card-container">
-            <div class="tittle-container">
-                <p class="profile-tittle" for="mail"><b>Barcelona</b></p>
-            </div>
-
-
-            <div class="card">
-                <div class="card-bakground">
-                    <img src="">
-                </div>
-                <p class="card-date">16 de octubre</p>
-                <div class="card-temperature">
-                    <p class="number">2</p>
-                    <p class="unit">ºC</p>
-                </div>
-                <div class="card-text">
-                    <p class="text">Tormenta</p>
-                </div>
-                <div class="card-forecast">
-                    <div class="card-forecast__line">
-                        <div class="forecast__line--icon">
-
-                        </div>
-                        <div class="forecast__line--text">Jue. | Soleado</div>
-                        <div class="forecast__line--temp">22º / 23º</div>
-                    </div>
-                    <div class="card-forecast__line">
-                        <div class="forecast__line--icon">
-
-                        </div>
-                        <div class="forecast__line--text">Vie. | Soleado</div>
-                        <div class="forecast__line--temp">22º / 23º</div>
-                    </div>
-                    <div class="card-forecast__line">
-                        <div class="forecast__line--icon">
-
-                        </div>
-                        <div class="forecast__line--text">Sáb. | Soleado</div>
-                        <div class="forecast__line--temp">22º / 23º</div>
+                <div class="card-button-container">
+                    <p>¿Asistiré?</p>
+                    <div class="card-button-subcontainer">
+                        <button class="yes-button">Sí</button>
+                        <button class="no-button">No</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    
 </div>
+
+    
 
 
 <app-menu></app-menu>

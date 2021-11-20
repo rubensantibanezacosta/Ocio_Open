@@ -7,4 +7,5 @@ export class Event{
     description: string;
     punctuation_avg: number;
     organizer: string;
+    image_url: string;
 }

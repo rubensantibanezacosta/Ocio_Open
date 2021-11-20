@@ -16,6 +16,15 @@ export class MenuComponent implements OnInit {
   logoutIcon = "../../../assets/icons/logout-icon.png";
   developerImage = "../../../assets/images/developer-site.png";
   collapseIcon = "../../../assets/icons/collapse-icon.png";
+
+
+  eventsIcon="../../../assets/icons/events-icon.png";
+  calendarIconMenu="../../../assets/icons/calendarIcon-menu.png";
+  rankingIconMenu="../../../assets/icons/ranking-icon.png";
+  myEventIcon="../../../assets/icons/my-event-icon.png";
+  calendarIconMenuOk="../../../assets/icons/calendar-ok-icon.png";
+  dataBaseIcon="../../../assets/icons/data-icon.png";
+
   menuShown:boolean=false;
 
   ngOnInit(): void {

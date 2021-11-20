@@ -5,43 +5,55 @@
 </div>
 <div id="slider" class="slider">
     <div id="menu" class="hideMenu">
-        <div class="menuContainer__items" (click)="navigateTo('/home')">
+        <div class="menuContainer__items__borderless" (click)="navigateTo('/home')">
             <div class="item-to-animate" tabindex="0">
                 <div class="item__p item-to-animate__sub">
                     <p>Eventos disponibles</p>
                 </div>
                 <div class="nav-icon item-to-animate__sub">
-                    <img src="{{ viewIcon }}" alt="{{ viewIcon }}" />
+                    <div class="icon-container">
+                        <img src="{{ eventsIcon }}" alt="{{ eventsIcon }}" />
+                    </div>
+                    
                 </div>
             </div>
         </div>
-        <div class="menuContainer__items" (click)="navigateTo('/calendar')">
+        <div class="menuContainer__items__borderless" (click)="navigateTo('/calendar')">
             <div class="item-to-animate " tabindex="0">
                 <div class="item__p item-to-animate__sub">
                     <p>Calendario</p>
                 </div>
                 <div class="nav-icon item-to-animate__sub">
-                    <img src="{{ plusIcon }}" alt="{{ plusIcon }}" />
+                    <div class="icon-container">
+                        <img src="{{ calendarIconMenu }}" alt="{{ calendarIconMenu }}" />
+                    </div>
+                    
                 </div>
             </div>
         </div>
-        <div class="menuContainer__items" (click)="navigateTo('/ranking')">
+        <div class="menuContainer__items__borderless" (click)="navigateTo('/ranking')">
             <div class="item-to-animate " tabindex="0">
                 <div class="item__p item-to-animate__sub">
                     <p>Ranking</p>
                 </div>
                 <div class="nav-icon item-to-animate__sub">
-                    <img src="{{ profileIcon }}" alt="{{ profileIcon }}" />
+                    <div class="icon-container">
+                        <img src="{{ rankingIconMenu }}" alt="{{ rankingIconMenu }}" />
+                    </div>
+                    
                 </div>
             </div>
         </div>
-        <div class="menuContainer__items" (click)="navigateTo('/myevents')">
+        <div class="menuContainer__items__borderless" (click)="navigateTo('/myevents')">
             <div class="item-to-animate" tabindex="0">
                 <div class="item__p item-to-animate__sub">
                     <p>Mis eventos</p>
                 </div>
-                <div class="nav-icon item-to-animate__sub logout-nav-icon">
-                    <img src="{{ logoutIcon }}" alt="{{ logoutIcon }}" />
+                <div class="nav-icon item-to-animate__sub ">
+                    <div class="icon-container">
+                        <img src="{{ myEventIcon }}" alt="{{ myEventIcon }}" />
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -50,8 +62,11 @@
                 <div class="item__p item-to-animate__sub">
                     <p>Eventos terminados</p>
                 </div>
-                <div class="nav-icon item-to-animate__sub logout-nav-icon">
-                    <img src="{{ logoutIcon }}" alt="{{ logoutIcon }}" />
+                <div class="nav-icon item-to-animate__sub ">
+                    <div class="icon-container">
+                        <img src="{{ calendarIconMenuOk }}" alt="{{ calendarIconMenuOk }}" />
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -61,7 +76,10 @@
                     <p>Cerrar sesión</p>
                 </div>
                 <div class="nav-icon item-to-animate__sub logout-nav-icon">
-                    <img src="{{ logoutIcon }}" alt="{{ logoutIcon }}" />
+                    <div class="icon-container">
+                        <img src="{{ logoutIcon }}" alt="{{ logoutIcon }}" />
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -70,8 +88,21 @@
                 <div class="item__p item-to-animate__sub">
                     <p>Administración</p>
                 </div>
-                <div class="nav-icon item-to-animate__sub logout-nav-icon">
-                    <img src="{{ logoutIcon }}" alt="{{ logoutIcon }}" />
+                <div class="nav-icon item-to-animate__sub ">
+                    <div class="icon-container">
+                        <img src="{{ dataBaseIcon }}" alt="{{ dataBaseIcon }}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="menuContainer__items__borderless" (click)="navigateTo('/administration')">
+            <div class="item-to-animate" tabindex="0">
+                <div class="dark-switch-container">
+                    <div class="dark-switch">
+                        <div class="dark-switch-button"></div>
+                        <p>Dark</p>
+                    </div>
+                    
                 </div>
             </div>
         </div>
