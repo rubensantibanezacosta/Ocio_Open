@@ -1,4 +1,4 @@
-# Ocio Open
+# Ocio Open (Proyecto formativo)
 
 Repositorio de la App y el servidor de Ocio Open.
 
