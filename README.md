@@ -12,8 +12,8 @@ El proyecto es una red social básica, que permite, potencia y premia la organiz
 ## Documentación del Proyecto
 
 - [Informe de requisitos de la aplicación](https://www.opencanarias.com/)
-- [Diagrama de casos de uso](https://www.opencanarias.com/)
-- [Diagrama Entidad Relación ](https://www.opencanarias.com/)
+- [Diagrama de casos de uso](https://github.com/rubensantibanezacosta/Ocio_Open/blob/main/docs/Casos%20de%20Uso.png)
+- [Diagrama Entidad Relación ](https://github.com/rubensantibanezacosta/Ocio_Open/blob/main/docs/Captura%20de%20pantalla%20de%202021-11-14%2021-48-39.png)
 - [Informe de llamadas API Rest en Postman](https://documenter.getpostman.com/view/17032586/UVC8E77j)
 - [Prototipo diseñado con FIGMA](https://www.figma.com/proto/avUqIHB3yfnUUCIBHcHBDu/Open-Ocio?node-id=182%3A98&starting-point-node-id=182%3A98)
 
@@ -63,7 +63,7 @@ En esta pagina deberá configurar un nuevo proyecto haciendo click en crear cren
 ![Captura de pantalla de 2021-11-22 15-04-08](https://user-images.githubusercontent.com/44450566/142885020-f59c7e6d-2fb1-467b-9fa4-b66f516ff12d.png)
 
 
-En nuestro entorno local podemos usar el http://localhost: 3000 predeterminado como origen. Para una implementación de producción, tendrá que cambiar/agregar su URL de implementación.
+En nuestro entorno local podemos usar el http://localhost:4000 predeterminado como origen. Para una implementación de producción, tendrá que cambiar/agregar su URL de implementación.
 
 
 Deberá agregar sus credenciales al proyecto en el frontend.
@@ -121,9 +121,9 @@ ACCEPTED_DOMAINS="dominios aceptados para el registro separados por comas. Ejemp
 
 2. Necesita un servidos MySQL funcionando.
 
-3. Cree la base de datos the mysql database, en su caso debe llamarse ... ocio_open ...
+3. Cree la base de datos the mysql database, en su caso debe llamarse ``` ocio_open ```
 
-4. Importe la base de datos  backend/import.sql
+4. Importe la base de datos:  [Base de datos](https://github.com/rubensantibanezacosta/Ocio_Open/blob/main/docs/ocioopenBBDD.sql)
 
 
 
