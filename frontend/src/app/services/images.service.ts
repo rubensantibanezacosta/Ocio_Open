@@ -1,16 +1,17 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { VariablesService } from 'src/config/config';
 import { Image } from '../models/image';
 
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + './../../../config/config')[env];
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImagesService {
-  endpoint = config.host+'/api/images';
+  variables= this.variablesService.getVariables();
+  endpoint = this.variablesService.variables.host + '/api/images';
   bearerToken = localStorage.getItem("ocioToken");
   httpOptions = {
     headers: new HttpHeaders({ 
@@ -18,7 +19,7 @@ export class ImagesService {
     'Authorization': `Bearer ${this.bearerToken}` }
     )
   };
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient:HttpClient, private variablesService:VariablesService) { }
 
   getAllImages():Observable<Image[]>{
     return this.httpClient.get<Image[]>(this.endpoint,this.httpOptions)

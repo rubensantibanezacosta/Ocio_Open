@@ -2,13 +2,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Event } from '../models/event';
-import { config } from '../../config/config.js';
+import { VariablesService } from 'src/config/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventsService {
-  endpoint = '/api/events';
+  variables= this.variablesService.getVariables();
+  endpoint = this.variablesService.variables.host + '/api/events';
   bearerToken = localStorage.getItem("ocioToken");
   httpOptions = {
     headers: new HttpHeaders({ 
@@ -16,15 +17,18 @@ export class EventsService {
     'Authorization': `Bearer ${this.bearerToken}` }
     )
   };
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient:HttpClient, private variablesService:VariablesService) { }
 
   createEvent(event:Event):Observable<Event>{
     return this.httpClient.post<Event>(this.endpoint, JSON.stringify(event), this.httpOptions)
   }
 
-  getAllEvents():Observable<Event[]>{
-    console.log(config);
-    return this.httpClient.get<Event[]>(this.endpoint, this.httpOptions)
+  getAllEventsASC():Observable<Event[]>{
+    return this.httpClient.get<Event[]>(this.endpoint+"/ASC", this.httpOptions)
+  }
+
+  getAllEventsDESC():Observable<Event[]>{
+    return this.httpClient.get<Event[]>(this.endpoint+"/DESC", this.httpOptions)
   }
 
   getEventsByDate(date:Date):Observable<Event[]>{

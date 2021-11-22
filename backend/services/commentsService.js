@@ -1,5 +1,6 @@
 const db = require("../models");
 const Comments = db.comments;
+const Users = db.users;
 
 class CommentsService {
 
@@ -10,8 +11,14 @@ class CommentsService {
     async findCommentsByEvent(event_id) {
         return Comments.findAll({
             where: {
-                event_id: event_id
-            }
+                event_id: event_id,
+               
+            },
+            include: {
+                model: Users,
+                attributes: ['name', 'surname']
+            },
+            order:[['date','DESC']]
         })
     };
 

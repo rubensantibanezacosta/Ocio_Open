@@ -31,14 +31,14 @@ module.exports = (sequelize, Sequelize) => {
     );
     Assistants.associate = function (models) {
         // associations can be defined here
-        Assistants.hasOne(models.events, {
+        Assistants.belongsTo(models.events, {
             foreignKey: 'event_id',
         })
     };
     Assistants.associate = function (models) {
         // associations can be defined here
-        Assistants.hasOne(models.users, {
-            foreignKey: 'email',
+        Assistants.belongsTo(models.users, {
+            foreignKey: 'assistant',
             constraints: false
         })
     };

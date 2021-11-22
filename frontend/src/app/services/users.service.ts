@@ -2,15 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user';
 import { Observable, observable } from 'rxjs';
+import { VariablesService } from 'src/config/config';
 
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + './../../../config/config')[env];
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
-  endpoint = config.host+'/api/user';
+  variables= this.variablesService.getVariables();
+  endpoint = this.variablesService.variables.host + '/api/user';
   bearerToken = localStorage.getItem("ocioToken");
   httpOptions = {
     headers: new HttpHeaders({ 
@@ -18,7 +19,7 @@ export class UsersService {
     'Authorization': `Bearer ${this.bearerToken}` }
     )
   };
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient:HttpClient, private variablesService:VariablesService) { }
 
   createOrUpdateUser(user:User):Observable<any>{
     return this.httpClient.post<any>(this.endpoint, JSON.stringify(user), this.httpOptions)

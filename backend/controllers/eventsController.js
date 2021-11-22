@@ -25,6 +25,7 @@ class EventsController {
             description:req.body.description,
             punctuation_avg: 0,
             organizer: req.body.organizer,
+            image_url: req.body.image_url,
         }
 
         
@@ -40,9 +41,23 @@ class EventsController {
             });
     };
 
-    findAllEvents = (req, res) => {
+    findAllEventsDESC = (req, res) => {
 
-        this.eventsService.findAllEvents()
+        this.eventsService.findAllEventsDESC()
+            .then(data => {
+                res.status(200).json(data);
+            })
+            .catch(err => {
+                res.status(500).json({
+                    message:
+                        err + " Some error occurred while retrieving events."
+                });
+            });
+    };
+
+    findAllEventsASC = (req, res) => {
+
+        this.eventsService.findAllEventsASC()
             .then(data => {
                 res.status(200).json(data);
             })
@@ -118,8 +133,8 @@ class EventsController {
             place: req.body.place,
             description:req.body.description,
             organizer: req.body.organizer,
+            image_url: req.body.image_url,
         }
-        const event_id = req.params.event_id;
 
         this.eventsService.updateEvent(event)
             .then(data => {

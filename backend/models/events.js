@@ -30,6 +30,9 @@ module.exports = (sequelize, Sequelize) => {
                 key: 'email',
             }
         },
+        image_url: {
+            type: Sequelize.STRING,
+        },
     },
         { // Condiciones del objeto con relación a la tabla de los datos
             tableName: 'events',
@@ -37,11 +40,27 @@ module.exports = (sequelize, Sequelize) => {
         }
     );
     Events.associate = function (models) {
-        // associations can be defined here
-        Events.hasOne(models.users, {
-            foreignKey: 'email',
-            constraints: false
-        })
+        [
+            Events.belongsTo(models.users, {
+                as: 'organizerdata',
+                foreignKey: 'organizer',
+                constraints: false
+            }),
+            // associations can be defined here
+            Events.hasMany(models.assistants, {
+                as: 'assistants',
+                foreignKey: 'event_id',
+                constraints: false
+            }),
+            Events.hasMany(models.comments, {
+                foreignKey: 'event_id',
+                constraints: false
+            })
+
+        ]
+
+
+
     };
 
     return Events;

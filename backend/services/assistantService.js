@@ -1,5 +1,6 @@
 const db = require("../models");
 const Assistants = db.assistants;
+const Users = db.users;
 
 class AssistantsService {
 
@@ -7,14 +8,22 @@ class AssistantsService {
         return Assistants.create(assistant);
     };
 
-    async findAssistantByPk(event_id, asisstant) {
-        return Assistants.findByPk(event_id, asisstant);
+    async findAssistantByPk(event_id, assistant) {
+        return Assistants.findAll({
+            where: {
+                event_id: event_id, assistant: assistant
+            }
+        });
     };
 
     async findAllAssistantsByEvent(event_id) {
         return Assistants.findAll({
             where: {
                 event_id: event_id, attendance: true
+            },
+            include:{
+                model:Users,
+                attributes: ['name', 'surname', 'punctuation_avg']
             }
         });
     };

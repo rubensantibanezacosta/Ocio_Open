@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdministrationComponent } from './pages/administration/administration.component';
+import { AssistantsComponent } from './pages/assistants/assistants.component';
 import { CalendarComponent } from './pages/calendar/calendar.component';
+import { CommentsComponent } from './pages/comments/comments.component';
 import { FinalizedeventsComponent } from './pages/finalizedevents/finalizedevents.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -14,6 +16,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'myevents', component: MyeventsComponent },
   { path: 'finalizedevents', component: FinalizedeventsComponent },
+  { path: 'comments/:event_id', component: CommentsComponent },
+  { path: 'assistants/:event_id', component: AssistantsComponent },
   { path: 'administration', component: AdministrationComponent },
   { path: 'ranking', component: RankingComponent },
   { path: 'calendar', component: CalendarComponent },

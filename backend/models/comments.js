@@ -34,19 +34,17 @@ module.exports = (sequelize, Sequelize) => {
 
         }
     );
-    Comments.associate = function (models) {
+    Comments.associate = function (models) {[
         // associations can be defined here
-        Comments.hasOne(models.events, {
+        Comments.belongsTo(models.events, {
             foreignKey: 'event_id',
             constraints: false
-        })
-    };
-    Comments.associate = function (models) {
+        }),
         // associations can be defined here
-        Comments.hasOne(models.users, {
-            foreignKey: 'email',
+        Comments.belongsTo(models.users, {
+            foreignKey: 'assistant',
             constraints: false
-        })
+        })]
     };
 
 

@@ -4,6 +4,7 @@ $color-background-menu: rgba(184, 184, 184, 0.99);
 $color-text-menu:rgb(77, 75, 75);
 $image-background:linear-gradient(#565656 0%, #747373  53.13%, #565656 100%);
 $header-footer:rgb(219, 119, 4);
+$text-grey:rgb(121, 118, 118);
 
 @mixin white-button {
     border: 2px $color-text-darkmode solid;

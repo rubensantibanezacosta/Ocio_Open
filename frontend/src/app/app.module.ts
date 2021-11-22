@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -21,6 +22,12 @@ import { AdministrationComponent } from './pages/administration/administration.c
 import { NofoundComponent } from './pages/nofound/nofound.component';
 import { CalendarComponent } from './pages/calendar/calendar.component';
 import { ProfileAdministrationComponent } from './pages/profile-administration/profile-administration.component';
+import { SlideshowComponent } from './components/slideshow/slideshow.component';
+import { ValorationComponent } from './components/slideshow/valoration/valoration.component';
+import { AttendanceComponent } from './components/slideshow/attendance/attendance.component';
+import { CommentsComponent } from './pages/comments/comments.component';
+import { AssistantsComponent } from './pages/assistants/assistants.component';
+import { BackIconComponent } from './components/back-icon/back-icon.component';
 
 @NgModule({
   declarations: [
@@ -37,14 +44,24 @@ import { ProfileAdministrationComponent } from './pages/profile-administration/p
     NofoundComponent,
     CalendarComponent,
     ProfileAdministrationComponent,
-    
-    
+    SlideshowComponent,
+    ValorationComponent,
+    AttendanceComponent,
+    CommentsComponent,
+    AssistantsComponent,
+    BackIconComponent,
+
+
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     SocialLoginModule,
     HttpClientModule,
+    FormsModule,
+
+    
   ],
   providers: [
     {

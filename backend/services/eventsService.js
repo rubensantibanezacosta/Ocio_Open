@@ -1,6 +1,9 @@
 const { sequelize } = require("../models");
 const db = require("../models");
 const Events = db.events;
+const Users = db.users;
+const Assistants = db.assistants;
+const Comments = db.comments;
 const { Op } = require("sequelize");
 
 class EventsService {
@@ -9,10 +12,63 @@ class EventsService {
     return Events.create(event);
   }
 
-  async findAllEvents() {
-    return Events.findAll();
+  async findAllEventsASC() {
+    return Events.findAll({
+      order:[['date','ASC']],
+      include: [{
+        model: Users,
+        as: "organizerdata",
+        attributes: ['name', 'surname', 'punctuation_avg']
+      },
+      {
+        model: Assistants,
+        include:{
+          model:Users,
+          attributes: ['name', 'surname', 'punctuation_avg']
+        },
+        as: "assistants",
+        attributes: ['assistant', 'attendance', 'excuse'],
+      },
+      {
+        model: Comments,
+        attributes: ['comment'],
+        include:{
+          model:Users,
+          attributes: ['name', 'surname']
+        }
+      }],
+
+    });
   }
 
+  async findAllEventsDESC() {
+    return Events.findAll({
+      order:[['date','DESC']],
+      include: [{
+        model: Users,
+        as: "organizerdata",
+        attributes: ['name', 'surname', 'punctuation_avg']
+      },
+      {
+        model: Assistants,
+        include:{
+          model:Users,
+          attributes: ['name', 'surname', 'punctuation_avg']
+        },
+        as: "assistants",
+        attributes: ['assistant', 'attendance', 'excuse'],
+      },
+      {
+        model: Comments,
+        attributes: ['comment'],
+        include:{
+          model:Users,
+          attributes: ['name', 'surname']
+        }
+      }],
+
+    });
+  }
   async findEventsByDate(date) {
 
     return Events.findAll(
@@ -20,7 +76,7 @@ class EventsService {
         where:
         {
           date: {
-            [Op.between]: [new Date(date+" 00:00:00"), new Date(date+" 23:59:59")]
+            [Op.between]: [new Date(date + " 00:00:00"), new Date(date + " 23:59:59")]
           }
         }
       });
@@ -34,7 +90,7 @@ class EventsService {
     return Events.findAll({ where: { zone: zone } });
   }
 
-  
+
 
   async findOneEventById(event_id) {
     return Events.findByPk(event_id);

@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./finalizedevents.component.scss']
 })
 export class FinalizedeventsComponent implements OnInit {
-
+tittle:string="Eventos Terminados";
+image="../../../assets/icons/calendar-ok-icon.png";
   constructor() { }
 
   ngOnInit(): void {

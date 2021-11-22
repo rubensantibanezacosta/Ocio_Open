@@ -12,6 +12,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
     
   }
   .icon img{
@@ -80,7 +81,6 @@
     margin: 0;
     box-sizing: border-box;
     font-size: 1.1em;
-    text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.1);
   }
   .menuContainer__items__borderless{
     width: 90%;
@@ -202,7 +202,7 @@
     display: flex;
     transition: 1.2s all;
     opacity: 1;
-    z-index: 1;
+    z-index: 2;
     
   }
   

@@ -8,7 +8,7 @@ require("../utils/auth/strategies/jwt");
 
 function eventsRoutes(app) {
     const router = express.Router();
-    app.use("/api/events", router)
+    app.use("/api/events/", router)
     const eventsController = new EventsController();
 
     router.post("/",
@@ -16,11 +16,15 @@ function eventsRoutes(app) {
         scopesValidationHandler(['create:events']),
         eventsController.createEvent);
 
-    router.get("/",
+    router.get("/ASC/",
         passport.authenticate("jwt", { session: false }),
         scopesValidationHandler(['read:events']),
-        eventsController.findAllEvents);
+        eventsController.findAllEventsASC);
 
+    router.get("/DESC/",
+        passport.authenticate("jwt", { session: false }),
+        scopesValidationHandler(['read:events']),
+        eventsController.findAllEventsDESC);
     router.get("/bydate/:date",
         passport.authenticate("jwt", { session: false }),
         scopesValidationHandler(['read:events']),
@@ -41,10 +45,10 @@ function eventsRoutes(app) {
         scopesValidationHandler(['update:events']),
         eventsController.updateEvent);
 
-/*     router.put("/eventpunctuationavg",
-        passport.authenticate("jwt", { session: false }),
-        scopesValidationHandler(['update:events']),
-        eventsController.updateEventPunctuationAvg); */
+    /*     router.put("/eventpunctuationavg",
+            passport.authenticate("jwt", { session: false }),
+            scopesValidationHandler(['update:events']),
+            eventsController.updateEventPunctuationAvg); */
 
     router.delete("/:event_id",
         passport.authenticate("jwt", { session: false }),

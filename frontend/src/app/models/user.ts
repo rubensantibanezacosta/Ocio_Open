@@ -5,6 +5,7 @@ export class User {
     image_url: string ;
     lastconection:string;
     createdAt:string;
+    punctuation_avg:number;
 }
 
 

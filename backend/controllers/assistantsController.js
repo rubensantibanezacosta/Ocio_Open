@@ -6,9 +6,9 @@ class AssistantsController {
     assistantsService = new AssistantService();
 
 
-    createAssistant = (req, res) => {
+    createOrUpdateAssistant = (req, res) => {
 
-        
+
 
         if (!req.body.event_id || !req.body.assistant) {
             res.status(400).json({
@@ -17,28 +17,52 @@ class AssistantsController {
             return;
         }
 
+
+
         const assistant = {
             event_id: req.body.event_id,
             assistant: req.body.assistant,
-            attendance: true,
+            attendance: req.body.attendance,
+            excuse: req.body.excuse
         };
 
-        this.assistantsService.createAsisstant(assistant)
-            .then(data => {
-                res.status(201).json(data);
-            })
-            .catch(err => {
-                res.status(500).json({
-                    message:
-                        err + " Some error occurred while creating the assistant."
-                });
-            });
+        this.assistantsService.findAssistantByPk(assistant.event_id, assistant.assistant).then((response)=>{
+            if (!response.length>0) {
+                this.assistantsService.createAsisstant(assistant)
+                    .then(data => {
+                        res.status(201).json(data);
+                    })
+                    .catch(err => {
+                        res.status(500).json({
+                            message:
+                                err + " Some error occurred while creating the assistant."
+                        });
+                    });
+    
+            } else {
+    
+                this.assistantsService.updateAssistant(assistant)
+                    .then(data => {
+                        res.status(200).json(data);
+                    })
+                    .catch(err => {
+                        res.status(500).json({
+                            message:
+                                err + " Some error occurred while updating assistant."
+                        });
+                    });
+            }
+
+
+        });
+       
+        
     };
 
 
     findAssistantByPk = (req, res) => {
         const event_id = req.params.event_id;
-        const asisstant = req.params.asisstant;
+        const asisstant = req.params.assistant;
         this.assistantsService.findAssistantByPk(event_id, asisstant)
             .then(data => {
                 res.status(200).json(data);
@@ -97,7 +121,7 @@ class AssistantsController {
 
 
     updateAssistant = (req, res) => {
-        
+
         if (!req.body.event_id || !req.body.assistant) {
             res.status(400).json({
                 message: "Content cannot be empty!"

@@ -2,15 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Asisstant } from '../models/assistant';
 import { Observable } from 'rxjs';
+import { VariablesService } from 'src/config/config';
 
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + './../../../config/config')[env];
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AssistantsService {
-  endpoint = config.host+'/api/assistant';
+  variables= this.variablesService.getVariables();
+  endpoint = this.variablesService.variables.host + '/api/assistant';
   bearerToken = localStorage.getItem("ocioToken");
   httpOptions = {
     headers: new HttpHeaders({ 
@@ -18,9 +19,9 @@ export class AssistantsService {
     'Authorization': `Bearer ${this.bearerToken}` }
     )
   };
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient:HttpClient, private variablesService:VariablesService) { }
 
-  createAssistant(assistant:Asisstant):Observable<string>{
+  createOrUpdateAssistant(assistant:Asisstant):Observable<string>{
     return this.httpClient.post<string>(this.endpoint, JSON.stringify(assistant), this.httpOptions)
   }
 

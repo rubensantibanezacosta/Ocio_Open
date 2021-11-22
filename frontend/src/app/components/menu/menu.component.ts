@@ -14,8 +14,8 @@ export class MenuComponent implements OnInit {
   plusIcon = "../../../assets/icons/plus-icon.png";
   profileIcon = "../../../assets/icons/user-icon.png";
   logoutIcon = "../../../assets/icons/logout-icon.png";
-  developerImage = "../../../assets/images/developer-site.png";
   collapseIcon = "../../../assets/icons/collapse-icon.png";
+ 
 
 
   eventsIcon="../../../assets/icons/events-icon.png";
