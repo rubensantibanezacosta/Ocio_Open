@@ -134,8 +134,12 @@ Finalmente disfrute del proytecto:
 
 
 ```
-root/
-npm start
+backend/
+npm run dev
+```
+```
+frontend/
+ng serve -o
 ```
 
 Si sigue las instrucciones debera tener arrancados tres servidores:
