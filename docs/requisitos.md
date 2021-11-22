@@ -1,6 +1,6 @@
 ## REQUISITOS
 
-###UBICACIONES
+### UBICACIONES
 
 - Que la gente sepa rápido si el evento es en Tenerife, Gran Canaria o virtual, además de a lo mejor sacar en algún sitio la estadística, a modo ranking, como se  ha hecho para los usuarios con más eventos puntuados. (puede servir para motivar a los de una isla u otra si ven que unos hacen más cosas que los otros) 
 
