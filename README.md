@@ -4,6 +4,8 @@ Repositorio de la App y el servidor de Ocio Open.
 
 El proyecto es una red social básica, que permite, potencia y premia la organización de eventos sociales para los empleados de una empresa.
 
+
+
 ## Cliente
 ![image](https://user-images.githubusercontent.com/44450566/142890754-a330b388-f293-4a12-a665-47dc6995a3ca.png)
 
