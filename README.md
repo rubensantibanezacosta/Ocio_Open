@@ -28,12 +28,13 @@ Desde Github: https://github.com/rubensantibanezacosta/Ocio_Open
 ## Prerequisitos
 
 Necesitas un entorno de desarrollo con:
-* [Git](https://git-scm.com) - You can install it from https://git-scm.com/downloads.
-* [MySQL](https://www.mysql.com) - You can install it from https://www.mysql.com/downloads/.
-* [Node.js](https://nodejs.org) - Install node.js from https://nodejs.org/es/download/. It's advisable to install the LTS version.
+* [Git](https://git-scm.com) -  https://git-scm.com/downloads.
+* [MySQL](https://www.mysql.com) -  https://www.mysql.com/downloads/.
+* [Node.js](https://nodejs.org) -  https://nodejs.org/es/download/. 
 
 ## Instrucciones de instalación
-The best option to start with this project is cloning it in your PC:
+
+Clone el repositorio:
 
 ```
 git clone https://github.com/rubensantibanezacosta/Ocio_Open
