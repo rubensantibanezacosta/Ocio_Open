@@ -45,9 +45,9 @@ El proyecto consta de 3 partes diferenciadas:
 * Backend
 * Base de datos
 
-Necesitas tener instalado node.js en tu entorno de desarrollo. Version LTS recomendada: https://nodejs.org/es/
+Necesita tener instalado node.js en tu entorno de desarrollo. Version LTS recomendada: https://nodejs.org/es/
 
-Una vez clonado, debes actualizar las dependencias.
+Una vez clonado, debe actualizar las dependencias.
 
 ```
 cd frontend/
