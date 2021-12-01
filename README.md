@@ -1,4 +1,4 @@
-# Ocio Open
+# Ocio Open  *(Proyecto formativo)*
 
 Repositorio de la App y el servidor de Ocio Open.
 
@@ -13,7 +13,7 @@ El proyecto es una red social básica, que permite, potencia y premia la organiz
 
 ## Documentación del Proyecto
 
-- [Informe de requisitos de la aplicación](https://www.opencanarias.com/)
+- [Informe de requisitos de la aplicación](https://github.com/rubensantibanezacosta/Ocio_Open/blob/main/docs/requisitos.md)
 - [Diagrama de casos de uso](https://github.com/rubensantibanezacosta/Ocio_Open/blob/main/docs/Casos%20de%20Uso.png)
 - [Diagrama Entidad Relación ](https://github.com/rubensantibanezacosta/Ocio_Open/blob/main/docs/Captura%20de%20pantalla%20de%202021-11-14%2021-48-39.png)
 - [Informe de llamadas API Rest en Postman](https://documenter.getpostman.com/view/17032586/UVC8E77j)
@@ -28,12 +28,13 @@ Desde Github: https://github.com/rubensantibanezacosta/Ocio_Open
 ## Prerequisitos
 
 Necesitas un entorno de desarrollo con:
-* [Git](https://git-scm.com) - You can install it from https://git-scm.com/downloads.
-* [MySQL](https://www.mysql.com) - You can install it from https://www.mysql.com/downloads/.
-* [Node.js](https://nodejs.org) - Install node.js from https://nodejs.org/es/download/. It's advisable to install the LTS version.
+* [Git](https://git-scm.com) -  https://git-scm.com/downloads.
+* [MySQL](https://www.mysql.com) -  https://www.mysql.com/downloads/.
+* [Node.js](https://nodejs.org) -  https://nodejs.org/es/download/. 
 
 ## Instrucciones de instalación
-The best option to start with this project is cloning it in your PC:
+
+Clone el repositorio:
 
 ```
 git clone https://github.com/rubensantibanezacosta/Ocio_Open
@@ -44,9 +45,9 @@ El proyecto consta de 3 partes diferenciadas:
 * Backend
 * Base de datos
 
-Necesitas tener instalado node.js en tu entorno de desarrollo. Version LTS recomendada: https://nodejs.org/es/
+Necesita tener instalado node.js en tu entorno de desarrollo. Version LTS recomendada: https://nodejs.org/es/
 
-Una vez clonado, debes actualizar las dependencias.
+Una vez clonado, debe actualizar las dependencias.
 
 ```
 cd frontend/
@@ -133,8 +134,12 @@ Finalmente disfrute del proytecto:
 
 
 ```
-root/
-npm start
+backend/
+npm run dev
+```
+```
+frontend/
+ng serve -o
 ```
 
 Si sigue las instrucciones debera tener arrancados tres servidores:
