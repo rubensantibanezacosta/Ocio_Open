@@ -1,0 +1,11 @@
+<div class="main">
+    <p>Selecciona...</p>
+    <div class="slider">
+        <div class="images-div" *ngFor="let image of images">
+            <app-image-viewer [imageId]="image.id"></app-image-viewer>
+            <div class="select-div" (click)="selectImage(image.id)">
+                <p class="select-text" tabindex="0">Seleccionar</p>
+            </div>
+        </div>
+    </div>
+</div>

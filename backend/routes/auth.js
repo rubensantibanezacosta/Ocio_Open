@@ -23,20 +23,21 @@ function authApi(app) {
         const bodyUser = req.body.user;
 
         if (!config.acceptedDomains.split(",").includes(bodyUser.email.split("@")[1])) {
-            console.log("domain not allowed")
+            
             return cb(boom.unauthorized("Domain unauthorized"), false);
         }
-
+       
         try {
 
-            const ResUser = userService.findOne(bodyUser.email).then(
-                (error, user) => {
-
+            userService.findOne(bodyUser.email).then(
+                (user, error) => {
+                    
                     if (error) {
                         return (error, null);
                     }
 
                     if (!user) {
+                        
                         const User = {
                             email: bodyUser.email,
                             name: bodyUser.name,
@@ -46,6 +47,8 @@ function authApi(app) {
                             punctuation_avg: 0,
                             lastconection: moment().format()
                         }
+                        
+                        userService.createUser(User);
                         return (null, User);
                     }
 
@@ -57,39 +60,42 @@ function authApi(app) {
                             image_url: bodyUser.image_url,
                             lastconection: moment().format()
                         }
+                        userService.update(User);
                         return (null, User);
 
                     }
                 }
-            )
-            req.login(bodyUser, { session: false }, async function (error) {
-                if (error) {
-                    next(error);
-                }
-                const apiKey = await rolesService.findOne(apiKeyToken);
-
-                if (!apiKey) {
-                    next(boom.unauthorized());
-                }
-
-
-                const expireTime = rememberMe ?
-                config.tokenExpireTimeRememberMe:config.tokenExpireTime;
-                
-                const expireDate = moment.utc().add(expireTime, "minutes");
-                const email = bodyUser.email;
-                const payload = {
-                    username: email,
-                    scopes: apiKey[0].permissions.split(","),
-                    tokenExpiresIn: expireDate
-                }
-
-                const token = jwt.sign(payload, config.jwtSecret, {
-                    expiresIn: expireTime + "m"
-                });
-
-                return res.status(200).json({ token, expireDate: expireDate, user: { email } })
+            ).then((User)=>{
+                req.login(User, { session: false }, async function (error) {
+                    if (error) {
+                        next(error);
+                    }
+                    const apiKey = await rolesService.findOne(apiKeyToken);
+    
+                    if (!apiKey) {
+                        next(boom.unauthorized());
+                    }
+    
+    
+                    const expireTime = rememberMe ?
+                    config.tokenExpireTimeRememberMe:config.tokenExpireTime;
+                    
+                    const expireDate = moment.utc().add(expireTime, "minutes");
+                    const email = bodyUser.email;
+                    const payload = {
+                        username: email,
+                        scopes: apiKey[0].permissions.split(","),
+                        tokenExpiresIn: expireDate
+                    }
+    
+                    const token = jwt.sign(payload, config.jwtSecret, {
+                        expiresIn: expireTime + "m"
+                    });
+    
+                    return res.status(200).json({ token, expireDate: expireDate, user: { email } })
+                })
             })
+            
 
         } catch (error) {
             next(error);

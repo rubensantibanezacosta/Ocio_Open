@@ -36,7 +36,7 @@ function punctuationsRoutes(app) {
         scopesValidationHandler(['read:punctuations']),
         punctuationsController.findPunctuationByPk);
 
-    
+
 }
 
 module.exports = punctuationsRoutes;

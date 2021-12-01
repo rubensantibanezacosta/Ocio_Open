@@ -1,48 +1,41 @@
 const db = require("../models");
 const ImagesService = require("../services/imagesService");
+const fs = require('fs');
+var path = require('path');
+
 
 class ImagesController {
-
-    imagesService = new ImagesService();
-
-
-    createImage = (req, res) => {
-
-
-        if (!req.body.url ) {
-            res.status(400).json({
-                message: "Content cannot be empty!"
-            });
-            return;
-        }
-        const image = {
-            url:req.body.url
-        }
-
-        this.imagesService.createImage(image)
-            .then(data => {
-                res.status(201).json(data);
-            })
-            .catch(err => {
-                res.status(500).json({
-                    message:
-                        err + " Some error occurred while saving the image."
-                });
-            });
-    };
-
+ imagesService=new ImagesService();
 
     findImageByPk = (req, res) => {
         const id = req.params.id;
 
         this.imagesService.findImageByPk(id)
             .then(data => {
-                res.status(200).json(data);
+                
+                let image = fs.readFileSync(__dirname+"/../assets/gallery/"+data.url)
+                res.writeHead(200, { 'Content-Type': 'image/jpg' });
+                res.end(image, 'binary');
             })
             .catch(err => {
                 res.status(500).json({
                     message:
-                        err + " Some error occurred while retrieving asisstants."
+                        err + " Some error occurred while retrieving image."
+                });
+            });
+    };
+
+    findImageByName = (req, res) => {
+        const name = req.file.filename;
+
+        this.imagesService.findImageByName(name)
+            .then(data => {
+                res.status(201).json(data)
+            })
+            .catch(err => {
+                res.status(500).json({
+                    message:
+                        err + " Some error occurred while uploading image."
                 });
             });
     };
@@ -51,7 +44,7 @@ class ImagesController {
 
         this.imagesService.findAllImages()
             .then(data => {
-                res.status(200).json(data);
+                res.status(200).json(data)
             })
             .catch(err => {
                 res.status(500).json({
@@ -60,7 +53,7 @@ class ImagesController {
                 });
             });
     };
-    
+
 
     deleteImageByPk = (req, res) => {
 

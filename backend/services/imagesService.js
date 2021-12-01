@@ -8,11 +8,18 @@ class ImagesService {
     }
 
     async findAllImages() {
-        return Images.findAll();
+        return Images.findAll({
+            order:[["id","DESC"]]
+        });
     }
 
     async findImageByPk(id) {
         return Images.findByPk(id);
+    }
+    async findImageByName(name) {
+        return Images.findAll({where:{
+            url: name
+        }});
     }
 
     async deleteImage(id) {

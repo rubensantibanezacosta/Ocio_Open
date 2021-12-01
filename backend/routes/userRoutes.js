@@ -22,9 +22,14 @@ function userRoutes(app) {
     userController.findAllUsers);
 
   router.get("/:email",
-    passport.authenticate("jwt", { session: false }),
-    scopesValidationHandler(['read:users']),
+  passport.authenticate("jwt", { session: false }),
+  scopesValidationHandler(['read:users']),
     userController.findOneUser);
+
+    router.get("/position/:email",
+  passport.authenticate("jwt", { session: false }),
+  scopesValidationHandler(['read:users']),
+    userController.getUserPosition);
 
   router.put("/userpunctuationavg/",
     passport.authenticate("jwt", { session: false }),

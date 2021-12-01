@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { VariablesService } from 'src/config/config';
+import { Zones } from '../models/zone';
 
 
 @Injectable({
@@ -9,7 +10,7 @@ import { VariablesService } from 'src/config/config';
 })
 export class ZonesService {
   variables= this.variablesService.getVariables();
-  endpoint = this.variablesService.variables.host + '/api/zone';
+  endpoint = this.variablesService.variables.host + '/api/zones';
   bearerToken = localStorage.getItem("ocioToken");
   httpOptions = {
     headers: new HttpHeaders({ 
@@ -19,8 +20,8 @@ export class ZonesService {
   };
   constructor(private httpClient:HttpClient, private variablesService:VariablesService) { }
 
-  getAllZones():Observable<Zone[]>{
-    return this.httpClient.get<Zone[]>(this.endpoint, this.httpOptions)
+  getAllZones():Observable<Zones[]>{
+    return this.httpClient.get<Zones[]>(this.endpoint, this.httpOptions)
   }
 
   

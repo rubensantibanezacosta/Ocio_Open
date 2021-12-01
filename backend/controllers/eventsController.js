@@ -25,7 +25,7 @@ class EventsController {
             description:req.body.description,
             punctuation_avg: 0,
             organizer: req.body.organizer,
-            image_url: req.body.image_url,
+            image_id: req.body.image_id,
         }
 
         

@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { GalleryComponent } from './components/gallery/gallery.component';
 import { AdministrationComponent } from './pages/administration/administration.component';
 import { AssistantsComponent } from './pages/assistants/assistants.component';
 import { CalendarComponent } from './pages/calendar/calendar.component';
 import { CommentsComponent } from './pages/comments/comments.component';
+import { EventFormComponent } from './pages/event-form/event-form.component';
 import { FinalizedeventsComponent } from './pages/finalizedevents/finalizedevents.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -22,6 +24,8 @@ const routes: Routes = [
   { path: 'ranking', component: RankingComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: 'profileAdministration', component: ProfileAdministrationComponent },
+  { path: 'eventform/:event_id/:type', component: EventFormComponent },
+  { path: 'gallery', component: GalleryComponent },
   { path: '', component: LoginComponent },
   { path: '**', component: NofoundComponent }
 

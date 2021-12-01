@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const passport = require("passport");
+const passport = require('passport');
 
 const authApi = require("./routes/auth");
 const userRoutes = require("./routes/userRoutes");
@@ -15,12 +15,15 @@ const punctuationRoutes = require("./routes/punctuationsRoutes");
 const zonesRoutes = require("./routes/zonesRoutes");
 
 
+
  
 const app = express();
 const port = process.env.PORT || 4000;
  
 // enable CORS
 app.use(cors());
+//Multer
+
 
 // parse application/json
 app.use(bodyParser.json());

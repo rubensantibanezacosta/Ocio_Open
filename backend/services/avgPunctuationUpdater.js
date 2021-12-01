@@ -13,10 +13,13 @@ class AvgPunctuationUpdater {
 
         let totalPunctuation = 0;
         let average = await punctuationsService.findPunctuationsByEvent(event_id).then((data) => {
-            data.forEach(punctuation => {
-                totalPunctuation += punctuation.punctuation;
-            })
-            return totalPunctuation / data.length
+            if(data.length>0){
+                data.forEach(punctuation => {
+                    totalPunctuation += punctuation.punctuation;
+                })
+                return totalPunctuation / data.length
+            }
+            
         });
 
         const event = {
@@ -35,10 +38,13 @@ class AvgPunctuationUpdater {
 
         let totalPunctuation = 0;
         let average = await punctuationsService.findPunctuationByOrganizer(organizer).then((data) => {
-            data.forEach(punctuation => {
-                totalPunctuation += punctuation.punctuation;
-            })
-            return totalPunctuation / data.length
+            if(data.length>0){
+
+                data.forEach(punctuation => {
+                    totalPunctuation += punctuation.punctuation;
+                })
+                return totalPunctuation / data.length
+            }
         });
 
         const user = {
@@ -90,7 +96,7 @@ class AvgPunctuationUpdater {
         }
 
         const VIRTUALEventsPunctuations = [];
-        if (VIRTUALEvents.size[0]) {
+        if (VIRTUALEvents[0]) {
             await VIRTUALEvents.forEach(element => {
                 VIRTUALEventsPunctuations.push(allPunctuation.filter((punctuation) => { return punctuation.event_id = element }))
             })

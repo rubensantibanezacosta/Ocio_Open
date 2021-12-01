@@ -10,27 +10,56 @@ import { Image } from '../models/image';
   providedIn: 'root'
 })
 export class ImagesService {
-  variables= this.variablesService.getVariables();
+  variables = this.variablesService.getVariables();
   endpoint = this.variablesService.variables.host + '/api/images';
   bearerToken = localStorage.getItem("ocioToken");
+
   httpOptions = {
-    headers: new HttpHeaders({ 
+    headers: new HttpHeaders({
       'Content-Type': 'application/json',
-    'Authorization': `Bearer ${this.bearerToken}` }
+      'Authorization': `Bearer ${this.bearerToken}`,
+    }
     )
   };
-  constructor(private httpClient:HttpClient, private variablesService:VariablesService) { }
 
-  getAllImages():Observable<Image[]>{
-    return this.httpClient.get<Image[]>(this.endpoint,this.httpOptions)
+  httpOptionsImage = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.bearerToken}`
+    }
+    ),
+  };
+
+  httpOptionsPostImage = {
+    headers: new HttpHeaders({
+      'enctype': 'multipart/form-data',
+      'Authorization': `Bearer ${this.bearerToken}`,
+
+    }
+    ),
+  };
+
+
+  constructor(private httpClient: HttpClient, private variablesService: VariablesService) { }
+
+  getAllImages(): Observable<Image[]> {
+    return this.httpClient.get<Image[]>(this.endpoint, this.httpOptions)
   }
 
-  getImageById(id:number):Observable<Image>{
-    return this.httpClient.get<Image>(this.endpoint+"/"+id, this.httpOptions);
+  getImageById(id: number) {
+    return this.httpClient.get(this.endpoint + "/" + id, {...this.httpOptionsImage, responseType:'blob'})
   }
 
-  deleteImageById(id:number):Observable<string>{
-    return this.httpClient.delete<string>(this.endpoint+"/"+id, this.httpOptions)
+  deleteImageById(id: number): Observable<string> {
+    return this.httpClient.delete<string>(this.endpoint + "/" + id, this.httpOptions)
+  }
+
+  createImage(image: File) {
+    const fd = new FormData();
+    console.log(image.name);
+    fd.append('uploadedImage', image);
+    fd.append('test', "test string");
+    return this.httpClient.post(this.endpoint, fd, this.httpOptionsPostImage)
   }
 
 }

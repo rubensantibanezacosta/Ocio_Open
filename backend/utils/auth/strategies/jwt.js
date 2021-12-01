@@ -10,13 +10,15 @@ const config = require(__dirname + './../../../config/config')[env];
 passport.use(
     new Strategy({
         secretOrKey: config.jwtSecret,
-        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
+        jwtFromRequest:  ExtractJwt.fromAuthHeaderAsBearerToken() 
     },
+   
         async function (tokenPayload, cb) {
             const userService = new UserService();
             
 
             try {
+                
                 const user = await userService.findOne(tokenPayload.username);
                 if (!user) {
                     return cb(boom.unauthorized(), false);

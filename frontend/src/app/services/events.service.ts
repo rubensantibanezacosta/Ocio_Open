@@ -40,7 +40,7 @@ export class EventsService {
   }
 
   getEventById(event_id:number):Observable<Event>{
-    return this.httpClient.get<Event>(this.endpoint+"/"+event_id, this.httpOptions)
+    return this.httpClient.get<Event>(this.endpoint+"/byid/"+event_id, this.httpOptions)
   }
 
   updateEvent(event:Event):Observable<string>{

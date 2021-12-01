@@ -30,8 +30,12 @@ module.exports = (sequelize, Sequelize) => {
                 key: 'email',
             }
         },
-        image_url: {
-            type: Sequelize.STRING,
+        image_id: {
+            type: Sequelize.INTEGER,
+            references: {
+                model: 'images',
+                key: 'id',
+            }
         },
     },
         { // Condiciones del objeto con relación a la tabla de los datos
@@ -54,6 +58,10 @@ module.exports = (sequelize, Sequelize) => {
             }),
             Events.hasMany(models.comments, {
                 foreignKey: 'event_id',
+                constraints: false
+            }),
+            Events.hasOne(models.images, {
+                foreignKey: 'id',
                 constraints: false
             })
 

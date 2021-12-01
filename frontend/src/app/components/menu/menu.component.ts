@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { SocialAuthService, FacebookLoginProvider, GoogleLoginProvider, SocialUser } from "angularx-social-login";
+import { LoginService } from 'src/app/services/login.service';
+
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -8,39 +12,33 @@ import { Router } from '@angular/router';
 })
 export class MenuComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router: Router, private authService: SocialAuthService,
+    private loginService: LoginService) { }
   menuIcon = "../../../assets/icons/menu-icon.png";
   viewIcon = "../../../assets/icons/view-icon.png";
   plusIcon = "../../../assets/icons/plus-icon.png";
   profileIcon = "../../../assets/icons/user-icon.png";
   logoutIcon = "../../../assets/icons/logout-icon.png";
   collapseIcon = "../../../assets/icons/collapse-icon.png";
- 
 
 
-  eventsIcon="../../../assets/icons/events-icon.png";
-  calendarIconMenu="../../../assets/icons/calendarIcon-menu.png";
-  rankingIconMenu="../../../assets/icons/ranking-icon.png";
-  myEventIcon="../../../assets/icons/my-event-icon.png";
-  calendarIconMenuOk="../../../assets/icons/calendar-ok-icon.png";
-  dataBaseIcon="../../../assets/icons/data-icon.png";
 
-  menuShown:boolean=false;
+  eventsIcon = "../../../assets/icons/events-icon.png";
+  calendarIconMenu = "../../../assets/icons/calendarIcon-menu.png";
+  rankingIconMenu = "../../../assets/icons/ranking-icon.png";
+  myEventIcon = "../../../assets/icons/my-event-icon.png";
+  calendarIconMenuOk = "../../../assets/icons/calendar-ok-icon.png";
+  dataBaseIcon = "../../../assets/icons/data-icon.png";
+
+  menuShown: boolean = false;
 
   ngOnInit(): void {
   }
 
 
-
-
-  navigateTo(url:string){
-    setTimeout(() =>this.router.navigateByUrl(url), 800);
+  navigateTo(url: string) {
+    setTimeout(() => this.router.navigateByUrl(url), 800);
   }
-
-
-
-
-
 
 
   //Animations
@@ -51,21 +49,28 @@ export class MenuComponent implements OnInit {
       menuIcon.style.animationPlayState = "paused";
     }
     ), 800);
-    if(!this.menuShown){
+    if (!this.menuShown) {
       document.querySelector("#slider").classList.toggle("sliderShow");
-    setTimeout((() => {
-      this.menuShown=true;
-      document.querySelector("#menu").classList.add("showMenu");
-      document.querySelector("#collapse-icon").classList.add("collapse-icon-show");
-    }), 300);
-    }else{
+      setTimeout((() => {
+        this.menuShown = true;
+        document.querySelector("#menu").classList.add("showMenu");
+        document.querySelector("#collapse-icon").classList.add("collapse-icon-show");
+      }), 300);
+    } else {
       document.querySelector("#menu").classList.remove("showMenu");
       document.querySelector("#collapse-icon").classList.remove("collapse-icon-show");
       setTimeout((() => {
         document.querySelector("#slider").classList.remove("sliderShow");
-        this.menuShown=false;
+        this.menuShown = false;
       }), 1000);
-
     }
   }
+
+  signOut(): void {
+    
+      localStorage.removeItem("ocioToken");
+      this.router.navigateByUrl("/");
+   
+  }
+
 }

@@ -1,7 +1,7 @@
 
 
 <h3 class="notevents" *ngIf="events.length<=0">Buscando...</h3>
-    <section class="slider" *ngIf="future==true">
+    <section class="slider" *ngIf="future==true&&events.length>0">
         <div class="card-container" *ngFor="let event of events" >
             
             <div class="card" >
@@ -58,15 +58,14 @@
                         </a>
                     </div>
                     <div class="card-data-container__row card-data-container__row-last">
-                            <p>Description Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus provident nemo</p>
+                            <p>{{event.description}}</p>
                     </div>
                 </div>
                 <app-attendance [event_id]="event.event_id"></app-attendance>
                 <div class="card-bakground">
-                    <img src="" alt="">
+                    <app-image-viewer [imageId]="event.image_id"></app-image-viewer>
                 </div>
                 <div class="card-bakground-darkfilter">
-                    <img src="" alt="">
                 </div>
                 
             </div>
@@ -130,15 +129,15 @@
                         </a>
                     </div>
                     <div class="card-data-container__row card-data-container__row-last">
-                            <p>Description Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus provident nemo</p>
+                            <p>{{event.description}}</p>
                     </div>
                 </div>
                 <app-valoration [event_id]="event.event_id"></app-valoration>
                 <div class="card-bakground">
-                    <img src="" alt="">
+                    <app-image-viewer [imageId]="event.image_id"></app-image-viewer>
                 </div>
                 <div class="card-bakground-darkfilter">
-                    <img src="" alt="">
+                    
                 </div>
                 
             </div>

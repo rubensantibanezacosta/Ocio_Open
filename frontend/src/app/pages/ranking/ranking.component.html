@@ -1,7 +1,72 @@
+<app-header [tittle]="tittle" [image]="image"></app-header>
+<div class="profile">
+    <div class="profile__image--container">
+        <div class="profile__image">
+            <img src="{{user.image_url}}" alt="">
+        </div>
 
+    </div>
+    <div class="profile__data">
+        <p class="profile__name"><b>{{user.name}} </b>{{user.surname}}</p>
+        <p class="profile__valoration">Mi valoración <b class="rank-number">{{userPosition}}º</b></p>
+        <div class="star-container">
+            <img *ngIf="user.punctuation_avg>=1" src="{{star}}" alt="star">
+            <img *ngIf="user.punctuation_avg>=2" src="{{star}}" alt="star">
+            <img *ngIf="user.punctuation_avg>=3" src="{{star}}" alt="star">
+            <img *ngIf="user.punctuation_avg>=4" src="{{star}}" alt="star">
+            <img *ngIf="user.punctuation_avg>=5" src="{{star}}" alt="star">
 
-<app-header></app-header>
-<p>ranking works!</p>
+        </div>
+    </div>
+</div>
+<div class="main">
+    <div class="main__header">
+        <p class="ranking__tittle">Ranking <img src="{{rankingIconBlack}}" alt=""></p>
+        <div class="clips">
+            <div class="organizers" [@organizerTittle]="organizerState" (click)="showOrganizers()" >
+                <p class="clip-tittle-organizers">Organizadores </p>
+                <div class="clip__image-organizers">
+                    <img src="{{profileIcon}}" alt="">
+                </div>
+            </div>
+            <div class="zones" [@zonesTittle]="zonesState" (click)="showZones()">
+                <p class="clip-tittle-zones">Zonas </p>
+                <div class="clip__image-zones">
+                    <img src="{{zoneIcon}}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="items-container-organizers" [@organizerClip]="organizerState">
+        <div class="item-organizers" *ngFor="let organizer of organizers;let indice=index">
+            <div class="item__name--container">
+                <p class="item-name">{{indice+1}}º  {{organizer.name}} {{organizer.surname}}</p>
+            </div>
+            <div class="item__ministar--container" >
+                <img *ngIf="organizer.punctuation_avg>=1" src="{{miniStar}}" alt="star">
+                <img *ngIf="organizer.punctuation_avg>=2" src="{{miniStar}}" alt="star">
+                <img *ngIf="organizer.punctuation_avg>=3" src="{{miniStar}}" alt="star">
+                <img *ngIf="organizer.punctuation_avg>=4" src="{{miniStar}}" alt="star">
+                <img *ngIf="organizer.punctuation_avg>=5" src="{{miniStar}}" alt="star">
+            </div>
+        </div>
+        
+    </div>
+    <div class="items-container-zones" [@zonesClip]="zonesState">
+        <div class="item-zones" *ngFor="let zone of zones;let indice=index">
+            <div class="item__name--container">
+                <p class="item-name">{{indice+1}}º {{zone.name}}</p>
+            </div>
+            <div class="item__ministar--container">
+                <img *ngIf="zone.punctuationavg>=1" src="{{miniStar}}" alt="star">
+                <img *ngIf="zone.punctuationavg>=2" src="{{miniStar}}" alt="star">
+                <img *ngIf="zone.punctuationavg>=3" src="{{miniStar}}" alt="star">
+                <img *ngIf="zone.punctuationavg>=4" src="{{miniStar}}" alt="star">
+                <img *ngIf="zone.punctuationavg>=5" src="{{miniStar}}" alt="star">
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <app-menu></app-menu>

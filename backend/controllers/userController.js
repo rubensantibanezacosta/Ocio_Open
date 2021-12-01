@@ -98,6 +98,27 @@ class userController {
             });
     };
 
+    getUserPosition = (req, res) => {
+
+        const username = req.params.email;
+
+        this.userService.findAll()
+            .then(data => {
+               
+                let position= data.map((users)=>{
+                    return users.email
+                })
+
+                res.status(200).json(1+position.indexOf(username));
+            })
+            .catch(err => {
+                res.status(500).json({
+                    message:
+                        err + " Error retrieving user with username=" + user.email
+                });
+            });
+    };
+
 
     /*  updateUser = (req, res) => {
  

@@ -4,6 +4,7 @@ const Events = db.events;
 const Users = db.users;
 const Assistants = db.assistants;
 const Comments = db.comments;
+const Images = db.images;
 const { Op } = require("sequelize");
 
 class EventsService {
@@ -14,7 +15,7 @@ class EventsService {
 
   async findAllEventsASC() {
     return Events.findAll({
-      order:[['date','ASC']],
+      order: [['date', 'ASC']],
       include: [{
         model: Users,
         as: "organizerdata",
@@ -22,8 +23,8 @@ class EventsService {
       },
       {
         model: Assistants,
-        include:{
-          model:Users,
+        include: {
+          model: Users,
           attributes: ['name', 'surname', 'punctuation_avg']
         },
         as: "assistants",
@@ -32,10 +33,11 @@ class EventsService {
       {
         model: Comments,
         attributes: ['comment'],
-        include:{
-          model:Users,
+        include: {
+          model: Users,
           attributes: ['name', 'surname']
-        }
+        },
+
       }],
 
     });
@@ -43,7 +45,7 @@ class EventsService {
 
   async findAllEventsDESC() {
     return Events.findAll({
-      order:[['date','DESC']],
+      order: [['date', 'DESC']],
       include: [{
         model: Users,
         as: "organizerdata",
@@ -51,8 +53,8 @@ class EventsService {
       },
       {
         model: Assistants,
-        include:{
-          model:Users,
+        include: {
+          model: Users,
           attributes: ['name', 'surname', 'punctuation_avg']
         },
         as: "assistants",
@@ -61,8 +63,8 @@ class EventsService {
       {
         model: Comments,
         attributes: ['comment'],
-        include:{
-          model:Users,
+        include: {
+          model: Users,
           attributes: ['name', 'surname']
         }
       }],
@@ -83,13 +85,13 @@ class EventsService {
   }
 
   async findEventsByOrganizer(organizer) {
-    return Events.findAll({ where: { organizer: organizer } });
+    return Events.findAll({ where: { organizer: organizer },
+      order: [['date', 'ASC']], });
   }
 
   async findEventsByZone(zone) {
     return Events.findAll({ where: { zone: zone } });
   }
-
 
 
   async findOneEventById(event_id) {

@@ -11,13 +11,12 @@ import { getDataFromToken } from '../../../utils/jwtparser';
 })
 export class ValorationComponent implements OnInit {
   userEmail:string=getDataFromToken().username;
-  myPunctuation:number;
+  myPunctuation:number=0;
 
 @Input() event_id:number;
 assisted:boolean=false;
 
   
-
   emptyStar = "../../../../assets/icons/big-empty-star.png";
   fullStar = "../../../../assets/icons/big-star.png";
   constructor(private punctuationService:PunctuationsService, private assistantService:AssistantsService) { }
@@ -42,7 +41,9 @@ assisted:boolean=false;
   loadPunctuationByPk(){
     return this.punctuationService.getPunctuationByPk(this.event_id, this.userEmail)
     .subscribe((Punctuation)=>{
-      return this.myPunctuation= Punctuation[0].punctuation
+      if(Punctuation[0]){
+        return this.myPunctuation = Punctuation[0].punctuation;
+      }
     })
 }
 

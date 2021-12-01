@@ -41,6 +41,7 @@ export class SlideshowComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadEvents();
+    
   }
   loadEvents() {
       if(this.future){

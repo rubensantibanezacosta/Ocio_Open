@@ -24,43 +24,49 @@ class PunctuationsController {
             assistant: req.body.assistant,
             punctuation: req.body.punctuation,
         }
-        if (!this.punctuationsService.findPunctuationByPk(req.body.event_id, req.body.assistant)) {
-
-            this.punctuationsService.createPunctuation(punctuation)
-                .then(data => {
-                    const avgPunctuationUpdaterService= new AvgPunctuationUpdaterService();
-                    const eventsService = new EventsService();
-                    const organizer = eventsService.findOneEventById(req.body.event_id)
-                    avgPunctuationUpdaterService.updateAvgPunctuations(req.body.event_id,organizer);
-                    res.status(201).json(data);
-                })
-                .catch(err => {
-                    res.status(500).json({
-                        message:
-                            err + " Some error occurred while saving the punctuation."
+        let punctuationExists;
+        this.punctuationsService.findPunctuationByPk(req.body.event_id, req.body.assistant).then(data=>{return this.punctuationExists=data}).then(()=>{
+            if (!this.punctuationExists.length>0) {
+                this.punctuationsService.createPunctuation(punctuation)
+                    .then(data => {
+                        const avgPunctuationUpdaterService= new AvgPunctuationUpdaterService();
+                        const eventsService = new EventsService();
+                        const organizer = eventsService.findOneEventById(req.body.event_id)
+                        avgPunctuationUpdaterService.updateAvgPunctuations(req.body.event_id,organizer);
+                        res.status(201).json(data);
+                    })
+                    .catch(err => {
+                        res.status(500).json({
+                            message:
+                                err + " Some error occurred while saving the punctuation."
+                        });
                     });
-                });
-
-        } else {
-            this.punctuationsService.updatePunctuation(punctuation)
-                .then(data => {
-                    const avgPunctuationUpdaterService= new AvgPunctuationUpdaterService();
-                    const eventsService = new EventsService();
-                
-                    eventsService.findOneEventById(req.body.event_id)
-                    .then((event)=>{
-                    avgPunctuationUpdaterService.updateAvgPunctuations(req.body.event_id,event.organizer);
-                    res.status(200).json(data);
-                    });
+    
+            } else {
+                this.punctuationsService.updatePunctuation(punctuation)
+                    .then(data => {
+                        const avgPunctuationUpdaterService= new AvgPunctuationUpdaterService();
+                        const eventsService = new EventsService();
                     
-                })
-                .catch(err => {
-                    res.status(500).json({
-                        message:
-                            err + " Some error occurred while updating punctuations."
+                        eventsService.findOneEventById(req.body.event_id)
+                        .then((event)=>{
+                        avgPunctuationUpdaterService.updateAvgPunctuations(req.body.event_id,event.organizer);
+                        res.status(200).json(data);
+                        });
+                        
+                    })
+                    .catch(err => {
+                        res.status(500).json({
+                            message:
+                                err + " Some error occurred while updating punctuations."
+                        });
                     });
-                });
-        }
+            }
+            
+        });
+       
+        
+        
     };
 
     findAllPunctuations = (req, res) => {
