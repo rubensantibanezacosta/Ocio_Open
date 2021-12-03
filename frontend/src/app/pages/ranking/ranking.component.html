@@ -1,24 +1,7 @@
 <app-header [tittle]="tittle" [image]="image"></app-header>
-<div class="profile">
-    <div class="profile__image--container">
-        <div class="profile__image">
-            <img src="{{user.image_url}}" alt="">
-        </div>
 
-    </div>
-    <div class="profile__data">
-        <p class="profile__name"><b>{{user.name}} </b>{{user.surname}}</p>
-        <p class="profile__valoration">Mi valoración <b class="rank-number">{{userPosition}}º</b></p>
-        <div class="star-container">
-            <img *ngIf="user.punctuation_avg>=1" src="{{star}}" alt="star">
-            <img *ngIf="user.punctuation_avg>=2" src="{{star}}" alt="star">
-            <img *ngIf="user.punctuation_avg>=3" src="{{star}}" alt="star">
-            <img *ngIf="user.punctuation_avg>=4" src="{{star}}" alt="star">
-            <img *ngIf="user.punctuation_avg>=5" src="{{star}}" alt="star">
+<app-profile></app-profile>
 
-        </div>
-    </div>
-</div>
 <div class="main">
     <div class="main__header">
         <p class="ranking__tittle">Ranking <img src="{{rankingIconBlack}}" alt=""></p>

@@ -3,7 +3,7 @@ export class User {
     name: string ;
     surname: string ;
     image_url: string ;
-    lastconection:string;
+    lastconnection:string;
     createdAt:string;
     punctuation_avg:number;
 }

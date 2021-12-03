@@ -31,6 +31,7 @@ import { BackIconComponent } from './components/back-icon/back-icon.component';
 import { EventFormComponent } from './pages/event-form/event-form.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { ImageViewerComponent } from './components/gallery/image-viewer/image-viewer.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { ImageViewerComponent } from './components/gallery/image-viewer/image-vi
     EventFormComponent,
     GalleryComponent,
     ImageViewerComponent,
+    ProfileComponent,
 
 
   ],
