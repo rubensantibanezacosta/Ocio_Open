@@ -8,7 +8,9 @@
     padding-top: 70px;
     max-height: calc(100vh - 110px);
     overflow-y: scroll;
+    display: flex;
     justify-content: center;
+    
 }
 
 
@@ -21,6 +23,7 @@ form{
     align-items: center;
     min-height: 100vh;
     justify-content: space-between;
+    max-width: 1000px;
 }
 
 .tittle-div{

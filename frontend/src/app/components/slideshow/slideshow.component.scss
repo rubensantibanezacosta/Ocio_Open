@@ -12,11 +12,10 @@
   text-shadow: 1px 1px 5px black;
   color:$color-text-darkmode;
   display: flex;
-  overflow-y: hidden;
+  overflow-y: scroll;
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
-  height: 85vh;
-  min-height: 468px;
+  height: calc(100vh - 100px);
   white-space: nowrap;
   margin-top: 70px;
   padding-left: 10px;
@@ -30,6 +29,7 @@
   max-width: 368px;
   box-sizing: border-box;
   padding-right: 20px;
+  ;
   
 }
 

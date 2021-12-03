@@ -71,7 +71,8 @@
 .contain-main__container{
     padding: 5%;
     box-sizing: border;
-    max-height: 55vh;
+    min-height: calc(85vh - 180px);
+    max-height: calc(85vh - 180px);
     overflow: scroll;
 
 }
@@ -88,6 +89,7 @@
     display: flex;
     padding-bottom: 15px;
     border-bottom: 1px solid $color-text-darkmode;
+
     
 }
 
@@ -125,6 +127,11 @@
     font-size: 0.8rem;
     padding-left: 10px;
     box-sizing: border-box;
+}
+
+.available-events__item:nth-child(even){
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 8px;
 }
 
 .available-events__item--text{
