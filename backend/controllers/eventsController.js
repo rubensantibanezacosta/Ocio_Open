@@ -71,7 +71,7 @@ class EventsController {
 
     findEventsByDate = (req, res) => {
         const date =moment(req.params.date).format("YYYY-MM-DD");
-        console.log(date);
+        
 
         this.eventsService.findEventsByDate(date)
             .then(data => {
@@ -86,7 +86,7 @@ class EventsController {
     };
 
     findEventsByOrganizer = (req, res) => {
-        const organizer = req.params.organizer;
+        const organizer = req.user.dataValues.email;
 
         this.eventsService.findEventsByOrganizer(organizer)
             .then(data => {
@@ -116,9 +116,8 @@ class EventsController {
     };
 
     updateEvent = (req, res) => {
-
         // Validate request
-        if (!req.body.tittle || !req.body.date || !req.body.place || !req.body.organizer || !req.body.zone || !req.body.event_id) {
+        if (!req.body.tittle || !req.body.date || !req.body.place || ! !req.body.zone || !req.body.event_id) {
             res.status(400).json({
                 message: "Content cannot be empty!"
             });
@@ -132,7 +131,7 @@ class EventsController {
             zone: req.body.zone,
             place: req.body.place,
             description:req.body.description,
-            organizer: req.body.organizer,
+            organizer: req.user.dataValues.email,
             image_url: req.body.image_url,
         }
 
@@ -168,7 +167,6 @@ class EventsController {
 
     deleteEvent = (req, res) => {
         const event_id = req.params.event_id;
-
         this.eventsService.deleteEvent(event_id)
             .then(num => {
                 if (num == 1) {

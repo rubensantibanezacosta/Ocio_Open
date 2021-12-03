@@ -62,12 +62,6 @@ export class LoginComponent implements OnInit {
             if (data.token) {
               const token: Token = data;
               localStorage.setItem("ocioToken", token.token);
-              const tokenTimeout: number = moment(token.expireDate).valueOf() - moment().valueOf();
-              let time = tokenTimeout / 1000;
-
-              setTimeout(() => {
-                return (localStorage.removeItem("ocioToken")), this.router.navigateByUrl("/");
-              }, tokenTimeout);
 
               this.router.navigateByUrl("/home");
             }

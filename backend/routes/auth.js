@@ -76,9 +76,8 @@ function authApi(app) {
                         next(boom.unauthorized());
                     }
     
-    
                     const expireTime = rememberMe ?
-                    config.tokenExpireTimeRememberMe:config.tokenExpireTime;
+                    config.tokenExpireTime:config.tokenExpireTimeRememberMe;
                     
                     const expireDate = moment.utc().add(expireTime, "minutes");
                     const email = bodyUser.email;

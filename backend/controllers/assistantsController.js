@@ -10,7 +10,7 @@ class AssistantsController {
 
 
 
-        if (!req.body.event_id || !req.body.assistant) {
+        if (!req.body.event_id) {
             res.status(400).json({
                 message: "Content cannot be empty!"
             });
@@ -21,7 +21,7 @@ class AssistantsController {
 
         const assistant = {
             event_id: req.body.event_id,
-            assistant: req.body.assistant,
+            assistant: req.user.dataValues.email,
             attendance: req.body.attendance,
             excuse: req.body.excuse
         };
@@ -122,7 +122,7 @@ class AssistantsController {
 
     updateAssistant = (req, res) => {
 
-        if (!req.body.event_id || !req.body.assistant) {
+        if (!req.body.event_id) {
             res.status(400).json({
                 message: "Content cannot be empty!"
             });
@@ -131,7 +131,7 @@ class AssistantsController {
 
         const assistant = {
             event_id: req.body.event_id,
-            assistant: req.body.assistant,
+            assistant: req.user.dataValues.email,
             attendance: req.body.attendance,
             excuse: req.body.excuse
         };

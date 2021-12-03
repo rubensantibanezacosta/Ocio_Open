@@ -11,7 +11,7 @@
         </div>
         <div class="header__data--search-bar-container">
             <div class="header__data--search-bar">
-                <input type="text" placeholder="Buscar..." name="search" #search (keyup)="filterBy(search.value)">
+                <input type="text" placeholder="Buscar..." name="search" #search>
                 <div class="search-icon">
                     <img src="{{searchIcon}}" alt="Search">
                 </div>
@@ -46,7 +46,7 @@
                 <th>Alta <img src="{{orderByIcon}}" alt=""></th>
                 <th>Ult. conex. <img src="{{orderByIcon}}" alt=""></th>
             </tr>
-            <tr *ngFor="let user of users">
+            <tr *ngFor="let user of users" routerLink="/profileAdministration/{{user.email}}">
 
                 <td>{{user.name}}</td>
                 <td>{{user.surname}}</td>

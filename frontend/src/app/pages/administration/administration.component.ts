@@ -32,7 +32,7 @@ import { getDataFromToken } from 'src/app/utils/jwtparser';
         borderBottom: "0"
       })),
       state('inactive', style({ borderBottom: "1px white solid" })),
-      transition("inactive <=> active", animate('0.3s')),
+      transition("inactive <=> active", animate('0s')),
     ]),
     trigger('eventTittle', [
       state('inactive', style({
@@ -42,7 +42,7 @@ import { getDataFromToken } from 'src/app/utils/jwtparser';
         border: "1px solid white",
         borderBottom: "0"
       })),
-      transition("inactive <=> active", animate('0.3s')),
+      transition("inactive <=> active", animate('0s')),
     ])
   ]
 })
@@ -60,30 +60,37 @@ export class AdministrationComponent implements OnInit {
   eventsState: string = "inactive";
   users: User[] = [];
   events: Event[] = [];
+  word: string = "";
 
   constructor(private usersService: UsersService, private eventsService: EventsService) { }
 
   ngOnInit(): void {
-    this.loadInfo();
+    this.loadInfoUsers();
+    this.loadInfoEvents();
+    this.getUser();
   }
 
-  async loadInfo() {
-    this.getUser();
-    this.eventsService.getAllEventsDESC().subscribe((res) => {
-      return this.events = res;
-    })
-    this.usersService.getAllUsers().subscribe((res) => {
-      return this.users = res;
+  async loadInfoUsers() {
+    return this.eventsService.getAllEventsDESC().subscribe((res) => {
+      return (this.events = res);
     })
   }
+  async loadInfoEvents() {
+    return this.usersService.getAllUsers().subscribe((res) => {
+      return (this.users = res);
+    })
+  }
+
   showEvents() {
     this.usersState = "inactive";
     this.eventsState = "active";
+    this.word="";
   }
 
   showUsers() {
     this.usersState = "active";
     this.eventsState = "inactive";
+    this.word="";
   }
 
   formatDate(date: Date) {
@@ -98,22 +105,5 @@ export class AdministrationComponent implements OnInit {
     this.usersService.getUserByEmail(this.userEmail).subscribe((res) => {
       this.userData = res;
     });
-  }
-  filterBy(word: string) {
-    console.log(word);
-    this.loadInfo().then(() => {
-      if (word != "") {
-        this.users = this.users.filter((user) => {
-          return user.email.includes(word) || user.name.includes(word) || user.surname.includes(word)
-        })
-        this.events = this.events.filter((event) => {
-          return event.tittle.includes(word) || event.description.includes(word) || event.place.includes(word) || event.zone.includes(word) || event.organizer.includes(word);
-        })
-      } else {
-        this.loadInfo()
-      }
-    });
-
-
   }
 }

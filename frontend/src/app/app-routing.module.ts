@@ -23,9 +23,9 @@ const routes: Routes = [
   { path: 'administration', component: AdministrationComponent },
   { path: 'ranking', component: RankingComponent },
   { path: 'calendar', component: CalendarComponent },
-  { path: 'profileAdministration', component: ProfileAdministrationComponent },
   { path: 'eventform/:event_id/:type', component: EventFormComponent },
   { path: 'gallery', component: GalleryComponent },
+  { path: 'profileAdministration/:email', component: ProfileAdministrationComponent },
   { path: '', component: LoginComponent },
   { path: '**', component: NofoundComponent }
 
