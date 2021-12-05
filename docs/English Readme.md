@@ -1,4 +1,4 @@
-[View in Spanish](https://github.com/rubensantibanezacosta/Ocio_Open)
+[Ver en castellano](https://github.com/rubensantibanezacosta/Ocio_Open)
 
 # Ocio Open  *(Training project)*
 
