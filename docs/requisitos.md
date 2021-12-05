@@ -38,7 +38,7 @@
 	- Cada vez que se apunte/desapunte un compañero a un evento que has propuesto o te has apuntado.
 
 
-## ADMINISTRACIÓN
+### ADMINISTRACIÓN
 
 - Tener un apartado de administración (para roles administradores) donde, como mínimo se pueda:
  	- EVENTOS  Poder hacer consultas de eventos y edición de estos (aunque no seamos el organizador).
