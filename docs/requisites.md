@@ -39,7 +39,7 @@
 	- Every time a colleague joins/unsubscribes to an event that you have proposed or signed up for.
 
 
-## ADMINISTRATION
+### ADMINISTRATION
 
 - THave an administration section (for administrator roles) where, as a minimum, you can:
  	- EVENTS To be able to consult events and edit them (even if we are not the organizer).
