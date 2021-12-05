@@ -48,7 +48,7 @@ The project consists of 3 different parts:
 
 You need to have node.js installed in your development environment. Recommended LTS version: https://nodejs.org/es/
 
-Once cloned, you must update the dependencies.
+Once cloned, you must update dependencies.
 
 ```
 cd frontend/
