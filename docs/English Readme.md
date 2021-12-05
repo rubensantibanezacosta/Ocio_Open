@@ -14,7 +14,7 @@ The project is a basic social network that allows, empowers and rewards the orga
 
 ## Project Documentation
 
-- [Application requirements report](https://github.com/rubensantibanezacosta/Ocio_Open/blob/main/docs/requisitos.md)
+- [Application requirements report](https://github.com/rubensantibanezacosta/Ocio_Open/blob/main/docs/requisites.md)
 - [Use case diagram](https://github.com/rubensantibanezacosta/Ocio_Open/blob/main/docs/Casos%20de%20Uso.png)
 - [Data model](https://github.com/rubensantibanezacosta/Ocio_Open/blob/main/docs/Captura%20de%20pantalla%20de%202021-12-03%2011-33-16.png)
 - [API Rest Calls Report in Postman](https://documenter.getpostman.com/view/17032586/UVC8E77j)
