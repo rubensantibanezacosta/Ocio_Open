@@ -123,7 +123,7 @@ ACCEPTED_DOMAINS="domains accepted for registration separated by commas. Example
 ```
 
 2. You need a MySQL server running.
-3. Create the database the mysql database, in your case it should be called ``` ocio_open ```
+3. Create the database in mysql, in your case it should be called ``` ocio_open ```
 
 4. Import the database:  [Database](https://github.com/rubensantibanezacosta/Ocio_Open/blob/main/docs/ocioopenBBDD.sql)
 
