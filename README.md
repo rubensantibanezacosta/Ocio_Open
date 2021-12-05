@@ -1,4 +1,4 @@
-[View in English]()
+[View in English](https://github.com/rubensantibanezacosta/Ocio_Open/blob/main/docs/English%20Readme.md)
 
 # Ocio Open  *(Proyecto formativo)*
 
