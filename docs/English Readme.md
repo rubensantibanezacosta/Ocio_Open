@@ -144,7 +144,7 @@ ng serve -o
 If you follow the instructions, you should have three servers started:
 * Frontend (http://localhost:4200)
 * Backend (http://localhost:4000)
-* Mysql (Address selected by you in `DB_HOST`)
+* Mysql (Address selected by yourself in `DB_HOST`)
 
 Enjoy!!!
 
