@@ -62,7 +62,7 @@ npm install
 
 * For the frontend, if you want to use the Google login feature, you need to create a client ID by creating a new project on the Google developers website: https://developers.google.com/
 
-On this page you must configure a new project by clicking on create crendenciales and Obtain your Google ClientId.
+On this page you must configure a new project by clicking on create crendentials and Obtain your Google ClientId.
 
 ![Captura de pantalla de 2021-11-22 15-04-08](https://user-images.githubusercontent.com/44450566/142885020-f59c7e6d-2fb1-467b-9fa4-b66f516ff12d.png)
 
