@@ -1,43 +1,46 @@
-## REQUISITOS
+[Back to Readme](https://github.com/rubensantibanezacosta/Ocio_Open/blob/main/docs/English%20Readme.md)
 
-### UBICACIONES
+## REQUIREMENTS
 
-- Que la gente sepa rápido si el evento es en Tenerife, Gran Canaria o virtual, además de a lo mejor sacar en algún sitio la estadística, a modo ranking, como se  ha hecho para los usuarios con más eventos puntuados. (puede servir para motivar a los de una isla u otra si ven que unos hacen más cosas que los otros) 
+### LOCATIONS
 
--  Campos en el card del evento:
+- Let people know quickly if the event is in Tenerife, Gran Canaria or virtual, in addition to maybe getting the statistics somewhere, as a ranking, as has been done for users with the most scored events. (It can serve to motivate those of one island or another if they see that some do more things than others)
 
-	- Un campo Provincia/isla o "Zona", que sólo pueda tener 3 opciones. TFE, GC y Virtual, para 	saber si el evento se propone en Tenerife, Gran Canaria o de forma virtual. Esta info estaría    bien que apareciera en la pantalla principal del evento.
+-  Fields in the event card:
 
-	- Un segundo campo que si sea libre e indique la ubicación (como el que está en el prototipo), y si es virtual pueda indicar el enlace a la videoconferencia creada.
+	- A Province/Island or "Zone" field, which can only have 3 options. TFE, GC and Virtual, to find out if the event is proposed in Tenerife, Gran Canaria or virtually. This info would be nice if it appeared on the main screen of the event.
 
-### IMAGENES
+	- A second field that is free and indicates the location (like the one in the prototype), and if it is virtual, it can indicate the link to the created video conference.
 
-- Tener una galería de imágenes precargada para ser usada en el campo Imagen, y que no carguen una imagen por evento sino que puedan usar imágenes ya cargadas por otros compañeros en eventos previos. Si no te gusta ninguna imagen de la librería o no hay una imagen adecuada, entonces podrá cargar una imagen (y esta pase a formar parte de la librería de imágenes).
+### IMAGES
 
-### FORMULARIOS
+- Have a preloaded gallery of images to be used in the Image field, and that they do not upload an image per event but can use images already uploaded by other colleagues in previous events. If you don't like any image in the library or there is no suitable image, then you can upload an image (and it becomes part of the image library).
 
-- Se ha de tener en cuenta la opción de desapuntarse de los eventos, aportando un motivo.
+### FORMS
 
-
-### USUARIOS
-
-- Tener una tabla de usuarios. Cada vez que un empleado acceda a la aplicación, con la integración por Google, registrarle como usuario en la tabla, si no está previamente (es la primera vez que entra en la aplicación) o bien, si ya está registrado, actualizar una campo de la tabla que sea último acceso.  En ppo me gustaría tener en esta tabla:
-
-	- id del usuario, me vale el mail, es único.
-	- fecha y hora del primer acceso.
-	- fecha y hora del ultimo acceso
-
-### NOTIFICACIONES
-
-- Poder hacer notificaciones por mail:
-
-	- Cada vez que se cree un evento, a todos los mails que tengamos en la tabla "usuarios"
-	- Cada vez que se edite o cancele un evento en el que te has apuntado.
-	- Cada vez que se apunte/desapunte un compañero a un evento que has propuesto o te has apuntado.
+- The option to unsubscribe from events must be taken into account, providing a reason.
 
 
-## ADMINISTRACIÓN
+### USERS
 
-- Tener un apartado de administración (para roles administradores) donde, como mínimo se pueda:
- 	- EVENTOS  Poder hacer consultas de eventos y edición de estos (aunque no seamos el organizador).
- 	- USUARIOS Poder consultar la tabla de usuarios, con su fecha de registro, y su ultima hora de conexión
+- Have a table of users. Every time an employee accesses the application, with the integration by Google, register him as a user in the table, if he is not previously present (it is the first time he enters the application) or, if he is already registered, update a field of the table that is last accessed. In ppo I would like to have in this table:
+- 
+	- User id, the email is good for me, it is unique.
+	- date and time of first access.
+	- date and time of last access
+
+
+### NOTIFICATIONS
+
+- To be able to make notifications by mail:
+
+	- Every time an event is created, to all the mails that we have in the "users" table
+	- Every time an event in which you have signed up is edited or canceled.
+	- Every time a colleague joins/unsubscribes to an event that you have proposed or signed up for.
+
+
+## ADMINISTRATION
+
+- THave an administration section (for administrator roles) where, as a minimum, you can:
+ 	- EVENTS To be able to consult events and edit them (even if we are not the organizer).
+ 	- USERS To be able to consult the table of users, with their registration date, and their last connection time
