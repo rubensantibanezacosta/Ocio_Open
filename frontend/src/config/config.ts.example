@@ -9,7 +9,7 @@ export class VariablesService {
   variables = {
     googleClientId: "google Client Id",
     googleClientSecret: "Google Client Secret",
-    host: "frontend host",
+    host: "Backend host",
 
   }
 
