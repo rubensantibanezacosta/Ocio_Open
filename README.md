@@ -73,7 +73,7 @@ En esta pagina deberá configurar un nuevo proyecto haciendo click en crear cren
 
 
 
-Deberá crear el archivo backend/config/config.ts y rellenarlo con sus credenciales utilizando el esquema del archivo backend/config.ts.example
+Deberá crear el archivo frontend/src/app/config/config.ts y rellenarlo con sus credenciales utilizando el esquema del archivo frontend/src/app//config.ts.example
 
 ```
 import { Injectable } from '@angular/core';
