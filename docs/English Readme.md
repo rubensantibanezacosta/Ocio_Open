@@ -72,7 +72,7 @@ In the Credentials section you must fill in the "URI*" field with your frontend 
 
 
 
-You will need to create the backend/config/config.ts file and fill it with your credentials using the schema from the backend/config.ts.example file
+You will need to create the frontend/src/app/config/config.ts file and fill it with your credentials using the schema from the frontend/src/app/config.ts.example file
 
 ```
 import { Injectable } from '@angular/core';
