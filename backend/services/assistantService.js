@@ -21,8 +21,8 @@ class AssistantsService {
             where: {
                 event_id: event_id, attendance: true
             },
-            include:{
-                model:Users,
+            include: {
+                model: Users,
                 attributes: ['name', 'surname', 'punctuation_avg']
             }
         });
@@ -45,6 +45,14 @@ class AssistantsService {
 
     async findAllAssistants() {
         return Assistants.findAll();
+    };
+
+    async countAttendance(assistant) {
+        return Assistants.findAll({
+            where: {
+                assistant: assistant, attendance: true
+            }
+        });
     };
 
     async updateAssistant(assistant) {

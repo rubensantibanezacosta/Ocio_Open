@@ -1,0 +1,23 @@
+import { Injectable } from '@angular/core';
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class VariablesService {
+
+  variables = {
+    googleClientId: "google Client Id",
+    googleClientSecret: "Google Client Secret",
+    host: "frontend host",
+
+  }
+
+
+  getVariables() {
+    return this.variables;
+  }
+}
+
+
+

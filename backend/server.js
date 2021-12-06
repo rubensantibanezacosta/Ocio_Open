@@ -4,6 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const morgan = require("morgan");
 
 const authApi = require("./routes/auth");
 const userRoutes = require("./routes/userRoutes");
@@ -16,14 +17,17 @@ const zonesRoutes = require("./routes/zonesRoutes");
 
 
 
+
  
 const app = express();
 const port = process.env.PORT || 4000;
  
 // enable CORS
 app.use(cors());
-//Multer
 
+//Morgan
+
+app.use(morgan('dev'));
 
 // parse application/json
 app.use(bodyParser.json());

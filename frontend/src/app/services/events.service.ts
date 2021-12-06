@@ -35,8 +35,12 @@ export class EventsService {
     return this.httpClient.get<Event[]>(this.endpoint+"/bydate/"+date, this.httpOptions)
   }
 
-  getEventsByOrganizer(organizer:string):Observable<Event[]>{
-    return this.httpClient.get<Event[]>(this.endpoint+"/byorganizer/"+ encodeURI(organizer), this.httpOptions)
+  getEventsByOrganizerASC(organizer:string):Observable<Event[]>{
+    return this.httpClient.get<Event[]>(this.endpoint+"/byorganizer/ASC/"+ encodeURI(organizer), this.httpOptions)
+  }
+
+  getEventsByOrganizerDESC(organizer:string):Observable<Event[]>{
+    return this.httpClient.get<Event[]>(this.endpoint+"/byorganizer/DESC/"+ encodeURI(organizer), this.httpOptions)
   }
 
   getEventById(event_id:number):Observable<Event>{

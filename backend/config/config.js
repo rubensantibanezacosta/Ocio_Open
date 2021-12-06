@@ -7,6 +7,7 @@ const config = {
     database: process.env.MYSQL_DATABASE,
     host: process.env.DB_HOST,
     dialect: 'mysql',
+    logging:false,
 
     jwtSecret: process.env.JWT_SECRET,
     publicApiKeyToken: process.env.PUBLIC_API_KEY_TOKEN,

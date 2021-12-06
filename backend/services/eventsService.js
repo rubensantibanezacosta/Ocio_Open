@@ -84,9 +84,14 @@ class EventsService {
       });
   }
 
-  async findEventsByOrganizer(organizer) {
+  async findEventsByOrganizerASC(organizer) {
     return Events.findAll({ where: { organizer: organizer },
       order: [['date', 'ASC']], });
+  }
+
+  async findEventsByOrganizerDESC(organizer) {
+    return Events.findAll({ where: { organizer: organizer },
+      order: [['date', 'DESC']], });
   }
 
   async findEventsByZone(zone) {

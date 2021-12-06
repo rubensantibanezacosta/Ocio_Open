@@ -41,6 +41,9 @@ export class AssistantsService {
     return this.httpClient.get<Asisstant[]>(this.endpoint,this.httpOptions)
   }
 
+  countAttendance(assistant:string):Observable<number>{
+    return this.httpClient.get<number>(this.endpoint+"/count/"+assistant,this.httpOptions)
+  }
   updateAssistant(assistant:Asisstant):Observable<string>{
     return this.httpClient.put<string>(this.endpoint,JSON.stringify(assistant) ,this.httpOptions)
   }

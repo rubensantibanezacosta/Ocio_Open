@@ -85,10 +85,25 @@ class EventsController {
             });
     };
 
-    findEventsByOrganizer = (req, res) => {
+    findEventsByOrganizerASC = (req, res) => {
         const organizer = req.user.dataValues.email;
 
-        this.eventsService.findEventsByOrganizer(organizer)
+        this.eventsService.findEventsByOrganizerASC(organizer)
+            .then(data => {
+                res.status(200).json(data);
+            })
+            .catch(err => {
+                res.status(500).json({
+                    message:
+                        err + " Some error occurred while retrieving punctuations."
+                });
+            });
+    };
+
+    findEventsByOrganizerDESC = (req, res) => {
+        const organizer = req.user.dataValues.email;
+
+        this.eventsService.findEventsByOrganizerDESC(organizer)
             .then(data => {
                 res.status(200).json(data);
             })
@@ -117,7 +132,7 @@ class EventsController {
 
     updateEvent = (req, res) => {
         // Validate request
-        if (!req.body.tittle || !req.body.date || !req.body.place || ! !req.body.zone || !req.body.event_id) {
+        if (!req.body.tittle || !req.body.place || !req.body.zone || !req.body.event_id) {
             res.status(400).json({
                 message: "Content cannot be empty!"
             });
@@ -132,7 +147,7 @@ class EventsController {
             place: req.body.place,
             description:req.body.description,
             organizer: req.user.dataValues.email,
-            image_url: req.body.image_url,
+            image_id: req.body.image_id,
         }
 
         this.eventsService.updateEvent(event)

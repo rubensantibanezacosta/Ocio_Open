@@ -53,6 +53,7 @@ export class EventFormComponent implements OnInit {
     console.log(this.myEvent.image_id);
     this.type=="new"?this.eventsService.createEvent(this.myEvent).subscribe(res=>window.history.back()):
     this.eventsService.updateEvent(this.myEvent).subscribe(res=>{
+      console.log("updating:[",res,"]")
       window.history.back()});
   }
 

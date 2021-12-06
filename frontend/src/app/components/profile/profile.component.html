@@ -1,7 +1,9 @@
 <div class="profile">
     <div class="profile__image--container">
         <div class="profile__image">
-            <img src="{{user.image_url}}" alt="user">
+            <img *ngIf="user.image_url==undefined" src="{{profileAvatar}}" alt=""/>
+            <img *ngIf="user.image_url" src="{{user.image_url}}" alt=""/>
+            
         </div>
 
     </div>

@@ -113,10 +113,16 @@ form{
     flex-direction: column;
     width: 100%;
 }
+.image-mini{
+    max-width: 20%;
+    object-fit: contain;
+    margin-right: 20px;
+}
 .buttons{
+    padding: 20px;
     display: flex;
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
     align-items:center;
     box-sizing: border-box;
 }
@@ -177,6 +183,8 @@ form{
     align-items: center;
     justify-content: center;
     height: 60px;
+    padding-bottom: 40px;
+    padding-top: 15px;
 }
 
 .save-button {

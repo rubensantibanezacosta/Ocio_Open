@@ -52,7 +52,7 @@ export class MyeventsComponent implements OnInit {
   }
 
   getFutureEventsByUser() {
-    this.eventService.getEventsByOrganizer(this.userEmail).subscribe((events) => {
+    this.eventService.getEventsByOrganizerASC(this.userEmail).subscribe((events) => {
       return this.futureEvents = events.filter((event) => {
         return moment(event.date).isAfter(moment());
       })
@@ -61,7 +61,7 @@ export class MyeventsComponent implements OnInit {
   }
 
   getPastEventsByUser() {
-    this.eventService.getEventsByOrganizer(this.userEmail).subscribe((events) => {
+    this.eventService.getEventsByOrganizerDESC(this.userEmail).subscribe((events) => {
       return this.pastEvents = events.filter((event) => {
         return moment(event.date).isBefore(moment());
       });

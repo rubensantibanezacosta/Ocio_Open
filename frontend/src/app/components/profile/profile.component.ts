@@ -18,11 +18,13 @@ export class ProfileComponent implements OnInit {
   editIcon = "../../../assets/icons/pencil-icon.png";
   plus = "../../../assets/icons/plus-icon-empty.png";
   miniStar = "../../../assets/icons/mini-star.png";
+  profileAvatar = "../../../assets/images/avatar.jpg";
   
   constructor(private userService: UsersService,) { }
 
   ngOnInit(): void {
     this.getUserByEmail();
+    this.getUserPosition();
   }
   getUserByEmail() {
     this.userService.getUserByEmail(this.userEmail).subscribe((user) => {

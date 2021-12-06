@@ -4,7 +4,8 @@
 <div class="profile">
     <div class="profile__image--container">
         <div class="profile__image">
-            <img src="{{user.image_url}}" alt="user">
+            <img *ngIf="user.image_url==undefined" src="{{profileAvatar}}" alt=""/>
+            <img *ngIf="user.image_url" src="{{user.image_url}}" alt=""/>
         </div>
 
     </div>
@@ -20,8 +21,34 @@
         </div>
     </div>
 </div>
+<div class="timestamp">
+    <p>Alta <span>{{formatDateString(user.createdAt)}}</span></p>
+    <p>Ultima conexión <span>{{formatDateTime(user.lastconnection)}}</span></p>
+    <p>Eventos Asistidos <span>{{attendanceCounter}}</span></p>
+    <p>Eventos Organizados <span>{{events.length}}</span></p>
+</div>
 
 
+<div class="main-events">
+    <div class="users-table-container">
+        <table>
+
+            <tr>
+                <th>Nombre </th>
+                <th>Fecha </th>
+                <th>Zona </th>
+                <th>Ubicación</th>
+            </tr>
+
+            <tr *ngFor="let event of events">
+                <td>{{event.tittle}}</td>
+                <td>{{formatDate(event.date)}}</td>
+                <td>{{event.zone}}</td>
+                <td>{{event.place}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
 
 
 <app-menu></app-menu>

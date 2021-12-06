@@ -105,6 +105,20 @@ class AssistantsController {
     };
 
 
+    countAttendance = (req, res) => {
+        const assistant=req.params.assistant;
+        this.assistantsService.countAttendance(assistant)
+            .then(data => {
+                res.status(200).json(data.length);
+            })
+            .catch(err => {
+                res.status(500).json({
+                    message:
+                        err + " Some error occurred while retrieving cities."
+                });
+            });
+    };
+
     findAllAsisstants = (req, res) => {
 
         this.assistantsService.findAllAssistants()

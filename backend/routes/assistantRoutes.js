@@ -36,6 +36,11 @@ function asisstantRoutes(app) {
         scopesValidationHandler(['read:assistants']),
         assistantsController.findAllAsisstants);
 
+        router.get("/count/:assistant",
+        passport.authenticate("jwt", { session: false }),
+        scopesValidationHandler(['read:assistants']),
+        assistantsController.countAttendance);
+
     router.put("/",
         passport.authenticate("jwt", { session: false }),
         scopesValidationHandler(['delete:assistants']),

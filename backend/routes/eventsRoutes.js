@@ -30,10 +30,15 @@ function eventsRoutes(app) {
         scopesValidationHandler(['read:events']),
         eventsController.findEventsByDate);
 
-    router.get("/byorganizer/:organizer",
+    router.get("/byorganizer/ASC/:organizer",
         passport.authenticate("jwt", { session: false }),
         scopesValidationHandler(['read:events']),
-        eventsController.findEventsByOrganizer);
+        eventsController.findEventsByOrganizerASC);
+
+        router.get("/byorganizer/DESC/:organizer",
+        passport.authenticate("jwt", { session: false }),
+        scopesValidationHandler(['read:events']),
+        eventsController.findEventsByOrganizerDESC);
 
     router.get("/byid/:event_id",
         passport.authenticate("jwt", { session: false }),

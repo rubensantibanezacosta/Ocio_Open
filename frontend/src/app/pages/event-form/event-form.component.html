@@ -53,9 +53,12 @@
         <div class="image-div">
             <label for="image">Imagen (Opcional)</label>
             <div class="buttons">
-                <input type="number" required readonly [(ngModel)]="myEvent.image_id" name=image #image_id="ngModel"
+                <div class="image-mini" *ngIf="myEvent.image_id>0">
+                    <app-image-viewer  [imageId]="myEvent.image_id"></app-image-viewer>
+                </div>
+                <input type="number" required style="display: none;" [(ngModel)]="myEvent.image_id" name=image #image_id="ngModel"
                     placeholder="Imagen...">
-                <button class="image" (click)="$event.preventDefault()" (click)="showGallery()"><img src="{{galeryIcon}}" alt=""></button>
+                <button class="image" (click)="$event.preventDefault()" (click)="showGallery()"   (click)="myEvent.image_id=0"><img src="{{galeryIcon}}" alt=""></button>
                 <button (click)="$event.preventDefault()" (click)="showImageForm()" class="image"><img src="{{fileIcon}}" alt=""></button>
         </div>
 
