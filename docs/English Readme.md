@@ -46,9 +46,9 @@ The project consists of 3 different parts:
 * Backend
 * Database
 
-You need to have node.js installed in your development environment. Recommended LTS version: https://nodejs.org/es/
+You need to have node.js installed in your development environment. LTS version recommended : https://nodejs.org/es/
 
-Once cloned, you must update dependencies.
+Once cloned, you must update the dependencies.
 
 ```
 cd frontend/
@@ -60,34 +60,66 @@ npm install
 ```
 
 
-* For the frontend, if you want to use the Google login feature, you need to create a client ID by creating a new project on the Google developers website: https://developers.google.com/
+* For the frontend, the Google login function is used, you need to create a client ID by creating a new project on the Google developers website: https://console.cloud.google.com/apis
 
-On this page you must configure a new project by clicking on create crendentials and Obtain your Google ClientId.
+On this page you must configure a new project by clicking on create crendenciales and Obtain your Google ClientId.
 
 ![Captura de pantalla de 2021-11-22 15-04-08](https://user-images.githubusercontent.com/44450566/142885020-f59c7e6d-2fb1-467b-9fa4-b66f516ff12d.png)
 
+In the Credentials section you must fill in the "URI*" field with your frontend host address. In our case:
+ 
+![Captura de pantalla de 2021-12-06 11-54-29](https://user-images.githubusercontent.com/44450566/144841712-ed985048-a395-4059-b449-84026d664d14.png)
 
-In our local environment we can use the default http://localhost:4000 as the origin. For a production deployment, you will have to change/add your deployment url.
 
 
-You will need to add your credentials to the project on the frontend.
+You will need to create the backend/config/config.ts file and fill it with your credentials using the schema from the backend/config.ts.example file
 
 ```
-REACT_APP_CLIENT_ID=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.apps.googleusercontent.com
-REACT_APP_BASEURL=http://localhost:3000
+import { Injectable } from '@angular/core';
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class VariablesService {
+
+  variables = {
+    googleClientId: "google Client Id",
+    googleClientSecret: "Google Client Secret",
+    host: "Backend host ", (En nuestro caso 'http://localhost:4000')
+
+  }
+
+
+  getVariables() {
+    return this.variables;
+  }
+}
+
+
 ```
+
+
 
 
 * For your backend:
-1. You should create the backend/.env file and fill it with your credentials using the file schema backend/.env.example
+
+
+1. You need a MySQL server running.
+
+2. Create the database, in your case it should be called ``` ocio_open ```
+
+3. Import the file to your database:  [SQL file](https://github.com/rubensantibanezacosta/Ocio_Open/blob/main/docs/ocioopenBBDD.sql)
+
+4. You should create the backend/.env file and fill it with your credentials using the backend/.env.example file schema
 
 MySQL
 ```
-MYSQL_DATABASE="database name"
-MYSQL_USER="Username"
-MYSQL_PASSWORD=MySQL access key
-MYSQL_ROOT_PASSWORD=MySQL access key
-DB_HOST=your host address
+MYSQL_DATABASE=ocio_open
+MYSQL_USER="username"
+MYSQL_PASSWORD="MySQL access key"
+MYSQL_ROOT_PASSWORD="MySQL access key"
+DB_HOST="MySQL host"
 ``` 
 Mode
 ```
@@ -105,13 +137,14 @@ These keys are automatically generated in the database by executing the script:
 ```
 npm run roleKeysCreate 
 ``` 
-to create, or 
+to create them, or 
 ```
 npm run roleKeysUpdate 
 ```
 to update them.
 
 Once created, copy and paste them here:
+
 ```
 PUBLIC_API_KEY_TOKEN=
 ADMIN_API_KEY_TOKEN=
@@ -122,19 +155,23 @@ Domains
 ACCEPTED_DOMAINS="domains accepted for registration separated by commas. Example: gmail.com,hotmail.com"
 ```
 
-2. You need a MySQL server running.
-3. Create the database in mysql, in your case it should be called ``` ocio_open ```
-
-4. Import the database:  [Database](https://github.com/rubensantibanezacosta/Ocio_Open/blob/main/docs/ocioopenBBDD.sql)
-
-
 
 Finally enjoy the project:
 
-
+Developer mode:
 ```
 backend/
 npm run dev
+```
+```
+frontend/
+ng serve -o
+```
+
+Production Mode:
+```
+backend/
+npm run start
 ```
 ```
 frontend/
