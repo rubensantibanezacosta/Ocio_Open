@@ -61,30 +61,62 @@ npm install
 ```
 
 
-* Para el frontend, si desea utilizar la función de inicio de sesión de Google, debe crear un ID de cliente creando un nuevo proyecto en el sitio web de desarrolladores de Google: https://developers.google.com/
+* Para el frontend, se utiliza la función de inicio de sesión de Google, debe crear un ID de cliente creando un nuevo proyecto en el sitio web de desarrolladores de Google: https://console.cloud.google.com/apis
 
 En esta pagina deberá configurar un nuevo proyecto haciendo click en crear crendenciales y Obtener tu Google ClientId.
 
 ![Captura de pantalla de 2021-11-22 15-04-08](https://user-images.githubusercontent.com/44450566/142885020-f59c7e6d-2fb1-467b-9fa4-b66f516ff12d.png)
 
+ En la sección de Credenciales debera rellenar el campo "URI *" con su dirección de host del frontend. En nuestro caso:
+ 
+![Captura de pantalla de 2021-12-06 11-54-29](https://user-images.githubusercontent.com/44450566/144841712-ed985048-a395-4059-b449-84026d664d14.png)
 
-En nuestro entorno local podemos usar el http://localhost:4000 predeterminado como origen. Para una implementación de producción, tendrá que cambiar/agregar su URL de implementación.
 
 
-Deberá agregar sus credenciales al proyecto en el frontend.
+Deberá crear el archivo backend/config/config.ts y rellenarlo con sus credenciales utilizando el esquema del archivo backend/config.ts.example
 
 ```
-REACT_APP_CLIENT_ID=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.apps.googleusercontent.com
-REACT_APP_BASEURL=http://localhost:3000
+import { Injectable } from '@angular/core';
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class VariablesService {
+
+  variables = {
+    googleClientId: "google Client Id",
+    googleClientSecret: "Google Client Secret",
+    host: "Backend host ", (En nuestro caso 'http://localhost:4000')
+
+  }
+
+
+  getVariables() {
+    return this.variables;
+  }
+}
+
+
 ```
+
+
 
 
 * Para su backend:
-1. Debera crear el archivo backend/.env y rellenarlo con sus credenciales utilizando es esquema del archivo backend/.env.example
+
+
+1. Necesita un servidor MySQL funcionando.
+
+2. Cree la base de datos, en su caso debe llamarse ``` ocio_open ```
+
+3. Importe el archivo a su base de datos:  [Archivo SQL](https://github.com/rubensantibanezacosta/Ocio_Open/blob/main/docs/ocioopenBBDD.sql)
+
+4. Debera crear el archivo backend/.env y rellenarlo con sus credenciales utilizando es esquema del archivo backend/.env.example
 
 MySQL
 ```
-MYSQL_DATABASE="nombre de la base de datos"
+MYSQL_DATABASE=ocio_open
 MYSQL_USER="nombre de usuario"
 MYSQL_PASSWORD=clave de acceso de MySQL
 MYSQL_ROOT_PASSWORD=clave de acceso de MySQL
@@ -124,20 +156,23 @@ Domains
 ACCEPTED_DOMAINS="dominios aceptados para el registro separados por comas. Ejemplo: gmail.com,hotmail.com"
 ```
 
-2. Necesita un servidos MySQL funcionando.
 
-3. Cree la base de datos the mysql database, en su caso debe llamarse ``` ocio_open ```
+Finalmente disfrute del proyecto:
 
-4. Importe la base de datos:  [Base de datos](https://github.com/rubensantibanezacosta/Ocio_Open/blob/main/docs/ocioopenBBDD.sql)
-
-
-
-Finalmente disfrute del proytecto:
-
-
+Modo Desarrollador:
 ```
 backend/
 npm run dev
+```
+```
+frontend/
+ng serve -o
+```
+
+Modo Producción:
+```
+backend/
+npm run start
 ```
 ```
 frontend/
