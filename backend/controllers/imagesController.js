@@ -18,10 +18,10 @@ class ImagesController {
                 res.end(image, 'binary');
             })
             .catch(err => {
-                res.status(500).json({
-                    message:
+                res.status(500).send(
+                    
                         err + " Some error occurred while retrieving image."
-                });
+                );
             });
     };
 
@@ -33,10 +33,10 @@ class ImagesController {
                 res.status(201).json(data)
             })
             .catch(err => {
-                res.status(500).json({
-                    message:
+                res.status(500).send(
+                    
                         err + " Some error occurred while uploading image."
-                });
+                );
             });
     };
 
@@ -47,10 +47,10 @@ class ImagesController {
                 res.status(200).json(data)
             })
             .catch(err => {
-                res.status(500).json({
-                    message:
+                res.status(500).send(
+                    
                         err + " Some error occurred while retrieving images."
-                });
+                );
             });
     };
 
@@ -72,11 +72,10 @@ class ImagesController {
                 }
             })
             .catch(err => {
-                res.status(500).json({
+                res.status(500).send(
 
-                    message:
                         err + " Could not delete image"
-                });
+                );
             });
 
     }

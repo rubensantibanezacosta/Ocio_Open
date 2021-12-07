@@ -13,18 +13,22 @@ class AvgPunctuationUpdater {
 
         let totalPunctuation = 0;
         let average = await punctuationsService.findPunctuationsByEvent(event_id).then((data) => {
-            if(data.length>0){
+            
+            if(data[0]){
                 data.forEach(punctuation => {
+                    
                     totalPunctuation += punctuation.punctuation;
                 })
+                
                 return totalPunctuation / data.length
             }
             
         });
+        
 
         const event = {
             event_id: event_id,
-            punctuationavg: average
+            punctuation_avg: average
         }
 
         return eventsService.updateEvent(event);
@@ -60,47 +64,29 @@ class AvgPunctuationUpdater {
         const eventsService = new EventsService();
         const punctuationsService = new PunctuationsService();
         const zonesService = new ZonesService();
-        const allPunctuation = await punctuationsService.findAllPunctuations();
+        
 
         //Filter events by zone
 
         const GCEvents = (await eventsService.findEventsByZone("GC")).map((event) => {
-            if (event.zone.toLowerCase() == event.zone.toLowerCase()) { return event }
+            if (event.zone.toLowerCase() == event.zone.toLowerCase()) { 
+                return event }
         });
 
         const TNFEvents = (await eventsService.findEventsByZone("TNF")).map((event) => {
             if
-                (event.zone.toLowerCase() == event.zone.toLowerCase()) { return event }
+                (event.zone.toLowerCase() == event.zone.toLowerCase()) { 
+                    
+                    return event }
         });
         const VIRTUALEvents = (await eventsService.findEventsByZone("VIRTUAL")).map((event) => {
             if
                 (event.zone.toLowerCase() == event.zone.toLowerCase()) { return event }
         });
 
-        //Get puntuations of events by zone
+        
 
-        const GCEventsPunctuations = [];
-        if (GCEvents[0]) {
-            await GCEvents.forEach(element => {
-
-                GCEventsPunctuations.push(allPunctuation.filter((punctuation) => { return punctuation.event_id = element }))
-            })
-        }
-
-
-        const TNFEventsPunctuations = [];
-        if (GCEvents[0]) {
-            await TNFEvents.forEach(element => {
-                TNFEventsPunctuations.push(allPunctuation.filter((punctuation) => { return punctuation.event_id = element }))
-            })
-        }
-
-        const VIRTUALEventsPunctuations = [];
-        if (VIRTUALEvents[0]) {
-            await VIRTUALEvents.forEach(element => {
-                VIRTUALEventsPunctuations.push(allPunctuation.filter((punctuation) => { return punctuation.event_id = element }))
-            })
-        }
+      
 
         //Calculate average punctuations of events by zone
 
@@ -108,17 +94,14 @@ class AvgPunctuationUpdater {
         let totalPunctuationGC = 0;
         let totalSizeGC = 0;
 
-        if (GCEventsPunctuations[0]) {
-            await GCEventsPunctuations.forEach((punctuation) => {
+        if (GCEvents[0]) {
+            await GCEvents.forEach((event) => {
 
-                punctuation.forEach((subPunctuation) => {
                     totalSizeGC += 1;
-                    totalPunctuationGC += subPunctuation.punctuation;
-                })
-
+                    totalPunctuationGC += event.punctuation_avg;
+                
             })
             GCAveragePunctuation = totalPunctuationGC / totalSizeGC;
-
         }
 
 
@@ -126,14 +109,12 @@ class AvgPunctuationUpdater {
         let totalPunctuationTNF = 0;
         let totalSizeTNF = 0;
 
-        if (TNFEventsPunctuations[0]) {
-            await TNFEventsPunctuations.forEach((punctuation) => {
+        if (TNFEvents[0]) {
+            await TNFEvents.forEach((event) => {
 
-                punctuation.forEach((subPunctuation) => {
                     totalSizeTNF += 1;
-                    totalPunctuationTNF += subPunctuation.punctuation;
-                })
-
+                    totalPunctuationTNF += event.punctuation_avg;
+                
             })
             TNFAveragePunctuation = totalPunctuationTNF / totalSizeTNF;
         }
@@ -142,14 +123,12 @@ class AvgPunctuationUpdater {
         let totalPunctuationVIRTUAL = 0;
         let totalSizeVIRTUAL = 0;
 
-        if (VIRTUALEventsPunctuations[0]) {
-            await VIRTUALEventsPunctuations.forEach((punctuation) => {
+        if (VIRTUALEvents[0]) {
+            await VIRTUALEvents.forEach((event) => {
 
-                punctuation.forEach((subPunctuation) => {
                     totalSizeVIRTUAL += 1;
-                    totalPunctuationVIRTUAL += subPunctuation.punctuation;
-                })
-
+                    totalPunctuationVIRTUAL += event.punctuation_avg;
+                
             })
             VIRTUALAveragePunctuation = totalPunctuationVIRTUAL / totalSizeVIRTUAL;
         }
@@ -168,7 +147,7 @@ class AvgPunctuationUpdater {
             id: "VIRTUAL",
             punctuationavg: VIRTUALAveragePunctuation
         }
-
+        
         return (zonesService.updateZone(GC), zonesService.updateZone(TNF), zonesService.updateZone(VIRTUAL));
     };
 

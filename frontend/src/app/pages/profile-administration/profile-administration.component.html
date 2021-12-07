@@ -40,7 +40,7 @@
                 <th>Ubicación</th>
             </tr>
 
-            <tr *ngFor="let event of events">
+            <tr *ngFor="let event of events" routerLink="/eventsAdministration/{{event.event_id}}">
                 <td>{{event.tittle}}</td>
                 <td>{{formatDate(event.date)}}</td>
                 <td>{{event.zone}}</td>

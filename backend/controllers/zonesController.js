@@ -29,10 +29,9 @@ class ZonesController {
                     res.status(201).json(data);
                 })
                 .catch(err => {
-                    res.status(500).json({
-                        message:
+                    res.status(500).json(
                             err + " Some error occurred while creating the Zone."
-                    });
+                    );
                 });
 
         } else {
@@ -50,10 +49,10 @@ class ZonesController {
                     }
                 })
                 .catch(err => {
-                    res.status(500).json({
-                        message:
+                    res.status(500).json(
+
                             err + " Error updating Zone with " + zone.name
-                    });
+                    );
                 });
         }
     };
@@ -65,10 +64,10 @@ class ZonesController {
                 res.status(200).json(data);
             })
             .catch(err => {
-                res.status(500).json({
-                    message:
+                res.status(500).json(
+
                         err + " Some error occurred while retrieving Zones."
-                });
+                );
             });
     };
 
@@ -82,10 +81,10 @@ class ZonesController {
                 res.status(200).json(data);
             })
             .catch(err => {
-                res.status(500).json({
-                    message:
+                res.status(500).json(
+
                         err + " Error retrieving Zone with id=" + id
-                });
+                );
             });
     };
 
@@ -107,10 +106,9 @@ class ZonesController {
                 }
             })
             .catch(err => {
-                res.status(500).json({
-                    message:
+                res.status(500).send(
                         err + " Could not delete Zone with id=" + id
-                });
+                );
             });
     }
 }

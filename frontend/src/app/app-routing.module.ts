@@ -6,6 +6,7 @@ import { AssistantsComponent } from './pages/assistants/assistants.component';
 import { CalendarComponent } from './pages/calendar/calendar.component';
 import { CommentsComponent } from './pages/comments/comments.component';
 import { EventFormComponent } from './pages/event-form/event-form.component';
+import { EventsAdministrationComponent } from './pages/events-administration/events-administration.component';
 import { FinalizedeventsComponent } from './pages/finalizedevents/finalizedevents.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'eventform/:event_id/:type', component: EventFormComponent },
   { path: 'gallery', component: GalleryComponent },
   { path: 'profileAdministration/:email', component: ProfileAdministrationComponent },
+  { path: 'eventsAdministration/:event_id', component: EventsAdministrationComponent },
   { path: '', component: LoginComponent },
   { path: '**', component: NofoundComponent }
 

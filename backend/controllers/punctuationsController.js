@@ -13,9 +13,9 @@ class PunctuationsController {
         
 
         if (!req.body.event_id || !req.body.assistant || !req.body.punctuation) {
-            res.status(400).json({
-                message: "Content cannot be empty!"
-            });
+            res.status(400).send(
+                "Content cannot be empty!"
+            );
             return;
         }
 
@@ -26,28 +26,34 @@ class PunctuationsController {
         }
         let punctuationExists;
         this.punctuationsService.findPunctuationByPk(req.body.event_id, req.body.assistant).then(data=>{return this.punctuationExists=data}).then(()=>{
-            if (!this.punctuationExists.length>0) {
+            
+            if (!this.punctuationExists[0]) {
+                
                 this.punctuationsService.createPunctuation(punctuation)
                     .then(data => {
+                        
                         const avgPunctuationUpdaterService= new AvgPunctuationUpdaterService();
                         const eventsService = new EventsService();
-                        const organizer = eventsService.findOneEventById(req.body.event_id)
-                        avgPunctuationUpdaterService.updateAvgPunctuations(req.body.event_id,organizer);
+                        
+                        eventsService.findOneEventById(req.body.event_id).then((event)=>{
+                            avgPunctuationUpdaterService.updateAvgPunctuations(req.body.event_id,event.organizer);
                         res.status(201).json(data);
+                        }) 
                     })
                     .catch(err => {
-                        res.status(500).json({
-                            message:
+                        res.status(500).send(
+                          
                                 err + " Some error occurred while saving the punctuation."
-                        });
+                       );
                     });
     
             } else {
                 this.punctuationsService.updatePunctuation(punctuation)
                     .then(data => {
+                        
                         const avgPunctuationUpdaterService= new AvgPunctuationUpdaterService();
                         const eventsService = new EventsService();
-                    
+                        
                         eventsService.findOneEventById(req.body.event_id)
                         .then((event)=>{
                         avgPunctuationUpdaterService.updateAvgPunctuations(req.body.event_id,event.organizer);
@@ -56,10 +62,10 @@ class PunctuationsController {
                         
                     })
                     .catch(err => {
-                        res.status(500).json({
-                            message:
+                        res.status(500).json(
+                            
                                 err + " Some error occurred while updating punctuations."
-                        });
+                        );
                     });
             }
             
@@ -76,10 +82,10 @@ class PunctuationsController {
                 res.status(200).json(data);
             })
             .catch(err => {
-                res.status(500).json({
-                    message:
+                res.status(500).send(
+                  
                         err + " Some error occurred while retrieving punctuations."
-                });
+                );
             });
     };
 
@@ -91,10 +97,10 @@ class PunctuationsController {
                 res.status(200).json(data);
             })
             .catch(err => {
-                res.status(500).json({
-                    message:
+                res.status(500).send(
+                    
                         err + " Some error occurred while retrieving punctuations."
-                });
+                );
             });
     };
 
@@ -106,10 +112,9 @@ class PunctuationsController {
                 res.status(200).json(data);
             })
             .catch(err => {
-                res.status(500).json({
-                    message:
+                res.status(500).send(
                         err + " Some error occurred while retrieving punctuations."
-                });
+                );
             });
     };
 
@@ -123,10 +128,10 @@ class PunctuationsController {
                 res.status(200).json(data);
             })
             .catch(err => {
-                res.status(500).json({
-                    message:
+                res.status(500).send(
+                    
                         err + " Some error occurred while retrieving punctuations."
-                });
+                );
             });
     };
 
@@ -148,11 +153,10 @@ class PunctuationsController {
                 }
             })
             .catch(err => {
-                res.status(500).json({
+                res.status(500).send(
 
-                    message:
                         err + " Could not delete Punctuation"
-                });
+                );
             });
 
     }

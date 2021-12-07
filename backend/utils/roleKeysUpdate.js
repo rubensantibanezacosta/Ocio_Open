@@ -2,9 +2,9 @@ const crypto = require("crypto");
 const db = require("../models");
 const Roles = db.roles;
 
-const adminPermissions = "login:auth,singup:auth,read:city, create:city,update:city,delete:city,read:users,create:users,update:users,delete:users"
+const adminPermissions = "login:auth,singup:auth,read:assistants,create:assistants,update:assistants,delete:assistants,readall:users,read:users,create:users,update:users,delete:users,read:comments,create:comments,update:comments,delete:comments,read:events,create:events,update:events,delete:events,read:images,create:images,update:images,delete:images,read:punctuations,create:punctuations,update:punctuations,delete:punctuations,read:zones,adminupdate:events,admindelete:events"
 
-const userPermissions = "login:auth,singup:auth,read:city, create:city,update:city,delete:city";
+const userPermissions = "login:auth,singup:auth,read:assistants,create:assistants,update:assistants,delete:assistants,read:users,create:users,update:users,delete:users,read:comments,create:comments,update:comments,delete:comments,read:events,create:events,update:events,delete:events,read:images,create:images,update:images,read:punctuations,create:punctuations,update:punctuations";
 
 const roles = [
     {

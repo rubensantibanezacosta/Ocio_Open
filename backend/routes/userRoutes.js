@@ -40,6 +40,5 @@ function userRoutes(app) {
     passport.authenticate("jwt", { session: false }),
     scopesValidationHandler(['delete:users']),
     userController.deleteUser);
-
 }
 module.exports = userRoutes;

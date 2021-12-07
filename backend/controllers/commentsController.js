@@ -11,9 +11,9 @@ class ComentsController {
             console.log(req.body);
 
         if (!req.body.event_id || !req.body.assistant || !req.body.comment) {
-            res.status(400).json({
-                message: "Content cannot be empty!"
-            });
+            res.status(400).send(
+                "Content cannot be empty!"
+            );
             return;
         }
         const comment = {
@@ -28,10 +28,10 @@ class ComentsController {
                 res.status(201).json(data);
             })
             .catch(err => {
-                res.status(500).json({
-                    message:
+                res.status(500).send(
+                    
                         err + " Some error occurred while saving the comment."
-                });
+                );
             });
     };
 
@@ -44,10 +44,10 @@ class ComentsController {
                 res.status(200).json(data);
             })
             .catch(err => {
-                res.status(500).json({
-                    message:
+                res.status(500).send(
+                
                         err + " Some error occurred while retrieving asisstants."
-                });
+                );
             });
     };
     
@@ -69,11 +69,10 @@ class ComentsController {
                 }
             })
             .catch(err => {
-                res.status(500).json({
+                res.status(500).send(
 
-                    message:
                         err + " Could not delete comment"
-                });
+                );
             });
 
     }

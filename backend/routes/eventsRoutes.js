@@ -35,7 +35,7 @@ function eventsRoutes(app) {
         scopesValidationHandler(['read:events']),
         eventsController.findEventsByOrganizerASC);
 
-        router.get("/byorganizer/DESC/:organizer",
+    router.get("/byorganizer/DESC/:organizer",
         passport.authenticate("jwt", { session: false }),
         scopesValidationHandler(['read:events']),
         eventsController.findEventsByOrganizerDESC);
@@ -50,6 +50,11 @@ function eventsRoutes(app) {
         scopesValidationHandler(['update:events']),
         eventsController.updateEvent);
 
+    router.put("/admin/",
+        passport.authenticate("jwt", { session: false }),
+        scopesValidationHandler(['adminupdate:events']),
+        eventsController.updateEventAdmin);
+
     /*     router.put("/eventpunctuationavg",
             passport.authenticate("jwt", { session: false }),
             scopesValidationHandler(['update:events']),
@@ -60,5 +65,9 @@ function eventsRoutes(app) {
         scopesValidationHandler(['delete:events']),
         eventsController.deleteEvent);
 
+    router.delete("/admin/:event_id",
+        passport.authenticate("jwt", { session: false }),
+        scopesValidationHandler(['admindelete:events']),
+        eventsController.deleteEventAdmin);
 }
 module.exports = eventsRoutes;

@@ -50,8 +50,16 @@ export class EventsService {
   updateEvent(event:Event):Observable<string>{
     return this.httpClient.put<string>(this.endpoint, JSON.stringify(event), this.httpOptions)
   }
+
+  updateEventAdmin(event:Event):Observable<string>{
+    return this.httpClient.put<string>(this.endpoint+"/admin", JSON.stringify(event), this.httpOptions)
+  }
   
   deleteEventById(event_id:number):Observable<string>{
     return this.httpClient.delete<string>(this.endpoint+"/"+event_id, this.httpOptions)
+  }
+
+  deleteEventByIdAdmin(event_id:number):Observable<string>{
+    return this.httpClient.delete<string>(this.endpoint+"/admin/"+event_id, this.httpOptions)
   }
 }

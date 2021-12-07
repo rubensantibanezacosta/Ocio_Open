@@ -19,7 +19,7 @@ class PunctuationsService {
 
     async findPunctuationByOrganizer(organizer) {
         const eventsService = new EventsService();
-        const eventsByOrganizer = (await eventsService.findEventsByOrganizer(organizer)).map((event) => { return event.event_id });
+        const eventsByOrganizer = (await eventsService.findEventsByOrganizerDESC(organizer)).map((event) => { return event.event_id });
         const allPunctuation = await Punctuations.findAll();
         const punctuationsByOrganizer = []
         await eventsByOrganizer.forEach(element => {

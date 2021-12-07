@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import  * as MyEvent from 'src/app/models/event';
+import * as MyEvent from 'src/app/models/event';
 import { getDataFromToken } from 'src/app/utils/jwtparser';
 import * as moment from 'moment';
 import { ImagesService } from 'src/app/services/images.service';
@@ -18,119 +18,121 @@ export class EventFormComponent implements OnInit {
   image = "../../../assets/icons/my-event-icon.png";
 
   userEmail: string = getDataFromToken().username;
-  event_id:number=this.activatedRoute.snapshot.params.event_id;
-  type:string=this.activatedRoute.snapshot.params.type;
-  tittle = this.type=="new"?"Nuevo evento":"Editar evento";
-  minDate:string=moment().add(2,"hour").locale("es").format("YYYY-MM-DD[T]hh:mm");
+  event_id: number = this.activatedRoute.snapshot.params.event_id;
+  type: string = this.activatedRoute.snapshot.params.type;
+  tittle = this.type == "new" ? "Nuevo evento" : "Editar evento";
+  minDate: string = moment().add(2, "hour").locale("es").format("YYYY-MM-DD[T]hh:mm");
 
 
-  galeryIcon="../../../assets/icons/galery-icon.png";
-  fileIcon="../../../assets/icons/file-icon.png";
+  galeryIcon = "../../../assets/icons/galery-icon.png";
+  fileIcon = "../../../assets/icons/file-icon.png";
 
-  myEvent: MyEvent.Event=new MyEvent.Event();
-  imageSrc:string | ArrayBuffer;
+  myEvent: MyEvent.Event = new MyEvent.Event();
+  imageSrc: string | ArrayBuffer;
   file: File;
 
-  imageFormVisible:boolean=false;
-  galleryVisible:boolean=false;
-  dateinputVisible:boolean=false;
+  imageFormVisible: boolean = false;
+  galleryVisible: boolean = false;
+  dateinputVisible: boolean = false;
 
 
-  constructor(private activatedRoute:ActivatedRoute, private imagesService:ImagesService, private eventsService:EventsService, private router:Router) { }
- 
+  constructor(private activatedRoute: ActivatedRoute, private imagesService: ImagesService, private eventsService: EventsService, private router: Router) { }
+
   ngOnInit(): void {
-    this.myEvent.zone="GC";
+    this.myEvent.zone = "GC";
     this.getEventToEdit();
     this.validateDate();
   }
 
-  validateDate(){
-    this.type!="new"?this.dateinputVisible=false:this.dateinputVisible=true;
+  validateDate() {
+    this.type != "new" ? this.dateinputVisible = false : this.dateinputVisible = true;
   }
 
-  submit(){
-    this.myEvent.organizer=this.userEmail;
-    console.log(this.myEvent.image_id);
-    this.type=="new"?this.eventsService.createEvent(this.myEvent).subscribe(res=>window.history.back()):
-    this.eventsService.updateEvent(this.myEvent).subscribe(res=>{
-      console.log("updating:[",res,"]")
-      window.history.back()});
+  submit() {
+    
+    if(this.type == "new"){
+    this.eventsService.createEvent(this.myEvent).subscribe(res => window.history.back())
+  }else{
+      this.eventsService.updateEvent(this.myEvent).subscribe(res => {
+        window.history.back()
+      });
+    }
   }
 
-  async getEventToEdit(){
-    if(this.type!="new"){
-      this.eventsService.getEventById(this.event_id).subscribe(res=>{
-        console.log(res);
-        return this.myEvent=res
-    })
-  }}
-  onPhotoSelected(event:any):void{
+  async getEventToEdit() {
+    if (this.type != "new") {
+      this.eventsService.getEventById(this.event_id).subscribe(res => {
+        return this.myEvent = res
+      })
+    }
+  }
+  onPhotoSelected(event: any): void {
 
-    if(event.target.files && event.target.files[0]){
-      this.file=<File>event.target.files[0];
+    if (event.target.files && event.target.files[0]) {
+      this.file = <File>event.target.files[0];
       const reader = new FileReader();
-      reader.onload= e=> this.imageSrc = reader.result;
+      reader.onload = e => this.imageSrc = reader.result;
       reader.readAsDataURL(this.file);
     }
   }
-  uploadImage():boolean{
-    this.imagesService.createImage(this.file).subscribe((res)=>{
+  uploadImage(): boolean {
+    this.imagesService.createImage(this.file).subscribe((res) => {
       this.hideImageForm();
-      this.myEvent.image_id= res[0].id;
+      this.myEvent.image_id = res[0].id;
     },
-    (err)=>{
-      console.error(err);
-    })
+      (err) => {
+        console.error(err);
+      })
 
     return false;
   }
 
-  showImageForm(){
-    this.imageFormVisible=true;
+  showImageForm() {
+    this.imageFormVisible = true;
   }
 
-  hideImageForm(){
-    this.file=undefined;
-    this.imageSrc=undefined;
-    this.imageFormVisible=false;
+  hideImageForm() {
+    this.file = undefined;
+    this.imageSrc = undefined;
+    this.imageFormVisible = false;
   }
 
-  showGallery(){
-    this.galleryVisible=true;
+  showGallery() {
+    this.galleryVisible = true;
   }
 
-  hideGallery(){
+  hideGallery() {
     this.myEvent.image_id;
-    this.galleryVisible=false;
+    this.galleryVisible = false;
   }
 
-  getId(e){
-    this.myEvent.image_id=e;
+  getId(e) {
+    this.myEvent.image_id = e;
     this.hideGallery();
   }
 
-  zoneSelected(){
+  zoneSelected() {
     switch (this.myEvent.zone) {
       case "TNF":
         return "Tenerife";
         break;
-        case "GC":
-          return "Gran Canaria";
-          break;
-          case "VIRTUAL":
-          return "Virtual";
-          break;
+      case "GC":
+        return "Gran Canaria";
+        break;
+      case "VIRTUAL":
+        return "Virtual";
+        break;
       default:
-          return "";
+        return "";
         break;
     }
   }
 
-  setVisibleDate(){
-    return this.dateinputVisible=true;
+  setVisibleDate() {
+    return this.dateinputVisible = true;
   }
 
-  formatDate(date:Date){
+  formatDate(date: Date) {
     return moment(date).format("DD-MM-YYYY hh:mm")
   }
 }

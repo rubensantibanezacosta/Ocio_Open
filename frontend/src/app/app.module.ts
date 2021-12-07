@@ -32,6 +32,7 @@ import { EventFormComponent } from './pages/event-form/event-form.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { ImageViewerComponent } from './components/gallery/image-viewer/image-viewer.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { EventsAdministrationComponent } from './pages/events-administration/events-administration.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     GalleryComponent,
     ImageViewerComponent,
     ProfileComponent,
+    EventsAdministrationComponent,
 
 
   ],

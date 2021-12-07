@@ -123,10 +123,13 @@ max-height: 12%;
   width: 100%;
   display:flex;
   align-items: center;
+  padding-bottom: 5px;
+  box-sizing: border-box;
   }
 
 .star-container{
   padding-left: 5px;
+  min-width: 50px;
 }
 
 .row__a{

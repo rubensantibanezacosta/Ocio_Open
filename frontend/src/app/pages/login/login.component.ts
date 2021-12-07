@@ -21,6 +21,8 @@ export class LoginComponent implements OnInit {
   loggedIn: boolean;
   public isChecked$ = new BehaviorSubject(false);
   public rememberMe: boolean = false;
+  apiKeyToken: string = "";
+  adminFormVisibility = false;
 
   googleIcon = ("../../../assets/icons/google-icon-white.png");
   openCanariasLogo = ("../../../assets/icons/open-canarias-logo.png")
@@ -36,7 +38,10 @@ export class LoginComponent implements OnInit {
       this.loggedIn = (user != null);
     });
   }
+  setApiKeyValue(apiKeyToken: string) {
+    this.apiKeyToken = apiKeyToken;
 
+  }
   toggleChecked() {
     this.isChecked$.next(!this.isChecked$.value)
     this.rememberMe = this.isChecked$.value;
@@ -55,7 +60,8 @@ export class LoginComponent implements OnInit {
 
           const loginData: any = {
             user: user,
-            rememberMe: this.rememberMe
+            rememberMe: this.rememberMe,
+            apiKeyToken: this.apiKeyToken,
           }
 
           this.loginService.login(loginData).subscribe((data) => {
@@ -79,6 +85,9 @@ export class LoginComponent implements OnInit {
   name: "Ruben Santibanez"
   photoUrl: "https://lh3.googleusercontent.com/a/AATXAJwcvFaX_gz372p_URZppF-xJyJ2-AeOcW7t_poz=s96-c" */
 
+  adminFormVisibilityToggle() {
+    this.adminFormVisibility ? this.adminFormVisibility = false : this.adminFormVisibility = true;
+  }
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
   }

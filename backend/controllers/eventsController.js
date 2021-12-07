@@ -1,7 +1,7 @@
 
 const db = require("../models");
 const EventsService = require("../services/eventsService");
-const moment= require("moment");
+const moment = require("moment");
 
 class EventsController {
 
@@ -12,9 +12,9 @@ class EventsController {
 
         // Validate request
         if (!req.body.tittle || !req.body.date || !req.body.place || !req.body.organizer || !req.body.zone) {
-            res.status(400).json({
-                message: "Content cannot be empty!"
-            });
+            res.status(400).send(
+                 "Content cannot be empty!"
+            );
             return;
         }
         const event = {
@@ -22,22 +22,21 @@ class EventsController {
             date: req.body.date,
             zone: req.body.zone,
             place: req.body.place,
-            description:req.body.description,
+            description: req.body.description,
             punctuation_avg: 0,
-            organizer: req.body.organizer,
+            organizer: req.body.dataValues.email,
             image_id: req.body.image_id,
         }
 
-        
+
         this.eventsService.createEvent(event)
             .then(data => {
                 res.status(201).json(data);
             })
             .catch(err => {
-                res.status(500).json({
-                    message:
+                res.status(500).send(
                         err + " Some error occurred while saving the event."
-                });
+                );
             });
     };
 
@@ -48,10 +47,9 @@ class EventsController {
                 res.status(200).json(data);
             })
             .catch(err => {
-                res.status(500).json({
-                    message:
+                res.status(500).send(
                         err + " Some error occurred while retrieving events."
-                });
+                );
             });
     };
 
@@ -62,26 +60,25 @@ class EventsController {
                 res.status(200).json(data);
             })
             .catch(err => {
-                res.status(500).json({
-                    message:
+                res.status(500).send(
+                    
                         err + " Some error occurred while retrieving events."
-                });
+                );
             });
     };
 
     findEventsByDate = (req, res) => {
-        const date =moment(req.params.date).format("YYYY-MM-DD");
-        
+        const date = moment(req.params.date).format("YYYY-MM-DD");
+
 
         this.eventsService.findEventsByDate(date)
             .then(data => {
                 res.status(200).json(data);
             })
             .catch(err => {
-                res.status(500).json({
-                    message:
+                res.status(500).send(
                         err + " Some error occurred while retrieving events."
-                });
+                );
             });
     };
 
@@ -93,10 +90,9 @@ class EventsController {
                 res.status(200).json(data);
             })
             .catch(err => {
-                res.status(500).json({
-                    message:
+                res.status(500).send(
                         err + " Some error occurred while retrieving punctuations."
-                });
+                );
             });
     };
 
@@ -108,10 +104,9 @@ class EventsController {
                 res.status(200).json(data);
             })
             .catch(err => {
-                res.status(500).json({
-                    message:
+                res.status(500).send(
                         err + " Some error occurred while retrieving punctuations."
-                });
+                );
             });
     };
 
@@ -123,19 +118,26 @@ class EventsController {
                 res.status(200).json(data);
             })
             .catch(err => {
-                res.status(500).json({
-                    message:
+                res.status(500).send(
                         err + " Some error occurred while retrieving event."
-                });
+                );
             });
     };
 
     updateEvent = (req, res) => {
         // Validate request
+        console.log(req, " ::::::::: ", req.user.dataValues.email);
         if (!req.body.tittle || !req.body.place || !req.body.zone || !req.body.event_id) {
-            res.status(400).json({
-                message: "Content cannot be empty!"
-            });
+            res.status(400).json(
+                "Content cannot be empty!"
+            );
+            return;
+        }
+
+        if (req.body.organizer != req.user.dataValues.email) {
+            res.status(401).send(
+                "Only organizer cans to edit event!"
+            );
             return;
         }
 
@@ -145,7 +147,7 @@ class EventsController {
             date: req.body.date,
             zone: req.body.zone,
             place: req.body.place,
-            description:req.body.description,
+            description: req.body.description,
             organizer: req.user.dataValues.email,
             image_id: req.body.image_id,
         }
@@ -155,10 +157,41 @@ class EventsController {
                 res.status(200).json(data);
             })
             .catch(err => {
-                res.status(500).json({
-                    message:
+                res.status(500).send(
                         err + " Some error occurred while updating event."
-                });
+                );
+            });
+    };
+
+    updateEventAdmin = (req, res) => {
+        // Validate request
+
+        if (!req.body.tittle || !req.body.place || !req.body.zone || !req.body.event_id) {
+            res.status(400).send(
+                "Content cannot be empty!"
+            );
+            return;
+        }
+
+
+        const event = {
+            event_id: req.body.event_id,
+            tittle: req.body.tittle,
+            date: req.body.date,
+            zone: req.body.zone,
+            place: req.body.place,
+            description: req.body.description,
+            image_id: req.body.image_id,
+        }
+
+        this.eventsService.updateEvent(event)
+            .then(data => {
+                res.status(200).json(data);
+            })
+            .catch(err => {
+                res.status(500).send(
+                        err + " Some error occurred while updating event."
+                );
             });
     };
     updateEventPunctuationAvg = (req, res) => {
@@ -173,15 +206,46 @@ class EventsController {
                 res.status(200).json(data);
             })
             .catch(err => {
-                res.status(500).json({
-                    message:
+                res.status(500).send(
+                     
                         err + " Some error occurred while updating event."
-                });
+                );
             });
     };
 
     deleteEvent = (req, res) => {
         const event_id = req.params.event_id;
+        this.eventsService.findOneEventById(event_id).then((event) => {
+            if (event.organizer != req.user.dataValues.email) {
+                res.status(401).send(
+                "Only organizer cans to delete a event!"
+                );
+                return;
+            }
+            this.eventsService.deleteEvent(event_id)
+                .then(num => {
+                    if (num == 1) {
+                        res.status(200).json({
+                            message: "Event was deleted successfully!"
+                        });
+                    } else {
+                        res.json({
+                            message: `Cannot delete Event. Maybe Event was not found!`
+                        });
+                    }
+                })
+                .catch(err => {
+                    res.status(500).send(
+                            err + " Could not delete event"
+                    );
+                });
+        })
+    }
+
+    deleteEventAdmin = (req, res) => {
+        const event_id = req.params.event_id;
+
+
         this.eventsService.deleteEvent(event_id)
             .then(num => {
                 if (num == 1) {
@@ -189,19 +253,17 @@ class EventsController {
                         message: "Event was deleted successfully!"
                     });
                 } else {
-                    res.json({
-                        message: `Cannot delete Event. Maybe Event was not found!`
-                    });
+                    res.send(
+                         `Cannot delete Event. Maybe Event was not found!`
+                    );
                 }
             })
             .catch(err => {
-                res.status(500).json({
-
-                    message:
+                res.status(500).send(
                         err + " Could not delete event"
-                });
+                );
             });
-
     }
 }
+
 module.exports = EventsController;
