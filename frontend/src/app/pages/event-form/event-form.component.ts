@@ -58,7 +58,7 @@ export class EventFormComponent implements OnInit {
     this.eventsService.createEvent(this.myEvent).subscribe(
       (res) => {window.history.back()},
     (error) => {
-      console.log(error);
+      
       this.ErrorMessage=error.error;
       this.createModal();
 
@@ -69,7 +69,7 @@ export class EventFormComponent implements OnInit {
         window.history.back()
       },
       (error) => {
-        console.log(error);
+        
         this.ErrorMessage=error.error;
         this.createModal();
   
@@ -83,7 +83,7 @@ export class EventFormComponent implements OnInit {
         return this.myEvent = res
       },
       (error) => {
-        console.log(error);
+        
         this.ErrorMessage=error.error;
         this.createModal();
   
@@ -105,7 +105,7 @@ export class EventFormComponent implements OnInit {
       this.myEvent.image_id = res[0].id;
     },
     (error) => {
-      console.log(error);
+      
       this.ErrorMessage=error.error;
       this.createModal();
 

@@ -16,7 +16,6 @@ image="../../../assets/icons/calendarIcon-menu.png";
   constructor(private activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
-    console.log(this.date);
   }
 
 }

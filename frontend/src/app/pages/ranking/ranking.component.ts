@@ -83,7 +83,7 @@ export class RankingComponent implements OnInit {
       this.user = user;
     },
     (error) => {
-      console.log(error);
+      
       this.ErrorMessage=error.error;
       this.createModal();
 
@@ -95,7 +95,7 @@ export class RankingComponent implements OnInit {
       this.userPosition = position;
     },
     (error) => {
-      console.log(error);
+      
       this.ErrorMessage=error.error;
       this.createModal();
 
@@ -107,7 +107,7 @@ export class RankingComponent implements OnInit {
       this.organizers = organizers;
     },
     (error) => {
-      console.log(error);
+      
       this.ErrorMessage=error.error;
       this.createModal();
 
@@ -119,7 +119,7 @@ export class RankingComponent implements OnInit {
       this.zones = zones;
     },
     (error) => {
-      console.log(error);
+      
       this.ErrorMessage=error.error;
       this.createModal();
 

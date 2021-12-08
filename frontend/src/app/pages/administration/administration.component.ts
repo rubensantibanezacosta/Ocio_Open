@@ -79,7 +79,6 @@ export class AdministrationComponent implements OnInit {
       return (this.events = res);
     },
     (error) => {
-      console.log(error);
       this.ErrorMessage=error.error;
       this.createModal();
 
@@ -90,7 +89,6 @@ export class AdministrationComponent implements OnInit {
       return (this.users = res);
     },
     (error) => {
-      console.log(error);
       this.ErrorMessage=error.error;
       this.createModal();
 

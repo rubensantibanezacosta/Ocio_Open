@@ -65,7 +65,6 @@ export class AttendanceComponent implements OnInit {
       }
     },
     (error) => {
-      console.log(error);
       this.ErrorMessage=error.error;
       this.createModal();
 
@@ -82,7 +81,6 @@ export class AttendanceComponent implements OnInit {
         this.refreshAssistantState();
       },
       (error) => {
-        console.log(error);
         this.ErrorMessage=error.error;
         this.createModal();
   
@@ -100,7 +98,6 @@ export class AttendanceComponent implements OnInit {
         this.refreshAssistantState();
       },
       (error) => {
-        console.log(error);
         this.ErrorMessage=error.error;
         this.createModal();
   

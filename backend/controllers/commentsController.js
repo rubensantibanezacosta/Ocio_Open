@@ -6,9 +6,8 @@ class ComentsController {
 
     comentsService = new CommentsService();
 
-
     createComment = (req, res) => {
-            console.log(req.body);
+            
 
         if (!req.body.event_id || !req.body.assistant || !req.body.comment) {
             res.status(400).send(

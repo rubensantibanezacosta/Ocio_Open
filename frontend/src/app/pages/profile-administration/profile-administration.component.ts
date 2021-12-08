@@ -39,7 +39,7 @@ export class ProfileAdministrationComponent implements OnInit {
       this.user = res;
     },
     (error) => {
-      console.log(error);
+      
       this.ErrorMessage=error.error;
       this.createModal();
 
@@ -51,7 +51,7 @@ export class ProfileAdministrationComponent implements OnInit {
       this.userPosition = position;
     },
     (error) => {
-      console.log(error);
+      
       this.ErrorMessage=error.error;
       this.createModal();
 
@@ -63,7 +63,7 @@ export class ProfileAdministrationComponent implements OnInit {
       this.events = events;
     },
     (error) => {
-      console.log(error);
+      
       this.ErrorMessage=error.error;
       this.createModal();
 
@@ -76,7 +76,7 @@ export class ProfileAdministrationComponent implements OnInit {
       this.attendanceCounter = res;
     },
     (error) => {
-      console.log(error);
+      
       this.ErrorMessage=error.error;
       this.createModal();
 

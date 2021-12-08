@@ -36,7 +36,6 @@ export class CommentsComponent implements OnInit {
       this.comments=comments;
     },
     (error) => {
-      console.log(error);
       this.ErrorMessage=error.error;
       this.createModal();
 
@@ -54,7 +53,6 @@ export class CommentsComponent implements OnInit {
         this.getCommentsByEvent();
       },
       (error) => {
-        console.log(error);
         this.ErrorMessage=error.error;
         this.createModal();
   
@@ -72,7 +70,6 @@ export class CommentsComponent implements OnInit {
       this.getCommentsByEvent();
     },
     (error) => {
-      console.log(error);
       this.ErrorMessage=error.error;
       this.createModal();
 

@@ -19,7 +19,6 @@ export class ErrorHandlerComponent implements OnInit, OnDestroy {
   @Output() closeMeEvent = new EventEmitter();
   @Output() confirmEvent = new EventEmitter();
   ngOnInit(): void {
-    console.log('Modal init');
   }
 
   closeMe() {
@@ -30,6 +29,5 @@ export class ErrorHandlerComponent implements OnInit, OnDestroy {
   } 
 
  ngOnDestroy(): void {
-    console.log(' Modal destroyed');
   }
 }

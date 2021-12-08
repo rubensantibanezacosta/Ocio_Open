@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit {
       this.user = user;
     },
     (error) => {
-      console.log(error);
+
       this.ErrorMessage=error.error;
       this.createModal();
 
@@ -47,7 +47,6 @@ export class ProfileComponent implements OnInit {
       this.userPosition = position;
     },
     (error) => {
-      console.log(error);
       this.ErrorMessage=error.error;
       this.createModal();
 

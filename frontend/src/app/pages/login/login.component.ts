@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit {
             }
           },
             (error) => {
-              console.log(error);
+              
               this.ErrorMessage=error.error;
               this.createModal();
 
@@ -95,7 +95,12 @@ export class LoginComponent implements OnInit {
   photoUrl: "https://lh3.googleusercontent.com/a/AATXAJwcvFaX_gz372p_URZppF-xJyJ2-AeOcW7t_poz=s96-c" */
 
   adminFormVisibilityToggle() {
-    this.adminFormVisibility ? this.adminFormVisibility = false : this.adminFormVisibility = true;
+    if(this.adminFormVisibility){
+      this.adminFormVisibility = false;
+      this.apiKeyToken=""; 
+    } else{
+      this.adminFormVisibility = true;
+    } 
   }
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);

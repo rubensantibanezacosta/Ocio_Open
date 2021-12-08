@@ -72,7 +72,6 @@ getDaysFromDate(month, year) {
         indexWeek: dayObject.isoWeekday(),
       };
     })
-    /* console.log(arrayDays) */
     this.monthSelected = arrayDays;
   }
 
@@ -92,7 +91,6 @@ getDaysFromDate(month, year) {
   }
   
   selectDay(day){
-    /* console.log(moment(this.dateSelected).format("YYYY-M")) */
     const dateSelected = moment(moment(this.dateSelected).format("YYYY-M")+"-"+day.value).format()
     
   }

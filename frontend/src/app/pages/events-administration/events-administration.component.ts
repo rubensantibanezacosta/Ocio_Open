@@ -51,7 +51,7 @@ export class EventsAdministrationComponent implements OnInit {
       window.history.back()
     },
     (error) => {
-      console.log(error);
+      
       this.ErrorMessage=error.error;
       this.createModal();
 
@@ -63,7 +63,7 @@ export class EventsAdministrationComponent implements OnInit {
       window.history.back()
     },
     (error) => {
-      console.log(error);
+      
       this.ErrorMessage=error.error;
       this.createModal();
 
@@ -75,7 +75,7 @@ export class EventsAdministrationComponent implements OnInit {
       return this.myEvent = res}
       ,
       (error) => {
-        console.log(error);
+        
         this.ErrorMessage=error.error;
         this.createModal();
   
@@ -97,7 +97,7 @@ export class EventsAdministrationComponent implements OnInit {
       this.myEvent.image_id = res[0].id;
     },
     (error) => {
-      console.log(error);
+      
       this.ErrorMessage=error.error;
       this.createModal();
 

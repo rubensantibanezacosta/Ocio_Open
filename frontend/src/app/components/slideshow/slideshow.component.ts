@@ -52,7 +52,7 @@ export class SlideshowComponent implements OnInit {
         this.events=res;
       },
       (error) => {
-        console.log(error);
+
         this.ErrorMessage=error.error;
         this.createModal();
   
@@ -65,7 +65,7 @@ export class SlideshowComponent implements OnInit {
       }));
     },
     (error) => {
-      console.log(error);
+
       this.ErrorMessage=error.error;
       this.createModal();
 
@@ -77,7 +77,7 @@ export class SlideshowComponent implements OnInit {
       }));
     },
     (error) => {
-      console.log(error);
+
       this.ErrorMessage=error.error;
       this.createModal();
 

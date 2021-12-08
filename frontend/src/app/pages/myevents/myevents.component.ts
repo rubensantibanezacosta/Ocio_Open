@@ -48,7 +48,7 @@ export class MyeventsComponent implements OnInit {
       this.user = user;
     },
     (error) => {
-      console.log(error);
+      
       this.ErrorMessage=error.error;
       this.createModal();
 
@@ -60,7 +60,7 @@ export class MyeventsComponent implements OnInit {
       this.userPosition = position;
     },
     (error) => {
-      console.log(error);
+      
       this.ErrorMessage=error.error;
       this.createModal();
 
@@ -75,7 +75,7 @@ export class MyeventsComponent implements OnInit {
 
     },
     (error) => {
-      console.log(error);
+      
       this.ErrorMessage=error.error;
       this.createModal();
 
@@ -89,7 +89,7 @@ export class MyeventsComponent implements OnInit {
       });
     },
     (error) => {
-      console.log(error);
+      
       this.ErrorMessage=error.error;
       this.createModal();
 
@@ -100,7 +100,7 @@ export class MyeventsComponent implements OnInit {
     this.eventService.deleteEventById(id).subscribe(
       res=>{return this.getFutureEventsByUser(); },
     (error) => {
-      console.log(error);
+      
       this.ErrorMessage=error.error;
       this.createModal();
 
