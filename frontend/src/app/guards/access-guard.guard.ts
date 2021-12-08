@@ -16,7 +16,7 @@ export class AccessGuardGuard implements CanActivate {
     const expireDate =  getDataFromToken().tokenExpiresIn;
     
     if(moment().isAfter(moment(expireDate))){
-      console.error('Unauthorized');
+      console.error('Token Expired');
       this.router.navigate(['/']);
       return false;
     }
