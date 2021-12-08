@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { Event } from 'src/app/models/event';
@@ -6,6 +6,8 @@ import { UsersService } from 'src/app/services/users.service';
 import { EventsService } from 'src/app/services/events.service';
 import * as moment from 'moment';
 import { AssistantsService } from 'src/app/services/assistants.service';
+import { ErrorHandlerService } from 'src/app/services/error-handler.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-profile-administration',
   templateUrl: './profile-administration.component.html',
@@ -21,7 +23,9 @@ export class ProfileAdministrationComponent implements OnInit {
   user: User = new User();
   events: Event[] = [];
   attendanceCounter:number=0;
-  constructor(private userService: UsersService, private activatedRoute: ActivatedRoute, private eventsService: EventsService, private assistantsService:AssistantsService) { }
+
+  ErrorMessage:string;
+  constructor(private userService: UsersService, private activatedRoute: ActivatedRoute, private eventsService: EventsService, private assistantsService:AssistantsService,  private errorHandlerService:ErrorHandlerService) { }
 
   ngOnInit(): void {
     this.getUser();
@@ -33,18 +37,36 @@ export class ProfileAdministrationComponent implements OnInit {
   getUser() {
     this.userService.getUserByEmail(this.userEmail).subscribe((res) => {
       this.user = res;
+    },
+    (error) => {
+      console.log(error);
+      this.ErrorMessage=error.error;
+      this.createModal();
+
     })
   }
 
   getUserPosition() {
     this.userService.getUserPosition(this.userEmail).subscribe((position) => {
       this.userPosition = position;
+    },
+    (error) => {
+      console.log(error);
+      this.ErrorMessage=error.error;
+      this.createModal();
+
     })
   }
 
   getEventsByUser() {
     this.eventsService.getEventsByOrganizerDESC(this.userEmail).subscribe((events) => {
       this.events = events;
+    },
+    (error) => {
+      console.log(error);
+      this.ErrorMessage=error.error;
+      this.createModal();
+
     })
   }
 
@@ -52,6 +74,12 @@ export class ProfileAdministrationComponent implements OnInit {
     this.assistantsService.countAttendance(this.userEmail).subscribe((res)=>{
       
       this.attendanceCounter = res;
+    },
+    (error) => {
+      console.log(error);
+      this.ErrorMessage=error.error;
+      this.createModal();
+
     })
   }
 
@@ -66,4 +94,18 @@ export class ProfileAdministrationComponent implements OnInit {
   formatDateTime(dateTime: string) {
     return moment(dateTime).format("DD-MM-YY HH:mm");
   }
+
+    //Error handler modals
+    @ViewChild('modal', { read: ViewContainerRef })
+    entry!: ViewContainerRef;
+    sub!: Subscription;
+  
+  
+    createModal(){
+        this.sub = this.errorHandlerService
+          .openModal(this.entry, 'ERROR', this.ErrorMessage)
+          .subscribe((v) => {
+            //your logic
+          });
+    }
 }

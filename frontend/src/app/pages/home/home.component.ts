@@ -1,7 +1,9 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
 import { EventsService } from 'src/app/services/events.service';
 import { Event } from '../../models/event';
 import * as moment from 'moment';
+import { ErrorHandlerService } from 'src/app/services/error-handler.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -15,9 +17,25 @@ export class HomeComponent implements OnInit {
   tittle = "Eventos disponibles";
   image = "../../../assets/icons/events-icon.png";
 
-  constructor(private eventsService: EventsService) { }
+  ErrorMessage:string;
+
+  constructor(private eventsService: EventsService,  private errorHandlerService:ErrorHandlerService) { }
 
   ngOnInit(): void {
 
   }
+
+    //Error handler modals
+    @ViewChild('modal', { read: ViewContainerRef })
+    entry!: ViewContainerRef;
+    sub!: Subscription;
+  
+  
+    createModal(){
+        this.sub = this.errorHandlerService
+          .openModal(this.entry, 'ERROR', this.ErrorMessage)
+          .subscribe((v) => {
+            //your logic
+          });
+    }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { EventsService } from 'src/app/services/events.service';
 import { UsersService } from 'src/app/services/users.service';
@@ -7,6 +7,8 @@ import * as moment from 'moment';
 
 import { getDataFromToken } from '../../utils/jwtparser';
 import { Event } from 'src/app/models/event';
+import { ErrorHandlerService } from 'src/app/services/error-handler.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-myevents',
@@ -30,7 +32,9 @@ export class MyeventsComponent implements OnInit {
   pastEvents: Event[] = [];
   futureEvents: Event[] = [];
 
-  constructor(private userService: UsersService, private eventService: EventsService) { }
+  ErrorMessage:string;
+
+  constructor(private userService: UsersService, private eventService: EventsService,  private errorHandlerService:ErrorHandlerService) { }
 
   ngOnInit(): void {
     this.getUserByEmail();
@@ -42,12 +46,24 @@ export class MyeventsComponent implements OnInit {
   getUserByEmail() {
     this.userService.getUserByEmail(this.userEmail).subscribe((user) => {
       this.user = user;
+    },
+    (error) => {
+      console.log(error);
+      this.ErrorMessage=error.error;
+      this.createModal();
+
     })
   }
 
   getUserPosition() {
     this.userService.getUserPosition(this.userEmail).subscribe((position) => {
       this.userPosition = position;
+    },
+    (error) => {
+      console.log(error);
+      this.ErrorMessage=error.error;
+      this.createModal();
+
     })
   }
 
@@ -57,6 +73,12 @@ export class MyeventsComponent implements OnInit {
         return moment(event.date).isAfter(moment());
       })
 
+    },
+    (error) => {
+      console.log(error);
+      this.ErrorMessage=error.error;
+      this.createModal();
+
     });
   }
 
@@ -65,14 +87,41 @@ export class MyeventsComponent implements OnInit {
       return this.pastEvents = events.filter((event) => {
         return moment(event.date).isBefore(moment());
       });
+    },
+    (error) => {
+      console.log(error);
+      this.ErrorMessage=error.error;
+      this.createModal();
+
     });
   }
 
   deleteEventById(id:number){
-    this.eventService.deleteEventById(id).subscribe(res=>{return this.getFutureEventsByUser(); });
+    this.eventService.deleteEventById(id).subscribe(
+      res=>{return this.getFutureEventsByUser(); },
+    (error) => {
+      console.log(error);
+      this.ErrorMessage=error.error;
+      this.createModal();
+
+    });
   }
     
   formatDate(date:Date){
     return moment(date).format("DD-MM-YYYY");
   }
+
+    //Error handler modals
+    @ViewChild('modal', { read: ViewContainerRef })
+    entry!: ViewContainerRef;
+    sub!: Subscription;
+  
+  
+    createModal(){
+        this.sub = this.errorHandlerService
+          .openModal(this.entry, 'ERROR', this.ErrorMessage)
+          .subscribe((v) => {
+            //your logic
+          });
+    }
 }

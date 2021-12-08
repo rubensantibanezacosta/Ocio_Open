@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as MyEvent from 'src/app/models/event';
 import { getDataFromToken } from 'src/app/utils/jwtparser';
 import * as moment from 'moment';
 import { ImagesService } from 'src/app/services/images.service';
 import { EventsService } from 'src/app/services/events.service';
+import { ErrorHandlerService } from 'src/app/services/error-handler.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-events-administration',
@@ -30,7 +32,10 @@ export class EventsAdministrationComponent implements OnInit {
   imageFormVisible: boolean = false;
   galleryVisible: boolean = false;
   dateinputVisible: boolean = false;
-  constructor(private activatedRoute: ActivatedRoute, private imagesService: ImagesService, private eventsService: EventsService, private router: Router) { }
+
+  ErrorMessage:string;
+
+  constructor(private activatedRoute: ActivatedRoute, private imagesService: ImagesService, private eventsService: EventsService, private router: Router,  private errorHandlerService:ErrorHandlerService) { }
 
   ngOnInit(): void {
     this.getEventToEdit();
@@ -45,20 +50,36 @@ export class EventsAdministrationComponent implements OnInit {
       console.log(res);
       window.history.back()
     },
-    error=>console.log(error));
+    (error) => {
+      console.log(error);
+      this.ErrorMessage=error.error;
+      this.createModal();
+
+    })
   }
 
   deleteEventAdmin(event_id: number) {
     this.eventsService.deleteEventByIdAdmin(this.event_id).subscribe(res => {
       window.history.back()
+    },
+    (error) => {
+      console.log(error);
+      this.ErrorMessage=error.error;
+      this.createModal();
+
     })
   }
 
   async getEventToEdit() {
     this.eventsService.getEventById(this.event_id).subscribe((res) => {
-      return this.myEvent = res,
-      (error:Error) =>{return console.warn(error)}
-    })
+      return this.myEvent = res}
+      ,
+      (error) => {
+        console.log(error);
+        this.ErrorMessage=error.error;
+        this.createModal();
+  
+      })
   }
 
   onPhotoSelected(event: any): void {
@@ -75,9 +96,12 @@ export class EventsAdministrationComponent implements OnInit {
       this.hideImageForm();
       this.myEvent.image_id = res[0].id;
     },
-      (err) => {
-        console.error(err);
-      })
+    (error) => {
+      console.log(error);
+      this.ErrorMessage=error.error;
+      this.createModal();
+
+    })
 
     return false;
   }
@@ -130,4 +154,18 @@ export class EventsAdministrationComponent implements OnInit {
   formatDate(date: Date) {
     return moment(date).format("DD-MM-YYYY hh:mm")
   }
+
+    //Error handler modals
+    @ViewChild('modal', { read: ViewContainerRef })
+    entry!: ViewContainerRef;
+    sub!: Subscription;
+  
+  
+    createModal(){
+        this.sub = this.errorHandlerService
+          .openModal(this.entry, 'ERROR', this.ErrorMessage)
+          .subscribe((v) => {
+            //your logic
+          });
+    }
 }

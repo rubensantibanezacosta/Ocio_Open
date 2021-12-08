@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
 import { EventsService } from 'src/app/services/events.service';
 import { Event } from '../../models/event';
 import * as moment from 'moment';
@@ -6,6 +6,8 @@ import { PunctuationsService } from 'src/app/services/punctuations.service';
 import { Punctuation } from 'src/app/models/punctuation';
 import { getDataFromToken } from '../../utils/jwtparser';
 import { Asisstant } from 'src/app/models/assistant';
+import { ErrorHandlerService } from 'src/app/services/error-handler.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -29,7 +31,7 @@ export class SlideshowComponent implements OnInit {
   commentIcon = "../../../assets/icons/comments-icon-white.png";
   navigateIcon= "../../../assets/icons/navigate-icon.png";
 
-
+  ErrorMessage:string;
 
   events: Event[] = [];
 
@@ -37,7 +39,7 @@ export class SlideshowComponent implements OnInit {
   formatDate = (date) => { return moment(date).locale("es").format("D [de] MMMM") };
   formatTime = (date) => { return moment(date).format("HH:mm") }
 
-  constructor(private eventsService: EventsService) { }
+  constructor(private eventsService: EventsService,  private errorHandlerService:ErrorHandlerService) { }
 
   ngOnInit(): void {
     this.loadEvents();
@@ -49,12 +51,24 @@ export class SlideshowComponent implements OnInit {
       this.events = data.filter((event => {
         return moment(event.date).isAfter(moment())==this.future;
       }));
+    },
+    (error) => {
+      console.log(error);
+      this.ErrorMessage=error.error;
+      this.createModal();
+
     })
   }else{
     return this.eventsService.getAllEventsDESC().subscribe(data => {
       this.events = data.filter((event => {
         return moment(event.date).isAfter(moment())==this.future;
       }));
+    },
+    (error) => {
+      console.log(error);
+      this.ErrorMessage=error.error;
+      this.createModal();
+
     })
   }
   }
@@ -69,4 +83,19 @@ export class SlideshowComponent implements OnInit {
     }).length
   }
   
+
+
+    //Error handler modals
+    @ViewChild('modal', { read: ViewContainerRef })
+    entry!: ViewContainerRef;
+    sub!: Subscription;
+  
+  
+    createModal(){
+        this.sub = this.errorHandlerService
+          .openModal(this.entry, 'ERROR', this.ErrorMessage)
+          .subscribe((v) => {
+            //your logic
+          });
+    }
 }

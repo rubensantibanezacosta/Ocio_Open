@@ -1,8 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Asisstant } from 'src/app/models/assistant';
 import { AssistantsService } from 'src/app/services/assistants.service';
 import { getDataFromToken } from 'src/app/utils/jwtparser';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { ErrorHandlerService } from 'src/app/services/error-handler.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-attendance',
@@ -36,15 +38,17 @@ export class AttendanceComponent implements OnInit {
   yesButtonState:string="inactive";
   noButtonState:string="inactive";
 
-  constructor(private assistantsService:AssistantsService) { }
+  ErrorMessage:string;
+
+  constructor(private assistantsService:AssistantsService,  private errorHandlerService:ErrorHandlerService) { }
 
   ngOnInit(): void {
-    this.refreshAssistanState();
+    this.refreshAssistantState();
     
     
   }
 
-  refreshAssistanState(){
+  refreshAssistantState(){
     this.assistantsService.getAssistantByPk(this.event_id, this.userEmail)
     .subscribe((assistant)=>{
       if(assistant[0]){
@@ -59,6 +63,12 @@ export class AttendanceComponent implements OnInit {
           this.assistantState=false;
         }
       }
+    },
+    (error) => {
+      console.log(error);
+      this.ErrorMessage=error.error;
+      this.createModal();
+
     })
   }
 
@@ -69,7 +79,13 @@ export class AttendanceComponent implements OnInit {
     assistant.attendance=true;
     this.assistantsService.createOrUpdateAssistant(assistant).subscribe(
       (response)=>{
-        this.refreshAssistanState();
+        this.refreshAssistantState();
+      },
+      (error) => {
+        console.log(error);
+        this.ErrorMessage=error.error;
+        this.createModal();
+  
       });
   }
 
@@ -81,8 +97,29 @@ export class AttendanceComponent implements OnInit {
     this.assistantsService.createOrUpdateAssistant(assistant)
     .subscribe(
       (response)=>{
-        this.refreshAssistanState();
+        this.refreshAssistantState();
+      },
+      (error) => {
+        console.log(error);
+        this.ErrorMessage=error.error;
+        this.createModal();
+  
       });
   }
 
+
+
+    //Error handler modals
+    @ViewChild('modal', { read: ViewContainerRef })
+    entry!: ViewContainerRef;
+    sub!: Subscription;
+  
+  
+    createModal(){
+        this.sub = this.errorHandlerService
+          .openModal(this.entry, 'ERROR', this.ErrorMessage)
+          .subscribe((v) => {
+            //your logic
+          });
+    }
 }

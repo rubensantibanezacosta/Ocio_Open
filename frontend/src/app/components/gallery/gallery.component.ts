@@ -1,8 +1,10 @@
 
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, ViewChild, ViewContainerRef } from '@angular/core';
 import { Image } from 'src/app/models/image';
 import { ImagesService } from 'src/app/services/images.service';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { ErrorHandlerService } from 'src/app/services/error-handler.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-gallery',
@@ -25,11 +27,14 @@ export class GalleryComponent implements OnInit {
   bearerToken = localStorage.getItem("ocioToken"); 
   @Output() imageSelected = new EventEmitter<number>();
 
+
+  ErrorMessage:string;
+  
   //animations
   filterState="inactive";
 
 
-  constructor(private imagesService: ImagesService) { }
+  constructor(private imagesService: ImagesService,  private errorHandlerService:ErrorHandlerService) { }
 
   ngOnInit(): void {
     this.getAllUrls();
@@ -56,5 +61,20 @@ export class GalleryComponent implements OnInit {
   filterStateToogle(){
     this.filterState=="inactive"?this.filterState="active":this.filterState="inactive";
   }
+
+
+    //Error handler modals
+    @ViewChild('modal', { read: ViewContainerRef })
+    entry!: ViewContainerRef;
+    sub!: Subscription;
+  
+  
+    createModal(){
+        this.sub = this.errorHandlerService
+          .openModal(this.entry, 'ERROR', this.ErrorMessage)
+          .subscribe((v) => {
+            //your logic
+          });
+    }
 }
 

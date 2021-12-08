@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { ImagesService } from 'src/app/services/images.service';
 
 @Component({
@@ -14,7 +16,9 @@ export class ImageViewerComponent implements OnInit {
   bearerToken = localStorage.getItem("ocioToken");
   spinner="../../../../assets/loaders/Spinner.gif";
   loaded=false;
-  constructor(private imagesService: ImagesService) { }
+
+  ErrorMessage:string;
+  constructor(private imagesService: ImagesService,  private errorHandlerService:ErrorHandlerService) { }
 
   ngOnInit(): void {
     this.getImage();
@@ -25,6 +29,12 @@ export class ImageViewerComponent implements OnInit {
     return this.imagesService.getImageById(this.imageId).subscribe((data) => {
       this.downloaded = new File([data], "filename", { type: "image/jpg" });
       return this.createImageFromBlob(this.downloaded);
+    },
+    (error) => {
+      console.log(error);
+      this.ErrorMessage=error.error;
+      this.createModal();
+
     })
   }
 
@@ -39,4 +49,19 @@ export class ImageViewerComponent implements OnInit {
       reader.readAsDataURL(image);
     }
   }
+
+
+    //Error handler modals
+    @ViewChild('modal', { read: ViewContainerRef })
+    entry!: ViewContainerRef;
+    sub!: Subscription;
+  
+  
+    createModal(){
+        this.sub = this.errorHandlerService
+          .openModal(this.entry, 'ERROR', this.ErrorMessage)
+          .subscribe((v) => {
+            //your logic
+          });
+    }
 }

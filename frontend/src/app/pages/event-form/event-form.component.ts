@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as MyEvent from 'src/app/models/event';
 import { getDataFromToken } from 'src/app/utils/jwtparser';
 import * as moment from 'moment';
 import { ImagesService } from 'src/app/services/images.service';
 import { EventsService } from 'src/app/services/events.service';
+import { ErrorHandlerService } from 'src/app/services/error-handler.service';
+import { Subscription } from 'rxjs';
 
 
 
@@ -35,8 +37,10 @@ export class EventFormComponent implements OnInit {
   galleryVisible: boolean = false;
   dateinputVisible: boolean = false;
 
+  ErrorMessage:string;
 
-  constructor(private activatedRoute: ActivatedRoute, private imagesService: ImagesService, private eventsService: EventsService, private router: Router) { }
+
+  constructor(private activatedRoute: ActivatedRoute, private imagesService: ImagesService, private eventsService: EventsService, private router: Router,  private errorHandlerService:ErrorHandlerService) { }
 
   ngOnInit(): void {
     this.myEvent.zone = "GC";
@@ -51,10 +55,24 @@ export class EventFormComponent implements OnInit {
   submit() {
     
     if(this.type == "new"){
-    this.eventsService.createEvent(this.myEvent).subscribe(res => window.history.back())
+    this.eventsService.createEvent(this.myEvent).subscribe(
+      (res) => {window.history.back()},
+    (error) => {
+      console.log(error);
+      this.ErrorMessage=error.error;
+      this.createModal();
+
+    })
   }else{
-      this.eventsService.updateEvent(this.myEvent).subscribe(res => {
+      this.eventsService.updateEvent(this.myEvent).subscribe(
+        res => {
         window.history.back()
+      },
+      (error) => {
+        console.log(error);
+        this.ErrorMessage=error.error;
+        this.createModal();
+  
       });
     }
   }
@@ -63,6 +81,12 @@ export class EventFormComponent implements OnInit {
     if (this.type != "new") {
       this.eventsService.getEventById(this.event_id).subscribe(res => {
         return this.myEvent = res
+      },
+      (error) => {
+        console.log(error);
+        this.ErrorMessage=error.error;
+        this.createModal();
+  
       })
     }
   }
@@ -80,9 +104,12 @@ export class EventFormComponent implements OnInit {
       this.hideImageForm();
       this.myEvent.image_id = res[0].id;
     },
-      (err) => {
-        console.error(err);
-      })
+    (error) => {
+      console.log(error);
+      this.ErrorMessage=error.error;
+      this.createModal();
+
+    })
 
     return false;
   }
@@ -135,4 +162,19 @@ export class EventFormComponent implements OnInit {
   formatDate(date: Date) {
     return moment(date).format("DD-MM-YYYY hh:mm")
   }
+  
+
+    //Error handler modals
+    @ViewChild('modal', { read: ViewContainerRef })
+    entry!: ViewContainerRef;
+    sub!: Subscription;
+  
+  
+    createModal(){
+        this.sub = this.errorHandlerService
+          .openModal(this.entry, 'ERROR', this.ErrorMessage)
+          .subscribe((v) => {
+            //your logic
+          });
+    }
 }

@@ -1,10 +1,12 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { UsersService } from 'src/app/services/users.service';
 import { ZonesService } from 'src/app/services/zones.service';
 import { getDataFromToken } from 'src/app/utils/jwtparser';
 import { Zones } from 'src/app/models/zone';
+import { ErrorHandlerService } from 'src/app/services/error-handler.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-ranking',
@@ -58,13 +60,15 @@ export class RankingComponent implements OnInit {
   zones: Zones[] = [];
   userPosition: number = 0;
 
+  ErrorMessage:string;
+
   //Animations
 
   organizerState:string="active";
   zonesState:string="inactive";
   
 
-  constructor(private userService: UsersService, private zonesService: ZonesService) { }
+  constructor(private userService: UsersService, private zonesService: ZonesService,  private errorHandlerService:ErrorHandlerService) { }
 
   ngOnInit(): void {
 
@@ -77,24 +81,48 @@ export class RankingComponent implements OnInit {
   getUserByEmail() {
     this.userService.getUserByEmail(this.userEmail).subscribe((user) => {
       this.user = user;
+    },
+    (error) => {
+      console.log(error);
+      this.ErrorMessage=error.error;
+      this.createModal();
+
     })
   }
 
   getUserPosition() {
     this.userService.getUserPosition(this.userEmail).subscribe((position) => {
       this.userPosition = position;
+    },
+    (error) => {
+      console.log(error);
+      this.ErrorMessage=error.error;
+      this.createModal();
+
     })
   }
 
   getOrganizers() {
     this.userService.getAllUsers().subscribe((organizers) => {
       this.organizers = organizers;
+    },
+    (error) => {
+      console.log(error);
+      this.ErrorMessage=error.error;
+      this.createModal();
+
     })
   }
 
   getZones() {
     this.zonesService.getAllZones().subscribe((zones) => {
       this.zones = zones;
+    },
+    (error) => {
+      console.log(error);
+      this.ErrorMessage=error.error;
+      this.createModal();
+
     })
   }
 
@@ -107,4 +135,18 @@ export class RankingComponent implements OnInit {
     this.organizerState="active";
     this.zonesState="inactive";
   }
+
+    //Error handler modals
+    @ViewChild('modal', { read: ViewContainerRef })
+    entry!: ViewContainerRef;
+    sub!: Subscription;
+  
+  
+    createModal(){
+        this.sub = this.errorHandlerService
+          .openModal(this.entry, 'ERROR', this.ErrorMessage)
+          .subscribe((v) => {
+            //your logic
+          });
+    }
 }

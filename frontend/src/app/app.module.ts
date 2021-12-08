@@ -33,6 +33,7 @@ import { GalleryComponent } from './components/gallery/gallery.component';
 import { ImageViewerComponent } from './components/gallery/image-viewer/image-viewer.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { EventsAdministrationComponent } from './pages/events-administration/events-administration.component';
+import { ErrorHandlerComponent } from './components/error-handler/error-handler.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { EventsAdministrationComponent } from './pages/events-administration/eve
     ImageViewerComponent,
     ProfileComponent,
     EventsAdministrationComponent,
+    ErrorHandlerComponent,
 
 
   ],

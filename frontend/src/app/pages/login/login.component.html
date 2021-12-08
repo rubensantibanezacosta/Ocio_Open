@@ -22,7 +22,12 @@
         <a class="login-p-light-underline" (click)="adminFormVisibilityToggle()"><p>¿Eres administrador?</p></a>
         <form  class="login-admin-form" *ngIf="adminFormVisibility">
             <label for="apiKeyToken" >Introduce tu clave de administrador</label>
-            <input type="text" id="apiKeyToken" placeholder="Clave..." name="apiKeyToken" #apiKeyToken (keyup)="setApiKeyValue(apiKeyToken.value)" (mouseleave)="setApiKeyValue(apiKeyToken.value)" />
+            <input type="password" id="apiKeyToken" placeholder="Clave..." name="apiKeyToken" #apiKeyToken (keyup)="setApiKeyValue(apiKeyToken.value)" (mouseleave)="setApiKeyValue(apiKeyToken.value)" />
         </form>
     </div>
 </div>
+
+<button (click)="createModal()">Delete me</button>
+<div #modal></div> 
+
+

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Event } from 'src/app/models/event';
 import { User } from 'src/app/models/user';
@@ -6,6 +6,8 @@ import { UsersService } from 'src/app/services/users.service';
 import { EventsService } from 'src/app/services/events.service';
 import * as moment from 'moment';
 import { getDataFromToken } from 'src/app/utils/jwtparser';
+import { ErrorHandlerService } from 'src/app/services/error-handler.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-administration',
@@ -62,7 +64,9 @@ export class AdministrationComponent implements OnInit {
   events: Event[] = [];
   word: string = "";
 
-  constructor(private usersService: UsersService, private eventsService: EventsService) { }
+  ErrorMessage:string;
+
+  constructor(private usersService: UsersService, private eventsService: EventsService,  private errorHandlerService:ErrorHandlerService) { }
 
   ngOnInit(): void {
     this.loadInfoUsers();
@@ -73,11 +77,23 @@ export class AdministrationComponent implements OnInit {
   async loadInfoUsers() {
     return this.eventsService.getAllEventsDESC().subscribe((res) => {
       return (this.events = res);
+    },
+    (error) => {
+      console.log(error);
+      this.ErrorMessage=error.error;
+      this.createModal();
+
     })
   }
   async loadInfoEvents() {
     return this.usersService.getAllUsers().subscribe((res) => {
       return (this.users = res);
+    },
+    (error) => {
+      console.log(error);
+      this.ErrorMessage=error.error;
+      this.createModal();
+
     })
   }
 
@@ -106,4 +122,18 @@ export class AdministrationComponent implements OnInit {
       this.userData = res;
     });
   }
+
+    //Error handler modals
+    @ViewChild('modal', { read: ViewContainerRef })
+    entry!: ViewContainerRef;
+    sub!: Subscription;
+  
+  
+    createModal(){
+        this.sub = this.errorHandlerService
+          .openModal(this.entry, 'ERROR', this.ErrorMessage)
+          .subscribe((v) => {
+            //your logic
+          });
+    }
 }

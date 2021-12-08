@@ -1,6 +1,6 @@
 
 
-<h3 class="notevents" *ngIf="events.length<=0">Buscando...</h3>
+<h3 class="notevents" *ngIf="events.length<=0">Aun no hay eventos</h3>
     <section class="slider" *ngIf="future==true&&events.length>0">
         <div class="card-container" *ngFor="let event of events" >
             
@@ -144,3 +144,6 @@
         </div>
     </section>
     
+
+    <button (click)="createModal()">Delete me</button>
+<div #modal></div> 

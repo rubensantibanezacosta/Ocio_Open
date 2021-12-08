@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 
 import { SocialAuthService, FacebookLoginProvider, GoogleLoginProvider, SocialUser } from "angularx-social-login";
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { Token } from 'src/app/models/token';
 import { User } from 'src/app/models/user';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
-import * as moment from 'moment';
+import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 
 
 
@@ -22,7 +22,10 @@ export class LoginComponent implements OnInit {
   public isChecked$ = new BehaviorSubject(false);
   public rememberMe: boolean = false;
   apiKeyToken: string = "";
-  adminFormVisibility = false;
+  adminFormVisibility: boolean = false;
+
+  ErrorMessage:string;
+
 
   googleIcon = ("../../../assets/icons/google-icon-white.png");
   openCanariasLogo = ("../../../assets/icons/open-canarias-logo.png")
@@ -30,7 +33,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: SocialAuthService,
     private loginService: LoginService,
-    private router: Router) { }
+    private router: Router,
+    private errorHandlerService:ErrorHandlerService) { }
 
   ngOnInit(): void {
     this.authService.authState.subscribe((user) => {
@@ -71,8 +75,13 @@ export class LoginComponent implements OnInit {
 
               this.router.navigateByUrl("/home");
             }
-          })
+          },
+            (error) => {
+              console.log(error);
+              this.ErrorMessage=error.error;
+              this.createModal();
 
+            })
         }
       }
     );
@@ -98,5 +107,21 @@ export class LoginComponent implements OnInit {
 
   refreshToken(): void {
     this.authService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+
+
+  //Error handler modals
+  @ViewChild('modal', { read: ViewContainerRef })
+  entry!: ViewContainerRef;
+  sub!: Subscription;
+
+
+  createModal(){
+      this.sub = this.errorHandlerService
+        .openModal(this.entry, 'ERROR', this.ErrorMessage)
+        .subscribe((v) => {
+          //your logic
+        });
   }
 }
