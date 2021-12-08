@@ -1,0 +1,4 @@
+<div class="day-container" routerLink="/eventsbydate/{{date}}">
+    <p class="dayValue">{{dayValue}}</p>
+    <p class="day-event" *ngFor="let event of eventsFiltered">{{event.tittle}}</p>
+</div>

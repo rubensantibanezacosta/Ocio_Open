@@ -20,6 +20,7 @@ import { Subscription } from 'rxjs';
 export class SlideshowComponent implements OnInit {
   @Input() future:boolean;
   @Input() userEmailOutput:string;
+  @Input() dateToFilter:Date;
 
   
   profileIcon = "../../../assets/icons/user-icon.png";
@@ -46,6 +47,17 @@ export class SlideshowComponent implements OnInit {
     
   }
   loadEvents() {
+    if(this.dateToFilter){
+      return this.eventsService.getEventsByDate(this.dateToFilter).subscribe((res)=>{
+        this.events=res;
+      },
+      (error) => {
+        console.log(error);
+        this.ErrorMessage=error.error;
+        this.createModal();
+  
+      })
+    }
       if(this.future){
     return this.eventsService.getAllEventsASC().subscribe(data => {
       this.events = data.filter((event => {
@@ -83,7 +95,9 @@ export class SlideshowComponent implements OnInit {
     }).length
   }
   
-
+datePastOrFuture(date:Date){
+  return moment(date).isAfter(moment());
+}
 
     //Error handler modals
     @ViewChild('modal', { read: ViewContainerRef })

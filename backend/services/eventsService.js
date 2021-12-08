@@ -80,8 +80,32 @@ class EventsService {
           date: {
             [Op.between]: [new Date(date + " 00:00:00"), new Date(date + " 23:59:59")]
           }
-        }
-      });
+        },
+        order: [['date', 'ASC']],
+        include: [{
+          model: Users,
+          as: "organizerdata",
+          attributes: ['name', 'surname', 'punctuation_avg']
+        },
+        {
+          model: Assistants,
+          include: {
+            model: Users,
+            attributes: ['name', 'surname', 'punctuation_avg']
+          },
+          as: "assistants",
+          attributes: ['assistant', 'attendance', 'excuse'],
+        },
+        {
+          model: Comments,
+          attributes: ['comment'],
+          include: {
+            model: Users,
+            attributes: ['name', 'surname']
+          },
+  
+        }]
+      },);
   }
 
   async findEventsByOrganizerASC(organizer) {

@@ -12,6 +12,7 @@ export class AccessGuardGuard implements CanActivate {
   canActivate(activatedRoute: ActivatedRouteSnapshot) {
 
     const scopes = getDataFromToken().scopes;
+    
     if (scopes.includes(activatedRoute.url[0].path)) {
       return true;
     } else {

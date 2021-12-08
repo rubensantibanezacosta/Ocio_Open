@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 02-12-2021 a las 16:25:41
+-- Tiempo de generación: 08-12-2021 a las 23:51:03
 -- Versión del servidor: 8.0.27-0ubuntu0.20.04.1
 -- Versión de PHP: 7.4.3
 
@@ -39,7 +39,8 @@ CREATE TABLE `assistants` (
   `updatedAt` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-
+--
+-
 -- --------------------------------------------------------
 
 --
@@ -54,7 +55,6 @@ CREATE TABLE `comments` (
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
 -- --------------------------------------------------------
 
 --
@@ -75,6 +75,7 @@ CREATE TABLE `events` (
   `updatedAt` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
 
 -- --------------------------------------------------------
 
@@ -94,8 +95,9 @@ CREATE TABLE `images` (
 --
 
 INSERT INTO `images` (`id`, `url`, `createdAt`, `updatedAt`) VALUES
-(1, 'gallery-1.jpg', '2021-11-13', '2021-11-13'),
-(2, 'gallery-2.jpeg', '2021-11-14', '2021-11-14');
+(19, '1638811976.jpg', '2021-12-06', '2021-12-06'),
+(20, '1638812001.jpg', '2021-12-06', '2021-12-06'),
+(21, '1638812301.jpeg', '2021-12-06', '2021-12-06');
 
 -- --------------------------------------------------------
 
@@ -111,8 +113,7 @@ CREATE TABLE `punctuations` (
   `updatedAt` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-
--- --------------------------------------------------------
+--
 
 --
 -- Estructura de tabla para la tabla `roles`
@@ -127,8 +128,10 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
+-- Volcado de datos para la tabla `roles`
+--
 
--- --------------------------------------------------------
+------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `users`
@@ -146,8 +149,7 @@ CREATE TABLE `users` (
   `updatedAt` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-
--- --------------------------------------------------------
+--
 
 --
 -- Estructura de tabla para la tabla `zones`
@@ -166,9 +168,9 @@ CREATE TABLE `zones` (
 --
 
 INSERT INTO `zones` (`id`, `name`, `punctuationavg`, `createdAt`, `updatedAt`) VALUES
-('GC', 'Gran Canaria', 0, '2021-11-13', '2021-11-25'),
-('TNF', 'Tenerife',0, '2021-11-19', '2021-11-25'),
-('VIRTUAL', 'Virtual', 0, '2021-11-13', '2021-11-25');
+('GC', 'Gran Canaria', 2.5, '2021-11-13', '2021-12-06'),
+('TNF', 'Tenerife', 0, '2021-11-19', '2021-12-06'),
+('VIRTUAL', 'Virtual', 0, '2021-11-13', '2021-12-06');
 
 --
 -- Índices para tablas volcadas
@@ -236,19 +238,19 @@ ALTER TABLE `zones`
 -- AUTO_INCREMENT de la tabla `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comment_id` float NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `comment_id` float NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT de la tabla `events`
 --
 ALTER TABLE `events`
-  MODIFY `event_id` float NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `event_id` float NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Restricciones para tablas volcadas

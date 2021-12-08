@@ -34,6 +34,8 @@ import { ImageViewerComponent } from './components/gallery/image-viewer/image-vi
 import { ProfileComponent } from './components/profile/profile.component';
 import { EventsAdministrationComponent } from './pages/events-administration/events-administration.component';
 import { ErrorHandlerComponent } from './components/error-handler/error-handler.component';
+import { DayEventsComponent } from './pages/calendar/day-events/day-events.component';
+import { EventsByDateComponent } from './pages/events-by-date/events-by-date.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import { ErrorHandlerComponent } from './components/error-handler/error-handler.
     ProfileComponent,
     EventsAdministrationComponent,
     ErrorHandlerComponent,
+    DayEventsComponent,
+    EventsByDateComponent,
 
 
   ],
