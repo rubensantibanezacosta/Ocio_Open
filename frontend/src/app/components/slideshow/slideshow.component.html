@@ -62,7 +62,7 @@
                 </div>
             </div>
             <app-attendance *ngIf="datePastOrFuture(event.date)" [event_id]="event.event_id"></app-attendance>
-            <app-valoration *ngIf="datePastOrFuture(event.date)" [event_id]="event.event_id"></app-valoration>
+            <app-valoration *ngIf="!datePastOrFuture(event.date)" [event_id]="event.event_id"></app-valoration>
             <div class="card-bakground">
                 <app-image-viewer [imageId]="event.image_id"></app-image-viewer>
             </div>
