@@ -11,7 +11,7 @@ class EventsController {
     createEvent = (req, res) => {
 
         // Validate request
-        if (!req.body.tittle || !req.body.date || !req.body.place || !req.body.organizer || !req.body.zone) {
+        if (!req.body.tittle || !req.body.date || !req.body.place || !req.body.zone) {
             res.status(400).send(
                  "Content cannot be empty!"
             );
@@ -24,7 +24,7 @@ class EventsController {
             place: req.body.place,
             description: req.body.description,
             punctuation_avg: 0,
-            organizer: req.body.dataValues.email,
+            organizer: req.user.dataValues.email,
             image_id: req.body.image_id,
         }
 
@@ -125,14 +125,6 @@ class EventsController {
     };
 
     updateEvent = (req, res) => {
-        // Validate request
-        console.log(req, " ::::::::: ", req.user.dataValues.email);
-        if (!req.body.tittle || !req.body.place || !req.body.zone || !req.body.event_id) {
-            res.status(400).json(
-                "Content cannot be empty!"
-            );
-            return;
-        }
 
         if (req.body.organizer != req.user.dataValues.email) {
             res.status(401).send(
@@ -148,7 +140,6 @@ class EventsController {
             zone: req.body.zone,
             place: req.body.place,
             description: req.body.description,
-            organizer: req.user.dataValues.email,
             image_id: req.body.image_id,
         }
 

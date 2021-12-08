@@ -5,7 +5,7 @@
 </div>
 <div id="slider" class="slider">
     <div id="menu" class="hideMenu">
-        <div class="menuContainer__items__borderless" (click)="navigateTo('/home')">
+        <div class="menuContainer__items__borderless" routerLink="/home" *ngIf="url!='/home'">
             <div class="item-to-animate" tabindex="0">
                 <div class="item__p item-to-animate__sub">
                     <p>Eventos disponibles</p>
@@ -18,7 +18,7 @@
                 </div>
             </div>
         </div>
-        <div class="menuContainer__items__borderless" (click)="navigateTo('/calendar')">
+        <div class="menuContainer__items__borderless" routerLink="/calendar" *ngIf="url!='/calendar'">
             <div class="item-to-animate " tabindex="0">
                 <div class="item__p item-to-animate__sub">
                     <p>Calendario</p>
@@ -31,7 +31,7 @@
                 </div>
             </div>
         </div>
-        <div class="menuContainer__items__borderless" (click)="navigateTo('/ranking')">
+        <div class="menuContainer__items__borderless" routerLink="/ranking" *ngIf="url!='/ranking'">
             <div class="item-to-animate " tabindex="0">
                 <div class="item__p item-to-animate__sub">
                     <p>Ranking</p>
@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-        <div class="menuContainer__items__borderless" (click)="navigateTo('/myevents')">
+        <div class="menuContainer__items__borderless" routerLink="/myevents" *ngIf="url!='/myevents'">
             <div class="item-to-animate" tabindex="0">
                 <div class="item__p item-to-animate__sub">
                     <p>Mis eventos</p>
@@ -57,7 +57,7 @@
                 </div>
             </div>
         </div>
-        <div class="menuContainer__items" (click)="navigateTo('/finalizedevents')">
+        <div class="menuContainer__items" routerLink="/finalizedevents" *ngIf="url!='/finalizedevents'">
             <div class="item-to-animate" tabindex="0">
                 <div class="item__p item-to-animate__sub">
                     <p>Eventos terminados</p>
@@ -83,7 +83,7 @@
                 </div>
             </div>
         </div>
-        <div class="menuContainer__items" (click)="navigateTo('/administration')">
+        <div class="menuContainer__items" routerLink="/administration" *ngIf="adminSectionAllowed &&url!='/administration'">
             <div class="item-to-animate" tabindex="0">
                 <div class="item__p item-to-animate__sub">
                     <p>Administración</p>
@@ -95,7 +95,7 @@
                 </div>
             </div>
         </div>
-        <div class="menuContainer__items__borderless" (click)="navigateTo('/administration')">
+        <div class="menuContainer__items__borderless">
             <div class="item-to-animate" tabindex="0">
                 <div class="dark-switch-container">
                     <div class="dark-switch">

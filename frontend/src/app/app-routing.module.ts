@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { GalleryComponent } from './components/gallery/gallery.component';
+import { AccessGuardGuard } from './guards/access-guard.guard';
 import { AdministrationComponent } from './pages/administration/administration.component';
 import { AssistantsComponent } from './pages/assistants/assistants.component';
 import { CalendarComponent } from './pages/calendar/calendar.component';
@@ -16,18 +16,17 @@ import { ProfileAdministrationComponent } from './pages/profile-administration/p
 import { RankingComponent } from './pages/ranking/ranking.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'myevents', component: MyeventsComponent },
-  { path: 'finalizedevents', component: FinalizedeventsComponent },
-  { path: 'comments/:event_id', component: CommentsComponent },
-  { path: 'assistants/:event_id', component: AssistantsComponent },
-  { path: 'administration', component: AdministrationComponent },
-  { path: 'ranking', component: RankingComponent },
-  { path: 'calendar', component: CalendarComponent },
-  { path: 'eventform/:event_id/:type', component: EventFormComponent },
-  { path: 'gallery', component: GalleryComponent },
-  { path: 'profileAdministration/:email', component: ProfileAdministrationComponent },
-  { path: 'eventsAdministration/:event_id', component: EventsAdministrationComponent },
+  { path: 'home', component: HomeComponent,  canActivate: [AccessGuardGuard]  },
+  { path: 'myevents', component: MyeventsComponent,  canActivate: [AccessGuardGuard]  },
+  { path: 'finalizedevents', component: FinalizedeventsComponent,  canActivate: [AccessGuardGuard]  },
+  { path: 'comments/:event_id', component: CommentsComponent,  canActivate: [AccessGuardGuard]  },
+  { path: 'assistants/:event_id', component: AssistantsComponent,  canActivate: [AccessGuardGuard]  },
+  { path: 'administration', component: AdministrationComponent,  canActivate: [AccessGuardGuard]  },
+  { path: 'ranking', component: RankingComponent,  canActivate: [AccessGuardGuard]  },
+  { path: 'calendar', component: CalendarComponent,  canActivate: [AccessGuardGuard]  },
+  { path: 'eventform/:event_id/:type', component: EventFormComponent,  canActivate: [AccessGuardGuard]  },
+  { path: 'profileAdministration/:email', component: ProfileAdministrationComponent,  canActivate: [AccessGuardGuard]  },
+  { path: 'eventsAdministration/:event_id', component: EventsAdministrationComponent,  canActivate: [AccessGuardGuard]  },
   { path: '', component: LoginComponent },
   { path: '**', component: NofoundComponent }
 

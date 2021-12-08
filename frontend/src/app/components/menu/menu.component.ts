@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { SocialAuthService, FacebookLoginProvider, GoogleLoginProvider, SocialUser } from "angularx-social-login";
 import { LoginService } from 'src/app/services/login.service';
+import { getDataFromToken } from 'src/app/utils/jwtparser';
 
 
 @Component({
@@ -20,9 +21,6 @@ export class MenuComponent implements OnInit {
   profileIcon = "../../../assets/icons/user-icon.png";
   logoutIcon = "../../../assets/icons/logout-icon.png";
   collapseIcon = "../../../assets/icons/collapse-icon.png";
-
-
-
   eventsIcon = "../../../assets/icons/events-icon.png";
   calendarIconMenu = "../../../assets/icons/calendarIcon-menu.png";
   rankingIconMenu = "../../../assets/icons/ranking-icon.png";
@@ -31,14 +29,20 @@ export class MenuComponent implements OnInit {
   dataBaseIcon = "../../../assets/icons/data-icon.png";
 
   menuShown: boolean = false;
-
+  url:string=window.location.pathname;
+  adminSectionAllowed=false;
+  
   ngOnInit(): void {
+    this.validateAdminScopes();
   }
 
-
-  navigateTo(url: string) {
-    setTimeout(() => this.router.navigateByUrl(url), 800);
+  validateAdminScopes(){
+    const scopes= getDataFromToken().scopes;
+    if(scopes.includes("administration")){
+      this.adminSectionAllowed=true;
+    }
   }
+
 
 
   //Animations
