@@ -162,7 +162,7 @@ EMAIL_PASSWORD=contraseña de Api para el email
 ```
 Frontend End point
 ```
-FRONTEND_ENDPOINT=http://dirección donde este alojado el frontend/eventsbydate/
+FRONTEND_ENDPOINT=http://{dirección donde este alojado el frontend}/eventsbydate/
 ```
 
 ## Mailing
