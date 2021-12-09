@@ -46,13 +46,13 @@
                     </a>
                 </div>
                 <div class="card-data-container__row" >
-                    <a class="row__a" routerLink="../assistants/{{event.event_id}}" >
+                    <a class="row__a" routerLink="/assistants/{{event.event_id}}" >
                         <img class="row__a--icon" src="{{assistantsIcon}}" alt="icon">
                         <p>{{filterByAttendance(event.assistants)}} Assistants</p>
                     </a>
                 </div>
-                <div class="card-data-container__row" routerLink="#">
-                    <a class="row__a" routerLink="../comments/{{event.event_id}}">
+                <div class="card-data-container__row">
+                    <a class="row__a" routerLink="/comments/{{event.event_id}}">
                         <img class="row__a--icon" src="{{commentIcon}}" alt="icon">
                         <p>{{event.comments.length}} Comments</p>
                     </a>

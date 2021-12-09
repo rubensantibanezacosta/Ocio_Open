@@ -111,6 +111,7 @@
     background: transparent;
     border: solid 3px rgb(0, 255, 0);
     box-shadow: 3px 3px 10px rgba($color: #000000, $alpha: .6);
+    cursor: pointer;
 
 }
 
@@ -145,6 +146,7 @@
     background: transparent;
     border: solid 3px rgb(255, 0, 0);
     box-shadow: 3px 3px 5px rgba($color: #000000, $alpha: .6);
+    cursor: pointer;
 }
 
 .edit-button{
@@ -155,12 +157,14 @@
     border: solid 3px rgb(3, 5, 3);
     box-shadow: 3px 3px 5px rgba($color: #000000, $alpha: .6);
     margin-left: 10px;
+    cursor: pointer;
 }
 
 .finalized-events__container{
     color: $color-text-darkmode;
     width: 100%;
     padding-top: 15px;
+    padding-bottom: 80px;
 
 }
 

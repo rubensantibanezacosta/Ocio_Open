@@ -56,6 +56,7 @@
 }
 .login-button{
     @include white-button;
+    cursor: pointer;
     
 }
 .login-button:focus{

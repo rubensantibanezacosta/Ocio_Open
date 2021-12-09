@@ -7,7 +7,7 @@ const config = {
     database: process.env.MYSQL_DATABASE,
     host: process.env.DB_HOST,
     dialect: 'mysql',
-    logging:false,
+    logging: false,
 
     jwtSecret: process.env.JWT_SECRET,
     publicApiKeyToken: process.env.PUBLIC_API_KEY_TOKEN,
@@ -16,7 +16,10 @@ const config = {
     googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
     acceptedDomains: process.env.ACCEPTED_DOMAINS,
     tokenExpireTime: process.env.TOKEN_EXPIRE_TIME,
-    tokenExpireTimeRememberMe: process.env.TOKEN_EXPIRE_TIME_REMEMBER_ME
+    tokenExpireTimeRememberMe: process.env.TOKEN_EXPIRE_TIME_REMEMBER_ME,
+    frontendEndpoint: process.env.FRONTEND_ENDPOINT,
+    emailApiName:process.env.EMAIL_API_NAME,
+    emailPassword:process.env.EMAIL_PASSWORD,
 
   },
   test: {
@@ -33,7 +36,10 @@ const config = {
     googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
     acceptedDomains: process.env.ACCEPTED_DOMAINS,
     tokenExpireTime: process.env.TOKEN_EXPIRE_TIME,
-    tokenExpireTimeRememberMe: process.env.TOKEN_EXPIRE_TIME_REMEMBER_ME
+    tokenExpireTimeRememberMe: process.env.TOKEN_EXPIRE_TIME_REMEMBER_ME,
+    frontendEndpoint: process.env.FRONTEND_ENDPOINT,
+    emailApiName:process.env.EMAIL_API_NAME,
+    emailPassword:process.env.EMAIL_PASSWORD,
 
   },
   production: {
@@ -50,7 +56,10 @@ const config = {
     googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
     acceptedDomains: process.env.ACCEPTED_DOMAINS,
     tokenExpireTime: process.env.TOKEN_EXPIRE_TIME,
-    tokenExpireTimeRememberMe: process.env.TOKEN_EXPIRE_TIME_REMEMBER_ME
+    tokenExpireTimeRememberMe: process.env.TOKEN_EXPIRE_TIME_REMEMBER_ME,
+    frontendEndpoint: process.env.FRONTEND_ENDPOINT,
+    emailApiName:process.env.EMAIL_API_NAME,
+    emailPassword:process.env.EMAIL_PASSWORD,
   }
 
 }

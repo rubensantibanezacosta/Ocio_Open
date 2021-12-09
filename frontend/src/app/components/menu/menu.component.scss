@@ -81,6 +81,7 @@
     margin: 0;
     box-sizing: border-box;
     font-size: 1.1em;
+    cursor: pointer;
   }
   .menuContainer__items__borderless{
     width: 90%;
@@ -93,6 +94,7 @@
     box-sizing: border-box;
     font-size: 1.1em;
     text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
   }
   
   .item__p {

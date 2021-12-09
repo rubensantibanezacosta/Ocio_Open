@@ -7,6 +7,8 @@ import { User } from 'src/app/models/user';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
 import { ErrorHandlerService } from 'src/app/services/error-handler.service';
+import { getDataFromToken } from 'src/app/utils/jwtparser';
+import * as moment from 'moment';
 
 
 
@@ -37,6 +39,7 @@ export class LoginComponent implements OnInit {
     private errorHandlerService:ErrorHandlerService) { }
 
   ngOnInit(): void {
+    this.tokenExists();
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = (user != null);
@@ -49,6 +52,15 @@ export class LoginComponent implements OnInit {
   toggleChecked() {
     this.isChecked$.next(!this.isChecked$.value)
     this.rememberMe = this.isChecked$.value;
+  }
+
+  tokenExists(){
+    if(localStorage.getItem("ocioToken")){
+      const expireDate=getDataFromToken().tokenExpireDate;
+      if (moment().isBefore(moment(expireDate))){
+        this.router.navigateByUrl("/home");
+      }
+    }
   }
 
   signInWithGoogle(): void {

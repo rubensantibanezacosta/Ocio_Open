@@ -73,6 +73,7 @@ form{
 
 .select-zone{
     display: flex;
+    cursor: pointer;
     
 }
 .select-zone select{
@@ -89,6 +90,7 @@ form{
     font-size: 0.9rem;
     margin-right: 15px;
     background-color: white;
+    cursor: pointer;
 }
 .place-div{
      display: flex;
@@ -154,6 +156,7 @@ form{
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 
 }
 
@@ -199,6 +202,7 @@ form{
     font-size: 1rem;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.6);
     margin: 0 10px;
+    cursor: pointer;
   }
   .reset-button {
     width: 111.8px;
@@ -212,6 +216,7 @@ form{
     font-size: 1rem;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.6);
     margin: 0 10px;
+    cursor: pointer;
   }
 
   .upload-image__container{
@@ -246,6 +251,7 @@ form{
     object-fit: cover;
     max-width: 100%;
     max-height: 100%;
+    cursor: pointer;
 }
 .preview-image-div p{
     position: absolute;
@@ -283,4 +289,5 @@ form{
     font-size: 1rem;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.6);
     margin: 0 10px;
+    cursor: pointer;
 }

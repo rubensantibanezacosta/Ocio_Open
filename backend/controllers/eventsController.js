@@ -2,10 +2,12 @@
 const db = require("../models");
 const EventsService = require("../services/eventsService");
 const moment = require("moment");
+const EmailService = require("../services/emailService");
 
 class EventsController {
 
     eventsService = new EventsService();
+    emailService = new EmailService();
 
 
     createEvent = (req, res) => {
@@ -13,7 +15,7 @@ class EventsController {
         // Validate request
         if (!req.body.tittle || !req.body.date || !req.body.place || !req.body.zone) {
             res.status(400).send(
-                 "Content cannot be empty!"
+                "Content cannot be empty!"
             );
             return;
         }
@@ -31,6 +33,8 @@ class EventsController {
 
         this.eventsService.createEvent(event)
             .then(data => {
+                this.emailService.newEventToAllUsers(event.organizer, event);
+                this.emailService.newEventToOrganizer(event.organizer, event);
                 res.status(201).json(data);
             })
             .catch(err => {
