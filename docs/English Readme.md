@@ -156,12 +156,12 @@ ACCEPTED_DOMAINS="domains accepted for registration separated by commas. Example
 ```
 Mail credentials
 ```
-EMAIL_API_NAME=direccion de email para enviar notificaciones
-EMAIL_PASSWORD=contraseña de Api para el email
+EMAIL_API_NAME=email address to send notifications
+EMAIL_PASSWORD=Api password for email
 ```
 Frontend End point
 ```
-FRONTEND_ENDPOINT=http://dirección donde este alojado el frontend/eventsbydate/
+FRONTEND_ENDPOINT=http://{address where the frontend is hosted}/eventsbydate/
 ```
 
 For the mailing, a private Google account has been used. In your configuration panel of your google account, access the *SECURITY* section and enable two-step verification.
