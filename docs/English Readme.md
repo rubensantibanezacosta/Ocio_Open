@@ -164,6 +164,18 @@ Frontend End point
 FRONTEND_ENDPOINT=http://dirección donde este alojado el frontend/eventsbydate/
 ```
 
+For the mailing, a private Google account has been used. In your configuration panel of your google account, access the *SECURITY* section and enable two-step verification.
+![Captura de pantalla de 2021-12-09 18-20-44](https://user-images.githubusercontent.com/44450566/145453642-36cc4206-d6ae-4d00-a8af-144b5f55227b.png)
+
+The next step is to access the *APPLICATION PASSWORDS* section, and generate a new password.
+
+![Captura de pantalla de 2021-12-09 18-22-45](https://user-images.githubusercontent.com/44450566/145453889-9eb9953b-cd20-4aaa-8683-3c4ffea87214.png)
+
+
+Copy and paste your email address and your generated key into the .env file
+
+
+
 Finally enjoy the project:
 
 Developer mode:
