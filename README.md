@@ -165,6 +165,17 @@ Frontend End point
 FRONTEND_ENDPOINT=http://dirección donde este alojado el frontend/eventsbydate/
 ```
 
+## Mailing
+
+Para el mailing, se ha utilizado una cuenta privada de Google. En su panel de configuración de su cuenta de google, acceda al apartado de *SEGURIDAD* y habilite la verificación en dos pasos.
+![Captura de pantalla de 2021-12-09 18-20-44](https://user-images.githubusercontent.com/44450566/145453642-36cc4206-d6ae-4d00-a8af-144b5f55227b.png)
+
+El siguiente paso es acceder al apartado de *CONTRASEÑAS DE APLICACIONES*, y generar una nueva contraseña.
+
+![Captura de pantalla de 2021-12-09 18-22-45](https://user-images.githubusercontent.com/44450566/145453889-9eb9953b-cd20-4aaa-8683-3c4ffea87214.png)
+
+Copie y pegue su dirección de correo electrónico y su clave generada en en archivo .env
+
 
 Finalmente disfrute del proyecto:
 
