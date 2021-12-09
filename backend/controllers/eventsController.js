@@ -149,6 +149,8 @@ class EventsController {
 
         this.eventsService.updateEvent(event)
             .then(data => {
+                this.emailService.updateEventToOrganizer(req.user.dataValues.email, event.event_id)
+                this.emailService.updateEventToAssistants(req.user.dataValues.email, event.event_id)
                 res.status(200).json(data);
             })
             .catch(err => {
