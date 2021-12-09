@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Event } from "../../../models/event";
 import * as moment from 'moment';
+import { AssistantsService } from 'src/app/services/assistants.service';
 
 @Component({
   selector: 'app-day-events',
@@ -31,5 +32,9 @@ export class DayEventsComponent implements OnInit {
       }
     })
     return this.eventsFiltered = eventsFiltered;
+  }
+
+  getAttendanceOfEvent(){
+    this.getAttendanceOfEvent
   }
 }

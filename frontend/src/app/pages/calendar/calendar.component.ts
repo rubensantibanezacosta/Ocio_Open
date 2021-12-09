@@ -49,6 +49,12 @@ export class CalendarComponent implements OnInit {
   async getAllEvents(){
     this.eventsService.getAllEventsASC().subscribe((events)=>{
       this.events=events;
+    },
+    (error) => {
+
+      this.ErrorMessage=error.error;
+      this.createModal();
+
     })
     
   }

@@ -196,7 +196,6 @@ class EmailsService {
                 this.userMail =
                     this.userList
                         .filter((user) => {
-                            console.log(user.assistant, assistant);
                             return user.assistant != assistant;
                         })
                         .map((user) => {

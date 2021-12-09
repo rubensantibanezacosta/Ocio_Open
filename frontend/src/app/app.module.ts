@@ -36,6 +36,7 @@ import { EventsAdministrationComponent } from './pages/events-administration/eve
 import { ErrorHandlerComponent } from './components/error-handler/error-handler.component';
 import { DayEventsComponent } from './pages/calendar/day-events/day-events.component';
 import { EventsByDateComponent } from './pages/events-by-date/events-by-date.component';
+import { DayEventComponent } from './pages/calendar/day-events/day-event/day-event.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { EventsByDateComponent } from './pages/events-by-date/events-by-date.com
     ErrorHandlerComponent,
     DayEventsComponent,
     EventsByDateComponent,
+    DayEventComponent,
 
 
   ],
