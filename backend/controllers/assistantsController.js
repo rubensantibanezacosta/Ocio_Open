@@ -34,7 +34,7 @@ class AssistantsController {
                     .then(data => {
                         //mailing
                         if(assistant.attendance){
-                            const eventFound;
+                            let eventFound;
                             this.eventService.findOneEventById(assistant.event_id)
                             .then((data)=>{
                                 eventFound=data;

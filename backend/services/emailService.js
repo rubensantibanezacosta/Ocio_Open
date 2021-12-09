@@ -49,7 +49,7 @@ class EmailsService {
                             from: '"Ocio Open" <' + config.emailApiName + '>', // sender address
                             to: email, // list of receivers
                             subject: "Nuevo evento", // Subject line
-                            text: "", // plain text body
+                            text: ` <p>${organizer} ha creado un nuevo evento.</p><b>Haz click <a href="${config.frontendEndpoint}${moment(event.date).format("YY-M-D")}">aqui</a> para verlo</b>` , // plain text body
                             html: ` <p>${organizer} ha creado un nuevo evento.</p><b>Haz click <a href="${config.frontendEndpoint}${moment(event.date).format("YY-M-D")}">aqui</a> para verlo</b>` // html body
                         });
                     } catch (error) {
@@ -65,8 +65,8 @@ class EmailsService {
             await transporter.sendMail({
                 from: '"Ocio Open" <' + config.emailApiName + '>', // sender address
                 to: organizer, // list of receivers
-                subject: "Nuevo evento", // Subject line
-                text: "", // plain text body
+                subject: "Cambios en el vento", // Subject line
+                text: ` <p>¡Enhorabuena ${organizer}! has hecho cambios en el evento <i>${event.tittle}</i> con éxito.</p><b>Haz click <a href="${config.frontendEndpoint}${moment(event.date).format("YY-M-D")}">aqui</a> para verlo</b>`, // plain text body
                 html: ` <p>¡Enhorabuena ${organizer}! has hecho cambios en el evento <i>${event.tittle}</i> con éxito.</p><b>Haz click <a href="${config.frontendEndpoint}${moment(event.date).format("YY-M-D")}">aqui</a> para verlo</b>` // html body
             });
         } catch (error) {
@@ -101,8 +101,8 @@ class EmailsService {
                             await transporter.sendMail({
                                 from: '"Ocio Open" <' + config.emailApiName + '>', // sender address
                                 to: email, // list of receivers
-                                subject: "Nuevo evento", // Subject line
-                                text: "", // plain text body
+                                subject: "Cambios en el evento", // Subject line
+                                text: ` <p>${organizer} ha hecho cambios en el evento <i>${event.tittle}</i>  al que vas a asistir.</p><b>Haz click <a href="${config.frontendEndpoint}${moment(event.date).format("YY-M-D")}">aqui</a> para verlo</b>`, // plain text body
                                 html: ` <p>${organizer} ha hecho cambios en el evento <i>${event.tittle}</i>  al que vas a asistir.</p><b>Haz click <a href="${config.frontendEndpoint}${moment(event.date).format("YY-M-D")}">aqui</a> para verlo</b>` // html body
                             });
                         } catch (error) {
@@ -118,8 +118,8 @@ class EmailsService {
             await transporter.sendMail({
                 from: '"Ocio Open" <' + config.emailApiName + '>', // sender address
                 to: organizer, // list of receivers
-                subject: "Nuevo evento", // Subject line
-                text: "", // plain text body
+                subject: "Evento borrado", // Subject line
+                text: ` <p>${organizer}, has borrado el evento <i>${event.tittle}</i> con éxito.</p>, // plain text body`,
                 html: ` <p>${organizer}, has borrado el evento <i>${event.tittle}</i> con éxito.</p>
                 ` // html body
             });
@@ -155,8 +155,8 @@ class EmailsService {
                             await transporter.sendMail({
                                 from: '"Ocio Open" <' + config.emailApiName + '>', // sender address
                                 to: email, // list of receivers
-                                subject: "Nuevo evento", // Subject line
-                                text: "", // plain text body
+                                subject: "Evento borrado", // Subject line
+                                text: ` <p>${organizer} ha borrado el evento <i>${event.tittle}</i>  al que ibas a asistir.</p>`, // plain text body
                                 html: ` <p>${organizer} ha borrado el evento <i>${event.tittle}</i>  al que ibas a asistir.</p>` // html body
                             });
                         } catch (error) {
@@ -172,8 +172,8 @@ class EmailsService {
         try {
             await transporter.sendMail({
                 from: '"Ocio Open" <' + config.emailApiName + '>', // sender address
-                to: organizer, // list of receivers
-                subject: "Nuevo evento", // Subject line
+                to: assistant, // list of receivers
+                subject: "Nuevo asistente", // Subject line
                 text: "", // plain text body
                 html: ` <p>¡Enhorabuena! ${assistant}, te has apuntado el evento <i>${event.tittle}</i> con éxito.</p><b>Haz click <a href="${config.frontendEndpoint}${moment(event.date).format("YY-M-D")}">aqui</a> para verlo</b>` // html body
             });
@@ -194,7 +194,7 @@ class EmailsService {
                 this.userMail =
                     this.userList
                         .filter((user) => {
-                            return user.email != organizer;
+                            return user.email != assistant;
                         })
                         .map((user) => {
 
@@ -209,7 +209,7 @@ class EmailsService {
                             await transporter.sendMail({
                                 from: '"Ocio Open" <' + config.emailApiName + '>', // sender address
                                 to: email, // list of receivers
-                                subject: "Nuevo evento", // Subject line
+                                subject: "Nuevo asistente", // Subject line
                                 text: "", // plain text body
                                 html: ` <p>${assistant} se ha apuntado al evento <i>${event.tittle}</i>  al que vas a asistir.</p>
                                 <b>Haz click <a href="${config.frontendEndpoint}${moment(event.date).format("YY-M-D")}">aqui</a> para verlo</b>` // html body

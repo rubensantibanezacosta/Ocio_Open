@@ -195,7 +195,7 @@ class EventsController {
                 );
             });
     };
-    
+
     updateEventPunctuationAvg = (req, res) => {
 
         const event = {
@@ -216,7 +216,7 @@ class EventsController {
 
     deleteEvent = (req, res) => {
         const event_id = req.params.event_id;
-        const eventUpdated;
+        let eventUpdated;
         this.eventsService.findOneEventById(event_id).then((event) => {
             eventUpdated=event;
             if (event.organizer != req.user.dataValues.email) {
