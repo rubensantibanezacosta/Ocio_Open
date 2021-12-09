@@ -1,10 +1,12 @@
 const db = require("../models");
 const AssistantService = require("../services/assistantService");
+const EmailService = require("../services/emailService");
+const EventService = require("../services/eventsService");
 
 class AssistantsController {
-
+    emailService=new EmailService();
     assistantsService = new AssistantService();
-
+    eventService= new EventService();
 
     createOrUpdateAssistant = (req, res) => {
 
@@ -30,6 +32,18 @@ class AssistantsController {
             if (!response.length>0) {
                 this.assistantsService.createAsisstant(assistant)
                     .then(data => {
+                        //mailing
+                        if(assistant.attendance){
+                            const eventFound;
+                            this.eventService.findOneEventById(assistant.event_id)
+                            .then((data)=>{
+                                eventFound=data;
+                                
+                                this.emailService.willAssistAssistant(assistant.assistant, eventFound);
+                                this.emailService.willAssistAllAssistants(assistant.assistant, eventFound);
+                            })
+                        }
+                        //response
                         res.status(201).json(data);
                     })
                     .catch(err => {

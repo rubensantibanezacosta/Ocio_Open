@@ -33,8 +33,10 @@ class EventsController {
 
         this.eventsService.createEvent(event)
             .then(data => {
+                //mailing
                 this.emailService.newEventToAllUsers(event.organizer, event);
                 this.emailService.newEventToOrganizer(event.organizer, event);
+                //response
                 res.status(201).json(data);
             })
             .catch(err => {
@@ -149,8 +151,10 @@ class EventsController {
 
         this.eventsService.updateEvent(event)
             .then(data => {
+                //mailing
                 this.emailService.updateEventToOrganizer(req.user.dataValues.email, event.event_id)
                 this.emailService.updateEventToAssistants(req.user.dataValues.email, event.event_id)
+                //response
                 res.status(200).json(data);
             })
             .catch(err => {
@@ -191,6 +195,7 @@ class EventsController {
                 );
             });
     };
+    
     updateEventPunctuationAvg = (req, res) => {
 
         const event = {
@@ -204,7 +209,6 @@ class EventsController {
             })
             .catch(err => {
                 res.status(500).send(
-                     
                         err + " Some error occurred while updating event."
                 );
             });
@@ -212,7 +216,9 @@ class EventsController {
 
     deleteEvent = (req, res) => {
         const event_id = req.params.event_id;
+        const eventUpdated;
         this.eventsService.findOneEventById(event_id).then((event) => {
+            eventUpdated=event;
             if (event.organizer != req.user.dataValues.email) {
                 res.status(401).send(
                 "Only organizer cans to delete a event!"
@@ -222,6 +228,10 @@ class EventsController {
             this.eventsService.deleteEvent(event_id)
                 .then(num => {
                     if (num == 1) {
+                        //mailing
+                        this.emailService.deleteEventToOrganizer(event.organizer, eventUpdated);
+                        this.emailService.deleteEventToAssistants(event.organizer, eventUpdated);
+                        //response
                         res.status(200).json({
                             message: "Event was deleted successfully!"
                         });
@@ -251,7 +261,7 @@ class EventsController {
                     });
                 } else {
                     res.send(
-                         `Cannot delete Event. Maybe Event was not found!`
+                        `Cannot delete Event. Maybe Event was not found!`
                     );
                 }
             })
