@@ -49,7 +49,7 @@ class EmailsService {
                             from: '"Ocio Open" <' + config.emailApiName + '>', // sender address
                             to: email, // list of receivers
                             subject: "Nuevo evento", // Subject line
-                            text: ` <p>${organizer} ha creado un nuevo evento.</p><b>Haz click <a href="${config.frontendEndpoint}${moment(event.date).format("YY-M-D")}">aqui</a> para verlo</b>` , // plain text body
+                            text: ` <p>${organizer} ha creado un nuevo evento.</p><b>Haz click <a href="${config.frontendEndpoint}${moment(event.date).format("YY-M-D")}">aqui</a> para verlo</b>`, // plain text body
                             html: ` <p>${organizer} ha creado un nuevo evento.</p><b>Haz click <a href="${config.frontendEndpoint}${moment(event.date).format("YY-M-D")}">aqui</a> para verlo</b>` // html body
                         });
                     } catch (error) {
@@ -112,7 +112,7 @@ class EmailsService {
                 }
             })
     }
-//Event deleted
+    //Event deleted
     async deleteEventToOrganizer(organizer, event) {
         try {
             await transporter.sendMail({
@@ -185,24 +185,29 @@ class EmailsService {
     async willAssistAllAssistants(assistant, event) {
         const userList = [];
         const userMail = [];
+
         this.assistantService.findAllAssistantsByEvent(event.event_id
         )
             .then((users) => {
+
                 this.userList = users;
             })
             .then(() => {
                 this.userMail =
                     this.userList
                         .filter((user) => {
-                            return user.email != assistant;
+                            console.log(user.assistant, assistant);
+                            return user.assistant != assistant;
                         })
                         .map((user) => {
 
-                            return user.email;
+                            return user.assistant;
                         })
             })
             .then(() => {
+
                 if (this.userMail[0]) {
+
                     this.userMail.forEach(async email => {
 
                         try {
@@ -222,7 +227,7 @@ class EmailsService {
             })
     }
 
-    
+
 }
 
 module.exports = EmailsService;

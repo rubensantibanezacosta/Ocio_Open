@@ -35,10 +35,9 @@ class AssistantsController {
                         //mailing
                         if(assistant.attendance){
                             let eventFound;
-                            this.eventService.findOneEventById(assistant.event_id)
+                            this.eventService.findOneEventById(req.body.event_id)
                             .then((data)=>{
                                 eventFound=data;
-                                
                                 this.emailService.willAssistAssistant(assistant.assistant, eventFound);
                                 this.emailService.willAssistAllAssistants(assistant.assistant, eventFound);
                             })
@@ -57,6 +56,17 @@ class AssistantsController {
     
                 this.assistantsService.updateAssistant(assistant)
                     .then(data => {
+                        //mailing
+                        if(assistant.attendance){
+                            let eventFound;
+                            this.eventService.findOneEventById(req.body.event_id)
+                            .then((data)=>{
+                                eventFound=data;
+                                this.emailService.willAssistAssistant(assistant.assistant, eventFound);
+                                this.emailService.willAssistAllAssistants(assistant.assistant, eventFound);
+                            })
+                        }
+                        //response
                         res.status(200).json(data);
                     })
                     .catch(err => {
