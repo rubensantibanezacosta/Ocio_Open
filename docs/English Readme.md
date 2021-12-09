@@ -154,7 +154,15 @@ Domains
 ```
 ACCEPTED_DOMAINS="domains accepted for registration separated by commas. Example: gmail.com,hotmail.com"
 ```
-
+Mail credentials
+```
+EMAIL_API_NAME=direccion de email para enviar notificaciones
+EMAIL_PASSWORD=contraseña de Api para el email
+```
+Frontend End point
+```
+FRONTEND_ENDPOINT=http://dirección donde este alojado el frontend/eventsbydate/
+```
 
 Finally enjoy the project:
 
