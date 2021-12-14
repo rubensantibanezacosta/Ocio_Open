@@ -65,7 +65,7 @@ class EmailsService {
             await transporter.sendMail({
                 from: '"Ocio Open" <' + config.emailApiName + '>', // sender address
                 to: organizer, // list of receivers
-                subject: "Cambios en el vento", // Subject line
+                subject: "Cambios en el evento", // Subject line
                 text: ` <p>¡Enhorabuena ${organizer}! has hecho cambios en el evento <i>${event.tittle}</i> con éxito.</p><b>Haz click <a href="${config.frontendEndpoint}${moment(event.date).format("YY-M-D")}">aqui</a> para verlo</b>`, // plain text body
                 html: ` <p>¡Enhorabuena ${organizer}! has hecho cambios en el evento <i>${event.tittle}</i> con éxito.</p><b>Haz click <a href="${config.frontendEndpoint}${moment(event.date).format("YY-M-D")}">aqui</a> para verlo</b>` // html body
             });

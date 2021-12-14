@@ -34,8 +34,8 @@ class EventsController {
         this.eventsService.createEvent(event)
             .then(data => {
                 //mailing
-                this.emailService.newEventToAllUsers(event.organizer, event);
-                this.emailService.newEventToOrganizer(event.organizer, event);
+                this.emailService.newEventToAllUsers(req.user.dataValues.email, event);
+                this.emailService.newEventToOrganizer(req.user.dataValues.email, event);
                 //response
                 res.status(201).json(data);
             })
@@ -225,12 +225,16 @@ class EventsController {
                 );
                 return;
             }
+            //mailing
+            this.emailService.deleteEventToOrganizer(req.user.dataValues.email, eventUpdated);
+            this.emailService.deleteEventToAssistants(req.user.dataValues.email, eventUpdated);
+
+
             this.eventsService.deleteEvent(event_id)
                 .then(num => {
                     if (num == 1) {
-                        //mailing
-                        this.emailService.deleteEventToOrganizer(event.organizer, eventUpdated);
-                        this.emailService.deleteEventToAssistants(event.organizer, eventUpdated);
+                        
+                        
                         //response
                         res.status(200).json({
                             message: "Event was deleted successfully!"
