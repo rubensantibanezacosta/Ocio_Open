@@ -84,9 +84,9 @@ import { Injectable } from '@angular/core';
 export class VariablesService {
 
   variables = {
-    googleClientId: "google Client Id",
-    googleClientSecret: "Google Client Secret",
-    host: "Backend host ", (En nuestro caso 'http://localhost:4000')
+    googleClientId: google Client Id,
+    googleClientSecret: Google Client Secret,
+    host: Backend host (En nuestro caso 'http://localhost:4000')
 
   }
 
@@ -116,10 +116,10 @@ export class VariablesService {
 MySQL
 ```
 MYSQL_DATABASE=ocio_open
-MYSQL_USER="username"
-MYSQL_PASSWORD="MySQL access key"
-MYSQL_ROOT_PASSWORD="MySQL access key"
-DB_HOST="MySQL host"
+MYSQL_USER=username
+MYSQL_PASSWORD="MySQL access key
+MYSQL_ROOT_PASSWORD=MySQL access key
+DB_HOST=MySQL host
 ``` 
 Mode
 ```
@@ -127,9 +127,9 @@ NODE_ENV=development
 ```
  JWT
 ```
-JWT_SECRET="The secret used for the Jwt protocol"
-TOKEN_EXPIRE_TIME="Token expiration time in minutes"
-TOKEN_EXPIRE_TIME_REMEMBER_ME="Token expiration time in minutes with the remember me box checked"
+JWT_SECRET=The secret used for the Jwt protocol
+TOKEN_EXPIRE_TIME=Token expiration time in minutes
+TOKEN_EXPIRE_TIME_REMEMBER_ME=Token expiration time in minutes with the remember me box checked
 ```
 Api key tokens
 
@@ -152,17 +152,18 @@ ADMIN_API_KEY_TOKEN=
 Domains
 
 ```
-ACCEPTED_DOMAINS="domains accepted for registration separated by commas. Example: gmail.com,hotmail.com"
+ACCEPTED_DOMAINS=domains accepted for registration separated by commas. Example: gmail.com,hotmail.com
 ```
 Mail credentials
 ```
-EMAIL_API_NAME=direccion de email para enviar notificaciones
-EMAIL_PASSWORD=contraseña de Api para el email
+EMAIL_API_NAME=email address to send notifications
+EMAIL_PASSWORD=Api password for email
 ```
 Frontend End point
 ```
-FRONTEND_ENDPOINT=http://dirección donde este alojado el frontend/eventsbydate/
+FRONTEND_ENDPOINT=http://{address where the frontend is hosted}/eventsbydate/
 ```
+### Mailing
 
 For the mailing, a private Google account has been used. In your configuration panel of your google account, access the *SECURITY* section and enable two-step verification.
 ![Captura de pantalla de 2021-12-09 18-20-44](https://user-images.githubusercontent.com/44450566/145453642-36cc4206-d6ae-4d00-a8af-144b5f55227b.png)
