@@ -19,6 +19,7 @@ The project is a basic social network that allows, empowers and rewards the orga
 - [Data model](https://github.com/rubensantibanezacosta/Ocio_Open/blob/main/docs/Captura%20de%20pantalla%20de%202021-12-03%2011-33-16.png)
 - [API Rest Calls Report in Postman](https://documenter.getpostman.com/view/17032586/UVC8E77j)
 - [FIGMA designed prototype](https://www.figma.com/proto/avUqIHB3yfnUUCIBHcHBDu/Open-Ocio?node-id=182%3A98&starting-point-node-id=182%3A98)
+- [Usability Ascpects](https://github.com/rubensantibanezacosta/Ocio_Open/blob/main/docs/Usability.md)
 
 ## Starting
 
