@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   constructor(private eventsService: EventsService,  private errorHandlerService:ErrorHandlerService) { }
 
   ngOnInit(): void {
-
+    window.history.pushState({ prevUrl: window.location.href },null);
   }
 
     //Error handler modals

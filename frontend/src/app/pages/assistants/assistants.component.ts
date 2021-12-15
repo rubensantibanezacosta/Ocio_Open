@@ -23,6 +23,7 @@ export class AssistantsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAssistantsByEvent();
+    
   }
 
   getAssistantsByEvent() {
@@ -49,4 +50,6 @@ export class AssistantsComponent implements OnInit {
         //your logic
       });
   }
+
+
 }

@@ -17,7 +17,7 @@ import { ProfileAdministrationComponent } from './pages/profile-administration/p
 import { RankingComponent } from './pages/ranking/ranking.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent,  canActivate: [AccessGuardGuard]  },
+  { path: 'home', component: HomeComponent,  canActivate: [AccessGuardGuard],  },
   { path: 'myevents', component: MyeventsComponent,  canActivate: [AccessGuardGuard]  },
   { path: 'finalizedevents', component: FinalizedeventsComponent,  canActivate: [AccessGuardGuard]  },
   { path: 'comments/:event_id', component: CommentsComponent,  canActivate: [AccessGuardGuard]  },
@@ -36,7 +36,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    scrollPositionRestoration: 'enabled',
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

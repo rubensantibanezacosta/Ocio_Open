@@ -1,10 +1,13 @@
 
 
+<a href="home#45" style="display:hidden" id="url"></a>
+
 <h3 class="notevents" *ngIf="events.length<=0">Aun no hay eventos</h3>
 <section class="slider" *ngIf="dateToFilter">
     <div class="card-container" *ngFor="let event of events" >
         
         <div class="card" >
+            <p id="anchor{{event.event_id}}" style="display:hidden" ></p>
             <p class="card-date">{{formatDate(event.date)}}</p>
             <p class="car-tittle">{{event.tittle}}</p>
             <div class="card-data-container">
@@ -46,15 +49,15 @@
                     </a>
                 </div>
                 <div class="card-data-container__row" >
-                    <a class="row__a" routerLink="/assistants/{{event.event_id}}" >
+                    <a class="row__a" routerLink="/assistants/{{event.event_id}}" (click)="saveScroll(event.event_id)">
                         <img class="row__a--icon" src="{{assistantsIcon}}" alt="icon">
-                        <p>{{filterByAttendance(event.assistants)}} Assistants</p>
+                        <p>{{filterByAttendance(event.assistants)}} Asistentes</p>
                     </a>
                 </div>
                 <div class="card-data-container__row">
-                    <a class="row__a" routerLink="/comments/{{event.event_id}}">
+                    <a class="row__a" routerLink="/comments/{{event.event_id}}" (click)="saveScroll(event.event_id)">
                         <img class="row__a--icon" src="{{commentIcon}}" alt="icon">
-                        <p>{{event.comments.length}} Comments</p>
+                        <p>{{event.comments.length}} Comentarios</p>
                     </a>
                 </div>
                 <div class="card-data-container__row card-data-container__row-last">
@@ -76,6 +79,7 @@
         <div class="card-container" *ngFor="let event of events" >
             
             <div class="card" >
+                <p id="anchor{{event.event_id}}" style="display:hidden" ></p>
                 <p class="card-date">{{formatDate(event.date)}}</p>
                 <p class="car-tittle">{{event.tittle}}</p>
                 <div class="card-data-container">
@@ -117,15 +121,15 @@
                         </a>
                     </div>
                     <div class="card-data-container__row" >
-                        <a class="row__a" routerLink="../assistants/{{event.event_id}}" >
+                        <a class="row__a" routerLink="../assistants/{{event.event_id}}" (click)="saveScroll(event.event_id)">
                             <img class="row__a--icon" src="{{assistantsIcon}}" alt="icon">
-                            <p>{{filterByAttendance(event.assistants)}} Assistants</p>
+                            <p>{{filterByAttendance(event.assistants)}} Asistentes</p>
                         </a>
                     </div>
-                    <div class="card-data-container__row" routerLink="#">
-                        <a class="row__a" routerLink="../comments/{{event.event_id}}">
+                    <div class="card-data-container__row" >
+                        <a class="row__a" routerLink="../comments/{{event.event_id}}" (click)="saveScroll(event.event_id)">
                             <img class="row__a--icon" src="{{commentIcon}}" alt="icon">
-                            <p>{{event.comments.length}} Comments</p>
+                            <p>{{event.comments.length}} Comentarios</p>
                         </a>
                     </div>
                     <div class="card-data-container__row card-data-container__row-last">
@@ -147,6 +151,7 @@
     <section class="slider" *ngIf="future==false && !dateToFilter">
         <div class="card-container" *ngFor="let event of events" >
             <div class="card">
+                <p id="anchor{{event.event_id}}" style="display:hidden" ></p>
                 <p class="card-date">{{formatDate(event.date)}}</p>
                 <p class="car-tittle">{{event.tittle}}</p>
                 <div class="card-data-container">
@@ -188,15 +193,15 @@
                         </a>
                     </div>
                     <div class="card-data-container__row"  >
-                        <a class="row__a" routerLink="../assistants/{{event.event_id}}">
+                        <a class="row__a" routerLink="../assistants/{{event.event_id}}" (click)="saveScroll(event.event_id)">
                             <img class="row__a--icon" src="{{assistantsIcon}}" alt="icon">
-                            <p>{{filterByAttendance(event.assistants)}} Assistants</p>
+                            <p>{{filterByAttendance(event.assistants)}} Asistentes</p>
                         </a>
                     </div>
                     <div class="card-data-container__row"  >
-                        <a class="row__a" routerLink="../comments/{{event.event_id}}">
+                        <a class="row__a" routerLink="../comments/{{event.event_id}}" (click)="saveScroll(event.event_id)">
                             <img class="row__a--icon" src="{{commentIcon}}" alt="icon">
-                            <p>{{event.comments.length}} Comments</p>
+                            <p>{{event.comments.length}} Comentarios</p>
                         </a>
                     </div>
                     <div class="card-data-container__row card-data-container__row-last">
@@ -214,6 +219,9 @@
             </div>
         </div>
     </section>
+
+
+
     
 
 <div #modal></div> 

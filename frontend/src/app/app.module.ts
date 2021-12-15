@@ -37,6 +37,7 @@ import { ErrorHandlerComponent } from './components/error-handler/error-handler.
 import { DayEventsComponent } from './pages/calendar/day-events/day-events.component';
 import { EventsByDateComponent } from './pages/events-by-date/events-by-date.component';
 import { DayEventComponent } from './pages/calendar/day-events/day-event/day-event.component';
+import { ReusableBackIconComponent } from './components/reusable-back-icon/reusable-back-icon.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { DayEventComponent } from './pages/calendar/day-events/day-event/day-eve
     DayEventsComponent,
     EventsByDateComponent,
     DayEventComponent,
+    ReusableBackIconComponent,
 
 
   ],
