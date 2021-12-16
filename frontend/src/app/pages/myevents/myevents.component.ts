@@ -95,7 +95,7 @@ export class MyeventsComponent implements OnInit {
 
     });
   }
-
+//
   deleteEventById(id:number){
     this.eventService.deleteEventById(id).subscribe(
       res=>{return this.getFutureEventsByUser(); },
