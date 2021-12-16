@@ -20,6 +20,7 @@ El proyecto es una red social básica, que permite, potencia y premia la organiz
 - [Diagrama Entidad Relación ](https://github.com/rubensantibanezacosta/Ocio_Open/blob/main/docs/Captura%20de%20pantalla%20de%202021-12-03%2011-33-16.png)
 - [Informe de llamadas API Rest en Postman](https://documenter.getpostman.com/view/17032586/UVC8E77j)
 - [Prototipo diseñado con FIGMA](https://www.figma.com/proto/avUqIHB3yfnUUCIBHcHBDu/Open-Ocio?node-id=182%3A98&starting-point-node-id=182%3A98)
+- [Aspectos de Usabilidad](https://github.com/rubensantibanezacosta/Ocio_Open/blob/main/docs/Usabilidad.md)
 
 ## Comenzando
 
