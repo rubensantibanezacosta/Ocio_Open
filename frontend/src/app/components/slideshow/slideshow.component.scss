@@ -12,8 +12,8 @@
   text-shadow: 1px 1px 5px black;
   color:$color-text-darkmode;
   display: flex;
-  overflow-y: scroll;
-  overflow-x: scroll;
+  overflow-y: auto;
+  overflow-x: auto;
   scroll-snap-type: x mandatory;
   height: calc(100vh - 100px);
   white-space: nowrap;

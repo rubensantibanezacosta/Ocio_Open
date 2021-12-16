@@ -54,3 +54,10 @@ margin-bottom: 15px;
     width: 35px;
   }
   
+  @media (min-width: 1024px) {
+    .main{
+        margin-left:30%;
+        margin-right:30%;
+        box-sizing: border-box;
+    }
+}

@@ -92,6 +92,7 @@ cursor: pointer;
     padding: 10px;
     border-radius: 8px;
     word-wrap: break-word;
+    
 }
 
 
@@ -138,4 +139,15 @@ cursor: pointer;
     justify-content: center;
     cursor: pointer;
 
+}
+
+@media (min-width: 1024px) {
+    .main{
+        margin-left:30%;
+        margin-right:30%;
+        box-sizing: border-box;
+    }
+    .comment-editor-container{
+        width: calc(30vw);
+    }
 }

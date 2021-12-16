@@ -142,8 +142,9 @@
 
 .items-container-organizers {
   margin-top: 10px;
-  overflow-y: scroll;
+  overflow-y: auto;
   max-height: 48vh;
+  padding-bottom: 40px;
 }
 
 .item-organizers{
@@ -163,8 +164,9 @@
 
 .items-container-zones {
   margin-top: 10px;
-  overflow-y: scroll;
+  overflow-y: auto;
   max-height: 48vh;
+  padding-bottom: 40px;
 }
 
 .item-zones{
@@ -198,3 +200,25 @@
   height: 10px;
 }
 
+@media (min-width: 1024px) {
+  .clips p {
+   font-size: 1.3rem;
+  }
+  .item-organizers {
+    font-size: 1rem;
+    
+  }
+  .item-zones {
+    font-size: 1rem;
+    
+  }
+  .ranking__tittle {
+    font-size: 1.5rem;
+  }
+  .main {
+    margin-left: 20%;
+    margin-right: 20%;
+    box-sizing: border-box;
+  }
+
+}

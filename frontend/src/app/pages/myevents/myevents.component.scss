@@ -73,7 +73,7 @@
     box-sizing: border;
     min-height: calc(85vh - 180px);
     max-height: calc(85vh - 180px);
-    overflow: scroll;
+    overflow: auto;
 
 }
 
@@ -193,10 +193,19 @@
 }
 
 .finalized-events__item:nth-child(even) {
-    border-radius: 4px;
-    background-color: rgba(255,255,255,0.05);
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 8px;
 }
 .finalized-events__item--text{
     width: calc(100% - 60px);
+}
+
+
+@media (min-width: 1024px) {
+    .contain-main__container{
+        margin-left:20%;
+        margin-right:20%;
+        box-sizing: border-box;
+    }
 }
 

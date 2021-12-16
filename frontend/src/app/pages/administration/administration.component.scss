@@ -135,13 +135,13 @@
 
 .users-table-container {
   max-height: calc(100vh - 260px);
-  overflow-y: scroll;
+  overflow-y: auto;
   margin-bottom: 50px;
 }
 
 .events-table-container {
     max-height: calc(100vh - 260px);
-    overflow-y: scroll;
+    overflow-y: auto;
     margin-bottom: 50px;
   }
 
@@ -169,4 +169,15 @@ th img {
 
 tr:nth-child(even) {
   background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+@media (min-width: 1024px) {
+  .clips p {
+   font-size: 1.3rem;
+  }
+  table {
+    font-size: 1rem;
+    
+  }
 }

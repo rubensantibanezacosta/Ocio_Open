@@ -59,3 +59,11 @@ top: 5px;
 right: 15px;
 cursor: pointer;
 }
+
+@media (min-width: 1024px) {
+    .main{
+        margin-left:20%;
+        margin-right:20%;
+        box-sizing: border-box;
+    }
+}

@@ -29,7 +29,6 @@ export class CommentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCommentsByEvent();
-    console.log(window.history.state);
   }
 
   getCommentsByEvent(){
