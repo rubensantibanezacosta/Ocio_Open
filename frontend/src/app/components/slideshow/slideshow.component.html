@@ -7,7 +7,7 @@
     <div class="card-container" *ngFor="let event of events" >
         
         <div class="card" >
-            <p id="anchor{{event.event_id}}" style="display:hidden" ></p>
+            <p id="anchor{{event.event_id}}" style="display:hidden; size:0px;" ></p>
             <p class="card-date">{{formatDate(event.date)}}</p>
             <p class="car-tittle">{{event.tittle}}</p>
             <div class="card-data-container">
@@ -79,7 +79,7 @@
         <div class="card-container" *ngFor="let event of events" >
             
             <div class="card" >
-                <p id="anchor{{event.event_id}}" style="display:hidden" ></p>
+                <p id="anchor{{event.event_id}}" style="display:hidden; size:0px;" ></p>
                 <p class="card-date">{{formatDate(event.date)}}</p>
                 <p class="car-tittle">{{event.tittle}}</p>
                 <div class="card-data-container">
@@ -151,7 +151,7 @@
     <section class="slider" *ngIf="future==false && !dateToFilter">
         <div class="card-container" *ngFor="let event of events" >
             <div class="card">
-                <p id="anchor{{event.event_id}}" style="display:hidden" ></p>
+                <p id="anchor{{event.event_id}}" style="display:hidden; size:0px;" ></p>
                 <p class="card-date">{{formatDate(event.date)}}</p>
                 <p class="car-tittle">{{event.tittle}}</p>
                 <div class="card-data-container">

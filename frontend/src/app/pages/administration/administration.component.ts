@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, NgZone, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Event } from 'src/app/models/event';
 import { User } from 'src/app/models/user';
@@ -62,11 +62,12 @@ export class AdministrationComponent implements OnInit {
   eventsState: string = "inactive";
   users: User[] = [];
   events: Event[] = [];
-  word: string = "";
+  wordUsers: string = "";
+  wordEvent: string = "";
 
-  ErrorMessage:string;
+  ErrorMessage: string;
 
-  constructor(private usersService: UsersService, private eventsService: EventsService,  private errorHandlerService:ErrorHandlerService) { }
+  constructor(private usersService: UsersService, private eventsService: EventsService, private errorHandlerService: ErrorHandlerService, private zone:NgZone) { }
 
   ngOnInit(): void {
     this.loadInfoUsers();
@@ -75,36 +76,36 @@ export class AdministrationComponent implements OnInit {
   }
 
   async loadInfoUsers() {
+    
     return this.eventsService.getAllEventsDESC().subscribe((res) => {
       return (this.events = res);
     },
-    (error) => {
-      this.ErrorMessage=error.error;
-      this.createModal();
+      (error) => {
+        this.ErrorMessage = error.error;
+        this.createModal();
 
-    })
+      })
   }
   async loadInfoEvents() {
+    
     return this.usersService.getAllUsers().subscribe((res) => {
       return (this.users = res);
     },
-    (error) => {
-      this.ErrorMessage=error.error;
-      this.createModal();
+      (error) => {
+        this.ErrorMessage = error.error;
+        this.createModal();
 
-    })
+      })
   }
 
   showEvents() {
     this.usersState = "inactive";
     this.eventsState = "active";
-    this.word="";
   }
 
   showUsers() {
     this.usersState = "active";
     this.eventsState = "inactive";
-    this.word="";
   }
 
   formatDate(date: Date) {
@@ -121,17 +122,50 @@ export class AdministrationComponent implements OnInit {
     });
   }
 
-    //Error handler modals
-    @ViewChild('modal', { read: ViewContainerRef })
-    entry!: ViewContainerRef;
-    sub!: Subscription;
-  
-  
-    createModal(){
-        this.sub = this.errorHandlerService
-          .openModal(this.entry, 'ERROR', this.ErrorMessage)
-          .subscribe((v) => {
-            //your logic
-          });
+  //Error handler modals
+  @ViewChild('modal', { read: ViewContainerRef })
+  entry!: ViewContainerRef;
+  sub!: Subscription;
+
+
+  createModal() {
+    this.sub = this.errorHandlerService
+      .openModal(this.entry, 'ERROR', this.ErrorMessage)
+      .subscribe((v) => {
+        //your logic
+      });
+  }
+
+  filterUsersByWord(event) {
+    if(event.code=='NumpadEnter' || event.code=='Enter'){
+      if (this.wordUsers != "") {
+        this.users = this.users.filter((user) => {
+          return user.surname.toLowerCase().includes(this.wordUsers.toLowerCase()) 
+        })
+      }
     }
+    if(event.code=='Backspace' || this.wordUsers == ""){
+      this.ngOnInit();
+    }
+  }
+
+
+  filterEventsByWord(event) {
+    if(event.code=='NumpadEnter' || event.code=='Enter'){
+      if (this.wordEvent != "") {
+        this.events = this.events.filter((event) => {
+          return event.tittle.toLowerCase().includes(this.wordEvent.toLowerCase())
+        })
+      }
+    }
+    if(event.code=='Backspace' || this.wordEvent == ""){
+      this.ngOnInit();
+    }
+  }
+
+/*   keyDownFunction(event, text:string){
+    if(event.code==='Enter'){
+      this.createComment(text);
+    }
+  } */
 }
