@@ -6,6 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { AssistantsService } from './assistants.service';
 import { of, throwError } from 'rxjs';
 import { User } from '../models/user';
+import { not } from '@angular/compiler/src/output/output_ast';
 
 
 describe('Assistants Service', () => {
@@ -20,7 +21,7 @@ describe('Assistants Service', () => {
 
   });
 
-  fit('should return an assistant', () => {
+  fit('should return an assistant', async () => {
     const expectedAssistant: Asisstant = {
       event_id: 2,
       assistant: "email@email.com",
@@ -29,16 +30,20 @@ describe('Assistants Service', () => {
       user: new User()
     }
 
-    httpClientSpy.get.and.returnValue(of(expectedAssistant));
+    await httpClientSpy.get.and.returnValue(of(expectedAssistant));
     let returnedAssistant: Asisstant;
-    assistantsService.getAssistantByPk(2, "email.com").subscribe((asisstant) => {
+    await assistantsService.getAssistantByPk(2, "email.com").subscribe((asisstant) => {
       returnedAssistant = asisstant;
-      expect(returnedAssistant).toEqual(expectedAssistant);
-      expect(returnedAssistant.attendance).toBe(true);
+      /* returnedAssistant.assistant="ssss"; */
+      
     });
+    expect(returnedAssistant.assistant).toEqual(expectedAssistant.assistant);
+      expect(returnedAssistant.excuse).toEqual(expectedAssistant.excuse);
+      expect(returnedAssistant.user).toEqual(expectedAssistant.user);
+      expect(returnedAssistant.attendance).toBe(true);
   });
 
-  fit('should return error', () => {
+  fit('should return error', async () => {
     let errorResponse = new HttpErrorResponse({
       error: 'test 404 error',
       status: 404,
@@ -46,17 +51,15 @@ describe('Assistants Service', () => {
     });
 
 
-    httpClientSpy.get.and.returnValue(throwError(errorResponse));
+    await httpClientSpy.get.and.returnValue(throwError(errorResponse));
     let response;
-    assistantsService.getAssistantByPk(2, "email@email.com").subscribe((asisstant) => {
-      response = asisstant;
-      console.log(response)
-      expect(response).toBe(errorResponse);
-
+    await assistantsService.getAssistantByPk(2, "email@email.com").subscribe(
+      (assistant)=>{},
+      (error) => {
+      response = error;
     });
+    expect(response).toEqual(errorResponse);
   });
-
-
 });
 
 
