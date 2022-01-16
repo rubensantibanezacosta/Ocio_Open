@@ -37,6 +37,7 @@ import { ErrorHandlerComponent } from './components/error-handler/error-handler.
 import { DayEventsComponent } from './pages/calendar/day-events/day-events.component';
 import { EventsByDateComponent } from './pages/events-by-date/events-by-date.component';
 import { DayEventComponent } from './pages/calendar/day-events/day-event/day-event.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 
 @NgModule({
@@ -69,9 +70,6 @@ import { DayEventComponent } from './pages/calendar/day-events/day-event/day-eve
     DayEventsComponent,
     EventsByDateComponent,
     DayEventComponent,
-
-
-
   ],
   imports: [
     BrowserModule,
@@ -80,8 +78,7 @@ import { DayEventComponent } from './pages/calendar/day-events/day-event/day-eve
     SocialLoginModule,
     HttpClientModule,
     FormsModule,
-
-    
+    ScrollingModule,
   ],
   providers: [
     {

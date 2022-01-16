@@ -7,11 +7,15 @@
   text-align: center;
   
 }
-
+cdk-virtual-scroll-viewport{
+  display: flex;
+  flex-direction: row;
+}
 .slider {
   text-shadow: 1px 1px 5px black;
   color:$color-text-darkmode;
   display: flex;
+  flex-direction: row;
   overflow-y: auto;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
@@ -29,8 +33,6 @@
   max-width: 368px;
   box-sizing: border-box;
   padding-right: 20px;
-  ;
-  
 }
 
 .card {

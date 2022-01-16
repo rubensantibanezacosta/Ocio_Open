@@ -34,7 +34,6 @@ export class ImagesService {
     headers: new HttpHeaders({
       'enctype': 'multipart/form-data',
       'Authorization': `Bearer ${this.bearerToken}`,
-
     }
     ),
   };
@@ -47,7 +46,7 @@ export class ImagesService {
   }
 
   getImageById(id: number) {
-    return this.httpClient.get(this.endpoint + "/" + id, {...this.httpOptionsImage, responseType:'blob'})
+    return this.httpClient.get(this.endpoint + "/" + id, { ...this.httpOptionsImage, responseType: 'blob' })
   }
 
   deleteImageById(id: number): Observable<string> {
