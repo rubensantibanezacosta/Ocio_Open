@@ -1,10 +1,15 @@
 require('dotenv').config();
- 
 const express = require('express');
+const app = express();
 const cors = require('cors');
+app.use(cors());
+const server = require('http').Server(app);
+
+
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const morgan = require("morgan");
+const socket = require("./socket");
 
 const authApi = require("./routes/auth");
 const userRoutes = require("./routes/userRoutes");
@@ -19,11 +24,12 @@ const zonesRoutes = require("./routes/zonesRoutes");
 
 
  
-const app = express();
+
 const port = process.env.PORT || 4000;
  
 // enable CORS
-app.use(cors());
+
+
 
 //Morgan
 
@@ -48,6 +54,12 @@ db.sequelize.sync();
 //Passport middelware
 app.use(passport.initialize());
 
+
+//WebSocket
+ socket.connect(server); 
+
+
+
 //routes
 
 authApi(app);
@@ -60,6 +72,6 @@ punctuationRoutes(app);
 zonesRoutes(app);
 
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log('Server started on: ' + port);
 });

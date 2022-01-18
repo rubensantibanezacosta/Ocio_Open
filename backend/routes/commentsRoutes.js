@@ -21,7 +21,7 @@ function commentsRoutes(app) {
         scopesValidationHandler(['read:comments']),
         commentsController.findCommentsByEvent);
 
-    router.delete("/:comment_id",
+    router.delete("/:comment_id/:index",
         passport.authenticate("jwt", { session: false }),
         scopesValidationHandler(['delete:comments']),
         commentsController.deleteCommentById);

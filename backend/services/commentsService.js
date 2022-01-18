@@ -12,13 +12,22 @@ class CommentsService {
         return Comments.findAll({
             where: {
                 event_id: event_id,
-               
+
             },
             include: {
                 model: Users,
                 attributes: ['name', 'surname']
             },
-            order:[['date','DESC']]
+            order: [['date', 'DESC']]
+        })
+    };
+
+    async findCommentsById(id) {
+        return Comments.findByPk(id, {
+            include: {
+                model: Users,
+                attributes: ['name', 'surname']
+            },
         })
     };
 

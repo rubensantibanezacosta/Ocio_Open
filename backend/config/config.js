@@ -8,6 +8,7 @@ const config = {
     host: process.env.DB_HOST,
     dialect: 'mysql',
     logging: false,
+    frontendBasicEndpoint: process.env.FRONTEND_BASIC_ENDPOINT,
 
     jwtSecret: process.env.JWT_SECRET,
     publicApiKeyToken: process.env.PUBLIC_API_KEY_TOKEN,
@@ -20,6 +21,7 @@ const config = {
     frontendEndpoint: process.env.FRONTEND_ENDPOINT,
     emailApiName:process.env.EMAIL_API_NAME,
     emailPassword:process.env.EMAIL_PASSWORD,
+    
 
   },
   test: {
@@ -40,6 +42,7 @@ const config = {
     frontendEndpoint: process.env.FRONTEND_ENDPOINT,
     emailApiName:process.env.EMAIL_API_NAME,
     emailPassword:process.env.EMAIL_PASSWORD,
+    frontendBasicEndpoint: process.env.FRONTEND_BASIC_ENDPOINT,
 
   },
   production: {
@@ -60,6 +63,7 @@ const config = {
     frontendEndpoint: process.env.FRONTEND_ENDPOINT,
     emailApiName:process.env.EMAIL_API_NAME,
     emailPassword:process.env.EMAIL_PASSWORD,
+    frontendBasicEndpoint: process.env.FRONTEND_BASIC_ENDPOINT,
   }
 
 }

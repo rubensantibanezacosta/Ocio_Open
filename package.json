@@ -14,5 +14,6 @@
     "Open"
   ],
   "author": "Ruben Santibañez Acosta",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {}
 }
