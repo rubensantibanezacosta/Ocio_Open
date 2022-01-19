@@ -31,9 +31,6 @@ CREATE TABLE `assistants` (
   `updatedAt` date NOT NULL
 )  ;
 
---
--- Volcado de datos para la tabla `assistants`
---
 
 
 -- --------------------------------------------------------
@@ -279,7 +276,7 @@ ALTER TABLE `events`
 ALTER TABLE `punctuations`
   ADD CONSTRAINT `FK_punctuations_events` FOREIGN KEY (`event_id`) REFERENCES `events` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_userasisstant_punctuation` FOREIGN KEY (`assistant`) REFERENCES `users` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
