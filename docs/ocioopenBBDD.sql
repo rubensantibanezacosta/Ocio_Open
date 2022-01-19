@@ -19,16 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `ocio_open`
---
-CREATE DATABASE IF NOT EXISTS `ocio_open` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
-USE `ocio_open`;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `assistants`
---
 
 
 CREATE TABLE `assistants` (
@@ -38,7 +29,7 @@ CREATE TABLE `assistants` (
   `excuse` varchar(2000) DEFAULT NULL,
   `createdAt` date NOT NULL,
   `updatedAt` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 
 --
 -- Volcado de datos para la tabla `assistants`
@@ -57,7 +48,7 @@ CREATE TABLE `comments` (
   `assistant` varchar(200) NOT NULL,
   `comment` varchar(2000) NOT NULL,
   `date` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 
 --
 -- Volcado de datos para la tabla `comments`
@@ -81,7 +72,7 @@ CREATE TABLE `events` (
   `image_id` int DEFAULT NULL,
   `createdAt` date NOT NULL,
   `updatedAt` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 
 --
 -- Volcado de datos para la tabla `events`
@@ -98,7 +89,7 @@ CREATE TABLE `images` (
   `url` varchar(2000) NOT NULL,
   `createdAt` date NOT NULL,
   `updatedAt` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 
 --
 -- Volcado de datos para la tabla `images`
@@ -115,7 +106,7 @@ CREATE TABLE `punctuations` (
   `punctuation` float NOT NULL,
   `createdAt` date NOT NULL,
   `updatedAt` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 
 --
 -- Volcado de datos para la tabla `punctuations`
@@ -134,7 +125,7 @@ CREATE TABLE `roles` (
   `permissions` varchar(2000) NOT NULL,
   `createdAt` date NOT NULL,
   `updatedAt` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 
 --
 
@@ -156,7 +147,7 @@ CREATE TABLE `users` (
   `createdAt` date NOT NULL,
   `lastconnection` datetime DEFAULT NULL,
   `updatedAt` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 
 --
 -- Volcado de datos para la tabla `users`
@@ -172,7 +163,7 @@ CREATE TABLE `zones` (
   `punctuationavg` float DEFAULT NULL,
   `createdAt` date NOT NULL,
   `updatedAt` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 
 --
 -- Volcado de datos para la tabla `zones`
