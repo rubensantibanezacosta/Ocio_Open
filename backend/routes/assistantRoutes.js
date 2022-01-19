@@ -13,7 +13,7 @@ function asisstantRoutes(app) {
 
     router.post("/",
         passport.authenticate("jwt", { session: false }),
-        scopesValidationHandler(['create:assistants']),
+        scopesValidationHandler(['create:assistants']), 
         assistantsController.createOrUpdateAssistant);
 
     router.get("/bypk/:event_id/:assistant",
