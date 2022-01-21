@@ -1,0 +1,2 @@
+
+{"operation":"insert","timestamp":{"$$date":1642795469062},"version":null,"doc":{"cpu":19,"freemem":1043,"timestamp":{"$$date":1642795469052},"hostname":"ruben-HP-Laptop-15-da0xxx","creationDate":{"$$date":1642795469053},"modificationDate":{"$$date":1642795469053},"shortid":"dEsMLON","_id":"AAPRq4ib71fyzpsf","$entitySet":"monitoring","$$etag":1642795469062}}

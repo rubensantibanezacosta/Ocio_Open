@@ -1,10 +1,11 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+
+// enable CORS
 const cors = require('cors');
 app.use(cors());
 const server = require('http').Server(app);
-
 
 const bodyParser = require('body-parser');
 const passport = require('passport');
@@ -20,6 +21,9 @@ const imagesRoutes = require("./routes/imagesRoutes");
 const punctuationRoutes = require("./routes/punctuationsRoutes");
 const zonesRoutes = require("./routes/zonesRoutes");
 
+const reporting = require("./jsReport");
+
+
 
 
 
@@ -27,9 +31,11 @@ const zonesRoutes = require("./routes/zonesRoutes");
 
 const port = process.env.PORT || 4000;
  
-// enable CORS
 
 
+
+
+/* app.use("/reporting",jsReportApp); */
 
 //Morgan
 
@@ -72,6 +78,11 @@ punctuationRoutes(app);
 zonesRoutes(app);
 
 
-server.listen(port, () => {
+
+
+const serverInit=server.listen(port, () => {
   console.log('Server started on: ' + port);
 });
+
+// JS Report
+reporting(app,serverInit);
