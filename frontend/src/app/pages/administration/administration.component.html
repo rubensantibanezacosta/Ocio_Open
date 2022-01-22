@@ -53,6 +53,9 @@
     </div>
 
     <div class="users-table-container" *ngIf="eventsState=='inactive'">
+        <div class="reportButton">
+            <button (click)="getUsersPDF()">Descargar PDF</button>
+        </div>
         <table>
 
             <tr>

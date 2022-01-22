@@ -38,6 +38,7 @@ import { DayEventsComponent } from './pages/calendar/day-events/day-events.compo
 import { EventsByDateComponent } from './pages/events-by-date/events-by-date.component';
 import { DayEventComponent } from './pages/calendar/day-events/day-event/day-event.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { FileSaverModule } from 'ngx-filesaver';
 
 
 @NgModule({
@@ -79,6 +80,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     HttpClientModule,
     FormsModule,
     ScrollingModule,
+    FileSaverModule,
   ],
   providers: [
     {
