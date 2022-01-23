@@ -1,0 +1,23 @@
+{
+    "name": "Users",
+    "engine": "jsrender",
+    "recipe": "chrome-pdf",
+    "shortid": "ZcqGpUHzt",
+    "chrome": {
+        "printBackground": true
+    },
+    "data": null,
+    "creationDate": {
+        "$$date": 1642840527034
+    },
+    "modificationDate": {
+        "$$date": 1642860656384
+    },
+    "_id": "pO1XKK0zUwyh8nZL",
+    "$entitySet": "templates",
+    "scripts": [
+        {
+            "shortid": "8hT88qlJm"
+        }
+    ]
+}
