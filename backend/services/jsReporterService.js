@@ -60,8 +60,8 @@ class jsReporterService {
             data: JSON.stringify(json)
         })
 
-        await fs.writeFile('report.pdf', result.content);
-        let file = await fs.readFile(__dirname + "/../report.pdf")
+        await fs.writeFile(__dirname + "/../js-report/Users/report.pdf", result.content);
+        let file = await fs.readFile(__dirname + "/../js-report/Users/report.pdf")
 
         return file;
     }
@@ -82,10 +82,10 @@ class jsReporterService {
             data: JSON.stringify(json)
         })
 
-        await fs.writeFile('report.pdf', result.content);
-        let file = await fs.readFile(__dirname + "/../report.pdf")
+        await fs.writeFile(__dirname + "/../js-report/Users/report.pdf", result.content);
+        
 
-        return this.emailService.specificEmail(email, "Informe de Usuarios", `<h3>Informe de usuarios del ${moment().locale("es").format("DD [de] MMMM [del] YYYY")}</h3>`, __dirname +"/../report.pdf");
+        return this.emailService.specificEmail(email, "Informe de Usuarios", `<h3>Informe de usuarios del ${moment().locale("es").format("DD [de] MMMM [del] YYYY")}</h3>`, __dirname +"./../js-report/Users/report.pdf");
 
     }
 
