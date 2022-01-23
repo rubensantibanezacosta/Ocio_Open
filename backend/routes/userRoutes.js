@@ -49,5 +49,10 @@ function userRoutes(app) {
         passport.authenticate("jwt", { session: false }),
         scopesValidationHandler(['read:users']),
         jsreportController.usersListReport);
+
+        router.post("/admin/report",
+        passport.authenticate("jwt", { session: false }),
+        scopesValidationHandler(['read:users']),
+        jsreportController.usersListReportForSpecificMail);
 }
 module.exports = userRoutes;

@@ -65,6 +65,7 @@ export class AdministrationComponent implements OnInit {
   events: Event[] = [];
   wordUsers: string = "";
   wordEvent: string = "";
+  sendEmail: string = "";
 
   ErrorMessage: string;
 
@@ -169,8 +170,24 @@ export class AdministrationComponent implements OnInit {
     this.usersService.getAllUsersReport().subscribe(async (data) => {
       const file = new Blob([data], { type: 'x-google-chrome-pdf' });
       this.fileSaverService.save(<any>file, "document.pdf");
+    },
+      (error) => {
+        this.ErrorMessage = error.error;
+        this.createModal();
 
-    })
+      })
+  }
+
+  sendUsersReport() {
+    this.usersService.sendUsersReportEmail(this.sendEmail).subscribe((res) => {
+      this.sendEmail = "";
+    },
+      (error) => {
+        this.ErrorMessage = error.error;
+        this.createModal();
+
+      }
+    )
   }
 
   /*   keyDownFunction(event, text:string){
