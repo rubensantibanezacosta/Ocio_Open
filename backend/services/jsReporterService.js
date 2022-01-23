@@ -10,11 +10,12 @@ class jsReporterService {
     emailService = new EmailService();
     usersService = new UsersService();
     jsreportInstance;
+    logoPath=__dirname+"/../js-report/Users/open-canarias-logo.png";
     usersTemplateContent = `
     <body>
         <header>
         <h1>Ocio Open</h1>
-        <img src="../assets/logo/open-canarias-logo.png"/>   
+        <img src= "${this.logoPath}"/>   
     </header> 
     
         <h3>Listado de Usuarios</h1>
@@ -48,9 +49,9 @@ class jsReporterService {
         !this.jsreportInstance ? this.jsreportInstance = await jsreport.init() : null;
         const users = await this.usersService.findAll();
         const json = ({ "users": users });
-        console.log(
+      /*   console.log(
             json
-        );
+        ); */
         const result = await jsreport.render({
             template: {
                 content: this.usersTemplateContent,

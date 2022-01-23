@@ -228,12 +228,8 @@ class EmailsService {
 
     //specific email with file
     async specificEmail(email, subject, html, filePath) {
+        
         try {
-
-            /*   let filesURL=[];
-              await filesArray.forEach((file)=>{
-                  filesURL.push(URL.createObjectURL(file));
-              }) */
             await transporter.sendMail({
                 from: '"Ocio Open" <' + config.emailApiName + '>', // sender address
                 to: email, // list of receivers
