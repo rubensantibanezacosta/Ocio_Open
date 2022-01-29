@@ -16,3 +16,13 @@ footer {
     background-color: $header-footer;
     box-shadow: 1px 1px 5px black;
 }
+.help{
+    position: absolute;
+    right: 3px;
+    bottom: 3px;
+    outline: none;
+    color: white;
+    text-decoration: underline;
+    background-color: transparent;
+    border: none;
+}
