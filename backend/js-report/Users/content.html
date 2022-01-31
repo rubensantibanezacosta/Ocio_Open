@@ -1,0 +1,52 @@
+<head>
+
+</head>
+<style>
+    header {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+    }
+
+    .user-image {
+        border-radius: 200px;
+    }
+
+    td {
+        padding: 0 5px;
+    }
+</style>
+
+<body>
+    <header>
+        <h1>Ocio Open</h1>
+        <img src="../js-report/Users/open-canarias-logo.png" />
+    </header>
+
+    <h3>Listado de Usuarios</h1>
+        <table>
+            <thead>
+                <th>Imagen</th>
+                <th>Email</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Puntuación</th>
+                <th>Creación</th>
+                <th>Conexión</th>
+            </thead>
+            {{for users}}
+            <tr>
+                <td><img class="user-image" src="{{:image_url}}" /></td>
+                <td>{{:email}}</td>
+                <td>{{:name}}</td>
+                <td>{{:surname}}</td>
+                <td>{{:punctuation_avg}}</td>
+                <td>{{:createdAt}}</td>
+                <td>{{:lastconnection}}</td>
+            </tr>
+            {{/for}}
+        </table>
+</body>
+
+
+</html>

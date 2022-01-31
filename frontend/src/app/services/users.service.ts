@@ -44,5 +44,11 @@ export class UsersService {
     return this.httpClient.delete<string>(this.endpoint+"/"+encodeURI(email), this.httpOptions)
   }
 
+  getAllUsersReport(){
+    return this.httpClient.get(this.endpoint+"/admin/report", { ...this.httpOptions, responseType: 'blob' })
+  }
+  sendUsersReportEmail(email:string){
+    return this.httpClient.post(this.endpoint+"/admin/report", {email:email}, this.httpOptions);
+  }
 
 }

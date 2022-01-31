@@ -53,6 +53,14 @@
     </div>
 
     <div class="users-table-container" *ngIf="eventsState=='inactive'">
+        <div class="reportButton">
+            <button (click)="getUsersPDF()">Descargar PDF</button>
+            <form #mailForm="ngForm" (ngSubmit)="sendUsersReport()">
+                <label for="sendEmail">Enviar por email</label>
+                <input type="email" placeholder="email..."  [(ngModel)]="sendEmail" name="sendEmail"  required>
+                <button type="submit" [disabled]="!mailForm.form.valid">Enviar</button>
+            </form>
+        </div>
         <table>
 
             <tr>

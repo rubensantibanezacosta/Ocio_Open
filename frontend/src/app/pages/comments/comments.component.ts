@@ -33,7 +33,7 @@ export class CommentsComponent implements OnInit {
       console.log(!this.comments)
       this.getCommentsByEvent();
       this.webSocketService.io.on(this.event_id.toString(), (comment) => {
-        console.log("emmitted",comment)
+        
         comment?this.comments.unshift(comment):null;
       })
       this.webSocketService.io.on(this.event_id.toString()+"_delete", (deleteindex) => {
