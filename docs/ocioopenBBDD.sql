@@ -99,7 +99,7 @@ CREATE TABLE `images` (
 
 CREATE TABLE `punctuations` (
   `event_id` float NOT NULL,
-  `assistant` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `assistant` varchar(200) ,
   `punctuation` float NOT NULL,
   `createdAt` date NOT NULL,
   `updatedAt` date NOT NULL
