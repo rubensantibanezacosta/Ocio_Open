@@ -9,6 +9,7 @@ import { getDataFromToken } from 'src/app/utils/jwtparser';
 import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { Subscription } from 'rxjs';
 import { FileSaverService } from 'ngx-filesaver';
+import { UrlObject } from 'url';
 
 @Component({
   selector: 'app-administration',
@@ -168,8 +169,11 @@ export class AdministrationComponent implements OnInit {
   getUsersPDF() {
     console.log("reveiving pdf")
     this.usersService.getAllUsersReport().subscribe(async (data) => {
-      const file = new Blob([data], { type: 'x-google-chrome-pdf' });
-      this.fileSaverService.save(<any>file, "document.pdf");
+      const file:File =<File> new Blob([data], { type: 'application/pdf' });
+      /* this.fileSaverService.save(<any>file, "document.pdf"); */
+
+      window.open(URL.createObjectURL(file),'_blank').focus();
+      
     },
       (error) => {
         this.ErrorMessage = error.error;
