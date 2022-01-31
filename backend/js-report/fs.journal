@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 {"operation":"insert","timestamp":{"$$date":1643387910088},"version":null,"doc":{"cpu":31,"freemem":441,"timestamp":{"$$date":1643387910073},"hostname":"ruben-HP-Laptop-15-da0xxx","creationDate":{"$$date":1643387910073},"modificationDate":{"$$date":1643387910073},"shortid":"o96g7jX","_id":"tVC8Wjz5hRzt59DG","$entitySet":"monitoring","$$etag":1643387910088}}
 {"operation":"insert","timestamp":{"$$date":1643387970111},"version":null,"doc":{"cpu":44,"freemem":378,"timestamp":{"$$date":1643387970094},"hostname":"ruben-HP-Laptop-15-da0xxx","creationDate":{"$$date":1643387970095},"modificationDate":{"$$date":1643387970095},"shortid":"EkztSgw","_id":"wu0J72SWqktM9OLY","$entitySet":"monitoring","$$etag":1643387970111}}
+=======
+{"operation":"insert","timestamp":{"$$date":1643481958746},"version":null,"doc":{"cpu":21,"freemem":206,"timestamp":{"$$date":1643481958736},"hostname":"ruben-H81M-S2H","creationDate":{"$$date":1643481958736},"modificationDate":{"$$date":1643481958736},"shortid":"4_X7qTs","_id":"ix8AYfV5u7zsJPob","$entitySet":"monitoring","$$etag":1643481958746}}
+{"operation":"insert","timestamp":{"$$date":1643482018737},"version":null,"doc":{"cpu":27,"freemem":157,"timestamp":{"$$date":1643482018731},"hostname":"ruben-H81M-S2H","creationDate":{"$$date":1643482018732},"modificationDate":{"$$date":1643482018732},"shortid":"xwYtXQW","_id":"cUdWAVQC8vTbvo1R","$entitySet":"monitoring","$$etag":1643482018737}}
+>>>>>>> a004b21d560c1ba3311208b1e0d4056600094cea

@@ -12,4 +12,9 @@ export class FooterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+
+  openHelp() {
+    window.open("http://localhost:4210/Bienvenida.html");
+  }
 }
