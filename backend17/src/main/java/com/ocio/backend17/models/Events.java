@@ -31,10 +31,10 @@ public class Events {
     @Column(name = "punctuationavg", nullable = false, precision = 0)
     private double punctuationavg;
     @Basic
-    @Column(name = "organizer", nullable = false, length = 200, insertable=false, updatable=false)
+    @Column(name = "organizer", nullable = false, length = 200, updatable = false, insertable = false)
     private String organizer;
     @Basic
-    @Column(name = "imageid", nullable = true, insertable=false, updatable=false)
+    @Column(name = "imageid", nullable = true)
     private Integer imageid;
     @Basic
     @Column(name = "createdAt", nullable = false)
@@ -50,7 +50,7 @@ public class Events {
     @JoinColumn(name = "organizer", referencedColumnName = "email", nullable = false)
     private Users usersByOrganizer;
     @ManyToOne
-    @JoinColumn(name = "imageid", referencedColumnName = "id")
+    @JoinColumn(name = "imageid", referencedColumnName = "id" , updatable = false, insertable = false)
     private Images imagesByImageid;
     @OneToMany(mappedBy = "eventsByEventid")
     private Collection<Punctuations> punctuationsByEventid;

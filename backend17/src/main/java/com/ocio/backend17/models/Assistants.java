@@ -9,11 +9,11 @@ import java.util.Objects;
 public class Assistants {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "eventid", nullable = false, precision = 0, insertable=false, updatable=false)
+    @Column(name = "eventid", nullable = false, updatable = false, insertable = false)
     private double eventid;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "assistant", nullable = false, length = 200, insertable=false, updatable=false)
+    @Column(name = "assistant", nullable = false, length = 200, updatable = false, insertable = false)
     private String assistant;
     @Basic
     @Column(name = "attendance", nullable = false)
@@ -28,10 +28,10 @@ public class Assistants {
     @Column(name = "updatedAt", nullable = false)
     private Date updatedAt;
     @ManyToOne
-    @JoinColumn(name = "eventid", referencedColumnName = "eventid", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "eventid", referencedColumnName = "eventid", nullable = false, updatable = false, insertable = false)
     private Events eventsByEventid;
     @ManyToOne
-    @JoinColumn(name = "assistant", referencedColumnName = "email", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "assistant", referencedColumnName = "email", nullable = false, updatable = false, insertable = false)
     private Users usersByAssistant;
 
     public double getEventid() {

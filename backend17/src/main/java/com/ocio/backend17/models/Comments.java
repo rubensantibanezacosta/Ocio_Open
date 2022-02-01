@@ -11,10 +11,10 @@ public class Comments {
     @Column(name = "commentid", nullable = false, precision = 0)
     private double commentid;
     @Basic
-    @Column(name = "eventid", nullable = false, precision = 0, insertable=false, updatable=false)
+    @Column(name = "eventid", nullable = false, precision = 0, updatable = false, insertable = false)
     private double eventid;
     @Basic
-    @Column(name = "assistant", nullable = false, length = 200, insertable=false, updatable=false)
+    @Column(name = "assistant", nullable = false, length = 200, updatable = false, insertable = false)
     private String assistant;
     @Basic
     @Column(name = "comment", nullable = false, length = 2000)
