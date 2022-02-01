@@ -5,8 +5,7 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "comments", schema = "ocio_open", catalog = "")
-public class PersistenceComments {
+public class Comments {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "comment_id", nullable = false, precision = 0)
@@ -23,12 +22,6 @@ public class PersistenceComments {
     @Basic
     @Column(name = "date", nullable = false)
     private Timestamp date;
-    @ManyToOne
-    @JoinColumn(name = "event_id", referencedColumnName = "event_id", nullable = false)
-    private PersistenceEvents eventsByEventId;
-    @ManyToOne
-    @JoinColumn(name = "assistant", referencedColumnName = "email", nullable = false)
-    private Users usersByAssistant;
 
     public double getCommentId() {
         return commentId;
@@ -74,28 +67,12 @@ public class PersistenceComments {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PersistenceComments that = (PersistenceComments) o;
-        return Double.compare(that.commentId, commentId) == 0 && Double.compare(that.eventId, eventId) == 0 && Objects.equals(assistant, that.assistant) && Objects.equals(comment, that.comment) && Objects.equals(date, that.date);
+        Comments comments = (Comments) o;
+        return Double.compare(comments.commentId, commentId) == 0 && Double.compare(comments.eventId, eventId) == 0 && Objects.equals(assistant, comments.assistant) && Objects.equals(comment, comments.comment) && Objects.equals(date, comments.date);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(commentId, eventId, assistant, comment, date);
-    }
-
-    public PersistenceEvents getEventsByEventId() {
-        return eventsByEventId;
-    }
-
-    public void setEventsByEventId(PersistenceEvents eventsByEventId) {
-        this.eventsByEventId = eventsByEventId;
-    }
-
-    public Users getUsersByAssistant() {
-        return usersByAssistant;
-    }
-
-    public void setUsersByAssistant(Users usersByAssistant) {
-        this.usersByAssistant = usersByAssistant;
     }
 }

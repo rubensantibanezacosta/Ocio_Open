@@ -5,9 +5,8 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "punctuations", schema = "ocio_open", catalog = "")
-@IdClass(PersistencePunctuationsPK.class)
-public class PersistencePunctuations {
+@IdClass(PunctuationsPK.class)
+public class Punctuations {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "event_id", nullable = false, precision = 0)
@@ -27,10 +26,7 @@ public class PersistencePunctuations {
     private Date updatedAt;
     @ManyToOne
     @JoinColumn(name = "event_id", referencedColumnName = "event_id", nullable = false)
-    private PersistenceEvents eventsByEventId;
-    @ManyToOne
-    @JoinColumn(name = "assistant", referencedColumnName = "email", nullable = false)
-    private Users usersByAssistant;
+    private Events eventsByEventId;
 
     public double getEventId() {
         return eventId;
@@ -76,7 +72,7 @@ public class PersistencePunctuations {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PersistencePunctuations that = (PersistencePunctuations) o;
+        Punctuations that = (Punctuations) o;
         return Double.compare(that.eventId, eventId) == 0 && Double.compare(that.punctuation, punctuation) == 0 && Objects.equals(assistant, that.assistant) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
     }
 
@@ -85,19 +81,11 @@ public class PersistencePunctuations {
         return Objects.hash(eventId, assistant, punctuation, createdAt, updatedAt);
     }
 
-    public PersistenceEvents getEventsByEventId() {
+    public Events getEventsByEventId() {
         return eventsByEventId;
     }
 
-    public void setEventsByEventId(PersistenceEvents eventsByEventId) {
+    public void setEventsByEventId(Events eventsByEventId) {
         this.eventsByEventId = eventsByEventId;
-    }
-
-    public Users getUsersByAssistant() {
-        return usersByAssistant;
-    }
-
-    public void setUsersByAssistant(Users usersByAssistant) {
-        this.usersByAssistant = usersByAssistant;
     }
 }

@@ -5,8 +5,7 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "roles", schema = "ocio_open", catalog = "")
-public class PersistenceRoles {
+public class Roles {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "number", nullable = false)
@@ -68,8 +67,8 @@ public class PersistenceRoles {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PersistenceRoles that = (PersistenceRoles) o;
-        return number == that.number && Objects.equals(roleKey, that.roleKey) && Objects.equals(permissions, that.permissions) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
+        Roles roles = (Roles) o;
+        return number == roles.number && Objects.equals(roleKey, roles.roleKey) && Objects.equals(permissions, roles.permissions) && Objects.equals(createdAt, roles.createdAt) && Objects.equals(updatedAt, roles.updatedAt);
     }
 
     @Override

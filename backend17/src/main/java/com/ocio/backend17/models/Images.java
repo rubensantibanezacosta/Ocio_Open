@@ -6,8 +6,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "images", schema = "ocio_open", catalog = "")
-public class PersistenceImages {
+public class Images {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
@@ -22,7 +21,7 @@ public class PersistenceImages {
     @Column(name = "updatedAt", nullable = false)
     private Date updatedAt;
     @OneToMany(mappedBy = "imagesByImageId")
-    private Collection<PersistenceEvents> eventsById;
+    private Collection<Events> eventsById;
 
     public int getId() {
         return id;
@@ -60,8 +59,8 @@ public class PersistenceImages {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PersistenceImages that = (PersistenceImages) o;
-        return id == that.id && Objects.equals(url, that.url) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
+        Images images = (Images) o;
+        return id == images.id && Objects.equals(url, images.url) && Objects.equals(createdAt, images.createdAt) && Objects.equals(updatedAt, images.updatedAt);
     }
 
     @Override
@@ -69,11 +68,11 @@ public class PersistenceImages {
         return Objects.hash(id, url, createdAt, updatedAt);
     }
 
-    public Collection<PersistenceEvents> getEventsById() {
+    public Collection<Events> getEventsById() {
         return eventsById;
     }
 
-    public void setEventsById(Collection<PersistenceEvents> eventsById) {
+    public void setEventsById(Collection<Events> eventsById) {
         this.eventsById = eventsById;
     }
 }

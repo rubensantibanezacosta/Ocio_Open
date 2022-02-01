@@ -7,8 +7,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "events", schema = "ocio_open", catalog = "")
-public class PersistenceEvents {
+public class Events {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "event_id", nullable = false, precision = 0)
@@ -44,17 +43,9 @@ public class PersistenceEvents {
     @Column(name = "updatedAt", nullable = false)
     private Date updatedAt;
     @OneToMany(mappedBy = "eventsByEventId")
-    private Collection<PersistenceAssistants> assistantsByEventId;
+    private Collection<Assistants> assistantsByEventId;
     @OneToMany(mappedBy = "eventsByEventId")
-    private Collection<PersistenceComments> commentsByEventId;
-    @ManyToOne
-    @JoinColumn(name = "organizer", referencedColumnName = "email", nullable = false)
-    private Users usersByOrganizer;
-    @ManyToOne
-    @JoinColumn(name = "image_id", referencedColumnName = "id")
-    private PersistenceImages imagesByImageId;
-    @OneToMany(mappedBy = "eventsByEventId")
-    private Collection<PersistencePunctuations> punctuationsByEventId;
+    private Collection<Comments> commentsByEventId;
 
     public double getEventId() {
         return eventId;
@@ -148,8 +139,8 @@ public class PersistenceEvents {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PersistenceEvents that = (PersistenceEvents) o;
-        return Double.compare(that.eventId, eventId) == 0 && Double.compare(that.punctuationAvg, punctuationAvg) == 0 && Objects.equals(tittle, that.tittle) && Objects.equals(date, that.date) && Objects.equals(zone, that.zone) && Objects.equals(place, that.place) && Objects.equals(description, that.description) && Objects.equals(organizer, that.organizer) && Objects.equals(imageId, that.imageId) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
+        Events events = (Events) o;
+        return Double.compare(events.eventId, eventId) == 0 && Double.compare(events.punctuationAvg, punctuationAvg) == 0 && Objects.equals(tittle, events.tittle) && Objects.equals(date, events.date) && Objects.equals(zone, events.zone) && Objects.equals(place, events.place) && Objects.equals(description, events.description) && Objects.equals(organizer, events.organizer) && Objects.equals(imageId, events.imageId) && Objects.equals(createdAt, events.createdAt) && Objects.equals(updatedAt, events.updatedAt);
     }
 
     @Override
@@ -157,43 +148,19 @@ public class PersistenceEvents {
         return Objects.hash(eventId, tittle, date, zone, place, description, punctuationAvg, organizer, imageId, createdAt, updatedAt);
     }
 
-    public Collection<PersistenceAssistants> getAssistantsByEventId() {
+    public Collection<Assistants> getAssistantsByEventId() {
         return assistantsByEventId;
     }
 
-    public void setAssistantsByEventId(Collection<PersistenceAssistants> assistantsByEventId) {
+    public void setAssistantsByEventId(Collection<Assistants> assistantsByEventId) {
         this.assistantsByEventId = assistantsByEventId;
     }
 
-    public Collection<PersistenceComments> getCommentsByEventId() {
+    public Collection<Comments> getCommentsByEventId() {
         return commentsByEventId;
     }
 
-    public void setCommentsByEventId(Collection<PersistenceComments> commentsByEventId) {
+    public void setCommentsByEventId(Collection<Comments> commentsByEventId) {
         this.commentsByEventId = commentsByEventId;
-    }
-
-    public Users getUsersByOrganizer() {
-        return usersByOrganizer;
-    }
-
-    public void setUsersByOrganizer(Users usersByOrganizer) {
-        this.usersByOrganizer = usersByOrganizer;
-    }
-
-    public PersistenceImages getImagesByImageId() {
-        return imagesByImageId;
-    }
-
-    public void setImagesByImageId(PersistenceImages imagesByImageId) {
-        this.imagesByImageId = imagesByImageId;
-    }
-
-    public Collection<PersistencePunctuations> getPunctuationsByEventId() {
-        return punctuationsByEventId;
-    }
-
-    public void setPunctuationsByEventId(Collection<PersistencePunctuations> punctuationsByEventId) {
-        this.punctuationsByEventId = punctuationsByEventId;
     }
 }
