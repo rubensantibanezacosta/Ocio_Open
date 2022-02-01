@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class PersistenceAssistantsPK implements Serializable {
+public class PunctuationsPK implements Serializable {
     @Column(name = "event_id", nullable = false, precision = 0)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +37,7 @@ public class PersistenceAssistantsPK implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PersistenceAssistantsPK that = (PersistenceAssistantsPK) o;
+        PunctuationsPK that = (PunctuationsPK) o;
         return Double.compare(that.eventId, eventId) == 0 && Objects.equals(assistant, that.assistant);
     }
 

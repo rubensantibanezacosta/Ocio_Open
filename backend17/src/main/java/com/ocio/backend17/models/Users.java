@@ -1,5 +1,8 @@
 package com.ocio.backend17.models;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -7,7 +10,6 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "users", schema = "ocio_open", catalog = "")
 public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -28,23 +30,23 @@ public class Users {
     @Basic
     @Column(name = "punctuation_avg", nullable = false, precision = 0)
     private double punctuationAvg;
-    @Basic
+    @CreatedDate
     @Column(name = "createdAt", nullable = false)
     private Date createdAt;
     @Basic
     @Column(name = "lastconnection", nullable = true)
     private Timestamp lastconnection;
-    @Basic
+    @LastModifiedDate
     @Column(name = "updatedAt", nullable = false)
     private Date updatedAt;
     @OneToMany(mappedBy = "usersByAssistant")
-    private Collection<PersistenceAssistants> assistantsByEmail;
+    private Collection<Assistants> assistantsByEmail;
     @OneToMany(mappedBy = "usersByAssistant")
-    private Collection<PersistenceComments> commentsByEmail;
+    private Collection<Comments> commentsByEmail;
     @OneToMany(mappedBy = "usersByOrganizer")
-    private Collection<PersistenceEvents> eventsByEmail;
+    private Collection<Events> eventsByEmail;
     @OneToMany(mappedBy = "usersByAssistant")
-    private Collection<PersistencePunctuations> punctuationsByEmail;
+    private Collection<Punctuations> punctuationsByEmail;
 
     public String getEmail() {
         return email;
@@ -122,8 +124,8 @@ public class Users {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Users that = (Users) o;
-        return Double.compare(that.punctuationAvg, punctuationAvg) == 0 && Objects.equals(email, that.email) && Objects.equals(name, that.name) && Objects.equals(surname, that.surname) && Objects.equals(imageUrl, that.imageUrl) && Objects.equals(role, that.role) && Objects.equals(createdAt, that.createdAt) && Objects.equals(lastconnection, that.lastconnection) && Objects.equals(updatedAt, that.updatedAt);
+        Users users = (Users) o;
+        return Double.compare(users.punctuationAvg, punctuationAvg) == 0 && Objects.equals(email, users.email) && Objects.equals(name, users.name) && Objects.equals(surname, users.surname) && Objects.equals(imageUrl, users.imageUrl) && Objects.equals(role, users.role) && Objects.equals(createdAt, users.createdAt) && Objects.equals(lastconnection, users.lastconnection) && Objects.equals(updatedAt, users.updatedAt);
     }
 
     @Override
@@ -131,35 +133,35 @@ public class Users {
         return Objects.hash(email, name, surname, imageUrl, role, punctuationAvg, createdAt, lastconnection, updatedAt);
     }
 
-    public Collection<PersistenceAssistants> getAssistantsByEmail() {
+    public Collection<Assistants> getAssistantsByEmail() {
         return assistantsByEmail;
     }
 
-    public void setAssistantsByEmail(Collection<PersistenceAssistants> assistantsByEmail) {
+    public void setAssistantsByEmail(Collection<Assistants> assistantsByEmail) {
         this.assistantsByEmail = assistantsByEmail;
     }
 
-    public Collection<PersistenceComments> getCommentsByEmail() {
+    public Collection<Comments> getCommentsByEmail() {
         return commentsByEmail;
     }
 
-    public void setCommentsByEmail(Collection<PersistenceComments> commentsByEmail) {
+    public void setCommentsByEmail(Collection<Comments> commentsByEmail) {
         this.commentsByEmail = commentsByEmail;
     }
 
-    public Collection<PersistenceEvents> getEventsByEmail() {
+    public Collection<Events> getEventsByEmail() {
         return eventsByEmail;
     }
 
-    public void setEventsByEmail(Collection<PersistenceEvents> eventsByEmail) {
+    public void setEventsByEmail(Collection<Events> eventsByEmail) {
         this.eventsByEmail = eventsByEmail;
     }
 
-    public Collection<PersistencePunctuations> getPunctuationsByEmail() {
+    public Collection<Punctuations> getPunctuationsByEmail() {
         return punctuationsByEmail;
     }
 
-    public void setPunctuationsByEmail(Collection<PersistencePunctuations> punctuationsByEmail) {
+    public void setPunctuationsByEmail(Collection<Punctuations> punctuationsByEmail) {
         this.punctuationsByEmail = punctuationsByEmail;
     }
 }

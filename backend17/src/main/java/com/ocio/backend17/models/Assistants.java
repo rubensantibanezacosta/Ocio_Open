@@ -1,20 +1,22 @@
 package com.ocio.backend17.models;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "assistants", schema = "ocio_open", catalog = "")
-@IdClass(PersistenceAssistantsPK.class)
-public class PersistenceAssistants {
+@IdClass(AssistantsPK.class)
+public class Assistants {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "event_id", nullable = false, precision = 0)
+    @Column(name = "event_id", nullable = false, precision = 0, updatable = false, insertable = false)
     private double eventId;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "assistant", nullable = false, length = 200)
+    @Column(name = "assistant", nullable = false, length = 200, updatable = false, insertable = false)
     private String assistant;
     @Basic
     @Column(name = "attendance", nullable = false)
@@ -22,17 +24,17 @@ public class PersistenceAssistants {
     @Basic
     @Column(name = "excuse", nullable = true, length = 2000)
     private String excuse;
-    @Basic
+    @CreatedDate
     @Column(name = "createdAt", nullable = false)
     private Date createdAt;
-    @Basic
+    @LastModifiedDate
     @Column(name = "updatedAt", nullable = false)
     private Date updatedAt;
     @ManyToOne
-    @JoinColumn(name = "event_id", referencedColumnName = "event_id", nullable = false)
-    private PersistenceEvents eventsByEventId;
+    @JoinColumn(name = "event_id", referencedColumnName = "event_id", nullable = false, updatable = false, insertable = false)
+    private Events eventsByEventId;
     @ManyToOne
-    @JoinColumn(name = "assistant", referencedColumnName = "email", nullable = false)
+    @JoinColumn(name = "assistant", referencedColumnName = "email", nullable = false, updatable = false, insertable = false)
     private Users usersByAssistant;
 
     public double getEventId() {
@@ -87,7 +89,7 @@ public class PersistenceAssistants {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PersistenceAssistants that = (PersistenceAssistants) o;
+        Assistants that = (Assistants) o;
         return Double.compare(that.eventId, eventId) == 0 && attendance == that.attendance && Objects.equals(assistant, that.assistant) && Objects.equals(excuse, that.excuse) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
     }
 
@@ -96,11 +98,11 @@ public class PersistenceAssistants {
         return Objects.hash(eventId, assistant, attendance, excuse, createdAt, updatedAt);
     }
 
-    public PersistenceEvents getEventsByEventId() {
+    public Events getEventsByEventId() {
         return eventsByEventId;
     }
 
-    public void setEventsByEventId(PersistenceEvents eventsByEventId) {
+    public void setEventsByEventId(Events eventsByEventId) {
         this.eventsByEventId = eventsByEventId;
     }
 

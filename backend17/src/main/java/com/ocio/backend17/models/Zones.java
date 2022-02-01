@@ -1,12 +1,14 @@
 package com.ocio.backend17.models;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "zones", schema = "ocio_open", catalog = "")
-public class PersistenceZones {
+public class Zones {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false, length = 7)
@@ -17,10 +19,10 @@ public class PersistenceZones {
     @Basic
     @Column(name = "punctuationavg", nullable = true, precision = 0)
     private Double punctuationavg;
-    @Basic
+    @CreatedDate
     @Column(name = "createdAt", nullable = false)
     private Date createdAt;
-    @Basic
+    @LastModifiedDate
     @Column(name = "updatedAt", nullable = false)
     private Date updatedAt;
 
@@ -68,8 +70,8 @@ public class PersistenceZones {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PersistenceZones that = (PersistenceZones) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(punctuationavg, that.punctuationavg) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
+        Zones zones = (Zones) o;
+        return Objects.equals(id, zones.id) && Objects.equals(name, zones.name) && Objects.equals(punctuationavg, zones.punctuationavg) && Objects.equals(createdAt, zones.createdAt) && Objects.equals(updatedAt, zones.updatedAt);
     }
 
     @Override

@@ -1,12 +1,14 @@
 package com.ocio.backend17.models;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "roles", schema = "ocio_open", catalog = "")
-public class PersistenceRoles {
+public class Roles {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "number", nullable = false)
@@ -17,10 +19,10 @@ public class PersistenceRoles {
     @Basic
     @Column(name = "permissions", nullable = false, length = 2000)
     private String permissions;
-    @Basic
+    @CreatedDate
     @Column(name = "createdAt", nullable = false)
     private Date createdAt;
-    @Basic
+    @LastModifiedDate
     @Column(name = "updatedAt", nullable = false)
     private Date updatedAt;
 
@@ -68,8 +70,8 @@ public class PersistenceRoles {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PersistenceRoles that = (PersistenceRoles) o;
-        return number == that.number && Objects.equals(roleKey, that.roleKey) && Objects.equals(permissions, that.permissions) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
+        Roles roles = (Roles) o;
+        return number == roles.number && Objects.equals(roleKey, roles.roleKey) && Objects.equals(permissions, roles.permissions) && Objects.equals(createdAt, roles.createdAt) && Objects.equals(updatedAt, roles.updatedAt);
     }
 
     @Override

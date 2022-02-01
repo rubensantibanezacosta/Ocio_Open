@@ -1,35 +1,37 @@
 package com.ocio.backend17.models;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "punctuations", schema = "ocio_open", catalog = "")
-@IdClass(PersistencePunctuationsPK.class)
-public class PersistencePunctuations {
+@IdClass(PunctuationsPK.class)
+public class Punctuations {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "event_id", nullable = false, precision = 0)
+    @Column(name = "event_id", nullable = false, precision = 0, updatable = false, insertable = false)
     private double eventId;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "assistant", nullable = false, length = 200)
+    @Column(name = "assistant", nullable = false, length = 200, updatable = false, insertable = false)
     private String assistant;
     @Basic
     @Column(name = "punctuation", nullable = false, precision = 0)
     private double punctuation;
-    @Basic
+    @CreatedDate
     @Column(name = "createdAt", nullable = false)
     private Date createdAt;
-    @Basic
+    @LastModifiedDate
     @Column(name = "updatedAt", nullable = false)
     private Date updatedAt;
     @ManyToOne
-    @JoinColumn(name = "event_id", referencedColumnName = "event_id", nullable = false)
-    private PersistenceEvents eventsByEventId;
+    @JoinColumn(name = "event_id", referencedColumnName = "event_id", nullable = false, updatable = false, insertable = false)
+    private Events eventsByEventId;
     @ManyToOne
-    @JoinColumn(name = "assistant", referencedColumnName = "email", nullable = false)
+    @JoinColumn(name = "assistant", referencedColumnName = "email", nullable = false, updatable = false, insertable = false)
     private Users usersByAssistant;
 
     public double getEventId() {
@@ -76,7 +78,7 @@ public class PersistencePunctuations {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PersistencePunctuations that = (PersistencePunctuations) o;
+        Punctuations that = (Punctuations) o;
         return Double.compare(that.eventId, eventId) == 0 && Double.compare(that.punctuation, punctuation) == 0 && Objects.equals(assistant, that.assistant) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
     }
 
@@ -85,11 +87,11 @@ public class PersistencePunctuations {
         return Objects.hash(eventId, assistant, punctuation, createdAt, updatedAt);
     }
 
-    public PersistenceEvents getEventsByEventId() {
+    public Events getEventsByEventId() {
         return eventsByEventId;
     }
 
-    public void setEventsByEventId(PersistenceEvents eventsByEventId) {
+    public void setEventsByEventId(Events eventsByEventId) {
         this.eventsByEventId = eventsByEventId;
     }
 

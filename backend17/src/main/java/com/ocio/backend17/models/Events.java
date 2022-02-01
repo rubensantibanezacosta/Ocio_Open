@@ -1,5 +1,8 @@
 package com.ocio.backend17.models;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -7,11 +10,10 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "events", schema = "ocio_open", catalog = "")
-public class PersistenceEvents {
+public class Events {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "event_id", nullable = false, precision = 0)
+    @Column(name = "event_id", nullable = false, precision = 0, updatable = false, insertable = false)
     private double eventId;
     @Basic
     @Column(name = "tittle", nullable = false, length = 200)
@@ -32,29 +34,29 @@ public class PersistenceEvents {
     @Column(name = "punctuation_avg", nullable = false, precision = 0)
     private double punctuationAvg;
     @Basic
-    @Column(name = "organizer", nullable = false, length = 200)
+    @Column(name = "organizer", nullable = false, length = 200, updatable = false, insertable = false)
     private String organizer;
     @Basic
-    @Column(name = "image_id", nullable = true)
+    @Column(name = "image_id", nullable = true, updatable = false, insertable = false)
     private Integer imageId;
-    @Basic
+    @CreatedDate
     @Column(name = "createdAt", nullable = false)
     private Date createdAt;
-    @Basic
+    @LastModifiedDate
     @Column(name = "updatedAt", nullable = false)
     private Date updatedAt;
     @OneToMany(mappedBy = "eventsByEventId")
-    private Collection<PersistenceAssistants> assistantsByEventId;
+    private Collection<Assistants> assistantsByEventId;
     @OneToMany(mappedBy = "eventsByEventId")
-    private Collection<PersistenceComments> commentsByEventId;
+    private Collection<Comments> commentsByEventId;
     @ManyToOne
-    @JoinColumn(name = "organizer", referencedColumnName = "email", nullable = false)
+    @JoinColumn(name = "organizer", referencedColumnName = "email", nullable = false, updatable = false, insertable = false)
     private Users usersByOrganizer;
     @ManyToOne
-    @JoinColumn(name = "image_id", referencedColumnName = "id")
-    private PersistenceImages imagesByImageId;
+    @JoinColumn(name = "image_id", referencedColumnName = "id", updatable = false, insertable = false)
+    private Images imagesByImageId;
     @OneToMany(mappedBy = "eventsByEventId")
-    private Collection<PersistencePunctuations> punctuationsByEventId;
+    private Collection<Punctuations> punctuationsByEventId;
 
     public double getEventId() {
         return eventId;
@@ -148,8 +150,8 @@ public class PersistenceEvents {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PersistenceEvents that = (PersistenceEvents) o;
-        return Double.compare(that.eventId, eventId) == 0 && Double.compare(that.punctuationAvg, punctuationAvg) == 0 && Objects.equals(tittle, that.tittle) && Objects.equals(date, that.date) && Objects.equals(zone, that.zone) && Objects.equals(place, that.place) && Objects.equals(description, that.description) && Objects.equals(organizer, that.organizer) && Objects.equals(imageId, that.imageId) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
+        Events events = (Events) o;
+        return Double.compare(events.eventId, eventId) == 0 && Double.compare(events.punctuationAvg, punctuationAvg) == 0 && Objects.equals(tittle, events.tittle) && Objects.equals(date, events.date) && Objects.equals(zone, events.zone) && Objects.equals(place, events.place) && Objects.equals(description, events.description) && Objects.equals(organizer, events.organizer) && Objects.equals(imageId, events.imageId) && Objects.equals(createdAt, events.createdAt) && Objects.equals(updatedAt, events.updatedAt);
     }
 
     @Override
@@ -157,19 +159,19 @@ public class PersistenceEvents {
         return Objects.hash(eventId, tittle, date, zone, place, description, punctuationAvg, organizer, imageId, createdAt, updatedAt);
     }
 
-    public Collection<PersistenceAssistants> getAssistantsByEventId() {
+    public Collection<Assistants> getAssistantsByEventId() {
         return assistantsByEventId;
     }
 
-    public void setAssistantsByEventId(Collection<PersistenceAssistants> assistantsByEventId) {
+    public void setAssistantsByEventId(Collection<Assistants> assistantsByEventId) {
         this.assistantsByEventId = assistantsByEventId;
     }
 
-    public Collection<PersistenceComments> getCommentsByEventId() {
+    public Collection<Comments> getCommentsByEventId() {
         return commentsByEventId;
     }
 
-    public void setCommentsByEventId(Collection<PersistenceComments> commentsByEventId) {
+    public void setCommentsByEventId(Collection<Comments> commentsByEventId) {
         this.commentsByEventId = commentsByEventId;
     }
 
@@ -181,19 +183,19 @@ public class PersistenceEvents {
         this.usersByOrganizer = usersByOrganizer;
     }
 
-    public PersistenceImages getImagesByImageId() {
+    public Images getImagesByImageId() {
         return imagesByImageId;
     }
 
-    public void setImagesByImageId(PersistenceImages imagesByImageId) {
+    public void setImagesByImageId(Images imagesByImageId) {
         this.imagesByImageId = imagesByImageId;
     }
 
-    public Collection<PersistencePunctuations> getPunctuationsByEventId() {
+    public Collection<Punctuations> getPunctuationsByEventId() {
         return punctuationsByEventId;
     }
 
-    public void setPunctuationsByEventId(Collection<PersistencePunctuations> punctuationsByEventId) {
+    public void setPunctuationsByEventId(Collection<Punctuations> punctuationsByEventId) {
         this.punctuationsByEventId = punctuationsByEventId;
     }
 }
