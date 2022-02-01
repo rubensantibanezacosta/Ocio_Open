@@ -10,8 +10,8 @@ import java.util.Objects;
 public class Events {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "event_id", nullable = false, precision = 0)
-    private double eventId;
+    @Column(name = "eventid", nullable = false, precision = 0)
+    private double eventid;
     @Basic
     @Column(name = "tittle", nullable = false, length = 200)
     private String tittle;
@@ -28,31 +28,39 @@ public class Events {
     @Column(name = "description", nullable = true, length = 4000)
     private String description;
     @Basic
-    @Column(name = "punctuation_avg", nullable = false, precision = 0)
-    private double punctuationAvg;
+    @Column(name = "punctuationavg", nullable = false, precision = 0)
+    private double punctuationavg;
     @Basic
-    @Column(name = "organizer", nullable = false, length = 200)
+    @Column(name = "organizer", nullable = false, length = 200, insertable=false, updatable=false)
     private String organizer;
     @Basic
-    @Column(name = "image_id", nullable = true)
-    private Integer imageId;
+    @Column(name = "imageid", nullable = true, insertable=false, updatable=false)
+    private Integer imageid;
     @Basic
     @Column(name = "createdAt", nullable = false)
     private Date createdAt;
     @Basic
     @Column(name = "updatedAt", nullable = false)
     private Date updatedAt;
-    @OneToMany(mappedBy = "eventsByEventId")
-    private Collection<Assistants> assistantsByEventId;
-    @OneToMany(mappedBy = "eventsByEventId")
-    private Collection<Comments> commentsByEventId;
+    @OneToMany(mappedBy = "eventsByEventid")
+    private Collection<Assistants> assistantsByEventid;
+    @OneToMany(mappedBy = "eventsByEventid")
+    private Collection<Comments> commentsByEventid;
+    @ManyToOne
+    @JoinColumn(name = "organizer", referencedColumnName = "email", nullable = false)
+    private Users usersByOrganizer;
+    @ManyToOne
+    @JoinColumn(name = "imageid", referencedColumnName = "id")
+    private Images imagesByImageid;
+    @OneToMany(mappedBy = "eventsByEventid")
+    private Collection<Punctuations> punctuationsByEventid;
 
-    public double getEventId() {
-        return eventId;
+    public double getEventid() {
+        return eventid;
     }
 
-    public void setEventId(double eventId) {
-        this.eventId = eventId;
+    public void setEventid(double eventid) {
+        this.eventid = eventid;
     }
 
     public String getTittle() {
@@ -95,12 +103,12 @@ public class Events {
         this.description = description;
     }
 
-    public double getPunctuationAvg() {
-        return punctuationAvg;
+    public double getPunctuationavg() {
+        return punctuationavg;
     }
 
-    public void setPunctuationAvg(double punctuationAvg) {
-        this.punctuationAvg = punctuationAvg;
+    public void setPunctuationavg(double punctuationavg) {
+        this.punctuationavg = punctuationavg;
     }
 
     public String getOrganizer() {
@@ -111,12 +119,12 @@ public class Events {
         this.organizer = organizer;
     }
 
-    public Integer getImageId() {
-        return imageId;
+    public Integer getImageid() {
+        return imageid;
     }
 
-    public void setImageId(Integer imageId) {
-        this.imageId = imageId;
+    public void setImageid(Integer imageid) {
+        this.imageid = imageid;
     }
 
     public Date getCreatedAt() {
@@ -140,27 +148,51 @@ public class Events {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Events events = (Events) o;
-        return Double.compare(events.eventId, eventId) == 0 && Double.compare(events.punctuationAvg, punctuationAvg) == 0 && Objects.equals(tittle, events.tittle) && Objects.equals(date, events.date) && Objects.equals(zone, events.zone) && Objects.equals(place, events.place) && Objects.equals(description, events.description) && Objects.equals(organizer, events.organizer) && Objects.equals(imageId, events.imageId) && Objects.equals(createdAt, events.createdAt) && Objects.equals(updatedAt, events.updatedAt);
+        return Double.compare(events.eventid, eventid) == 0 && Double.compare(events.punctuationavg, punctuationavg) == 0 && Objects.equals(tittle, events.tittle) && Objects.equals(date, events.date) && Objects.equals(zone, events.zone) && Objects.equals(place, events.place) && Objects.equals(description, events.description) && Objects.equals(organizer, events.organizer) && Objects.equals(imageid, events.imageid) && Objects.equals(createdAt, events.createdAt) && Objects.equals(updatedAt, events.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(eventId, tittle, date, zone, place, description, punctuationAvg, organizer, imageId, createdAt, updatedAt);
+        return Objects.hash(eventid, tittle, date, zone, place, description, punctuationavg, organizer, imageid, createdAt, updatedAt);
     }
 
-    public Collection<Assistants> getAssistantsByEventId() {
-        return assistantsByEventId;
+    public Collection<Assistants> getAssistantsByEventid() {
+        return assistantsByEventid;
     }
 
-    public void setAssistantsByEventId(Collection<Assistants> assistantsByEventId) {
-        this.assistantsByEventId = assistantsByEventId;
+    public void setAssistantsByEventid(Collection<Assistants> assistantsByEventid) {
+        this.assistantsByEventid = assistantsByEventid;
     }
 
-    public Collection<Comments> getCommentsByEventId() {
-        return commentsByEventId;
+    public Collection<Comments> getCommentsByEventid() {
+        return commentsByEventid;
     }
 
-    public void setCommentsByEventId(Collection<Comments> commentsByEventId) {
-        this.commentsByEventId = commentsByEventId;
+    public void setCommentsByEventid(Collection<Comments> commentsByEventid) {
+        this.commentsByEventid = commentsByEventid;
+    }
+
+    public Users getUsersByOrganizer() {
+        return usersByOrganizer;
+    }
+
+    public void setUsersByOrganizer(Users usersByOrganizer) {
+        this.usersByOrganizer = usersByOrganizer;
+    }
+
+    public Images getImagesByImageid() {
+        return imagesByImageid;
+    }
+
+    public void setImagesByImageid(Images imagesByImageid) {
+        this.imagesByImageid = imagesByImageid;
+    }
+
+    public Collection<Punctuations> getPunctuationsByEventid() {
+        return punctuationsByEventid;
+    }
+
+    public void setPunctuationsByEventid(Collection<Punctuations> punctuationsByEventid) {
+        this.punctuationsByEventid = punctuationsByEventid;
     }
 }

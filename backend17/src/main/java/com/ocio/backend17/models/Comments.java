@@ -8,13 +8,13 @@ import java.util.Objects;
 public class Comments {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "comment_id", nullable = false, precision = 0)
-    private double commentId;
+    @Column(name = "commentid", nullable = false, precision = 0)
+    private double commentid;
     @Basic
-    @Column(name = "event_id", nullable = false, precision = 0)
-    private double eventId;
+    @Column(name = "eventid", nullable = false, precision = 0, insertable=false, updatable=false)
+    private double eventid;
     @Basic
-    @Column(name = "assistant", nullable = false, length = 200)
+    @Column(name = "assistant", nullable = false, length = 200, insertable=false, updatable=false)
     private String assistant;
     @Basic
     @Column(name = "comment", nullable = false, length = 2000)
@@ -22,21 +22,27 @@ public class Comments {
     @Basic
     @Column(name = "date", nullable = false)
     private Timestamp date;
+    @ManyToOne
+    @JoinColumn(name = "eventid", referencedColumnName = "eventid", nullable = false)
+    private Events eventsByEventid;
+    @ManyToOne
+    @JoinColumn(name = "assistant", referencedColumnName = "email", nullable = false)
+    private Users usersByAssistant;
 
-    public double getCommentId() {
-        return commentId;
+    public double getCommentid() {
+        return commentid;
     }
 
-    public void setCommentId(double commentId) {
-        this.commentId = commentId;
+    public void setCommentid(double commentid) {
+        this.commentid = commentid;
     }
 
-    public double getEventId() {
-        return eventId;
+    public double getEventid() {
+        return eventid;
     }
 
-    public void setEventId(double eventId) {
-        this.eventId = eventId;
+    public void setEventid(double eventid) {
+        this.eventid = eventid;
     }
 
     public String getAssistant() {
@@ -68,11 +74,27 @@ public class Comments {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Comments comments = (Comments) o;
-        return Double.compare(comments.commentId, commentId) == 0 && Double.compare(comments.eventId, eventId) == 0 && Objects.equals(assistant, comments.assistant) && Objects.equals(comment, comments.comment) && Objects.equals(date, comments.date);
+        return Double.compare(comments.commentid, commentid) == 0 && Double.compare(comments.eventid, eventid) == 0 && Objects.equals(assistant, comments.assistant) && Objects.equals(comment, comments.comment) && Objects.equals(date, comments.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(commentId, eventId, assistant, comment, date);
+        return Objects.hash(commentid, eventid, assistant, comment, date);
+    }
+
+    public Events getEventsByEventid() {
+        return eventsByEventid;
+    }
+
+    public void setEventsByEventid(Events eventsByEventid) {
+        this.eventsByEventid = eventsByEventid;
+    }
+
+    public Users getUsersByAssistant() {
+        return usersByAssistant;
+    }
+
+    public void setUsersByAssistant(Users usersByAssistant) {
+        this.usersByAssistant = usersByAssistant;
     }
 }

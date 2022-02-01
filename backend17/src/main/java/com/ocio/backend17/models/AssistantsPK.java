@@ -8,21 +8,21 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class AssistantsPK implements Serializable {
-    @Column(name = "event_id", nullable = false, precision = 0)
+    @Column(name = "eventid", nullable = false, precision = 0)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private double eventId;
+    private double eventid;
     @Column(name = "assistant", nullable = false, length = 200)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String assistant;
 
-    public double getEventId() {
-        return eventId;
+    public double getEventid() {
+        return eventid;
     }
 
-    public void setEventId(double eventId) {
-        this.eventId = eventId;
+    public void setEventid(double eventid) {
+        this.eventid = eventid;
     }
 
     public String getAssistant() {
@@ -38,11 +38,11 @@ public class AssistantsPK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AssistantsPK that = (AssistantsPK) o;
-        return Double.compare(that.eventId, eventId) == 0 && Objects.equals(assistant, that.assistant);
+        return Double.compare(that.eventid, eventid) == 0 && Objects.equals(assistant, that.assistant);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(eventId, assistant);
+        return Objects.hash(eventid, assistant);
     }
 }

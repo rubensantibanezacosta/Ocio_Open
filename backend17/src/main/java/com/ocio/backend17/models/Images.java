@@ -20,7 +20,7 @@ public class Images {
     @Basic
     @Column(name = "updatedAt", nullable = false)
     private Date updatedAt;
-    @OneToMany(mappedBy = "imagesByImageId")
+    @OneToMany(mappedBy = "imagesByImageid")
     private Collection<Events> eventsById;
 
     public int getId() {

@@ -9,11 +9,11 @@ import java.util.Objects;
 public class Punctuations {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "event_id", nullable = false, precision = 0)
-    private double eventId;
+    @Column(name = "eventid", nullable = false, precision = 0,  insertable=false, updatable=false)
+    private double eventid;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "assistant", nullable = false, length = 200)
+    @Column(name = "assistant", nullable = false, length = 200,insertable=false, updatable=false)
     private String assistant;
     @Basic
     @Column(name = "punctuation", nullable = false, precision = 0)
@@ -25,15 +25,18 @@ public class Punctuations {
     @Column(name = "updatedAt", nullable = false)
     private Date updatedAt;
     @ManyToOne
-    @JoinColumn(name = "event_id", referencedColumnName = "event_id", nullable = false)
-    private Events eventsByEventId;
+    @JoinColumn(name = "eventid", referencedColumnName = "eventid", nullable = false, insertable=false, updatable=false)
+    private Events eventsByEventid;
+    @ManyToOne
+    @JoinColumn(name = "assistant", referencedColumnName = "email", nullable = false, insertable=false, updatable=false)
+    private Users usersByAssistant;
 
-    public double getEventId() {
-        return eventId;
+    public double getEventid() {
+        return eventid;
     }
 
-    public void setEventId(double eventId) {
-        this.eventId = eventId;
+    public void setEventid(double eventid) {
+        this.eventid = eventid;
     }
 
     public String getAssistant() {
@@ -73,19 +76,27 @@ public class Punctuations {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Punctuations that = (Punctuations) o;
-        return Double.compare(that.eventId, eventId) == 0 && Double.compare(that.punctuation, punctuation) == 0 && Objects.equals(assistant, that.assistant) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
+        return Double.compare(that.eventid, eventid) == 0 && Double.compare(that.punctuation, punctuation) == 0 && Objects.equals(assistant, that.assistant) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(eventId, assistant, punctuation, createdAt, updatedAt);
+        return Objects.hash(eventid, assistant, punctuation, createdAt, updatedAt);
     }
 
-    public Events getEventsByEventId() {
-        return eventsByEventId;
+    public Events getEventsByEventid() {
+        return eventsByEventid;
     }
 
-    public void setEventsByEventId(Events eventsByEventId) {
-        this.eventsByEventId = eventsByEventId;
+    public void setEventsByEventid(Events eventsByEventid) {
+        this.eventsByEventid = eventsByEventid;
+    }
+
+    public Users getUsersByAssistant() {
+        return usersByAssistant;
+    }
+
+    public void setUsersByAssistant(Users usersByAssistant) {
+        this.usersByAssistant = usersByAssistant;
     }
 }
