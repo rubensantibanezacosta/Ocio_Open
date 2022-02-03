@@ -33,10 +33,6 @@ function userRoutes(app) {
   scopesValidationHandler(['read:users']),
     userController.getUserPosition);
 
-  router.put("/userpunctuationavg/",
-    passport.authenticate("jwt", { session: false }),
-    scopesValidationHandler(['update:users']),
-    userController.updateUserPunctuationAvg);
 
   router.delete("/:email",
     passport.authenticate("jwt", { session: false }),

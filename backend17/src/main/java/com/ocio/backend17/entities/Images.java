@@ -1,7 +1,4 @@
-package com.ocio.backend17.models;
-
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+package com.ocio.backend17.entities;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -17,13 +14,13 @@ public class Images {
     @Basic
     @Column(name = "url", nullable = false, length = 2000)
     private String url;
-    @CreatedDate
+    @Basic
     @Column(name = "createdAt", nullable = false)
     private Date createdAt;
-    @LastModifiedDate
+    @Basic
     @Column(name = "updatedAt", nullable = false)
     private Date updatedAt;
-    @OneToMany(mappedBy = "imagesByImageId")
+    @OneToMany(mappedBy = "imagesByImageid")
     private Collection<Events> eventsById;
 
     public int getId() {

@@ -1,6 +1,4 @@
-package com.ocio.backend17.models;
-
-import org.springframework.data.annotation.CreatedDate;
+package com.ocio.backend17.entities;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -10,41 +8,41 @@ import java.util.Objects;
 public class Comments {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "comment_id", nullable = false, precision = 0)
-    private double commentId;
+    @Column(name = "commentid", nullable = false, precision = 0)
+    private double commentid;
     @Basic
-    @Column(name = "event_id", nullable = false, precision = 0, updatable = false, insertable = false)
-    private double eventId;
+    @Column(name = "eventid", nullable = false, precision = 0)
+    private double eventid;
     @Basic
-    @Column(name = "assistant", nullable = false, length = 200, updatable = false, insertable = false)
+    @Column(name = "assistant", nullable = false, length = 200)
     private String assistant;
     @Basic
     @Column(name = "comment", nullable = false, length = 2000)
     private String comment;
-    @CreatedDate
+    @Basic
     @Column(name = "date", nullable = false)
     private Timestamp date;
     @ManyToOne
-    @JoinColumn(name = "event_id", referencedColumnName = "event_id", nullable = false, updatable = false, insertable = false)
-    private Events eventsByEventId;
+    @JoinColumn(name = "eventid", referencedColumnName = "eventid", nullable = false, updatable = false, insertable = false)
+    private Events eventsByEventid;
     @ManyToOne
     @JoinColumn(name = "assistant", referencedColumnName = "email", nullable = false, updatable = false, insertable = false)
     private Users usersByAssistant;
 
-    public double getCommentId() {
-        return commentId;
+    public double getCommentid() {
+        return commentid;
     }
 
-    public void setCommentId(double commentId) {
-        this.commentId = commentId;
+    public void setCommentid(double commentid) {
+        this.commentid = commentid;
     }
 
-    public double getEventId() {
-        return eventId;
+    public double getEventid() {
+        return eventid;
     }
 
-    public void setEventId(double eventId) {
-        this.eventId = eventId;
+    public void setEventid(double eventid) {
+        this.eventid = eventid;
     }
 
     public String getAssistant() {
@@ -76,20 +74,20 @@ public class Comments {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Comments comments = (Comments) o;
-        return Double.compare(comments.commentId, commentId) == 0 && Double.compare(comments.eventId, eventId) == 0 && Objects.equals(assistant, comments.assistant) && Objects.equals(comment, comments.comment) && Objects.equals(date, comments.date);
+        return Double.compare(comments.commentid, commentid) == 0 && Double.compare(comments.eventid, eventid) == 0 && Objects.equals(assistant, comments.assistant) && Objects.equals(comment, comments.comment) && Objects.equals(date, comments.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(commentId, eventId, assistant, comment, date);
+        return Objects.hash(commentid, eventid, assistant, comment, date);
     }
 
-    public Events getEventsByEventId() {
-        return eventsByEventId;
+    public Events getEventsByEventid() {
+        return eventsByEventid;
     }
 
-    public void setEventsByEventId(Events eventsByEventId) {
-        this.eventsByEventId = eventsByEventId;
+    public void setEventsByEventid(Events eventsByEventid) {
+        this.eventsByEventid = eventsByEventid;
     }
 
     public Users getUsersByAssistant() {

@@ -1,7 +1,4 @@
-package com.ocio.backend17.models;
-
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+package com.ocio.backend17.entities;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -12,8 +9,8 @@ import java.util.Objects;
 public class Punctuations {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "event_id", nullable = false, precision = 0, updatable = false, insertable = false)
-    private double eventId;
+    @Column(name = "eventid", nullable = false, precision = 0, updatable = false, insertable = false)
+    private double eventid;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "assistant", nullable = false, length = 200, updatable = false, insertable = false)
@@ -21,25 +18,25 @@ public class Punctuations {
     @Basic
     @Column(name = "punctuation", nullable = false, precision = 0)
     private double punctuation;
-    @CreatedDate
+    @Basic
     @Column(name = "createdAt", nullable = false)
     private Date createdAt;
-    @LastModifiedDate
+    @Basic
     @Column(name = "updatedAt", nullable = false)
     private Date updatedAt;
     @ManyToOne
-    @JoinColumn(name = "event_id", referencedColumnName = "event_id", nullable = false, updatable = false, insertable = false)
-    private Events eventsByEventId;
+    @JoinColumn(name = "eventid", referencedColumnName = "eventid", nullable = false, updatable = false, insertable = false)
+    private Events eventsByEventid;
     @ManyToOne
     @JoinColumn(name = "assistant", referencedColumnName = "email", nullable = false, updatable = false, insertable = false)
     private Users usersByAssistant;
 
-    public double getEventId() {
-        return eventId;
+    public double getEventid() {
+        return eventid;
     }
 
-    public void setEventId(double eventId) {
-        this.eventId = eventId;
+    public void setEventid(double eventid) {
+        this.eventid = eventid;
     }
 
     public String getAssistant() {
@@ -79,20 +76,20 @@ public class Punctuations {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Punctuations that = (Punctuations) o;
-        return Double.compare(that.eventId, eventId) == 0 && Double.compare(that.punctuation, punctuation) == 0 && Objects.equals(assistant, that.assistant) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
+        return Double.compare(that.eventid, eventid) == 0 && Double.compare(that.punctuation, punctuation) == 0 && Objects.equals(assistant, that.assistant) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(eventId, assistant, punctuation, createdAt, updatedAt);
+        return Objects.hash(eventid, assistant, punctuation, createdAt, updatedAt);
     }
 
-    public Events getEventsByEventId() {
-        return eventsByEventId;
+    public Events getEventsByEventid() {
+        return eventsByEventid;
     }
 
-    public void setEventsByEventId(Events eventsByEventId) {
-        this.eventsByEventId = eventsByEventId;
+    public void setEventsByEventid(Events eventsByEventid) {
+        this.eventsByEventid = eventsByEventid;
     }
 
     public Users getUsersByAssistant() {

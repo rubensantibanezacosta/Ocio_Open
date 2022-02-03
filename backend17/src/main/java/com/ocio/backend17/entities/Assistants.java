@@ -1,7 +1,4 @@
-package com.ocio.backend17.models;
-
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+package com.ocio.backend17.entities;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -12,11 +9,11 @@ import java.util.Objects;
 public class Assistants {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "event_id", nullable = false, precision = 0, updatable = false, insertable = false)
-    private double eventId;
+    @Column(name = "eventid", nullable = false, precision = 0)
+    private double eventid;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "assistant", nullable = false, length = 200, updatable = false, insertable = false)
+    @Column(name = "assistant", nullable = false, length = 200)
     private String assistant;
     @Basic
     @Column(name = "attendance", nullable = false)
@@ -24,25 +21,25 @@ public class Assistants {
     @Basic
     @Column(name = "excuse", nullable = true, length = 2000)
     private String excuse;
-    @CreatedDate
+    @Basic
     @Column(name = "createdAt", nullable = false)
     private Date createdAt;
-    @LastModifiedDate
+    @Basic
     @Column(name = "updatedAt", nullable = false)
     private Date updatedAt;
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "event_id", nullable = false, updatable = false, referencedColumnName = "event_id", insertable = false)
-    private Events eventsByEventId;
+    @ManyToOne
+    @JoinColumn(name = "eventid", referencedColumnName = "eventid", nullable = false, updatable = false, insertable = false)
+    private Events eventsByEventid;
     @ManyToOne
     @JoinColumn(name = "assistant", referencedColumnName = "email", nullable = false, updatable = false, insertable = false)
     private Users usersByAssistant;
 
-    public double getEventId() {
-        return eventId;
+    public double getEventid() {
+        return eventid;
     }
 
-    public void setEventId(double eventId) {
-        this.eventId = eventId;
+    public void setEventid(double eventid) {
+        this.eventid = eventid;
     }
 
     public String getAssistant() {
@@ -90,20 +87,20 @@ public class Assistants {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Assistants that = (Assistants) o;
-        return Double.compare(that.eventId, eventId) == 0 && attendance == that.attendance && Objects.equals(assistant, that.assistant) && Objects.equals(excuse, that.excuse) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
+        return Double.compare(that.eventid, eventid) == 0 && attendance == that.attendance && Objects.equals(assistant, that.assistant) && Objects.equals(excuse, that.excuse) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(eventId, assistant, attendance, excuse, createdAt, updatedAt);
+        return Objects.hash(eventid, assistant, attendance, excuse, createdAt, updatedAt);
     }
 
-    public Events getEventsByEventId() {
-        return eventsByEventId;
+    public Events getEventsByEventid() {
+        return eventsByEventid;
     }
 
-    public void setEventsByEventId(Events eventsByEventId) {
-        this.eventsByEventId = eventsByEventId;
+    public void setEventsByEventid(Events eventsByEventid) {
+        this.eventsByEventid = eventsByEventid;
     }
 
     public Users getUsersByAssistant() {

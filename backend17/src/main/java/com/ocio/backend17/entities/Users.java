@@ -1,7 +1,4 @@
-package com.ocio.backend17.models;
-
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+package com.ocio.backend17.entities;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -22,21 +19,21 @@ public class Users {
     @Column(name = "surname", nullable = false, length = 400)
     private String surname;
     @Basic
-    @Column(name = "image_url", nullable = false, length = 2000)
-    private String imageUrl;
+    @Column(name = "imageurl", nullable = false, length = 2000)
+    private String imageurl;
     @Basic
     @Column(name = "role", nullable = false, length = 50)
     private String role;
     @Basic
-    @Column(name = "punctuation_avg", nullable = false, precision = 0)
-    private double punctuationAvg;
-    @CreatedDate
+    @Column(name = "punctuationavg", nullable = false, precision = 0)
+    private double punctuationavg;
+    @Basic
     @Column(name = "createdAt", nullable = false)
     private Date createdAt;
     @Basic
     @Column(name = "lastconnection", nullable = true)
     private Timestamp lastconnection;
-    @LastModifiedDate
+    @Basic
     @Column(name = "updatedAt", nullable = false)
     private Date updatedAt;
     @OneToMany(mappedBy = "usersByAssistant")
@@ -72,12 +69,12 @@ public class Users {
         this.surname = surname;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImageurl() {
+        return imageurl;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageurl(String imageurl) {
+        this.imageurl = imageurl;
     }
 
     public String getRole() {
@@ -88,12 +85,12 @@ public class Users {
         this.role = role;
     }
 
-    public double getPunctuationAvg() {
-        return punctuationAvg;
+    public double getPunctuationavg() {
+        return punctuationavg;
     }
 
-    public void setPunctuationAvg(double punctuationAvg) {
-        this.punctuationAvg = punctuationAvg;
+    public void setPunctuationavg(double punctuationavg) {
+        this.punctuationavg = punctuationavg;
     }
 
     public Date getCreatedAt() {
@@ -125,12 +122,12 @@ public class Users {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Users users = (Users) o;
-        return Double.compare(users.punctuationAvg, punctuationAvg) == 0 && Objects.equals(email, users.email) && Objects.equals(name, users.name) && Objects.equals(surname, users.surname) && Objects.equals(imageUrl, users.imageUrl) && Objects.equals(role, users.role) && Objects.equals(createdAt, users.createdAt) && Objects.equals(lastconnection, users.lastconnection) && Objects.equals(updatedAt, users.updatedAt);
+        return Double.compare(users.punctuationavg, punctuationavg) == 0 && Objects.equals(email, users.email) && Objects.equals(name, users.name) && Objects.equals(surname, users.surname) && Objects.equals(imageurl, users.imageurl) && Objects.equals(role, users.role) && Objects.equals(createdAt, users.createdAt) && Objects.equals(lastconnection, users.lastconnection) && Objects.equals(updatedAt, users.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, name, surname, imageUrl, role, punctuationAvg, createdAt, lastconnection, updatedAt);
+        return Objects.hash(email, name, surname, imageurl, role, punctuationavg, createdAt, lastconnection, updatedAt);
     }
 
     public Collection<Assistants> getAssistantsByEmail() {

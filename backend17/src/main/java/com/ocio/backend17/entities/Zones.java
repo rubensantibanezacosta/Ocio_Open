@@ -1,7 +1,4 @@
-package com.ocio.backend17.models;
-
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+package com.ocio.backend17.entities;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -19,10 +16,10 @@ public class Zones {
     @Basic
     @Column(name = "punctuationavg", nullable = true, precision = 0)
     private Double punctuationavg;
-    @CreatedDate
+    @Basic
     @Column(name = "createdAt", nullable = false)
     private Date createdAt;
-    @LastModifiedDate
+    @Basic
     @Column(name = "updatedAt", nullable = false)
     private Date updatedAt;
 
