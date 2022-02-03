@@ -30,8 +30,8 @@ public class Assistants {
     @LastModifiedDate
     @Column(name = "updatedAt", nullable = false)
     private Date updatedAt;
-    @ManyToOne
-    @JoinColumn(name = "event_id", referencedColumnName = "event_id", nullable = false, updatable = false, insertable = false)
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "event_id", nullable = false, updatable = false, referencedColumnName = "event_id", insertable = false)
     private Events eventsByEventId;
     @ManyToOne
     @JoinColumn(name = "assistant", referencedColumnName = "email", nullable = false, updatable = false, insertable = false)
