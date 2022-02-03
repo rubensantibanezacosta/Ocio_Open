@@ -28,22 +28,22 @@ public class Users {
     @Column(name = "punctuationavg", nullable = false, precision = 0)
     private double punctuationavg;
     @Basic
-    @Column(name = "createdAt", nullable = false)
+    @Column(name = "createdat", nullable = false)
     private Date createdAt;
     @Basic
     @Column(name = "lastconnection", nullable = true)
     private Timestamp lastconnection;
     @Basic
-    @Column(name = "updatedAt", nullable = false)
+    @Column(name = "updatedat", nullable = false)
     private Date updatedAt;
-    @OneToMany(mappedBy = "usersByAssistant")
-    private Collection<Assistants> assistantsByEmail;
-    @OneToMany(mappedBy = "usersByAssistant")
-    private Collection<Comments> commentsByEmail;
-    @OneToMany(mappedBy = "usersByOrganizer")
-    private Collection<Events> eventsByEmail;
-    @OneToMany(mappedBy = "usersByAssistant")
-    private Collection<Punctuations> punctuationsByEmail;
+//    @OneToMany(mappedBy = "usersByAssistant")
+//    private Collection<Assistants> assistantsByEmail;
+//    @OneToMany(mappedBy = "usersByAssistant")
+//    private Collection<Comments> commentsByEmail;
+//    @OneToMany(mappedBy = "usersByOrganizer")
+//    private Collection<Events> eventsByEmail;
+//    @OneToMany(mappedBy = "usersByAssistant")
+//    private Collection<Punctuations> punctuationsByEmail;
 
     public String getEmail() {
         return email;
@@ -130,35 +130,35 @@ public class Users {
         return Objects.hash(email, name, surname, imageurl, role, punctuationavg, createdAt, lastconnection, updatedAt);
     }
 
-    public Collection<Assistants> getAssistantsByEmail() {
-        return assistantsByEmail;
-    }
-
-    public void setAssistantsByEmail(Collection<Assistants> assistantsByEmail) {
-        this.assistantsByEmail = assistantsByEmail;
-    }
-
-    public Collection<Comments> getCommentsByEmail() {
-        return commentsByEmail;
-    }
-
-    public void setCommentsByEmail(Collection<Comments> commentsByEmail) {
-        this.commentsByEmail = commentsByEmail;
-    }
-
-    public Collection<Events> getEventsByEmail() {
-        return eventsByEmail;
-    }
-
-    public void setEventsByEmail(Collection<Events> eventsByEmail) {
-        this.eventsByEmail = eventsByEmail;
-    }
-
-    public Collection<Punctuations> getPunctuationsByEmail() {
-        return punctuationsByEmail;
-    }
-
-    public void setPunctuationsByEmail(Collection<Punctuations> punctuationsByEmail) {
-        this.punctuationsByEmail = punctuationsByEmail;
-    }
+//    public Collection<Assistants> getAssistantsByEmail() {
+//        return assistantsByEmail;
+//    }
+//
+//    public void setAssistantsByEmail(Collection<Assistants> assistantsByEmail) {
+//        this.assistantsByEmail = assistantsByEmail;
+//    }
+//
+//    public Collection<Comments> getCommentsByEmail() {
+//        return commentsByEmail;
+//    }
+//
+//    public void setCommentsByEmail(Collection<Comments> commentsByEmail) {
+//        this.commentsByEmail = commentsByEmail;
+//    }
+//
+//    public Collection<Events> getEventsByEmail() {
+//        return eventsByEmail;
+//    }
+//
+//    public void setEventsByEmail(Collection<Events> eventsByEmail) {
+//        this.eventsByEmail = eventsByEmail;
+//    }
+//
+//    public Collection<Punctuations> getPunctuationsByEmail() {
+//        return punctuationsByEmail;
+//    }
+//
+//    public void setPunctuationsByEmail(Collection<Punctuations> punctuationsByEmail) {
+//        this.punctuationsByEmail = punctuationsByEmail;
+//    }
 }
