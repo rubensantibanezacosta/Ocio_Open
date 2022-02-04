@@ -1,7 +1,7 @@
 package com.ocio.backend17.controllers;
 
 import com.ocio.backend17.entities.Zones;
-import com.ocio.backend17.services.IZones;
+import com.ocio.backend17.services.IZonesImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +17,10 @@ import java.util.List;
 @RestController
 public class ZonesController {
     @Autowired
-    IZones iZones;
+    IZonesImpl iZonesImpl;
 
     @GetMapping("/")
     public ResponseEntity<List<Zones>> getAll(){
-        return new ResponseEntity(iZones.getAll(), HttpStatus.OK);
+        return new ResponseEntity(iZonesImpl.getAll(), HttpStatus.OK);
     }
 }

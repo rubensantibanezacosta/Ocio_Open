@@ -1,15 +1,21 @@
 package com.ocio.backend17.config;
 
 
-public class IConfigImpl implements IConfig{
-    private String nombre;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-    public IConfigImpl(String nombre) {
-        this.nombre = nombre;
+@Component
+public class IConfigImpl implements IConfig{
+    @Autowired Config config;
+
+
+    @Override
+    public String getJwtSecret() {
+        return config.getJwtSecret();
     }
 
     @Override
-    public String getName() {
-        return nombre;
+    public String getUserRoleKey() {
+        return config.getUserrolekey();
     }
 }

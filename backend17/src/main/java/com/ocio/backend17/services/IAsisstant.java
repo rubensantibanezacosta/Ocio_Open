@@ -2,12 +2,12 @@ package com.ocio.backend17.services;
 
 import com.ocio.backend17.entities.Assistants;
 import com.ocio.backend17.entities.AssistantsPK;
-import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
+
 public interface IAsisstant {
     Assistants add(Assistants assistant);
     Optional<Assistants> findByPk(AssistantsPK assistantsPK);

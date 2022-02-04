@@ -79,5 +79,16 @@ public class Punctuations {
         return Objects.hash(event_id, assistant, punctuation, createdAt, updatedAt);
 
     }
+
+    @ManyToOne(optional = false)
+    private Events events;
+
+    public Events getEvents() {
+        return events;
+    }
+
+    public void setEvents(Events events) {
+        this.events = events;
+    }
 }
 

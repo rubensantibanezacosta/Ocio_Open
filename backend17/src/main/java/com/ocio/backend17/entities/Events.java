@@ -52,7 +52,7 @@ public class Events {
     @ManyToOne
     @JoinColumn(name = "imageid", referencedColumnName = "id" , updatable = false, insertable = false)
     private Images imagesByImageid;
-    @OneToMany(mappedBy = "eventsByEventid")
+    @OneToMany(mappedBy = "events")
     private Collection<Punctuations> punctuationsByEventid;
 
     public double getEvent_id() {

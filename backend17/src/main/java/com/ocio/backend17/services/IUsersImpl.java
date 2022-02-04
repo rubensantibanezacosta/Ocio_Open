@@ -52,7 +52,7 @@ UsersDao usersDao;
     public int getUserPosition(String email) {
         if(usersDao.findById(email).isPresent()) {
             Users user = usersDao.findById(email).get();
-            List<Users> orderedUsers = usersDao.findUsersOrderByPuntuacion();
+            List<Users> orderedUsers = usersDao.findUsersOrderByPunctuacion();
             return orderedUsers.indexOf(user)+1;
         }else{
             return 0;

@@ -4,11 +4,12 @@ import com.ocio.backend17.dao.AssistantDao;
 import com.ocio.backend17.entities.Assistants;
 import com.ocio.backend17.entities.AssistantsPK;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class IAssistantImpl implements IAsisstant {
     @Autowired
     AssistantDao assistantDao;
@@ -24,7 +25,7 @@ public class IAssistantImpl implements IAsisstant {
 
     @Override
     public List<Assistants> findByEventAndAttendance(Double event_id, Boolean attendee) {
-        return assistantDao.findByEventidAndAttendance(event_id,attendee);
+        return assistantDao.findAllByEvent_idAndAttendance(event_id,attendee);
     }
 
     @Override

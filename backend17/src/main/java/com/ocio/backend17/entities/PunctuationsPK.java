@@ -11,18 +11,18 @@ public class PunctuationsPK implements Serializable {
     @Column(name = "eventid", nullable = false, precision = 0)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private double eventid;
+    private double event_id;
     @Column(name = "assistant", nullable = false, length = 200)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String assistant;
 
     public double getEvent_id() {
-        return eventid;
+        return event_id;
     }
 
     public void setEvent_id(double eventid) {
-        this.eventid = eventid;
+        this.event_id = eventid;
     }
 
     public String getAssistant() {
@@ -38,11 +38,11 @@ public class PunctuationsPK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PunctuationsPK that = (PunctuationsPK) o;
-        return Double.compare(that.eventid, eventid) == 0 && Objects.equals(assistant, that.assistant);
+        return Double.compare(that.event_id, event_id) == 0 && Objects.equals(assistant, that.assistant);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(eventid, assistant);
+        return Objects.hash(event_id, assistant);
     }
 }
