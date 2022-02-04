@@ -19,10 +19,10 @@ public class Punctuations {
     @Column(name = "punctuation", nullable = false, precision = 0)
     private double punctuation;
     @Basic
-    @Column(name = "createdAt", nullable = false)
+    @Column(name = "createdat", nullable = false)
     private Date createdAt;
     @Basic
-    @Column(name = "updatedAt", nullable = false)
+    @Column(name = "updatedat", nullable = false)
     private Date updatedAt;
     @ManyToOne
     @JoinColumn(name = "eventid", referencedColumnName = "eventid", nullable = false, updatable = false, insertable = false)

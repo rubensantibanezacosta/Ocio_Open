@@ -19,13 +19,13 @@ public class Users {
     @Column(name = "surname", nullable = false, length = 400)
     private String surname;
     @Basic
-    @Column(name = "imageurl", nullable = false, length = 2000)
+    @Column(name = "image_url", nullable = false, length = 2000)
     private String imageurl;
     @Basic
     @Column(name = "role", nullable = false, length = 50)
     private String role;
     @Basic
-    @Column(name = "punctuationavg", nullable = false, precision = 0)
+    @Column(name = "punctuation_avg", nullable = false, precision = 0)
     private double punctuationavg;
     @Basic
     @Column(name = "createdat", nullable = false)

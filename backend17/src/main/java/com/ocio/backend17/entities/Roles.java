@@ -17,10 +17,10 @@ public class Roles {
     @Column(name = "permissions", nullable = false, length = 2000)
     private String permissions;
     @Basic
-    @Column(name = "createdAt", nullable = false)
+    @Column(name = "createdat", nullable = false)
     private Date createdAt;
     @Basic
-    @Column(name = "updatedAt", nullable = false)
+    @Column(name = "updatedat", nullable = false)
     private Date updatedAt;
 
     public int getNumber() {

@@ -17,6 +17,14 @@ public class AssistantsPK implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String assistant;
 
+    public AssistantsPK() {
+    }
+
+    public AssistantsPK(double eventid, String assistant) {
+        this.eventid = eventid;
+        this.assistant = assistant;
+    }
+
     public double getEventid() {
         return eventid;
     }

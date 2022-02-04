@@ -17,19 +17,17 @@ public class Assistants {
     private String assistant;
     @Basic
     @Column(name = "attendance", nullable = false)
-    private byte attendance;
+    private Boolean attendance;
     @Basic
     @Column(name = "excuse", nullable = true, length = 2000)
     private String excuse;
     @Basic
-    @Column(name = "createdAt", nullable = false)
+    @Column(name = "createdat", nullable = false)
     private Date createdAt;
     @Basic
-    @Column(name = "updatedAt", nullable = false)
+    @Column(name = "updatedat", nullable = false)
     private Date updatedAt;
-    @ManyToOne
-    @JoinColumn(name = "eventid", referencedColumnName = "eventid", nullable = false, updatable = false, insertable = false)
-    private Events eventsByEventid;
+
     @ManyToOne
     @JoinColumn(name = "assistant", referencedColumnName = "email", nullable = false, updatable = false, insertable = false)
     private Users usersByAssistant;
@@ -50,11 +48,11 @@ public class Assistants {
         this.assistant = assistant;
     }
 
-    public byte getAttendance() {
+    public Boolean getAttendance() {
         return attendance;
     }
 
-    public void setAttendance(byte attendance) {
+    public void setAttendance(Boolean attendance) {
         this.attendance = attendance;
     }
 
@@ -93,14 +91,6 @@ public class Assistants {
     @Override
     public int hashCode() {
         return Objects.hash(eventid, assistant, attendance, excuse, createdAt, updatedAt);
-    }
-
-    public Events getEventsByEventid() {
-        return eventsByEventid;
-    }
-
-    public void setEventsByEventid(Events eventsByEventid) {
-        this.eventsByEventid = eventsByEventid;
     }
 
     public Users getUsersByAssistant() {

@@ -37,10 +37,10 @@ public class Events {
     @Column(name = "imageid", nullable = true)
     private Integer imageid;
     @Basic
-    @Column(name = "createdAt", nullable = false)
+    @Column(name = "createdat", nullable = false)
     private Date createdAt;
     @Basic
-    @Column(name = "updatedAt", nullable = false)
+    @Column(name = "updatedat", nullable = false)
     private Date updatedAt;
     @OneToMany(mappedBy = "eventsByEventid")
     private Collection<Assistants> assistantsByEventid;
