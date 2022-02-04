@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public class ICommentsImpl implements IComments {
     @Autowired
@@ -26,5 +27,10 @@ public class ICommentsImpl implements IComments {
     @Override
     public int deleteById(Double id) {
         return 0;
+    }
+
+    @Override
+    public Optional<Comments> findbyId(Double id) {
+        return commentsDao.findById(id);
     }
 }

@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface UsersDao extends CrudRepository<Users, String> {
-    @Query("Select u from Users u order by u.punctuationavg desc")
+    @Query("Select u from Users u order by u.punctuation_avg desc")
     List<Users> findUsersOrderByPuntuacion();
 }

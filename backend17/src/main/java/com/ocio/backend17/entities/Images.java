@@ -20,8 +20,7 @@ public class Images {
     @Basic
     @Column(name = "updatedat", nullable = false)
     private Date updatedAt;
-    @OneToMany(mappedBy = "imagesByImageid")
-    private Collection<Events> eventsById;
+
 
     public int getId() {
         return id;
@@ -68,11 +67,5 @@ public class Images {
         return Objects.hash(id, url, createdAt, updatedAt);
     }
 
-    public Collection<Events> getEventsById() {
-        return eventsById;
-    }
 
-    public void setEventsById(Collection<Events> eventsById) {
-        this.eventsById = eventsById;
-    }
 }

@@ -25,7 +25,7 @@ public class AssistantController {
     ResponseEntity<?> createOrUpdateUser(@RequestBody String jsonAssistant) throws JsonProcessingException {
         ObjectMapper om = new ObjectMapper();
         Assistants assistant=om.readValue(jsonAssistant,Assistants.class);
-        if(!(assistant.getEventid()>0)){
+        if(!(assistant.getEvent_id()>0)){
             return new ResponseEntity<>(new ResponseMessageDto("Fields cannot be emplty"), HttpStatus.BAD_REQUEST);
         }else{
             return new ResponseEntity<>(iAsisstant.add(assistant), HttpStatus.CREATED);

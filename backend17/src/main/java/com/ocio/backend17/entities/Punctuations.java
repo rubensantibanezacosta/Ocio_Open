@@ -10,7 +10,7 @@ public class Punctuations {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "eventid", nullable = false, precision = 0, updatable = false, insertable = false)
-    private double eventid;
+    private double event_id;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "assistant", nullable = false, length = 200, updatable = false, insertable = false)
@@ -24,19 +24,14 @@ public class Punctuations {
     @Basic
     @Column(name = "updatedat", nullable = false)
     private Date updatedAt;
-    @ManyToOne
-    @JoinColumn(name = "eventid", referencedColumnName = "eventid", nullable = false, updatable = false, insertable = false)
-    private Events eventsByEventid;
-    @ManyToOne
-    @JoinColumn(name = "assistant", referencedColumnName = "email", nullable = false, updatable = false, insertable = false)
-    private Users usersByAssistant;
 
-    public double getEventid() {
-        return eventid;
+
+    public double getEvent_id() {
+        return event_id;
     }
 
-    public void setEventid(double eventid) {
-        this.eventid = eventid;
+    public void setEvent_id(double eventid) {
+        this.event_id = eventid;
     }
 
     public String getAssistant() {
@@ -76,27 +71,13 @@ public class Punctuations {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Punctuations that = (Punctuations) o;
-        return Double.compare(that.eventid, eventid) == 0 && Double.compare(that.punctuation, punctuation) == 0 && Objects.equals(assistant, that.assistant) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
+        return Double.compare(that.event_id, event_id) == 0 && Double.compare(that.punctuation, punctuation) == 0 && Objects.equals(assistant, that.assistant) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(eventid, assistant, punctuation, createdAt, updatedAt);
-    }
+        return Objects.hash(event_id, assistant, punctuation, createdAt, updatedAt);
 
-    public Events getEventsByEventid() {
-        return eventsByEventid;
-    }
-
-    public void setEventsByEventid(Events eventsByEventid) {
-        this.eventsByEventid = eventsByEventid;
-    }
-
-    public Users getUsersByAssistant() {
-        return usersByAssistant;
-    }
-
-    public void setUsersByAssistant(Users usersByAssistant) {
-        this.usersByAssistant = usersByAssistant;
     }
 }
+

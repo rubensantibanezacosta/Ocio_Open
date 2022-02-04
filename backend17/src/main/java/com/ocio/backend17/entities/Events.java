@@ -11,7 +11,7 @@ public class Events {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "eventid", nullable = false, precision = 0)
-    private double eventid;
+    private double event_id;
     @Basic
     @Column(name = "tittle", nullable = false, length = 200)
     private String tittle;
@@ -29,23 +29,23 @@ public class Events {
     private String description;
     @Basic
     @Column(name = "punctuationavg", nullable = false, precision = 0)
-    private double punctuationavg;
+    private double punctuation_avg;
     @Basic
     @Column(name = "organizer", nullable = false, length = 200)
     private String organizer;
     @Basic
     @Column(name = "imageid", nullable = true)
-    private Integer imageid;
+    private Integer image_id;
     @Basic
     @Column(name = "createdat", nullable = false)
     private Date createdAt;
     @Basic
     @Column(name = "updatedat", nullable = false)
     private Date updatedAt;
-    @OneToMany(mappedBy = "eventsByEventid")
-    private Collection<Assistants> assistantsByEventid;
-    @OneToMany(mappedBy = "eventsByEventid")
-    private Collection<Comments> commentsByEventid;
+    @OneToMany(mappedBy = "events")
+    private Collection<Assistants> assistants;
+    @OneToMany(mappedBy = "events")
+    private Collection<Comments> comments;
     @ManyToOne
     @JoinColumn(name = "organizer", referencedColumnName = "email", nullable = false, updatable = false, insertable = false)
     private Users usersByOrganizer;
@@ -55,12 +55,12 @@ public class Events {
     @OneToMany(mappedBy = "eventsByEventid")
     private Collection<Punctuations> punctuationsByEventid;
 
-    public double getEventid() {
-        return eventid;
+    public double getEvent_id() {
+        return event_id;
     }
 
-    public void setEventid(double eventid) {
-        this.eventid = eventid;
+    public void setEvent_id(double eventid) {
+        this.event_id = eventid;
     }
 
     public String getTittle() {
@@ -103,12 +103,12 @@ public class Events {
         this.description = description;
     }
 
-    public double getPunctuationavg() {
-        return punctuationavg;
+    public double getPunctuation_avg() {
+        return punctuation_avg;
     }
 
-    public void setPunctuationavg(double punctuationavg) {
-        this.punctuationavg = punctuationavg;
+    public void setPunctuation_avg(double punctuationavg) {
+        this.punctuation_avg = punctuationavg;
     }
 
     public String getOrganizer() {
@@ -119,12 +119,12 @@ public class Events {
         this.organizer = organizer;
     }
 
-    public Integer getImageid() {
-        return imageid;
+    public Integer getImage_id() {
+        return image_id;
     }
 
-    public void setImageid(Integer imageid) {
-        this.imageid = imageid;
+    public void setImage_id(Integer imageid) {
+        this.image_id = imageid;
     }
 
     public Date getCreatedAt() {
@@ -148,28 +148,28 @@ public class Events {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Events events = (Events) o;
-        return Double.compare(events.eventid, eventid) == 0 && Double.compare(events.punctuationavg, punctuationavg) == 0 && Objects.equals(tittle, events.tittle) && Objects.equals(date, events.date) && Objects.equals(zone, events.zone) && Objects.equals(place, events.place) && Objects.equals(description, events.description) && Objects.equals(organizer, events.organizer) && Objects.equals(imageid, events.imageid) && Objects.equals(createdAt, events.createdAt) && Objects.equals(updatedAt, events.updatedAt);
+        return Double.compare(events.event_id, event_id) == 0 && Double.compare(events.punctuation_avg, punctuation_avg) == 0 && Objects.equals(tittle, events.tittle) && Objects.equals(date, events.date) && Objects.equals(zone, events.zone) && Objects.equals(place, events.place) && Objects.equals(description, events.description) && Objects.equals(organizer, events.organizer) && Objects.equals(image_id, events.image_id) && Objects.equals(createdAt, events.createdAt) && Objects.equals(updatedAt, events.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(eventid, tittle, date, zone, place, description, punctuationavg, organizer, imageid, createdAt, updatedAt);
+        return Objects.hash(event_id, tittle, date, zone, place, description, punctuation_avg, organizer, image_id, createdAt, updatedAt);
     }
 
     public Collection<Assistants> getAssistantsByEventid() {
-        return assistantsByEventid;
+        return assistants;
     }
 
     public void setAssistantsByEventid(Collection<Assistants> assistantsByEventid) {
-        this.assistantsByEventid = assistantsByEventid;
+        this.assistants= assistantsByEventid;
     }
 
     public Collection<Comments> getCommentsByEventid() {
-        return commentsByEventid;
+        return comments;
     }
 
     public void setCommentsByEventid(Collection<Comments> commentsByEventid) {
-        this.commentsByEventid = commentsByEventid;
+        this.comments = commentsByEventid;
     }
 
     public Users getUsersByOrganizer() {

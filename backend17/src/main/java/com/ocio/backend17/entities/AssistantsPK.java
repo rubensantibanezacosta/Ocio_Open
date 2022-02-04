@@ -25,11 +25,11 @@ public class AssistantsPK implements Serializable {
         this.assistant = assistant;
     }
 
-    public double getEventid() {
+    public double getEvent_id() {
         return eventid;
     }
 
-    public void setEventid(double eventid) {
+    public void setEvent_id(double eventid) {
         this.eventid = eventid;
     }
 

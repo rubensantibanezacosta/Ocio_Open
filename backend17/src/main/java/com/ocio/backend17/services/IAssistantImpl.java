@@ -47,8 +47,8 @@ public class IAssistantImpl implements IAsisstant {
     @Transactional
     @Override
     public int updateAssistant(Assistants assistants) {
-        if (assistantDao.findById(new AssistantsPK(assistants.getEventid(),assistants.getAssistant())).isPresent()) {
-            Assistants newAssistant = assistantDao.findById(new AssistantsPK(assistants.getEventid(),assistants.getAssistant())).get();
+        if (assistantDao.findById(new AssistantsPK(assistants.getEvent_id(),assistants.getAssistant())).isPresent()) {
+            Assistants newAssistant = assistantDao.findById(new AssistantsPK(assistants.getEvent_id(),assistants.getAssistant())).get();
             newAssistant.setAttendance(assistants.getAttendance());
             newAssistant.setExcuse(assistants.getExcuse());
             assistantDao.save(newAssistant);

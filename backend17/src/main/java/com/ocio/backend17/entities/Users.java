@@ -3,7 +3,6 @@ package com.ocio.backend17.entities;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -19,14 +18,14 @@ public class Users {
     @Column(name = "surname", nullable = false, length = 400)
     private String surname;
     @Basic
-    @Column(name = "image_url", nullable = false, length = 2000)
-    private String imageurl;
+    @Column(name = "imageurl", nullable = false, length = 2000)
+    private String image_url;
     @Basic
     @Column(name = "role", nullable = false, length = 50)
     private String role;
     @Basic
-    @Column(name = "punctuation_avg", nullable = false, precision = 0)
-    private double punctuationavg;
+    @Column(name = "punctuationavg", nullable = false, precision = 0)
+    private double punctuation_avg;
     @Basic
     @Column(name = "createdat", nullable = false)
     private Date createdAt;
@@ -69,12 +68,12 @@ public class Users {
         this.surname = surname;
     }
 
-    public String getImageurl() {
-        return imageurl;
+    public String getImage_url() {
+        return image_url;
     }
 
-    public void setImageurl(String imageurl) {
-        this.imageurl = imageurl;
+    public void setImage_url(String imageurl) {
+        this.image_url = imageurl;
     }
 
     public String getRole() {
@@ -85,12 +84,12 @@ public class Users {
         this.role = role;
     }
 
-    public double getPunctuationavg() {
-        return punctuationavg;
+    public double getPunctuation_avg() {
+        return punctuation_avg;
     }
 
-    public void setPunctuationavg(double punctuationavg) {
-        this.punctuationavg = punctuationavg;
+    public void setPunctuation_avg(double punctuationavg) {
+        this.punctuation_avg = punctuationavg;
     }
 
     public Date getCreatedAt() {
@@ -122,12 +121,12 @@ public class Users {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Users users = (Users) o;
-        return Double.compare(users.punctuationavg, punctuationavg) == 0 && Objects.equals(email, users.email) && Objects.equals(name, users.name) && Objects.equals(surname, users.surname) && Objects.equals(imageurl, users.imageurl) && Objects.equals(role, users.role) && Objects.equals(createdAt, users.createdAt) && Objects.equals(lastconnection, users.lastconnection) && Objects.equals(updatedAt, users.updatedAt);
+        return Double.compare(users.punctuation_avg, punctuation_avg) == 0 && Objects.equals(email, users.email) && Objects.equals(name, users.name) && Objects.equals(surname, users.surname) && Objects.equals(image_url, users.image_url) && Objects.equals(role, users.role) && Objects.equals(createdAt, users.createdAt) && Objects.equals(lastconnection, users.lastconnection) && Objects.equals(updatedAt, users.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, name, surname, imageurl, role, punctuationavg, createdAt, lastconnection, updatedAt);
+        return Objects.hash(email, name, surname, image_url, role, punctuation_avg, createdAt, lastconnection, updatedAt);
     }
 
 //    public Collection<Assistants> getAssistantsByEmail() {

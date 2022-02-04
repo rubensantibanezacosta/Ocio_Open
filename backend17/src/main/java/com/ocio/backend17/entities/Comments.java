@@ -9,10 +9,10 @@ public class Comments {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "commentid", nullable = false, precision = 0)
-    private double commentid;
+    private double comment_id;
     @Basic
     @Column(name = "eventid", nullable = false, precision = 0)
-    private double eventid;
+    private double event_id;
     @Basic
     @Column(name = "assistant", nullable = false, length = 200)
     private String assistant;
@@ -23,26 +23,23 @@ public class Comments {
     @Column(name = "date", nullable = false)
     private Timestamp date;
     @ManyToOne
-    @JoinColumn(name = "eventid", referencedColumnName = "eventid", nullable = false, updatable = false, insertable = false)
-    private Events eventsByEventid;
-    @ManyToOne
     @JoinColumn(name = "assistant", referencedColumnName = "email", nullable = false, updatable = false, insertable = false)
-    private Users usersByAssistant;
+    private Users user;
 
-    public double getCommentid() {
-        return commentid;
+    public double getComment_id() {
+        return comment_id;
     }
 
-    public void setCommentid(double commentid) {
-        this.commentid = commentid;
+    public void setComment_id(double commentid) {
+        this.comment_id = commentid;
     }
 
-    public double getEventid() {
-        return eventid;
+    public double getEvent_id() {
+        return event_id;
     }
 
-    public void setEventid(double eventid) {
-        this.eventid = eventid;
+    public void setEvent_id(double eventid) {
+        this.event_id = eventid;
     }
 
     public String getAssistant() {
@@ -74,27 +71,32 @@ public class Comments {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Comments comments = (Comments) o;
-        return Double.compare(comments.commentid, commentid) == 0 && Double.compare(comments.eventid, eventid) == 0 && Objects.equals(assistant, comments.assistant) && Objects.equals(comment, comments.comment) && Objects.equals(date, comments.date);
+        return Double.compare(comments.comment_id, comment_id) == 0 && Double.compare(comments.event_id, event_id) == 0 && Objects.equals(assistant, comments.assistant) && Objects.equals(comment, comments.comment) && Objects.equals(date, comments.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(commentid, eventid, assistant, comment, date);
+        return Objects.hash(comment_id, event_id, assistant, comment, date);
     }
 
-    public Events getEventsByEventid() {
-        return eventsByEventid;
-    }
 
-    public void setEventsByEventid(Events eventsByEventid) {
-        this.eventsByEventid = eventsByEventid;
-    }
 
     public Users getUsersByAssistant() {
-        return usersByAssistant;
+        return user;
     }
 
     public void setUsersByAssistant(Users usersByAssistant) {
-        this.usersByAssistant = usersByAssistant;
+        this.user = usersByAssistant;
+    }
+
+    @ManyToOne(optional = false)
+    private Events events;
+
+    public Events getEvents() {
+        return events;
+    }
+
+    public void setEvents(Events events) {
+        this.events = events;
     }
 }

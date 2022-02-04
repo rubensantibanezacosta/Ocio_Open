@@ -17,10 +17,10 @@ public class Zones {
     @Column(name = "punctuationavg", nullable = true, precision = 0)
     private Double punctuationavg;
     @Basic
-    @Column(name = "createdAt", nullable = false)
+    @Column(name = "createdat", nullable = false)
     private Date createdAt;
     @Basic
-    @Column(name = "updatedAt", nullable = false)
+    @Column(name = "updatedat", nullable = false)
     private Date updatedAt;
 
     public String getId() {
