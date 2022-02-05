@@ -28,13 +28,13 @@ public class Events {
     @Column(name = "description", nullable = true, length = 4000)
     private String description;
     @Basic
-    @Column(name = "punctuationavg", nullable = false, precision = 0)
+    @Column(name = "punctuation_avg", nullable = false, precision = 0)
     private double punctuation_avg;
     @Basic
     @Column(name = "organizer", nullable = false, length = 200)
     private String organizer;
     @Basic
-    @Column(name = "imageid", nullable = true)
+    @Column(name = "image_id", nullable = true)
     private Integer image_id;
     @Basic
     @Column(name = "createdat", nullable = false)

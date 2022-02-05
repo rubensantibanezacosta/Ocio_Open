@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Assistants {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "eventid", nullable = false, precision = 0)
+    @Column(name = "event_id", nullable = false, precision = 0)
     private double event_id;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

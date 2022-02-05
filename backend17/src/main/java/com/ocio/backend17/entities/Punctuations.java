@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Punctuations {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "eventid", nullable = false, precision = 0, updatable = false, insertable = false)
+    @Column(name = "event_id", nullable = false, precision = 0, updatable = false, insertable = false)
     private double event_id;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class PunctuationsPK implements Serializable {
-    @Column(name = "eventid", nullable = false, precision = 0)
+    @Column(name = "event_id", nullable = false, precision = 0)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private double event_id;

@@ -8,10 +8,10 @@ import java.util.Objects;
 public class Comments {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "commentid", nullable = false, precision = 0)
+    @Column(name = "comment_id", nullable = false, precision = 0)
     private double comment_id;
     @Basic
-    @Column(name = "eventid", nullable = false, precision = 0)
+    @Column(name = "event_id", nullable = false, precision = 0)
     private double event_id;
     @Basic
     @Column(name = "assistant", nullable = false, length = 200)
