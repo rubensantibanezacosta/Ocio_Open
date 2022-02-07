@@ -1,8 +1,16 @@
 package com.ocio.backend17.dto;
 
-public class BasicAuth {
+public class BasicAuthRequest {
     String username;
     String password;
+
+    public BasicAuthRequest(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public BasicAuthRequest() {
+    }
 
     public String getUsername() {
         return username;

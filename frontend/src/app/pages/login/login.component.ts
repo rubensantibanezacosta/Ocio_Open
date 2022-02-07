@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { getDataFromToken } from 'src/app/utils/jwtparser';
 import * as moment from 'moment';
+import { DataSource } from '@angular/cdk/collections';
 
 
 
@@ -67,7 +68,7 @@ export class LoginComponent implements OnInit {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
       (data) => {
         if (data.email) {
-
+          console.log(data)
           const user: User = new User();
           user.email = data.email;
           user.image_url = data.photoUrl;

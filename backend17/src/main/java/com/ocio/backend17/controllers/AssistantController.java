@@ -2,7 +2,7 @@ package com.ocio.backend17.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ocio.backend17.dto.ResponseMessageDto;
+import com.ocio.backend17.dto.ResponseMessage;
 import com.ocio.backend17.entities.Assistants;
 import com.ocio.backend17.entities.AssistantsPK;
 import com.ocio.backend17.services.IAssistantImpl;
@@ -26,7 +26,7 @@ public class AssistantController {
         ObjectMapper om = new ObjectMapper();
         Assistants assistant=om.readValue(jsonAssistant,Assistants.class);
         if(!(assistant.getEvent_id()>0)){
-            return new ResponseEntity<>(new ResponseMessageDto("Fields cannot be emplty"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ResponseMessage("Fields cannot be emplty"), HttpStatus.BAD_REQUEST);
         }else{
             return new ResponseEntity<>(iAsisstantImpl.add(assistant), HttpStatus.CREATED);
         }

@@ -2,10 +2,12 @@ package com.ocio.backend17.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ocio.backend17.dto.ResponseMessageDto;
+import com.ocio.backend17.dto.ResponseMessage;
 import com.ocio.backend17.dto.UsersDto;
 import com.ocio.backend17.entities.Users;
 import com.ocio.backend17.services.IUsersImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +21,12 @@ import java.util.List;
 public class UsersController {
 @Autowired
 IUsersImpl iUsersImpl;
+private Logger logger= LoggerFactory.getLogger(UsersController.class);
 
     @GetMapping("/api/user")
+
     List<Users> getAll(){
+        logger.debug("request arrived users");
         return iUsersImpl.getAll();
     }
 
@@ -43,12 +48,12 @@ IUsersImpl iUsersImpl;
 
     @DeleteMapping("/api/user/{email}")
     @ResponseBody
-    ResponseEntity<ResponseMessageDto> deleteByEmail(@PathVariable("email") String email){
+    ResponseEntity<ResponseMessage> deleteByEmail(@PathVariable("email") String email){
         if(iUsersImpl.getById(email).isPresent()) {
             iUsersImpl.deleteById(email);
-            return new ResponseEntity<>(new ResponseMessageDto("User deleted"), HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(new ResponseMessage("User deleted"), HttpStatus.NO_CONTENT);
         }else{
-            return new ResponseEntity<>(new ResponseMessageDto("User not found"), HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(new ResponseMessage("User not found"), HttpStatus.NO_CONTENT);
         }
     }
 

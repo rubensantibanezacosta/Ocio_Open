@@ -18,4 +18,19 @@ public class IConfigImpl implements IConfig{
     public String getUserRoleKey() {
         return config.getUserrolekey();
     }
+
+    @Override
+    public int getExpirationTime() {
+        return (config.getExpirationTime()*1000*60);
+    }
+
+    @Override
+    public String acceptedDomains() {
+        return config.getAcceptedDomains();
+    }
+
+    @Override
+    public String googleApiUrl() {
+        return config.getGoogleApiUrl();
+    }
 }

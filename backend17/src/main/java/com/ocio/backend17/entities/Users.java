@@ -12,6 +12,9 @@ public class Users {
     @Column(name = "email", nullable = false, length = 200)
     private String email;
     @Basic
+    @Column(name = "name", nullable = false, length = 400)
+    private String password;
+    @Basic
     @Column(name = "name", nullable = false, length = 200)
     private String name;
     @Basic
@@ -50,6 +53,14 @@ public class Users {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {

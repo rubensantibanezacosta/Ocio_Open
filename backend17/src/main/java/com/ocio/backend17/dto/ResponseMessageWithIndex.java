@@ -1,14 +1,14 @@
 package com.ocio.backend17.dto;
 
-public class ResponseMessageDto {
+public class ResponseMessageWithIndex {
     private String message;
     private int index;
 
-    public ResponseMessageDto(String message) {
+    public ResponseMessageWithIndex(String message) {
         this.message = message;
     }
 
-    public ResponseMessageDto(String message, int index) {
+    public ResponseMessageWithIndex(String message, int index) {
         this.message = message;
         this.index = index;
     }

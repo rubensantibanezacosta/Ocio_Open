@@ -1,17 +1,31 @@
 package com.ocio.backend17.dto;
 
 public class BasicAuthResponse {
-    private String jwt;
+    private String token;
+    private String expireDate;
 
-    public BasicAuthResponse(String jwt) {
-        this.jwt = jwt;
+
+    public BasicAuthResponse() {
     }
 
-    public String getJwt() {
-        return jwt;
+    public BasicAuthResponse(String token, String expireDate) {
+        this.token = token;
+        this.expireDate = expireDate;
     }
 
-    public void setJwt(String jwt) {
-        this.jwt = jwt;
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getExpireDate() {
+        return expireDate;
+    }
+
+    public void setExpireDate(String expireDate) {
+        this.expireDate = expireDate;
     }
 }

@@ -2,7 +2,8 @@ package com.ocio.backend17.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ocio.backend17.dto.ResponseMessageDto;
+import com.ocio.backend17.dto.ResponseMessage;
+import com.ocio.backend17.dto.ResponseMessageWithIndex;
 import com.ocio.backend17.entities.Comments;
 
 import com.ocio.backend17.services.ICommentsImpl;
@@ -25,7 +26,7 @@ public class CommentsController {
         ObjectMapper om = new ObjectMapper();
         Comments comment=om.readValue(jsonComment, Comments.class);
         if(!(comment.getEvent_id()>0)){
-            return new ResponseEntity<>(new ResponseMessageDto("Fields cannot be empty"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ResponseMessage("Fields cannot be empty"), HttpStatus.BAD_REQUEST);
         }else{
             return new ResponseEntity<>(iCommentsImpl.addComment(comment), HttpStatus.CREATED);
         }
@@ -38,12 +39,12 @@ public class CommentsController {
 
     @DeleteMapping("/api/user/{comment_id}/{index}")
     @ResponseBody
-    ResponseEntity<ResponseMessageDto> deleteByEmail(@PathVariable("comment_id") Double id, @PathVariable("index") int index){
+    ResponseEntity<?> deleteByEmail(@PathVariable("comment_id") Double id, @PathVariable("index") int index){
         if(iCommentsImpl.findbyId(id).isPresent()) {
             iCommentsImpl.deleteById(id);
-            return new ResponseEntity<>(new ResponseMessageDto("User deleted", index), HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(new ResponseMessageWithIndex("User deleted", index), HttpStatus.NO_CONTENT);
         }else{
-            return new ResponseEntity<>(new ResponseMessageDto("User not found"), HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(new ResponseMessage("User not found"), HttpStatus.NO_CONTENT);
         }
     }
 

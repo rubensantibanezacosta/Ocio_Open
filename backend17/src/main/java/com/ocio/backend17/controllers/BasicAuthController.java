@@ -1,10 +1,21 @@
 package com.ocio.backend17.controllers;
 
-import com.ocio.backend17.dto.BasicAuth;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ocio.backend17.config.IConfigImpl;
+import com.ocio.backend17.dto.BasicAuthRequest;
+
 import com.ocio.backend17.dto.BasicAuthResponse;
-import com.ocio.backend17.dto.ResponseMessageDto;
+import com.ocio.backend17.dto.ResponseMessage;
+import com.ocio.backend17.entities.Users;
+import com.ocio.backend17.security.ExtractHeaderData;
 import com.ocio.backend17.security.JWTUtil;
+
+import com.ocio.backend17.services.IUsersImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -12,7 +23,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -25,16 +35,58 @@ public class BasicAuthController {
     private UserDetailsService userDetailsService;
     @Autowired
     private JWTUtil jwtUtil;
-
+    @Autowired
+    ExtractHeaderData extractHeaderData;
+    @Autowired
+    IUsersImpl iUsersimpl;
+    @Autowired
+    IConfigImpl iConfig;
+private Logger logger = LoggerFactory.getLogger(BasicAuthController.class);
     @PostMapping(value = "/api/auth/sign-in", consumes = "application/json")
-    public ResponseEntity<?> login(@RequestBody BasicAuth basicAuth) {
+    public ResponseEntity<?> login(@RequestHeader HttpHeaders headers, @RequestBody String jsonUser) {
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(basicAuth.getUsername(), basicAuth.getPassword()));
-            UserDetails userDetails = userDetailsService.loadUserByUsername(basicAuth.getUsername());
+            BasicAuthRequest basicAuthRequest = extractHeaderData.extractBasicAuthCredentials(headers);
+            if(iConfig.acceptedDomains().contains(basicAuthRequest.getUsername().split("@")[1])){
+                ObjectMapper om = new ObjectMapper();
+                Users user = om.readValue(jsonUser, Users.class);
+                iUsersimpl.createOrUpdate(user);
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(basicAuthRequest.getUsername(), basicAuthRequest.getPassword()));
+            UserDetails userDetails = userDetailsService.loadUserByUsername(basicAuthRequest.getUsername());
             String jwt = jwtUtil.generateToken(userDetails);
-            return new ResponseEntity<>(new BasicAuthResponse(jwt),HttpStatus.OK);
+            String tokenExpiresIn = jwtUtil.extractExpireTime(jwt);
+            return new ResponseEntity<>(new BasicAuthResponse(jwt,tokenExpiresIn),HttpStatus.OK);}
+            else{
+                return new ResponseEntity<>(new ResponseMessage("Domain " + basicAuthRequest.getUsername().split("@")[1] +" not allowed"), HttpStatus.UNAUTHORIZED);
+            }
         } catch (BadCredentialsException e) {
-            return new ResponseEntity<>(new ResponseMessageDto("Unauthorized"), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(new ResponseMessage("Bad Credentials"), HttpStatus.UNAUTHORIZED);
+       }
+        catch (JsonMappingException e) {
+            return new ResponseEntity<>(new ResponseMessage("Uknown error"), HttpStatus.FORBIDDEN);
         }
+     catch (NullPointerException e) {
+        return new ResponseEntity<>(new ResponseMessage("Bad Credentials"), HttpStatus.UNAUTHORIZED);
+    }catch (Exception e){
+            return new ResponseEntity<>(new ResponseMessage("Unknown error"), HttpStatus.FORBIDDEN);
+        }
+
+    }
+
+    @PostMapping(value = "/api/auth/register", consumes = "application/json")
+    public ResponseEntity<?> register(@RequestHeader HttpHeaders headers, @RequestBody Users user) {
+        try {
+            BasicAuthRequest basicAuthRequest = extractHeaderData.extractBasicAuthCredentials(headers);
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(basicAuthRequest.getUsername(), basicAuthRequest.getPassword()));
+            UserDetails userDetails = userDetailsService.loadUserByUsername(basicAuthRequest.getUsername());
+            String jwt = jwtUtil.generateToken(userDetails);
+            String tokenExpiresIn = jwtUtil.extractExpireTime(jwt);
+            return new ResponseEntity<>(new BasicAuthResponse(jwt,tokenExpiresIn),HttpStatus.OK);
+        } catch (BadCredentialsException e) {
+            return new ResponseEntity<>(new ResponseMessage("Bad Credentials"), HttpStatus.UNAUTHORIZED);
+        }
+        catch (NullPointerException e) {
+            return new ResponseEntity<>(new ResponseMessage("Bad Credentials"), HttpStatus.BAD_REQUEST);
+        }
+
     }
 }
