@@ -6,9 +6,15 @@ import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -61,15 +67,14 @@ public class JWTUtil {
     public String extractExpireTime(String token){
         return (String) getClaims(token).get("tokenExpiresIn");
     }
-    public  String[] extractScopes(String token){
+    public  List<String> extractScopes(String token){
         System.out.println(getClaims(token).get("scopes"));
-        return (String[])getClaims(token).get("scopes");
+        return (List<String>) getClaims(token).get("scopes");
     }
 
     private Claims getClaims(String token){
         return Jwts.parser().setSigningKey(iConfigImpl.getJwtSecret()).parseClaimsJws(token).getBody();
     }
-
 
 
 }

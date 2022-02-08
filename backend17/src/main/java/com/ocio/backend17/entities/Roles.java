@@ -11,7 +11,7 @@ public class Roles {
     @Column(name = "number", nullable = false)
     private int number;
     @Basic
-    @Column(name = "rolekey", nullable = false, length = 500)
+    @Column(name = "role_key", nullable = false, length = 500)
     private String rolekey;
     @Basic
     @Column(name = "permissions", nullable = false, length = 2000)

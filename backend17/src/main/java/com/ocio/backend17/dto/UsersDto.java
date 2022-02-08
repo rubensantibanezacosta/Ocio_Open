@@ -3,8 +3,9 @@ package com.ocio.backend17.dto;
 
 import com.ocio.backend17.entities.Users;
 
+import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.Date;
+
 
 public class UsersDto {
     private String email;

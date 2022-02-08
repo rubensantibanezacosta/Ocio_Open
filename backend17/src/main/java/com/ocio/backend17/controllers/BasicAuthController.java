@@ -1,5 +1,6 @@
 package com.ocio.backend17.controllers;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ocio.backend17.config.IConfigImpl;
@@ -47,26 +48,30 @@ private Logger logger = LoggerFactory.getLogger(BasicAuthController.class);
         try {
             BasicAuthRequest basicAuthRequest = extractHeaderData.extractBasicAuthCredentials(headers);
             if(iConfig.acceptedDomains().contains(basicAuthRequest.getUsername().split("@")[1])){
-                ObjectMapper om = new ObjectMapper();
+                ObjectMapper om = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
                 Users user = om.readValue(jsonUser, Users.class);
                 iUsersimpl.createOrUpdate(user);
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(basicAuthRequest.getUsername(), basicAuthRequest.getPassword()));
-            UserDetails userDetails = userDetailsService.loadUserByUsername(basicAuthRequest.getUsername());
-            String jwt = jwtUtil.generateToken(userDetails);
-            String tokenExpiresIn = jwtUtil.extractExpireTime(jwt);
-            return new ResponseEntity<>(new BasicAuthResponse(jwt,tokenExpiresIn),HttpStatus.OK);}
+                authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(basicAuthRequest.getUsername(), basicAuthRequest.getPassword()));
+                UserDetails userDetails = userDetailsService.loadUserByUsername(basicAuthRequest.getUsername());
+                String jwt = jwtUtil.generateToken(userDetails);
+                String tokenExpiresIn = jwtUtil.extractExpireTime(jwt);
+                return new ResponseEntity<>(new BasicAuthResponse(jwt,tokenExpiresIn),HttpStatus.OK);}
             else{
                 return new ResponseEntity<>(new ResponseMessage("Domain " + basicAuthRequest.getUsername().split("@")[1] +" not allowed"), HttpStatus.UNAUTHORIZED);
             }
         } catch (BadCredentialsException e) {
+            logger.error(e.getMessage());
             return new ResponseEntity<>(new ResponseMessage("Bad Credentials"), HttpStatus.UNAUTHORIZED);
        }
         catch (JsonMappingException e) {
+            logger.error(e.getMessage());
             return new ResponseEntity<>(new ResponseMessage("Uknown error"), HttpStatus.FORBIDDEN);
         }
      catch (NullPointerException e) {
+         logger.error(e.getMessage());
         return new ResponseEntity<>(new ResponseMessage("Bad Credentials"), HttpStatus.UNAUTHORIZED);
     }catch (Exception e){
+            logger.error(e.getMessage());
             return new ResponseEntity<>(new ResponseMessage("Unknown error"), HttpStatus.FORBIDDEN);
         }
 

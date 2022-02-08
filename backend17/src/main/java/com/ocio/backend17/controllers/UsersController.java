@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,16 +23,15 @@ public class UsersController {
 @Autowired
 IUsersImpl iUsersImpl;
 private Logger logger= LoggerFactory.getLogger(UsersController.class);
-
+    @PreAuthorize("hasAuthority('read:users')")
     @GetMapping("/api/user")
-
     List<Users> getAll(){
         logger.debug("request arrived users");
         return iUsersImpl.getAll();
     }
-
+    @PreAuthorize("hasAuthority('read:users')")
     @GetMapping("/api/user/{email}")
-    ResponseEntity<?> getByEmail(@PathVariable("email") String email){
+     public ResponseEntity<?> getByEmail(@PathVariable("email") String email){
         System.out.println("por email request by id");
         System.out.println(email);
         if(iUsersImpl.getById(email).isPresent()){
@@ -40,12 +40,12 @@ private Logger logger= LoggerFactory.getLogger(UsersController.class);
             return new ResponseEntity<>(new UsersDto(), HttpStatus.OK);
         }
     }
-
+    @PreAuthorize("hasAuthority('read:users')")
     @GetMapping("/api/user/position/{email}")
-    ResponseEntity<?> getUserPositionByEmail(@PathVariable("email") String email){
+    public ResponseEntity<?> getUserPositionByEmail(@PathVariable("email") String email){
         return new ResponseEntity<>(iUsersImpl.getUserPosition(email), HttpStatus.OK);
     }
-
+    @PreAuthorize("hasAuthority('delete:users')")
     @DeleteMapping("/api/user/{email}")
     @ResponseBody
     ResponseEntity<ResponseMessage> deleteByEmail(@PathVariable("email") String email){
@@ -56,7 +56,7 @@ private Logger logger= LoggerFactory.getLogger(UsersController.class);
             return new ResponseEntity<>(new ResponseMessage("User not found"), HttpStatus.NO_CONTENT);
         }
     }
-
+    @PreAuthorize("hasAuthority('create:users')")
     @PostMapping(value="/api/user/", consumes = "application/json")
     @ResponseBody
     ResponseEntity<UsersDto> createOrUpdateUser(@RequestBody String jsonUser) throws JsonProcessingException {

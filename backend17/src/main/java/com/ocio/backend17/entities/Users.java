@@ -1,6 +1,10 @@
 package com.ocio.backend17.entities;
 
 import javax.persistence.*;
+
+
+
+
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -11,9 +15,6 @@ public class Users {
     @Id
     @Column(name = "email", nullable = false, length = 200)
     private String email;
-    @Basic
-    @Column(name = "name", nullable = false, length = 400)
-    private String password;
     @Basic
     @Column(name = "name", nullable = false, length = 200)
     private String name;
@@ -55,13 +56,6 @@ public class Users {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getName() {
         return name;
@@ -140,7 +134,21 @@ public class Users {
         return Objects.hash(email, name, surname, image_url, role, punctuation_avg, createdAt, lastconnection, updatedAt);
     }
 
-//    public Collection<Assistants> getAssistantsByEmail() {
+    @Override
+    public String toString() {
+        return "Users{" +
+                "email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", image_url='" + image_url + '\'' +
+                ", role='" + role + '\'' +
+                ", punctuation_avg=" + punctuation_avg +
+                ", createdAt=" + createdAt +
+                ", lastconnection=" + lastconnection +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
+    //    public Collection<Assistants> getAssistantsByEmail() {
 //        return assistantsByEmail;
 //    }
 //
