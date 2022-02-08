@@ -2,11 +2,11 @@ package com.ocio.backend17.dto;
 
 public class BasicAuthRequest {
     String username;
-    String password;
+    String googleToken;
 
-    public BasicAuthRequest(String username, String password) {
+    public BasicAuthRequest(String username, String googleToken) {
         this.username = username;
-        this.password = password;
+        this.googleToken = googleToken;
     }
 
     public BasicAuthRequest() {
@@ -20,11 +20,11 @@ public class BasicAuthRequest {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getGoogleToken() {
+        return googleToken;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setGoogleToken(String googleToken) {
+        this.googleToken = googleToken;
     }
 }
