@@ -24,10 +24,14 @@ public class ExtractHeaderData {
     JWTUtil jwtUtil;
 
     public BasicAuthRequest extractBasicAuthCredentials(HttpHeaders headers) {
+
         try {
             String headerAuthDataEncoded = headers.getValuesAsList("Authorization").get(0).toString().substring(6);
-            if (headerAuthDataEncoded != null && new String(Base64.getDecoder().decode(headerAuthDataEncoded)).startsWith("Basic")) {
+            System.out.println(new String(Base64.getDecoder().decode(headerAuthDataEncoded)));
+            if (headerAuthDataEncoded != null) {
                 String[] decodedData = new String(Base64.getDecoder().decode(headerAuthDataEncoded)).split(":");
+
+
                 return new BasicAuthRequest(decodedData[0], decodedData[1]);
             }
         } catch (Exception e) {

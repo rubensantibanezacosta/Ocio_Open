@@ -4,14 +4,14 @@ import com.ocio.backend17.config.IConfigImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class GoogleRequestDto {
-    @Autowired
-    IConfigImpl iConfig;
+
 
     String url;
     String token;
 
-    public GoogleRequestDto(String token) {
-        this.url =iConfig.googleApiUrl();
+
+    public GoogleRequestDto(String url, String token) {
+        this.url = url;
         this.token = token;
     }
 

@@ -54,7 +54,8 @@ private Logger logger = LoggerFactory.getLogger(BasicAuthController.class);
             if(iConfig.acceptedDomains().contains(basicAuthRequest.getUsername().split("@")[1])) {
                 ObjectMapper om = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
                 Users user = om.readValue(jsonUser, Users.class);
-                if (googleValidation.validateToken(new GoogleRequestDto(basicAuthRequest.getGoogleToken())).equals(basicAuthRequest.getUsername())) {
+               System.out.println(googleValidation.validateToken(basicAuthRequest.getGoogleToken()).getEmail()+"  aquiiii "+basicAuthRequest.getUsername());
+                if (googleValidation.validateToken(basicAuthRequest.getGoogleToken()).getEmail().equals(basicAuthRequest.getUsername())) {
                     iUsersimpl.createOrUpdate(user);
                     authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(basicAuthRequest.getUsername(), basicAuthRequest.getGoogleToken()));
                     UserDetails userDetails = userDetailsService.loadUserByUsername(basicAuthRequest.getUsername());
