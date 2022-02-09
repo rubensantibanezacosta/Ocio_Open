@@ -7,15 +7,19 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
+
 @Repository
 public interface EventsDao extends CrudRepository<Events, Double> {
     @Query("Select u from Events u order by u.date desc")
     List<Events> findAllOrderDesc();
+
     @Query("Select u from Events u order by u.date asc")
     List<Events> findAllOrderAsc();
-    List<Events> findAllByDate(Date date);
-    List<Events> findAllByOrganizerOrderByDateAsc(String organizer);
-    List<Events> findAllByOrganizerOrderByDateDesc(String organizer);
 
+    List<Events> findAllByDate(Date date);
+
+    List<Events> findAllByOrganizerOrderByDateAsc(String organizer);
+
+    List<Events> findAllByOrganizerOrderByDateDesc(String organizer);
 
 }

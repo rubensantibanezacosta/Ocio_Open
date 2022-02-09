@@ -7,7 +7,6 @@ import com.ocio.backend17.dto.ResponseMessageWithIndex;
 import com.ocio.backend17.entities.Comments;
 
 import com.ocio.backend17.security.ExtractHeaderData;
-import com.ocio.backend17.security.JWTUtil;
 import com.ocio.backend17.services.ICommentsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -27,14 +26,15 @@ public class CommentsController {
     ExtractHeaderData extractHeaderData;
 
     @PreAuthorize("hasAuthority('create:comments')")
-    @PostMapping(value="/api/comments", consumes = "application/json")
+    @PostMapping(value = "/api/comments", consumes = "application/json")
     @ResponseBody
-    ResponseEntity<?> createOrUpdateComment(@RequestBody String jsonComment, @RequestHeader HttpHeaders headers) throws JsonProcessingException {
+    ResponseEntity<?> createOrUpdateComment(@RequestBody String jsonComment, @RequestHeader HttpHeaders headers)
+            throws JsonProcessingException {
         ObjectMapper om = new ObjectMapper();
-        Comments comment=om.readValue(jsonComment, Comments.class);
-        if(!(comment.getEvent_id()>0)){
+        Comments comment = om.readValue(jsonComment, Comments.class);
+        if (!(comment.getEvent_id() > 0)) {
             return new ResponseEntity<>(new ResponseMessage("Fields cannot be empty"), HttpStatus.BAD_REQUEST);
-        }else{
+        } else {
             comment.setAssistant(extractHeaderData.extractJWTUsername(headers));
             return new ResponseEntity<>(iCommentsImpl.addComment(comment), HttpStatus.CREATED);
         }
@@ -42,7 +42,7 @@ public class CommentsController {
 
     @PreAuthorize("hasAuthority('read:comments')")
     @GetMapping("/api/comments/byevent/{event_id}")
-    ResponseEntity<List<Comments>> getAll(@PathVariable("event_id") Double event_id){
+    ResponseEntity<List<Comments>> getAll(@PathVariable("event_id") Double event_id) {
         return new ResponseEntity<>(iCommentsImpl.findByEventId(event_id), HttpStatus.OK);
 
     }
@@ -50,12 +50,16 @@ public class CommentsController {
     @PreAuthorize("hasAuthority('delete:comments')")
     @DeleteMapping("/api/user/{comment_id}/{index}")
     @ResponseBody
-    ResponseEntity<?> deleteByEmail(@PathVariable("comment_id") Double id, @PathVariable("index") int index,  @RequestHeader HttpHeaders headers){
-        if(iCommentsImpl.findbyId(id).isPresent() && iCommentsImpl.findbyId(id).get().getAssistant().equals(extractHeaderData.extractJWTUsername(headers))) {
+    ResponseEntity<?> deleteByEmail(@PathVariable("comment_id") Double id, @PathVariable("index") int index,
+            @RequestHeader HttpHeaders headers) {
+        if (iCommentsImpl.findbyId(id).isPresent() && iCommentsImpl.findbyId(id).get().getAssistant()
+                .equals(extractHeaderData.extractJWTUsername(headers))) {
             iCommentsImpl.deleteById(id);
             return new ResponseEntity<>(new ResponseMessageWithIndex("User deleted", index), HttpStatus.NO_CONTENT);
-        }else if(iCommentsImpl.findbyId(id).isPresent() && !(iCommentsImpl.findbyId(id).get().getAssistant().equals(extractHeaderData.extractJWTUsername(headers)))){
-            return new ResponseEntity<>(new ResponseMessage("Only author cans delete his own comments"), HttpStatus.UNAUTHORIZED);
+        } else if (iCommentsImpl.findbyId(id).isPresent() && !(iCommentsImpl.findbyId(id).get().getAssistant()
+                .equals(extractHeaderData.extractJWTUsername(headers)))) {
+            return new ResponseEntity<>(new ResponseMessage("Only author cans delete his own comments"),
+                    HttpStatus.UNAUTHORIZED);
         }
         return new ResponseEntity<>(new ResponseMessage("Comment id not found"), HttpStatus.NO_CONTENT);
     }

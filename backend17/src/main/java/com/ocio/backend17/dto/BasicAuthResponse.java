@@ -4,7 +4,6 @@ public class BasicAuthResponse {
     private String token;
     private String expireDate;
 
-
     public BasicAuthResponse() {
     }
 

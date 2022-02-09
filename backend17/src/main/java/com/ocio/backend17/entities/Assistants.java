@@ -82,10 +82,14 @@ public class Assistants {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Assistants that = (Assistants) o;
-        return Double.compare(that.event_id, event_id) == 0 && attendance == that.attendance && Objects.equals(assistant, that.assistant) && Objects.equals(excuse, that.excuse) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
+        return Double.compare(that.event_id, event_id) == 0 && attendance == that.attendance
+                && Objects.equals(assistant, that.assistant) && Objects.equals(excuse, that.excuse)
+                && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
     }
 
     @Override

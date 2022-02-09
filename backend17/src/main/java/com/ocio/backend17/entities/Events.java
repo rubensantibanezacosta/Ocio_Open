@@ -50,7 +50,7 @@ public class Events {
     @JoinColumn(name = "organizer", referencedColumnName = "email", nullable = false, updatable = false, insertable = false)
     private Users usersByOrganizer;
     @ManyToOne
-    @JoinColumn(name = "imageid", referencedColumnName = "id" , updatable = false, insertable = false)
+    @JoinColumn(name = "imageid", referencedColumnName = "id", updatable = false, insertable = false)
     private Images imagesByImageid;
     @OneToMany(mappedBy = "events")
     private Collection<Punctuations> punctuationsByEventid;
@@ -145,15 +145,23 @@ public class Events {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Events events = (Events) o;
-        return Double.compare(events.event_id, event_id) == 0 && Double.compare(events.punctuation_avg, punctuation_avg) == 0 && Objects.equals(tittle, events.tittle) && Objects.equals(date, events.date) && Objects.equals(zone, events.zone) && Objects.equals(place, events.place) && Objects.equals(description, events.description) && Objects.equals(organizer, events.organizer) && Objects.equals(image_id, events.image_id) && Objects.equals(createdAt, events.createdAt) && Objects.equals(updatedAt, events.updatedAt);
+        return Double.compare(events.event_id, event_id) == 0
+                && Double.compare(events.punctuation_avg, punctuation_avg) == 0 && Objects.equals(tittle, events.tittle)
+                && Objects.equals(date, events.date) && Objects.equals(zone, events.zone)
+                && Objects.equals(place, events.place) && Objects.equals(description, events.description)
+                && Objects.equals(organizer, events.organizer) && Objects.equals(image_id, events.image_id)
+                && Objects.equals(createdAt, events.createdAt) && Objects.equals(updatedAt, events.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(event_id, tittle, date, zone, place, description, punctuation_avg, organizer, image_id, createdAt, updatedAt);
+        return Objects.hash(event_id, tittle, date, zone, place, description, punctuation_avg, organizer, image_id,
+                createdAt, updatedAt);
     }
 
     public Collection<Assistants> getAssistantsByEventid() {
@@ -161,7 +169,7 @@ public class Events {
     }
 
     public void setAssistantsByEventid(Collection<Assistants> assistantsByEventid) {
-        this.assistants= assistantsByEventid;
+        this.assistants = assistantsByEventid;
     }
 
     public Collection<Comments> getCommentsByEventid() {

@@ -24,27 +24,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public JwtFilterRequest jwtFilterRequest;
     @Autowired
-   public JWTEntryPoint jwtEntryPoint;
+    public JWTEntryPoint jwtEntryPoint;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
     }
-//    @Bean
-//    public PasswordEncoder passwordEncoder(){
-//        return new BCryptPasswordEncoder();
-//    }
+
+    // @Bean
+    // public PasswordEncoder passwordEncoder(){
+    // return new BCryptPasswordEncoder();
+    // }
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
+
     @Bean
     @Override
     protected AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();
     }
-
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -57,6 +58,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(jwtFilterRequest, UsernamePasswordAuthenticationFilter.class);
 
     }
-
 
 }

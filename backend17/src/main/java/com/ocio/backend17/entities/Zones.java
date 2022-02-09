@@ -65,10 +65,14 @@ public class Zones {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Zones zones = (Zones) o;
-        return Objects.equals(id, zones.id) && Objects.equals(name, zones.name) && Objects.equals(punctuationavg, zones.punctuationavg) && Objects.equals(createdAt, zones.createdAt) && Objects.equals(updatedAt, zones.updatedAt);
+        return Objects.equals(id, zones.id) && Objects.equals(name, zones.name)
+                && Objects.equals(punctuationavg, zones.punctuationavg) && Objects.equals(createdAt, zones.createdAt)
+                && Objects.equals(updatedAt, zones.updatedAt);
     }
 
     @Override

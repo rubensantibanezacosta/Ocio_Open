@@ -1,13 +1,12 @@
 package com.ocio.backend17.config;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class IConfigImpl implements IConfig{
-    @Autowired Config config;
-
+public class IConfigImpl implements IConfig {
+    @Autowired
+    Config config;
 
     @Override
     public String getJwtSecret() {
@@ -21,7 +20,7 @@ public class IConfigImpl implements IConfig{
 
     @Override
     public int getExpirationTime() {
-        return (config.getExpirationTime()*1000*60);
+        return (config.getExpirationTime() * 1000 * 60);
     }
 
     @Override

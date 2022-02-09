@@ -1,6 +1,5 @@
 package com.ocio.backend17.security;
 
-
 import com.ocio.backend17.config.IConfigImpl;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
@@ -24,57 +23,56 @@ import java.util.stream.Collectors;
 @Component
 public class JWTUtil {
     private final static Logger logger = LoggerFactory.getLogger(JWTUtil.class);
-@Autowired
+    @Autowired
     IConfigImpl iConfigImpl;
-    public String generateToken(UserDetails userDetails){
-        DateFormat dateFormatter=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'4Z'");
-        Date dateExpiration=new Date(System.currentTimeMillis() + iConfigImpl.getExpirationTime());
+
+    public String generateToken(UserDetails userDetails) {
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'4Z'");
+        Date dateExpiration = new Date(System.currentTimeMillis() + iConfigImpl.getExpirationTime());
         return Jwts.builder().setSubject(userDetails.getUsername())
-                .claim("username",userDetails.getUsername())
-                .claim("scopes",userDetails.getAuthorities().stream().map((x)->x.getAuthority()).collect(Collectors.toList()))
-                .claim("tokenExpiresIn",dateFormatter.format(dateExpiration))
+                .claim("username", userDetails.getUsername())
+                .claim("scopes",
+                        userDetails.getAuthorities().stream().map((x) -> x.getAuthority()).collect(Collectors.toList()))
+                .claim("tokenExpiresIn", dateFormatter.format(dateExpiration))
                 .setIssuedAt(new Date())
                 .setExpiration(dateExpiration)
                 .signWith(SignatureAlgorithm.HS256, iConfigImpl.getJwtSecret()).compact();
     }
 
-
-    public Boolean validateToken(String token){
-        try{
+    public Boolean validateToken(String token) {
+        try {
             Jwts.parser().setSigningKey(iConfigImpl.getJwtSecret()).parseClaimsJws(token);
             return true;
-        }catch (MalformedJwtException e){
-        logger.error("Token mal formado");
+        } catch (MalformedJwtException e) {
+            logger.error("Token mal formado");
 
-        }
-        catch (UnsupportedJwtException e){
+        } catch (UnsupportedJwtException e) {
             logger.error("Token no soportado");
-        }
-        catch (ExpiredJwtException e){
+        } catch (ExpiredJwtException e) {
             logger.error("Token expirado");
-        }
-        catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             logger.error("Token vacio");
-        }catch (SignatureException e){
+        } catch (SignatureException e) {
             logger.error("Error en la firma");
         }
         return false;
     }
 
-    public String extractUsername(String token){
+    public String extractUsername(String token) {
         return getClaims(token).getSubject();
     }
-    public String extractExpireTime(String token){
+
+    public String extractExpireTime(String token) {
         return (String) getClaims(token).get("tokenExpiresIn");
     }
-    public  List<String> extractScopes(String token){
+
+    public List<String> extractScopes(String token) {
         System.out.println(getClaims(token).get("scopes"));
         return (List<String>) getClaims(token).get("scopes");
     }
 
-    private Claims getClaims(String token){
+    private Claims getClaims(String token) {
         return Jwts.parser().setSigningKey(iConfigImpl.getJwtSecret()).parseClaimsJws(token).getBody();
     }
-
 
 }

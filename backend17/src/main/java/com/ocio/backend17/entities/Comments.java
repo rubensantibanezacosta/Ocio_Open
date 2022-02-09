@@ -68,18 +68,20 @@ public class Comments {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Comments comments = (Comments) o;
-        return Double.compare(comments.comment_id, comment_id) == 0 && Double.compare(comments.event_id, event_id) == 0 && Objects.equals(assistant, comments.assistant) && Objects.equals(comment, comments.comment) && Objects.equals(date, comments.date);
+        return Double.compare(comments.comment_id, comment_id) == 0 && Double.compare(comments.event_id, event_id) == 0
+                && Objects.equals(assistant, comments.assistant) && Objects.equals(comment, comments.comment)
+                && Objects.equals(date, comments.date);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(comment_id, event_id, assistant, comment, date);
     }
-
-
 
     public Users getUsersByAssistant() {
         return user;

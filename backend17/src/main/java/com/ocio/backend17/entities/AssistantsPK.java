@@ -43,8 +43,10 @@ public class AssistantsPK implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         AssistantsPK that = (AssistantsPK) o;
         return Double.compare(that.event_id, event_id) == 0 && Objects.equals(assistant, that.assistant);
     }

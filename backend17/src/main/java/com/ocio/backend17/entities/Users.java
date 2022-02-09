@@ -2,9 +2,6 @@ package com.ocio.backend17.entities;
 
 import javax.persistence.*;
 
-
-
-
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -39,14 +36,14 @@ public class Users {
     @Basic
     @Column(name = "updatedat", nullable = false)
     private Date updatedAt;
-//    @OneToMany(mappedBy = "usersByAssistant")
-//    private Collection<Assistants> assistantsByEmail;
-//    @OneToMany(mappedBy = "usersByAssistant")
-//    private Collection<Comments> commentsByEmail;
-//    @OneToMany(mappedBy = "usersByOrganizer")
-//    private Collection<Events> eventsByEmail;
-//    @OneToMany(mappedBy = "usersByAssistant")
-//    private Collection<Punctuations> punctuationsByEmail;
+    // @OneToMany(mappedBy = "usersByAssistant")
+    // private Collection<Assistants> assistantsByEmail;
+    // @OneToMany(mappedBy = "usersByAssistant")
+    // private Collection<Comments> commentsByEmail;
+    // @OneToMany(mappedBy = "usersByOrganizer")
+    // private Collection<Events> eventsByEmail;
+    // @OneToMany(mappedBy = "usersByAssistant")
+    // private Collection<Punctuations> punctuationsByEmail;
 
     public String getEmail() {
         return email;
@@ -55,7 +52,6 @@ public class Users {
     public void setEmail(String email) {
         this.email = email;
     }
-
 
     public String getName() {
         return name;
@@ -123,15 +119,22 @@ public class Users {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Users users = (Users) o;
-        return Double.compare(users.punctuation_avg, punctuation_avg) == 0 && Objects.equals(email, users.email) && Objects.equals(name, users.name) && Objects.equals(surname, users.surname) && Objects.equals(image_url, users.image_url) && Objects.equals(role, users.role) && Objects.equals(createdAt, users.createdAt) && Objects.equals(lastconnection, users.lastconnection) && Objects.equals(updatedAt, users.updatedAt);
+        return Double.compare(users.punctuation_avg, punctuation_avg) == 0 && Objects.equals(email, users.email)
+                && Objects.equals(name, users.name) && Objects.equals(surname, users.surname)
+                && Objects.equals(image_url, users.image_url) && Objects.equals(role, users.role)
+                && Objects.equals(createdAt, users.createdAt) && Objects.equals(lastconnection, users.lastconnection)
+                && Objects.equals(updatedAt, users.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, name, surname, image_url, role, punctuation_avg, createdAt, lastconnection, updatedAt);
+        return Objects.hash(email, name, surname, image_url, role, punctuation_avg, createdAt, lastconnection,
+                updatedAt);
     }
 
     @Override
@@ -148,35 +151,36 @@ public class Users {
                 ", updatedAt=" + updatedAt +
                 '}';
     }
-    //    public Collection<Assistants> getAssistantsByEmail() {
-//        return assistantsByEmail;
-//    }
-//
-//    public void setAssistantsByEmail(Collection<Assistants> assistantsByEmail) {
-//        this.assistantsByEmail = assistantsByEmail;
-//    }
-//
-//    public Collection<Comments> getCommentsByEmail() {
-//        return commentsByEmail;
-//    }
-//
-//    public void setCommentsByEmail(Collection<Comments> commentsByEmail) {
-//        this.commentsByEmail = commentsByEmail;
-//    }
-//
-//    public Collection<Events> getEventsByEmail() {
-//        return eventsByEmail;
-//    }
-//
-//    public void setEventsByEmail(Collection<Events> eventsByEmail) {
-//        this.eventsByEmail = eventsByEmail;
-//    }
-//
-//    public Collection<Punctuations> getPunctuationsByEmail() {
-//        return punctuationsByEmail;
-//    }
-//
-//    public void setPunctuationsByEmail(Collection<Punctuations> punctuationsByEmail) {
-//        this.punctuationsByEmail = punctuationsByEmail;
-//    }
+    // public Collection<Assistants> getAssistantsByEmail() {
+    // return assistantsByEmail;
+    // }
+    //
+    // public void setAssistantsByEmail(Collection<Assistants> assistantsByEmail) {
+    // this.assistantsByEmail = assistantsByEmail;
+    // }
+    //
+    // public Collection<Comments> getCommentsByEmail() {
+    // return commentsByEmail;
+    // }
+    //
+    // public void setCommentsByEmail(Collection<Comments> commentsByEmail) {
+    // this.commentsByEmail = commentsByEmail;
+    // }
+    //
+    // public Collection<Events> getEventsByEmail() {
+    // return eventsByEmail;
+    // }
+    //
+    // public void setEventsByEmail(Collection<Events> eventsByEmail) {
+    // this.eventsByEmail = eventsByEmail;
+    // }
+    //
+    // public Collection<Punctuations> getPunctuationsByEmail() {
+    // return punctuationsByEmail;
+    // }
+    //
+    // public void setPunctuationsByEmail(Collection<Punctuations>
+    // punctuationsByEmail) {
+    // this.punctuationsByEmail = punctuationsByEmail;
+    // }
 }

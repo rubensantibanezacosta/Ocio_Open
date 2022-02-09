@@ -45,41 +45,45 @@ public class BasicAuthController {
     IConfigImpl iConfig;
     @Autowired
     GoogleValidation googleValidation;
-private Logger logger = LoggerFactory.getLogger(BasicAuthController.class);
+    private Logger logger = LoggerFactory.getLogger(BasicAuthController.class);
+
     @PostMapping(value = "/api/auth/sign-in", consumes = "application/json")
     public ResponseEntity<?> login(@RequestHeader HttpHeaders headers, @RequestBody String jsonUser) {
         try {
             BasicAuthRequest basicAuthRequest = extractHeaderData.extractBasicAuthCredentials(headers);
-            if(iConfig.acceptedDomains().contains(basicAuthRequest.getUsername().split("@")[1])) {
-                ObjectMapper om = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            if (iConfig.acceptedDomains().contains(basicAuthRequest.getUsername().split("@")[1])) {
+                ObjectMapper om = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
+                        false);
                 Users user = om.readValue(jsonUser, Users.class);
-               System.out.println(googleValidation.validateToken(basicAuthRequest.getGoogleToken()).getEmail()+"  aquiiii "+basicAuthRequest.getUsername());
-                if (googleValidation.validateToken(basicAuthRequest.getGoogleToken()).getEmail().equals(basicAuthRequest.getUsername())) {
+
+                if (googleValidation.validateToken(basicAuthRequest.getGoogleToken()).getEmail()
+                        .equals(basicAuthRequest.getUsername())) {
                     iUsersimpl.createOrUpdate(user);
-                    authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(basicAuthRequest.getUsername(), "empty"));
+                    authenticationManager.authenticate(
+                            new UsernamePasswordAuthenticationToken(basicAuthRequest.getUsername(), "empty"));
                     UserDetails userDetails = userDetailsService.loadUserByUsername(basicAuthRequest.getUsername());
                     String jwt = jwtUtil.generateToken(userDetails);
                     String tokenExpiresIn = jwtUtil.extractExpireTime(jwt);
                     return new ResponseEntity<>(new BasicAuthResponse(jwt, tokenExpiresIn), HttpStatus.OK);
-                }else {
+                } else {
                     return new ResponseEntity<>(new ResponseMessage("Bad Credentials"), HttpStatus.UNAUTHORIZED);
                 }
-            }
-            else{
-                return new ResponseEntity<>(new ResponseMessage("Domain " + basicAuthRequest.getUsername().split("@")[1] +" not allowed"), HttpStatus.UNAUTHORIZED);
+            } else {
+                return new ResponseEntity<>(
+                        new ResponseMessage("Domain " + basicAuthRequest.getUsername().split("@")[1] + " not allowed"),
+                        HttpStatus.UNAUTHORIZED);
             }
         } catch (BadCredentialsException e) {
             logger.error(e.getMessage());
-            return new ResponseEntity<>(new ResponseMessage("Bad Credentials Bad:" +e.getMessage()), HttpStatus.UNAUTHORIZED);
-       }
-        catch (JsonMappingException e) {
+            return new ResponseEntity<>(new ResponseMessage("Bad Credentials Bad:" + e.getMessage()),
+                    HttpStatus.UNAUTHORIZED);
+        } catch (JsonMappingException e) {
             logger.error(e.getMessage());
             return new ResponseEntity<>(new ResponseMessage("Uknown error"), HttpStatus.FORBIDDEN);
-        }
-     catch (NullPointerException e) {
-         logger.error(e.getMessage());
-        return new ResponseEntity<>(new ResponseMessage("Bad Credentials Null"), HttpStatus.UNAUTHORIZED);
-    }catch (Exception e){
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
+            return new ResponseEntity<>(new ResponseMessage("Bad Credentials Null"), HttpStatus.UNAUTHORIZED);
+        } catch (Exception e) {
             logger.error(e.getMessage());
             return new ResponseEntity<>(new ResponseMessage("Unknown error"), HttpStatus.FORBIDDEN);
         }
@@ -90,15 +94,15 @@ private Logger logger = LoggerFactory.getLogger(BasicAuthController.class);
     public ResponseEntity<?> register(@RequestHeader HttpHeaders headers, @RequestBody Users user) {
         try {
             BasicAuthRequest basicAuthRequest = extractHeaderData.extractBasicAuthCredentials(headers);
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(basicAuthRequest.getUsername(), basicAuthRequest.getGoogleToken()));
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(basicAuthRequest.getUsername(),
+                    basicAuthRequest.getGoogleToken()));
             UserDetails userDetails = userDetailsService.loadUserByUsername(basicAuthRequest.getUsername());
             String jwt = jwtUtil.generateToken(userDetails);
             String tokenExpiresIn = jwtUtil.extractExpireTime(jwt);
-            return new ResponseEntity<>(new BasicAuthResponse(jwt,tokenExpiresIn),HttpStatus.OK);
+            return new ResponseEntity<>(new BasicAuthResponse(jwt, tokenExpiresIn), HttpStatus.OK);
         } catch (BadCredentialsException e) {
             return new ResponseEntity<>(new ResponseMessage("Bad Credentials"), HttpStatus.UNAUTHORIZED);
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             return new ResponseEntity<>(new ResponseMessage("Bad Credentials"), HttpStatus.BAD_REQUEST);
         }
 

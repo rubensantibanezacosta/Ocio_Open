@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
 @Service
-public class IRolesImpl implements IRoles{
+public class IRolesImpl implements IRoles {
     @Autowired
     RolesDao rolesDao;
+
     @Override
     public Optional<Roles> getRole(String roleKey) {
         return rolesDao.findByRolekey(roleKey);

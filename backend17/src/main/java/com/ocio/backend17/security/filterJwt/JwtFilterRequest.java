@@ -1,6 +1,5 @@
 package com.ocio.backend17.security.filterJwt;
 
-
 import com.ocio.backend17.security.JWTUtil;
 import io.jsonwebtoken.Claims;
 import org.slf4j.Logger;
@@ -25,35 +24,38 @@ import java.util.Collection;
 import java.util.List;
 
 @Component
-public class JwtFilterRequest extends OncePerRequestFilter  {
+public class JwtFilterRequest extends OncePerRequestFilter {
     @Autowired
     JWTUtil jwtUtil;
     @Autowired
     UserDetailsService userDetailsService;
 
-private final static Logger logger = LoggerFactory.getLogger(JwtFilterRequest.class);
-   @Override
-   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    private final static Logger logger = LoggerFactory.getLogger(JwtFilterRequest.class);
 
-      try {
-          String authorizationHeader = request.getHeader("Authorization");
-          if (authorizationHeader != null && authorizationHeader.startsWith("Bearer")) {
-              String jwt = authorizationHeader.substring(7);
-              if (jwtUtil.validateToken(jwt)) {
-                  String username = jwtUtil.extractUsername(jwt);
-                  List<String> scopes = jwtUtil.extractScopes(jwt);
-                  Collection<SimpleGrantedAuthority> authorities=new ArrayList<>();
-                  scopes.forEach(s -> authorities.add(new SimpleGrantedAuthority(s)));
-                  UserDetails userDetails= new User(username,"{noop}empty",true, true, true, true, authorities);
-                  UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                  SecurityContextHolder.getContext().setAuthentication(auth);
-              }
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
 
-          }
-      }catch (Exception e){
+        try {
+            String authorizationHeader = request.getHeader("Authorization");
+            if (authorizationHeader != null && authorizationHeader.startsWith("Bearer")) {
+                String jwt = authorizationHeader.substring(7);
+                if (jwtUtil.validateToken(jwt)) {
+                    String username = jwtUtil.extractUsername(jwt);
+                    List<String> scopes = jwtUtil.extractScopes(jwt);
+                    Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+                    scopes.forEach(s -> authorities.add(new SimpleGrantedAuthority(s)));
+                    UserDetails userDetails = new User(username, "{noop}empty", true, true, true, true, authorities);
+                    UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails,
+                            null, userDetails.getAuthorities());
+                    SecurityContextHolder.getContext().setAuthentication(auth);
+                }
 
-        logger.error("Failed doFilter:" + e.getMessage());
-      }
-      filterChain.doFilter(request,response);
+            }
+        } catch (Exception e) {
+
+            logger.error("Failed doFilter:" + e.getMessage());
+        }
+        filterChain.doFilter(request, response);
     }
 }

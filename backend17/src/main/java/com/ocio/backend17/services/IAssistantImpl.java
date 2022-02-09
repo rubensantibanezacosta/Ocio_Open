@@ -9,10 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public class IAssistantImpl implements IAsisstant {
     @Autowired
     AssistantDao assistantDao;
+
     @Override
     public Assistants add(Assistants assistant) {
         return assistantDao.save(assistant);
@@ -25,16 +27,16 @@ public class IAssistantImpl implements IAsisstant {
 
     @Override
     public List<Assistants> findByEventAndAttendance(Double event_id, Boolean attendee) {
-        return assistantDao.findAllByEvent_idAndAttendance(event_id,attendee);
+        return assistantDao.findAllByEvent_idAndAttendance(event_id, attendee);
     }
 
     @Override
     public List<Assistants> findAll() {
-        return (List<Assistants>)assistantDao.findAll();
+        return (List<Assistants>) assistantDao.findAll();
     }
 
     @Override
-    public int updateAttendee(AssistantsPK assistantsPK,Boolean attendee) {
+    public int updateAttendee(AssistantsPK assistantsPK, Boolean attendee) {
         if (assistantDao.findById(assistantsPK).isPresent()) {
             Assistants assistant = assistantDao.findById(assistantsPK).get();
             assistant.setAttendance(attendee);
@@ -48,8 +50,9 @@ public class IAssistantImpl implements IAsisstant {
     @Transactional
     @Override
     public int updateAssistant(Assistants assistants) {
-        if (assistantDao.findById(new AssistantsPK(assistants.getEvent_id(),assistants.getAssistant())).isPresent()) {
-            Assistants newAssistant = assistantDao.findById(new AssistantsPK(assistants.getEvent_id(),assistants.getAssistant())).get();
+        if (assistantDao.findById(new AssistantsPK(assistants.getEvent_id(), assistants.getAssistant())).isPresent()) {
+            Assistants newAssistant = assistantDao
+                    .findById(new AssistantsPK(assistants.getEvent_id(), assistants.getAssistant())).get();
             newAssistant.setAttendance(assistants.getAttendance());
             newAssistant.setExcuse(assistants.getExcuse());
             assistantDao.save(newAssistant);

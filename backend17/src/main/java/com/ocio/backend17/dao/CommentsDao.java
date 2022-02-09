@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 @Repository
 public interface CommentsDao extends CrudRepository<Comments, Double> {
     @Query("Select u from Comments u where u.event_id=?1")

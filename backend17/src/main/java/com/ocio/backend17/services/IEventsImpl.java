@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class IEventsImpl implements IEvents{
-@Autowired
+public class IEventsImpl implements IEvents {
+    @Autowired
     EventsDao eventsDao;
 
     @Override
@@ -55,9 +55,9 @@ public class IEventsImpl implements IEvents{
     @Transactional
     @Override
     public int updateEvent(Events event) {
-        DateFormat dateFormatterDate=new SimpleDateFormat("yyyy-MM-dd");
-        if(eventsDao.findById(event.getEvent_id()).isPresent()){
-            Events oldEvent=eventsDao.findById(event.getEvent_id()).get();
+        DateFormat dateFormatterDate = new SimpleDateFormat("yyyy-MM-dd");
+        if (eventsDao.findById(event.getEvent_id()).isPresent()) {
+            Events oldEvent = eventsDao.findById(event.getEvent_id()).get();
             oldEvent.setDate(event.getDate());
             oldEvent.setDescription(event.getDescription());
             oldEvent.setImage_id(event.getImage_id());
@@ -76,17 +76,18 @@ public class IEventsImpl implements IEvents{
     @Transactional
     @Override
     public int updateEventPunctuationAvg(double event_id, double punctuation_avg) {
-        if(eventsDao.findById(event_id).isPresent()){
+        if (eventsDao.findById(event_id).isPresent()) {
             Events event = eventsDao.findById(event_id).get();
             event.setPunctuation_avg(punctuation_avg);
             return 1;
         }
         return 0;
     }
+
     @Transactional
     @Override
     public int deleteEvent(Double event_id) {
-        if(eventsDao.findById(event_id).isPresent()){
+        if (eventsDao.findById(event_id).isPresent()) {
             eventsDao.deleteById(event_id);
             return 1;
         }

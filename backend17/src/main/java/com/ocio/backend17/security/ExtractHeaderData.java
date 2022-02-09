@@ -19,7 +19,7 @@ import java.util.List;
 
 @Component
 public class ExtractHeaderData {
-    private Logger logger= LoggerFactory.getLogger(ExtractHeaderData.class);
+    private Logger logger = LoggerFactory.getLogger(ExtractHeaderData.class);
     @Autowired
     JWTUtil jwtUtil;
 
@@ -30,7 +30,6 @@ public class ExtractHeaderData {
             System.out.println(new String(Base64.getDecoder().decode(headerAuthDataEncoded)));
             if (headerAuthDataEncoded != null) {
                 String[] decodedData = new String(Base64.getDecoder().decode(headerAuthDataEncoded)).split(":");
-
 
                 return new BasicAuthRequest(decodedData[0], decodedData[1]);
             }
@@ -56,6 +55,6 @@ public class ExtractHeaderData {
             logger.error(e.getMessage());
             return "";
         }
-    return "";
+        return "";
     }
 }

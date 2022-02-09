@@ -35,8 +35,10 @@ public class PunctuationsPK implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         PunctuationsPK that = (PunctuationsPK) o;
         return Double.compare(that.event_id, event_id) == 0 && Objects.equals(assistant, that.assistant);
     }

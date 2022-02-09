@@ -65,10 +65,14 @@ public class Roles {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Roles roles = (Roles) o;
-        return number == roles.number && Objects.equals(rolekey, roles.rolekey) && Objects.equals(permissions, roles.permissions) && Objects.equals(createdAt, roles.createdAt) && Objects.equals(updatedAt, roles.updatedAt);
+        return number == roles.number && Objects.equals(rolekey, roles.rolekey)
+                && Objects.equals(permissions, roles.permissions) && Objects.equals(createdAt, roles.createdAt)
+                && Objects.equals(updatedAt, roles.updatedAt);
     }
 
     @Override

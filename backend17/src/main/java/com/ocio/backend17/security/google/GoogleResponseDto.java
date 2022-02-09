@@ -1,7 +1,7 @@
 package com.ocio.backend17.security.google;
 
 public class GoogleResponseDto {
- private String email;
+    private String email;
 
     public GoogleResponseDto(String email) {
         this.email = email;

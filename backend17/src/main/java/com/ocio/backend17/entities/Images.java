@@ -21,7 +21,6 @@ public class Images {
     @Column(name = "updatedat", nullable = false)
     private Date updatedAt;
 
-
     public int getId() {
         return id;
     }
@@ -56,16 +55,18 @@ public class Images {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Images images = (Images) o;
-        return id == images.id && Objects.equals(url, images.url) && Objects.equals(createdAt, images.createdAt) && Objects.equals(updatedAt, images.updatedAt);
+        return id == images.id && Objects.equals(url, images.url) && Objects.equals(createdAt, images.createdAt)
+                && Objects.equals(updatedAt, images.updatedAt);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, url, createdAt, updatedAt);
     }
-
 
 }

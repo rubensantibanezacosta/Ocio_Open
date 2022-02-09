@@ -25,7 +25,6 @@ public class Punctuations {
     @Column(name = "updatedat", nullable = false)
     private Date updatedAt;
 
-
     public double getEvent_id() {
         return event_id;
     }
@@ -68,10 +67,14 @@ public class Punctuations {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Punctuations that = (Punctuations) o;
-        return Double.compare(that.event_id, event_id) == 0 && Double.compare(that.punctuation, punctuation) == 0 && Objects.equals(assistant, that.assistant) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
+        return Double.compare(that.event_id, event_id) == 0 && Double.compare(that.punctuation, punctuation) == 0
+                && Objects.equals(assistant, that.assistant) && Objects.equals(createdAt, that.createdAt)
+                && Objects.equals(updatedAt, that.updatedAt);
     }
 
     @Override
@@ -91,4 +94,3 @@ public class Punctuations {
         this.events = events;
     }
 }
-

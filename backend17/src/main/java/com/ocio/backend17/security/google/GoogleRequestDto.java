@@ -5,10 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class GoogleRequestDto {
 
-
     String url;
     String token;
-
 
     public GoogleRequestDto(String url, String token) {
         this.url = url;
@@ -16,8 +14,7 @@ public class GoogleRequestDto {
     }
 
     public String getRequestCompleteUrl() {
-        return url+token;
+        return url + token;
     }
-
 
 }

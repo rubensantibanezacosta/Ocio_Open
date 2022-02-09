@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 @Repository
 public interface AssistantDao extends CrudRepository<Assistants, AssistantsPK> {
     @Query("Select u from Assistants u where u.event_id=?1 and u.attendance=?2")

@@ -1,6 +1,5 @@
 package com.ocio.backend17.security.google;
 
-
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ocio.backend17.config.IConfigImpl;
@@ -23,13 +22,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-
 import java.io.IOException;
-
 
 @Component
 public class GoogleValidation {
-
 
     private Logger logger = LoggerFactory.getLogger(GoogleValidation.class);
 
@@ -38,7 +34,7 @@ public class GoogleValidation {
     @Autowired
     IConfigImpl iConfig;
 
-    public GoogleResponseDto validateToken(String token)  {
+    public GoogleResponseDto validateToken(String token) {
         try {
             GoogleRequestDto googleRequestDto = new GoogleRequestDto(iConfig.googleApiUrl(), token);
             CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -47,25 +43,26 @@ public class GoogleValidation {
 
             if (response.getStatusLine().getStatusCode() == 200) {
 
-
                 String str = EntityUtils.toString(response.getEntity(), "UTF-8");
-                ObjectMapper om = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+                ObjectMapper om = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
+                        false);
                 GoogleResponseDto googleResponseDto = om.readValue(str, GoogleResponseDto.class);
                 System.out.println(googleResponseDto.getEmail());
                 return googleResponseDto;
 
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return null;
     }
 
     @Bean
-    public CloseableHttpClient closeableHttpClient(){
+    public CloseableHttpClient closeableHttpClient() {
         return new CloseableHttpClient() {
             @Override
-            protected CloseableHttpResponse doExecute(HttpHost httpHost, HttpRequest httpRequest, HttpContext httpContext) throws IOException, ClientProtocolException {
+            protected CloseableHttpResponse doExecute(HttpHost httpHost, HttpRequest httpRequest,
+                    HttpContext httpContext) throws IOException, ClientProtocolException {
                 return null;
             }
 

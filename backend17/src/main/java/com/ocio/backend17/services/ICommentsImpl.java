@@ -9,14 +9,16 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public class ICommentsImpl implements IComments {
     @Autowired
     CommentsDao commentsDao;
+
     @Override
     public Comments addComment(Comments comment) {
-        Comments setTimedComment=comment;
-        setTimedComment.setDate((Timestamp)new Date());
+        Comments setTimedComment = comment;
+        setTimedComment.setDate((Timestamp) new Date());
         return commentsDao.save(comment);
     }
 
