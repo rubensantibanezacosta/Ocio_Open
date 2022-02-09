@@ -12,7 +12,6 @@ import com.ocio.backend17.entities.Users;
 import com.ocio.backend17.security.ExtractHeaderData;
 import com.ocio.backend17.security.JWTUtil;
 
-import com.ocio.backend17.security.google.GoogleRequestDto;
 import com.ocio.backend17.security.google.GoogleValidation;
 import com.ocio.backend17.services.IUsersImpl;
 import org.slf4j.Logger;
