@@ -57,7 +57,7 @@ private Logger logger = LoggerFactory.getLogger(BasicAuthController.class);
                System.out.println(googleValidation.validateToken(basicAuthRequest.getGoogleToken()).getEmail()+"  aquiiii "+basicAuthRequest.getUsername());
                 if (googleValidation.validateToken(basicAuthRequest.getGoogleToken()).getEmail().equals(basicAuthRequest.getUsername())) {
                     iUsersimpl.createOrUpdate(user);
-                    authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(basicAuthRequest.getUsername(), basicAuthRequest.getGoogleToken()));
+                    authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(basicAuthRequest.getUsername(), "empty"));
                     UserDetails userDetails = userDetailsService.loadUserByUsername(basicAuthRequest.getUsername());
                     String jwt = jwtUtil.generateToken(userDetails);
                     String tokenExpiresIn = jwtUtil.extractExpireTime(jwt);
@@ -71,7 +71,7 @@ private Logger logger = LoggerFactory.getLogger(BasicAuthController.class);
             }
         } catch (BadCredentialsException e) {
             logger.error(e.getMessage());
-            return new ResponseEntity<>(new ResponseMessage("Bad Credentials"), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(new ResponseMessage("Bad Credentials Bad:" +e.getMessage()), HttpStatus.UNAUTHORIZED);
        }
         catch (JsonMappingException e) {
             logger.error(e.getMessage());
@@ -79,7 +79,7 @@ private Logger logger = LoggerFactory.getLogger(BasicAuthController.class);
         }
      catch (NullPointerException e) {
          logger.error(e.getMessage());
-        return new ResponseEntity<>(new ResponseMessage("Bad Credentials"), HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(new ResponseMessage("Bad Credentials Null"), HttpStatus.UNAUTHORIZED);
     }catch (Exception e){
             logger.error(e.getMessage());
             return new ResponseEntity<>(new ResponseMessage("Unknown error"), HttpStatus.FORBIDDEN);
