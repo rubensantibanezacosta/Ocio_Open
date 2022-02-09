@@ -4,10 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ocio.backend17.dto.ResponseMessage;
-import com.ocio.backend17.entities.Comments;
+import com.ocio.backend17.entities.Assistants;
 import com.ocio.backend17.entities.Events;
 import com.ocio.backend17.security.ExtractHeaderData;
-import com.ocio.backend17.services.ICommentsImpl;
 import com.ocio.backend17.services.IEventsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -43,45 +42,111 @@ public class EventsController {
     }
 
     @PreAuthorize("hasAuthority('read:events')")
-    @GetMapping(value = "/api/events/ASC", consumes = "application/json")
+    @GetMapping( "/api/events/ASC")
     @ResponseBody
     ResponseEntity<?> findAllEventsAsc() {
         return new ResponseEntity<>(iEventsImpl.findAllEventsAsc(), HttpStatus.OK);
     }
 
     @PreAuthorize("hasAuthority('read:events')")
-    @GetMapping(value = "/api/events/DESC", consumes = "application/json")
+    @GetMapping( "/api/events/DESC")
     @ResponseBody
     ResponseEntity<?> findAllEventsDsc() {
         return new ResponseEntity<>(iEventsImpl.findAllEventsDesc(), HttpStatus.OK);
     }
 
     @PreAuthorize("hasAuthority('read:events')")
-    @GetMapping(value = "/api/events/bydate/{date}", consumes = "application/json")
+    @GetMapping( "/api/events/bydate/{date}")
     @ResponseBody
-    ResponseEntity<?> findAllEventsByDate(@PathVariable Date date) {
+    ResponseEntity<?> findAllEventsByDate(@PathVariable("date") Date date) {
         return new ResponseEntity<>(iEventsImpl.findAllByDate(date), HttpStatus.OK);
     }
 
     @PreAuthorize("hasAuthority('read:events')")
-    @GetMapping(value = "/api/events/byorganizer/ASC/{organizer}", consumes = "application/json")
+    @GetMapping( "/api/events/byorganizer/ASC/{organizer}")
     @ResponseBody
-    ResponseEntity<?> findAllEventsByOrganizerAsc(@PathVariable String organizer) {
-        return new ResponseEntity<>(iEventsImpl.findAllByDate(date), HttpStatus.OK);
+    ResponseEntity<?> findAllEventsByOrganizerAsc(@PathVariable("organizer") String organizer) {
+        return new ResponseEntity<>(iEventsImpl.findEventsByOrganizerAsc(organizer), HttpStatus.OK);
     }
 
-//    @PreAuthorize("hasAuthority('read:events')")
-//    @GetMapping(value = "/api/events/byorganizer/DESC/{organizer}", consumes = "application/json")
-//    @ResponseBody
-//    ResponseEntity<?> findAllEventsByOrganizerDesc(@PathVariable String organizer) {
-//        return new ResponseEntity<>(iEventsImpl.findAllByDate(date), HttpStatus.OK);
-//    }
-//
-//    @PreAuthorize("hasAuthority('read:events')")
-//    @GetMapping(value = "/api/events/byid/{event_id}", consumes = "application/json")
-//    @ResponseBody
-//    ResponseEntity<?> findAllEventsByDate(@PathVariable String organizer) {
-//        return new ResponseEntity<>(iEventsImpl.findAllByDate(date), HttpStatus.OK);
-//    }
+    @PreAuthorize("hasAuthority('read:events')")
+    @GetMapping( "/api/events/byorganizer/DESC/{organizer}")
+    @ResponseBody
+    ResponseEntity<?> findAllEventsByOrganizerDesc(@PathVariable("organizer") String organizer) {
+        return new ResponseEntity<>(iEventsImpl.findEventsByOrganizerDesc(organizer), HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasAuthority('read:events')")
+    @GetMapping("/api/events/byid/{event_id}")
+    @ResponseBody
+    ResponseEntity<?> findById(@PathVariable("event_id") Double id) {
+        if (iEventsImpl.findEventById(id).isPresent()) {
+            return new ResponseEntity<>(iEventsImpl.findEventById(id).get(),
+                    HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new Assistants(), HttpStatus.OK);
+        }
+    }
+
+    @PreAuthorize("hasAuthority('update:events')")
+    @PutMapping(value = "/api/events", consumes = "application/json")
+    @ResponseBody
+    ResponseEntity<?> updateEvent(@RequestBody String jsonEvent, @RequestHeader HttpHeaders headers)
+            throws JsonProcessingException {
+        ObjectMapper om = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        Events event = om.readValue(jsonEvent, Events.class);
+        if (!(event.getTittle()).equals("") || !(event.getPlace()).equals("") || !(event.getZone()).equals("")) {
+            return new ResponseEntity<>(new ResponseMessage("Fields cannot be empty"), HttpStatus.BAD_REQUEST);
+        } else {
+            event.setOrganizer(extractHeaderData.extractJWTUsername(headers));
+            return new ResponseEntity<>(iEventsImpl.updateEvent(event), HttpStatus.OK);
+        }
+    }
+
+    @PreAuthorize("hasAuthority('adminupdate:events')")
+    @PutMapping(value = "/api/events/admin", consumes = "application/json")
+    @ResponseBody
+    ResponseEntity<?> updateEventAdmin(@RequestBody String jsonEvent, @RequestHeader HttpHeaders headers)
+            throws JsonProcessingException {
+        ObjectMapper om = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        Events event = om.readValue(jsonEvent, Events.class);
+        if (!(event.getTittle()).equals("") || !(event.getPlace()).equals("") || !(event.getZone()).equals("")) {
+            return new ResponseEntity<>(new ResponseMessage("Fields cannot be empty"), HttpStatus.BAD_REQUEST);
+        } else {
+            return new ResponseEntity<>(iEventsImpl.updateEvent(event), HttpStatus.OK);
+        }
+    }
+
+    @PreAuthorize("hasAuthority('delete:events')")
+    @DeleteMapping("/api/events/{event_id}")
+    @ResponseBody
+    ResponseEntity<?> deleteById(@PathVariable("event_id") Double id,  @RequestHeader HttpHeaders headers) {
+        if (iEventsImpl.findEventById(id).isPresent()) {
+
+            Events events=iEventsImpl.findEventById(id).get();
+                if(events.getOrganizer().equals(extractHeaderData.extractJWTUsername(headers))){
+                    return new ResponseEntity<>(iEventsImpl.findEventById(id).get(),HttpStatus.OK);
+            } else {
+                    return new ResponseEntity<>(new ResponseMessage("Only organizer cans delete his events"), HttpStatus.UNAUTHORIZED);
+                }
+        }
+        return new ResponseEntity<>(new ResponseMessage("Event not found"), HttpStatus.NO_CONTENT);
+    }
+
+    @PreAuthorize("hasAuthority('admindelete:events')")
+    @DeleteMapping("/api/events/admin/{event_id}")
+    @ResponseBody
+    ResponseEntity<?> deleteByIdAdmin(@PathVariable("event_id") Double id,  @RequestHeader HttpHeaders headers) {
+        if (iEventsImpl.findEventById(id).isPresent()) {
+
+            Events events=iEventsImpl.findEventById(id).get();
+            if(events.getOrganizer().equals(extractHeaderData.extractJWTUsername(headers))){
+                return new ResponseEntity<>(iEventsImpl.findEventById(id).get(),HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(new ResponseMessage("Only organizer cans delete his events"), HttpStatus.UNAUTHORIZED);
+            }
+        }
+        return new ResponseEntity<>(new ResponseMessage("Event not found"), HttpStatus.NO_CONTENT);
+    }
 
 }

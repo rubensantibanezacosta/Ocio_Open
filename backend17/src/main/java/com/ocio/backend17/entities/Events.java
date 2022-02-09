@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Events {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "eventid", nullable = false, precision = 0)
+    @Column(name = "event_id", nullable = false, precision = 0)
     private double event_id;
     @Basic
     @Column(name = "tittle", nullable = false, length = 200)
@@ -50,7 +50,7 @@ public class Events {
     @JoinColumn(name = "organizer", referencedColumnName = "email", nullable = false, updatable = false, insertable = false)
     private Users usersByOrganizer;
     @ManyToOne
-    @JoinColumn(name = "imageid", referencedColumnName = "id", updatable = false, insertable = false)
+    @JoinColumn(name = "image_id", referencedColumnName = "id", updatable = false, insertable = false)
     private Images imagesByImageid;
     @OneToMany(mappedBy = "events")
     private Collection<Punctuations> punctuationsByEventid;
@@ -59,8 +59,8 @@ public class Events {
         return event_id;
     }
 
-    public void setEvent_id(double eventid) {
-        this.event_id = eventid;
+    public void setEvent_id(double event_id) {
+        this.event_id = event_id;
     }
 
     public String getTittle() {
@@ -107,8 +107,8 @@ public class Events {
         return punctuation_avg;
     }
 
-    public void setPunctuation_avg(double punctuationavg) {
-        this.punctuation_avg = punctuationavg;
+    public void setPunctuation_avg(double punctuation_avg) {
+        this.punctuation_avg = punctuation_avg;
     }
 
     public String getOrganizer() {
