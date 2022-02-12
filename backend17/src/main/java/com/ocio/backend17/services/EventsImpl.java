@@ -2,10 +2,13 @@ package com.ocio.backend17.services;
 
 import com.ocio.backend17.dao.EventsDao;
 import com.ocio.backend17.entities.Events;
+import com.ocio.backend17.utils.DateFormatterSQL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,12 +16,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class IEventsImpl implements IEvents {
+public class EventsImpl implements IEvents {
     @Autowired
     EventsDao eventsDao;
 
+    @Autowired
+    DateFormatterSQL dateFormatterSQL;
+
     @Override
     public Events createEvent(Events event) {
+        event.setCreatedAt(dateFormatterSQL.todaySQLFormat());
+        event.setUpdatedAt(dateFormatterSQL.todaySQLFormat());
         return eventsDao.save(event);
     }
 
@@ -34,7 +42,14 @@ public class IEventsImpl implements IEvents {
 
     @Override
     public List<Events> findAllByDate(Date date) {
-        return eventsDao.findAllByDate(date);
+
+
+        Timestamp dateTime = dateFormatterSQL.nowTimestampSQLFormat(date);
+        Timestamp dateTimeFinish = new Timestamp(dateTime.getTime()+((23*60*60*1000)+(59*60*1000)+(59*1000)+900));
+
+
+
+        return eventsDao.findAllByDate(dateTime, dateTimeFinish);
     }
 
     @Override
@@ -65,7 +80,7 @@ public class IEventsImpl implements IEvents {
             oldEvent.setTittle(event.getTittle());
             oldEvent.setPlace(event.getPlace());
             oldEvent.setZone(event.getZone());
-            oldEvent.setUpdatedAt((java.sql.Date.valueOf(dateFormatterDate.format(new Date()))));
+            oldEvent.setUpdatedAt(dateFormatterSQL.todaySQLFormat());
             eventsDao.save(oldEvent);
             return 1;
 
@@ -78,7 +93,7 @@ public class IEventsImpl implements IEvents {
     public int updateEventPunctuationAvg(double event_id, double punctuation_avg) {
         if (eventsDao.findById(event_id).isPresent()) {
             Events event = eventsDao.findById(event_id).get();
-            event.setPunctuation_avg(punctuation_avg);
+            event.setPunctuationAvg(punctuation_avg);
             return 1;
         }
         return 0;

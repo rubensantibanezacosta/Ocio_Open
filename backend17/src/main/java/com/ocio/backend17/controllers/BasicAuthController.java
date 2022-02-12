@@ -13,7 +13,7 @@ import com.ocio.backend17.security.ExtractHeaderData;
 import com.ocio.backend17.security.JWTUtil;
 
 import com.ocio.backend17.security.google.GoogleValidation;
-import com.ocio.backend17.services.IUsersImpl;
+import com.ocio.backend17.services.UsersImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ public class BasicAuthController {
     @Autowired
     ExtractHeaderData extractHeaderData;
     @Autowired
-    IUsersImpl iUsersimpl;
+    UsersImpl usersimpl;
     @Autowired
     IConfigImpl iConfig;
     @Autowired
@@ -58,7 +58,7 @@ public class BasicAuthController {
 
                 if (googleValidation.validateToken(basicAuthRequest.getGoogleToken()).getEmail()
                         .equals(basicAuthRequest.getUsername())) {
-                    iUsersimpl.createOrUpdate(user);
+                    usersimpl.createOrUpdate(user);
                     authenticationManager.authenticate(
                             new UsernamePasswordAuthenticationToken(basicAuthRequest.getUsername(), "empty"));
                     UserDetails userDetails = userDetailsService.loadUserByUsername(basicAuthRequest.getUsername());

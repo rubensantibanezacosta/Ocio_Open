@@ -3,6 +3,7 @@ package com.ocio.backend17.services;
 import com.ocio.backend17.dao.AssistantDao;
 import com.ocio.backend17.entities.Assistants;
 import com.ocio.backend17.entities.AssistantsPK;
+import com.ocio.backend17.utils.DateFormatterSQL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,12 +12,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class IAssistantImpl implements IAsisstant {
+public class AssistantImpl implements IAsisstant {
     @Autowired
     AssistantDao assistantDao;
+    @Autowired
+    DateFormatterSQL dateFormatterSQL;
 
     @Override
     public Assistants add(Assistants assistant) {
+
+        assistant.setCreatedAt(dateFormatterSQL.todaySQLFormat());
+        assistant.setUpdatedAt(dateFormatterSQL.todaySQLFormat());
         return assistantDao.save(assistant);
     }
 
@@ -55,6 +61,7 @@ public class IAssistantImpl implements IAsisstant {
                     .findById(new AssistantsPK(assistants.getEvent_id(), assistants.getAssistant())).get();
             newAssistant.setAttendance(assistants.getAttendance());
             newAssistant.setExcuse(assistants.getExcuse());
+            newAssistant.setUpdatedAt(dateFormatterSQL.todaySQLFormat());
             assistantDao.save(newAssistant);
             return 1;
         } else {

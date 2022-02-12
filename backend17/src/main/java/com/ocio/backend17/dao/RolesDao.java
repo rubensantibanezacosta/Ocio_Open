@@ -8,5 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface RolesDao extends CrudRepository<Roles, Integer> {
-    Optional<Roles> findByRolekey(String rolekey);
+
+    Optional<Roles> findByRoleKey(String roleKey);
 }

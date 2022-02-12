@@ -19,22 +19,22 @@ import java.util.List;
 
 @Service
 public class UserDetails implements UserDetailsService {
-  @Autowired
-  IRolesImpl iRoles;
-  @Autowired
-  IConfigImpl iConfig;
-  @Autowired
-  IUsersImpl iUsers;
+    @Autowired
+    RolesImpl iRoles;
+    @Autowired
+    IConfigImpl iConfig;
+    @Autowired
+    UsersImpl iUsers;
 
-  @Override
-  public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String username)
-      throws UsernameNotFoundException {
+    @Override
+    public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String username)
+            throws UsernameNotFoundException {
 
-    Users user = iUsers.getById(username).get();
-    Roles roles = iRoles.getRole(iConfig.getUserRoleKey()).get();
-    Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-    List<String> scopes = List.of(roles.getPermissions().split(","));
-    scopes.forEach(s -> authorities.add(new SimpleGrantedAuthority(s)));
-    return new User(user.getEmail(), "{noop}empty", true, true, true, true, authorities);
-  }
+        Users user = iUsers.getById(username).get();
+        Roles roles = iRoles.getRole(iConfig.getUserRoleKey()).get();
+        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        List<String> scopes = List.of(roles.getPermissions().split(","));
+        scopes.forEach(s -> authorities.add(new SimpleGrantedAuthority(s)));
+        return new User(user.getEmail(), "{noop}empty", true, true, true, true, authorities);
+    }
 }

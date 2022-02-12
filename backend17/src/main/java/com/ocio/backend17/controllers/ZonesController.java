@@ -1,7 +1,7 @@
 package com.ocio.backend17.controllers;
 
 import com.ocio.backend17.entities.Zones;
-import com.ocio.backend17.services.IZonesImpl;
+import com.ocio.backend17.services.ZonesImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +16,11 @@ import java.util.List;
 @RestController
 public class ZonesController {
     @Autowired
-    IZonesImpl iZonesImpl;
+    ZonesImpl zonesImpl;
 
     @PreAuthorize("hasAuthority('read:zones')")
     @GetMapping("/api/zones")
     public ResponseEntity<List<Zones>> getAll() {
-        return new ResponseEntity(iZonesImpl.getAll(), HttpStatus.OK);
+        return new ResponseEntity(zonesImpl.getAll(), HttpStatus.OK);
     }
 }

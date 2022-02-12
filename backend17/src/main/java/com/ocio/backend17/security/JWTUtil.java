@@ -27,8 +27,9 @@ public class JWTUtil {
     IConfigImpl iConfigImpl;
 
     public String generateToken(UserDetails userDetails) {
+        System.out.println(iConfigImpl.getExpirationTime());
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'4Z'");
-        Date dateExpiration = new Date(System.currentTimeMillis() + iConfigImpl.getExpirationTime());
+        Date dateExpiration = new Date((System.currentTimeMillis() + (iConfigImpl.getExpirationTime())));
         return Jwts.builder().setSubject(userDetails.getUsername())
                 .claim("username", userDetails.getUsername())
                 .claim("scopes",
@@ -49,7 +50,7 @@ public class JWTUtil {
         } catch (UnsupportedJwtException e) {
             logger.error("Token no soportado");
         } catch (ExpiredJwtException e) {
-            logger.error("Token expirado");
+            logger.error("Token expirado" + e.getMessage());
         } catch (IllegalArgumentException e) {
             logger.error("Token vacio");
         } catch (SignatureException e) {

@@ -7,7 +7,7 @@ import com.ocio.backend17.dto.ResponseMessageWithIndex;
 import com.ocio.backend17.entities.Comments;
 
 import com.ocio.backend17.security.ExtractHeaderData;
-import com.ocio.backend17.services.ICommentsImpl;
+import com.ocio.backend17.services.CommentsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,7 +21,7 @@ import java.util.List;
 @RestController
 public class CommentsController {
     @Autowired
-    ICommentsImpl iCommentsImpl;
+    CommentsImpl commentsImpl;
     @Autowired
     ExtractHeaderData extractHeaderData;
 
@@ -36,14 +36,14 @@ public class CommentsController {
             return new ResponseEntity<>(new ResponseMessage("Fields cannot be empty"), HttpStatus.BAD_REQUEST);
         } else {
             comment.setAssistant(extractHeaderData.extractJWTUsername(headers));
-            return new ResponseEntity<>(iCommentsImpl.addComment(comment), HttpStatus.CREATED);
+            return new ResponseEntity<>(commentsImpl.addComment(comment), HttpStatus.CREATED);
         }
     }
 
     @PreAuthorize("hasAuthority('read:comments')")
     @GetMapping("/api/comments/byevent/{event_id}")
     ResponseEntity<List<Comments>> getAll(@PathVariable("event_id") Double event_id) {
-        return new ResponseEntity<>(iCommentsImpl.findByEventId(event_id), HttpStatus.OK);
+        return new ResponseEntity<>(commentsImpl.findByEventId(event_id), HttpStatus.OK);
 
     }
 
@@ -52,11 +52,11 @@ public class CommentsController {
     @ResponseBody
     ResponseEntity<?> deleteByEmail(@PathVariable("comment_id") Double id, @PathVariable("index") int index,
             @RequestHeader HttpHeaders headers) {
-        if (iCommentsImpl.findbyId(id).isPresent() && iCommentsImpl.findbyId(id).get().getAssistant()
+        if (commentsImpl.findbyId(id).isPresent() && commentsImpl.findbyId(id).get().getAssistant()
                 .equals(extractHeaderData.extractJWTUsername(headers))) {
-            iCommentsImpl.deleteById(id);
+            commentsImpl.deleteById(id);
             return new ResponseEntity<>(new ResponseMessageWithIndex("User deleted", index), HttpStatus.NO_CONTENT);
-        } else if (iCommentsImpl.findbyId(id).isPresent() && !(iCommentsImpl.findbyId(id).get().getAssistant()
+        } else if (commentsImpl.findbyId(id).isPresent() && !(commentsImpl.findbyId(id).get().getAssistant()
                 .equals(extractHeaderData.extractJWTUsername(headers)))) {
             return new ResponseEntity<>(new ResponseMessage("Only author cans delete his own comments"),
                     HttpStatus.UNAUTHORIZED);

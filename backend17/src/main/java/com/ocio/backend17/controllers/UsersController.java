@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ocio.backend17.dto.ResponseMessage;
 import com.ocio.backend17.dto.UsersDto;
 import com.ocio.backend17.entities.Users;
-import com.ocio.backend17.services.IUsersImpl;
+import com.ocio.backend17.services.UsersImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +21,14 @@ import java.util.List;
 
 public class UsersController {
     @Autowired
-    IUsersImpl iUsersImpl;
+    UsersImpl usersImpl;
     private Logger logger = LoggerFactory.getLogger(UsersController.class);
 
     @PreAuthorize("hasAuthority('read:users')")
     @GetMapping("/api/user")
     List<Users> getAll() {
         logger.debug("request arrived users");
-        return iUsersImpl.getAll();
+        return usersImpl.getAll();
     }
 
     @PreAuthorize("hasAuthority('read:users')")
@@ -36,8 +36,8 @@ public class UsersController {
     public ResponseEntity<?> getByEmail(@PathVariable("email") String email) {
         System.out.println("por email request by id");
         System.out.println(email);
-        if (iUsersImpl.getById(email).isPresent()) {
-            return new ResponseEntity<>(new UsersDto(iUsersImpl.getById(email).get()), HttpStatus.OK);
+        if (usersImpl.getById(email).isPresent()) {
+            return new ResponseEntity<>(new UsersDto(usersImpl.getById(email).get()), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(new UsersDto(), HttpStatus.OK);
         }
@@ -46,15 +46,15 @@ public class UsersController {
     @PreAuthorize("hasAuthority('read:users')")
     @GetMapping("/api/user/position/{email}")
     public ResponseEntity<?> getUserPositionByEmail(@PathVariable("email") String email) {
-        return new ResponseEntity<>(iUsersImpl.getUserPosition(email), HttpStatus.OK);
+        return new ResponseEntity<>(usersImpl.getUserPosition(email), HttpStatus.OK);
     }
 
     @PreAuthorize("hasAuthority('delete:users')")
     @DeleteMapping("/api/user/{email}")
     @ResponseBody
     ResponseEntity<ResponseMessage> deleteByEmail(@PathVariable("email") String email) {
-        if (iUsersImpl.getById(email).isPresent()) {
-            iUsersImpl.deleteById(email);
+        if (usersImpl.getById(email).isPresent()) {
+            usersImpl.deleteById(email);
             return new ResponseEntity<>(new ResponseMessage("User deleted"), HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(new ResponseMessage("User not found"), HttpStatus.NO_CONTENT);
@@ -67,7 +67,7 @@ public class UsersController {
     ResponseEntity<UsersDto> createOrUpdateUser(@RequestBody String jsonUser) throws JsonProcessingException {
         ObjectMapper om = new ObjectMapper();
         Users user = om.readValue(jsonUser, Users.class);
-        return new ResponseEntity<>(new UsersDto(iUsersImpl.createOrUpdate(user)), HttpStatus.CREATED);
+        return new ResponseEntity<>(new UsersDto(usersImpl.createOrUpdate(user)), HttpStatus.CREATED);
     }
 
 }

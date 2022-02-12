@@ -17,12 +17,20 @@ public class PunctuationsPK implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String assistant;
 
+    public PunctuationsPK(double event_id, String assistant) {
+        this.event_id = event_id;
+        this.assistant = assistant;
+    }
+
+    public PunctuationsPK() {
+    }
+
     public double getEvent_id() {
         return event_id;
     }
 
-    public void setEvent_id(double eventid) {
-        this.event_id = eventid;
+    public void setEvent_id(double eventId) {
+        this.event_id = eventId;
     }
 
     public String getAssistant() {
@@ -35,10 +43,8 @@ public class PunctuationsPK implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         PunctuationsPK that = (PunctuationsPK) o;
         return Double.compare(that.event_id, event_id) == 0 && Objects.equals(assistant, that.assistant);
     }

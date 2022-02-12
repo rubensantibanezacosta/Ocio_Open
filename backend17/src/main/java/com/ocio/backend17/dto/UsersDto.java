@@ -18,7 +18,7 @@ public class UsersDto {
         this.email = user.getEmail();
         this.name = user.getName();
         this.surname = user.getSurname();
-        this.imageurl = user.getImage_url();
+        this.imageurl = user.getImageUrl();
         this.lastconnection = user.getLastconnection();
         this.createdAt = user.getCreatedAt();
         this.punctuationavg = user.getPunctuation_avg();

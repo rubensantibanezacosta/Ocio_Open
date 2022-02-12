@@ -3,9 +3,10 @@ package com.ocio.backend17.dao;
 import com.ocio.backend17.entities.Events;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
@@ -16,7 +17,8 @@ public interface EventsDao extends CrudRepository<Events, Double> {
     @Query("Select u from Events u order by u.date asc")
     List<Events> findAllOrderAsc();
 
-    List<Events> findAllByDate(Date date);
+    @Query("Select u from Events u where u.date between ?1 and ?2")
+    List<Events> findAllByDate(Timestamp dateStart, Timestamp dateEnd);
 
     List<Events> findAllByOrganizerOrderByDateAsc(String organizer);
 

@@ -2,6 +2,7 @@ package com.ocio.backend17.services;
 
 import com.ocio.backend17.dao.UsersDao;
 import com.ocio.backend17.entities.Users;
+import com.ocio.backend17.utils.DateFormatterSQL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +13,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class IUsersImpl implements IUsers {
+public class UsersImpl implements IUsers {
     @Autowired
     UsersDao usersDao;
+
+    @Autowired
+    DateFormatterSQL dateFormatterSQL;
 
     @Override
     public List<Users> getAll() {
@@ -28,21 +32,20 @@ public class IUsersImpl implements IUsers {
 
     @Override
     public Users createOrUpdate(Users user) {
-        DateFormat dateFormatterDate = new SimpleDateFormat("yyyy-MM-dd");
-        DateFormat dateFormatterDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         if (usersDao.findById(user.getEmail()).isPresent()) {
 
             Users updatedUser = usersDao.findById(user.getEmail()).get();
             System.out.println(updatedUser);
             updatedUser.setName(user.getName());
             updatedUser.setSurname(user.getSurname());
-            updatedUser.setUpdatedAt(java.sql.Date.valueOf(dateFormatterDate.format(new Date())));
+            updatedUser.setUpdatedAt(dateFormatterSQL.todaySQLFormat());
             return usersDao.save(updatedUser);
         } else {
             Users createdUser = user;
-            createdUser.setLastconnection(java.sql.Timestamp.valueOf(dateFormatterDateTime.format(new Date())));
-            createdUser.setCreatedAt(java.sql.Date.valueOf(dateFormatterDate.format(new Date())));
-            createdUser.setUpdatedAt(java.sql.Date.valueOf(dateFormatterDate.format(new Date())));
+            createdUser.setLastconnection(dateFormatterSQL.nowTimestampSQLFormat());
+            createdUser.setCreatedAt(dateFormatterSQL.todaySQLFormat());
+            createdUser.setUpdatedAt(dateFormatterSQL.todaySQLFormat());
             return usersDao.save(createdUser);
         }
 

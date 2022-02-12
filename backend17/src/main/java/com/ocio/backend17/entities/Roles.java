@@ -12,7 +12,7 @@ public class Roles {
     private int number;
     @Basic
     @Column(name = "role_key", nullable = false, length = 500)
-    private String rolekey;
+    private String roleKey;
     @Basic
     @Column(name = "permissions", nullable = false, length = 2000)
     private String permissions;
@@ -31,12 +31,12 @@ public class Roles {
         this.number = number;
     }
 
-    public String getRolekey() {
-        return rolekey;
+    public String getRoleKey() {
+        return roleKey;
     }
 
-    public void setRolekey(String rolekey) {
-        this.rolekey = rolekey;
+    public void setRoleKey(String roleKey) {
+        this.roleKey = roleKey;
     }
 
     public String getPermissions() {
@@ -65,18 +65,14 @@ public class Roles {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         Roles roles = (Roles) o;
-        return number == roles.number && Objects.equals(rolekey, roles.rolekey)
-                && Objects.equals(permissions, roles.permissions) && Objects.equals(createdAt, roles.createdAt)
-                && Objects.equals(updatedAt, roles.updatedAt);
+        return number == roles.number && Objects.equals(roleKey, roles.roleKey) && Objects.equals(permissions, roles.permissions) && Objects.equals(createdAt, roles.createdAt) && Objects.equals(updatedAt, roles.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number, rolekey, permissions, createdAt, updatedAt);
+        return Objects.hash(number, roleKey, permissions, createdAt, updatedAt);
     }
 }

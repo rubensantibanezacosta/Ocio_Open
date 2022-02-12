@@ -6,7 +6,7 @@ import com.ocio.backend17.dto.ResponseMessage;
 import com.ocio.backend17.entities.Assistants;
 import com.ocio.backend17.entities.AssistantsPK;
 import com.ocio.backend17.security.ExtractHeaderData;
-import com.ocio.backend17.services.IAssistantImpl;
+import com.ocio.backend17.services.AssistantImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,7 +21,7 @@ import java.util.List;
 
 public class AssistantController {
     @Autowired
-    IAssistantImpl iAsisstantImpl;
+    AssistantImpl iAsisstantImpl;
     @Autowired
     ExtractHeaderData extractHeaderData;
 
@@ -48,7 +48,7 @@ public class AssistantController {
             return new ResponseEntity<>(iAsisstantImpl.findByPk(new AssistantsPK(event_id, assistant)).get(),
                     HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(new Assistants(), HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 

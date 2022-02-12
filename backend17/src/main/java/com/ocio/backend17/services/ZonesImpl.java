@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class IZonesImpl implements IZones {
+public class ZonesImpl implements IZones {
     @Autowired
     ZonesDao zonesDao;
 

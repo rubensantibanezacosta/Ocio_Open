@@ -20,6 +20,8 @@ public class Images {
     @Basic
     @Column(name = "updatedat", nullable = false)
     private Date updatedAt;
+    @OneToMany(mappedBy = "imagesByImageId")
+    private Collection<Events> eventsById;
 
     public int getId() {
         return id;
@@ -55,13 +57,10 @@ public class Images {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         Images images = (Images) o;
-        return id == images.id && Objects.equals(url, images.url) && Objects.equals(createdAt, images.createdAt)
-                && Objects.equals(updatedAt, images.updatedAt);
+        return id == images.id && Objects.equals(url, images.url) && Objects.equals(createdAt, images.createdAt) && Objects.equals(updatedAt, images.updatedAt);
     }
 
     @Override
@@ -69,4 +68,11 @@ public class Images {
         return Objects.hash(id, url, createdAt, updatedAt);
     }
 
+    public Collection<Events> getEventsById() {
+        return eventsById;
+    }
+
+    public void setEventsById(Collection<Events> eventsById) {
+        this.eventsById = eventsById;
+    }
 }

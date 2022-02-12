@@ -1,5 +1,7 @@
 package com.ocio.backend17.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
@@ -27,8 +29,12 @@ public class Assistants {
     @Basic
     @Column(name = "updatedat", nullable = false)
     private Date updatedAt;
-
     @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "event_id", referencedColumnName = "event_id", nullable = false, updatable = false, insertable = false)
+    private Events eventsByEventId;
+    @ManyToOne
+
     @JoinColumn(name = "assistant", referencedColumnName = "email", nullable = false, updatable = false, insertable = false)
     private Users user;
 
@@ -36,8 +42,8 @@ public class Assistants {
         return event_id;
     }
 
-    public void setEvent_id(double eventid) {
-        this.event_id = eventid;
+    public void setEvent_id(double eventId) {
+        this.event_id = eventId;
     }
 
     public String getAssistant() {
@@ -82,14 +88,10 @@ public class Assistants {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         Assistants that = (Assistants) o;
-        return Double.compare(that.event_id, event_id) == 0 && attendance == that.attendance
-                && Objects.equals(assistant, that.assistant) && Objects.equals(excuse, that.excuse)
-                && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
+        return Double.compare(that.event_id, event_id) == 0 && attendance == that.attendance && Objects.equals(assistant, that.assistant) && Objects.equals(excuse, that.excuse) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
     }
 
     @Override
@@ -97,22 +99,19 @@ public class Assistants {
         return Objects.hash(event_id, assistant, attendance, excuse, createdAt, updatedAt);
     }
 
-    public Users getUsersByAssistant() {
+    public Events getEventsByEventId() {
+        return eventsByEventId;
+    }
+
+    public void setEventsByEventId(Events eventsByEventId) {
+        this.eventsByEventId = eventsByEventId;
+    }
+
+    public Users getUser() {
         return user;
     }
 
-    public void setUsersByAssistant(Users usersByAssistant) {
+    public void setUser(Users usersByAssistant) {
         this.user = usersByAssistant;
-    }
-
-    @ManyToOne(optional = false)
-    private Events events;
-
-    public Events getEvents() {
-        return events;
-    }
-
-    public void setEvents(Events events) {
-        this.events = events;
     }
 }

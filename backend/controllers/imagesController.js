@@ -59,7 +59,7 @@ class ImagesController {
 
         const id = req.id;
 
-        this.imagesService.deleteComment(id)
+        this.imagesService.deleteImage(id)
             .then(num => {
                 if (num == 1) {
                     res.status(200).json({
