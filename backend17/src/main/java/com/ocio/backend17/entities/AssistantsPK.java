@@ -10,12 +10,12 @@ import java.util.Objects;
 public class AssistantsPK implements Serializable {
     @Column(name = "event_id", nullable = false, precision = 0)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private double event_id;
 
     @Column(name = "assistant", nullable = false, length = 200)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private String assistant;
 
 
