@@ -154,7 +154,7 @@ public class EventsController {
                 return new ResponseEntity<>(new ResponseMessage("Only organizer cans delete his events"), HttpStatus.UNAUTHORIZED);
             }
         }
-        return new ResponseEntity<>(new ResponseMessage("Event not found"), HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(new ResponseMessage("Event not found"), HttpStatus.OK);
     }
 
 }
