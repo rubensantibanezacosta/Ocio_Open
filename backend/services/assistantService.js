@@ -47,13 +47,13 @@ class AssistantsService {
         return Assistants.findAll();
     };
 
-    async countAttendance(assistant) {
+  /*   async countAttendance(assistant) {
         return Assistants.findAll({
             where: {
                 assistant: assistant, attendance: true
             }
         });
-    };
+    }; */
 
     async updateAssistant(assistant) {
         return Assistants.update(assistant, {

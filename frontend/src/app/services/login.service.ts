@@ -17,8 +17,13 @@ export class LoginService {
   };
   constructor(private httpClient: HttpClient) { }
 
-  login(body: Object): Observable<Token> {
-    return this.httpClient.post<Token>(this.endpoint, JSON.stringify(body), this.httpOptions)
+  login(body: any, idToken:string): Observable<Token> {
+    const basic:string=btoa(body.email+":"+idToken);
+    const httpOptionsBasic = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' ,
+      "Authorization":"Basic "+basic})
+    };
+    return this.httpClient.post<Token>(this.endpoint, JSON.stringify(body), httpOptionsBasic);
   }
 
 }

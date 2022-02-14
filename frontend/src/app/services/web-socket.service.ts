@@ -12,7 +12,6 @@ export class WebSocketService {
     autoConnect: true,
   })
   constructor(private variablesService:VariablesService) {
-    console.log(this.variablesService.variables.host);
   }
   
  /*  listenEvent(event_id){

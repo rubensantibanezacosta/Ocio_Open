@@ -1,0 +1,19 @@
+{
+  "name": "help",
+  "version": "1.0.0",
+  "description": "",
+  "main": "_translations.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "start": "live-server ./ --port=4210",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "live-server": "^1.2.1"
+  }
+}

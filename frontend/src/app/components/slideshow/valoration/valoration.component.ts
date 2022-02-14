@@ -33,8 +33,9 @@ export class ValorationComponent implements OnInit {
   assistedValidation() {
     return this.assistantService.getAssistantByPk(this.event_id, this.userEmail)
       .subscribe((assistant) => {
-
-        if (assistant[0]) {
+        console.log(this.event_id, this.userEmail)
+      
+        if (assistant[0] && assistant.attendance) {
           if (assistant[0].attendance)
             this.assisted = true;
           this.loadPunctuationByPk();

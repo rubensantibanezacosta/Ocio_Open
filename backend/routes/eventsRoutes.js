@@ -50,15 +50,11 @@ function eventsRoutes(app) {
         scopesValidationHandler(['update:events']),
         eventsController.updateEvent);
 
-    router.put("/admin/",
+    router.put("/admin",
         passport.authenticate("jwt", { session: false }),
         scopesValidationHandler(['adminupdate:events']),
         eventsController.updateEventAdmin);
 
-    /*     router.put("/eventpunctuationavg",
-            passport.authenticate("jwt", { session: false }),
-            scopesValidationHandler(['update:events']),
-            eventsController.updateEventPunctuationAvg); */
 
     router.delete("/:event_id",
         passport.authenticate("jwt", { session: false }),

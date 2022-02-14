@@ -28,7 +28,7 @@ class ComentsController {
             .then(data => {
                 console.log(data.comment_id);
                 this.comentsService.findCommentsById(data.comment_id).then((retrievedComment) => {
-                    console.log(retrievedComment)
+
                     socket.io.emit(comment.event_id, retrievedComment);
                     res.status(201).json(retrievedComment);
                 })
