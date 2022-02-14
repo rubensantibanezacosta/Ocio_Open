@@ -9,19 +9,19 @@ public class UsersDto {
     private String email;
     private String name;
     private String surname;
-    private String imageurl;
+    private String image_url;
     private Timestamp lastconnection;
     private Date createdAt;
-    private Double punctuationavg;
+    private Double punctuation_avg;
 
     public UsersDto(Users user) {
         this.email = user.getEmail();
         this.name = user.getName();
         this.surname = user.getSurname();
-        this.imageurl = user.getImageUrl();
+        this.image_url = user.getImage_url();
         this.lastconnection = user.getLastconnection();
         this.createdAt = user.getCreatedAt();
-        this.punctuationavg = user.getPunctuation_avg();
+        this.punctuation_avg = user.getPunctuation_avg();
     }
 
     public UsersDto() {
@@ -51,12 +51,12 @@ public class UsersDto {
         this.surname = surname;
     }
 
-    public String getImageurl() {
-        return imageurl;
+    public String getImage_url() {
+        return image_url;
     }
 
-    public void setImageurl(String imageurl) {
-        this.imageurl = imageurl;
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 
     public Timestamp getLastconnection() {
@@ -75,11 +75,11 @@ public class UsersDto {
         this.createdAt = createdAt;
     }
 
-    public Double getPunctuationavg() {
-        return punctuationavg;
+    public Double getPunctuation_avg() {
+        return punctuation_avg;
     }
 
-    public void setPunctuationavg(Double punctuationavg) {
-        this.punctuationavg = punctuationavg;
+    public void setPunctuation_avg(Double punctuation_avg) {
+        this.punctuation_avg = punctuation_avg;
     }
 }

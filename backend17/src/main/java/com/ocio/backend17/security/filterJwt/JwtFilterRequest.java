@@ -1,6 +1,7 @@
 package com.ocio.backend17.security.filterJwt;
 
 import com.ocio.backend17.security.JWTUtil;
+import com.ocio.backend17.services.UsersImpl;
 import io.jsonwebtoken.Claims;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,8 @@ public class JwtFilterRequest extends OncePerRequestFilter {
     JWTUtil jwtUtil;
     @Autowired
     UserDetailsService userDetailsService;
+    @Autowired
+    UsersImpl usersService;
 
     private final static Logger logger = LoggerFactory.getLogger(JwtFilterRequest.class);
 
@@ -42,6 +45,7 @@ public class JwtFilterRequest extends OncePerRequestFilter {
                 String jwt = authorizationHeader.substring(7);
                 if (jwtUtil.validateToken(jwt)) {
                     String username = jwtUtil.extractUsername(jwt);
+                    usersService.updateLastConnection(username);
                     List<String> scopes = jwtUtil.extractScopes(jwt);
                     Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
                     scopes.forEach(s -> authorities.add(new SimpleGrantedAuthority(s)));

@@ -20,7 +20,6 @@ public class Config {
     private String googleApiUrl;
 
 
-
     public Config() {
     }
 

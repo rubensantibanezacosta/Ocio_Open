@@ -1,7 +1,5 @@
 package com.ocio.backend17.security.google;
 
-import com.ocio.backend17.config.IConfigImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class GoogleRequestDto {
 

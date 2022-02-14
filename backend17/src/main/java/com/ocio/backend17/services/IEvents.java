@@ -19,6 +19,8 @@ public interface IEvents {
 
     List<Events> findEventsByOrganizerDesc(String organizer);
 
+    List<Events> findEventsByZone(String zone);
+
     Optional<Events> findEventById(double event_id);
 
     int updateEvent(Events event);

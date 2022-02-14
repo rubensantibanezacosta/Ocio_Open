@@ -79,13 +79,13 @@ public class BasicAuthController {
                     HttpStatus.UNAUTHORIZED);
         } catch (JsonMappingException e) {
             logger.error(e.getMessage());
-            return new ResponseEntity<>(new ResponseMessage("Uknown error"), HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(new ResponseMessage("Uknown error"), HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (NullPointerException e) {
             logger.error(e.getMessage());
             return new ResponseEntity<>(new ResponseMessage("Bad Credentials Null"), HttpStatus.UNAUTHORIZED);
         } catch (Exception e) {
             logger.error(e.getMessage());
-            return new ResponseEntity<>(new ResponseMessage("Unknown error"), HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(new ResponseMessage("Unknown error"), HttpStatus.UNAUTHORIZED);
         }
 
     }

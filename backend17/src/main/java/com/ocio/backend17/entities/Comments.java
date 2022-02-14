@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 public class Comments {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
     @Column(name = "comment_id", nullable = false, precision = 0)
     private double comment_id;
@@ -30,7 +30,7 @@ public class Comments {
     private Events eventsByEventId;
     @ManyToOne
     @JoinColumn(name = "assistant", referencedColumnName = "email", nullable = false, updatable = false, insertable = false)
-    private Users users;
+    private Users user;
 
     public double getComment_id() {
         return comment_id;
@@ -93,11 +93,11 @@ public class Comments {
         this.eventsByEventId = eventsByEventId;
     }
 
-    public Users getUsers() {
-        return users;
+    public Users getUser() {
+        return user;
     }
 
-    public void setUsers(Users usersByAssistant) {
-        this.users = usersByAssistant;
+    public void setUser(Users usersByAssistant) {
+        this.user = usersByAssistant;
     }
 }

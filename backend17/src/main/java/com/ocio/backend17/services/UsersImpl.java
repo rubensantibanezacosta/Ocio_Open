@@ -6,8 +6,7 @@ import com.ocio.backend17.utils.DateFormatterSQL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +21,7 @@ public class UsersImpl implements IUsers {
 
     @Override
     public List<Users> getAll() {
-        return (List<Users>) usersDao.findAll();
+        return (List<Users>) usersDao.findUsersOrderByPunctuacion();
     }
 
     @Override
@@ -36,7 +35,6 @@ public class UsersImpl implements IUsers {
         if (usersDao.findById(user.getEmail()).isPresent()) {
 
             Users updatedUser = usersDao.findById(user.getEmail()).get();
-            System.out.println(updatedUser);
             updatedUser.setName(user.getName());
             updatedUser.setSurname(user.getSurname());
             updatedUser.setUpdatedAt(dateFormatterSQL.todaySQLFormat());
@@ -64,6 +62,25 @@ public class UsersImpl implements IUsers {
             return orderedUsers.indexOf(user) + 1;
         } else {
             return 0;
+        }
+    }
+
+    @Override
+    public void updateAvgPunctuation(Double punctuation_avg, String id) {
+        if (usersDao.existsById(id)) {
+            Users oldUser = usersDao.findById(id).get();
+            oldUser.setPunctuation_avg(punctuation_avg);
+            usersDao.save(oldUser);
+        }
+
+    }
+
+    @Override
+    public void updateLastConnection(String id) {
+        if (usersDao.existsById(id)) {
+            Users oldUser = usersDao.findById(id).get();
+            oldUser.setLastconnection(new Timestamp(new Date().getTime()));
+            usersDao.save(oldUser);
         }
     }
 }

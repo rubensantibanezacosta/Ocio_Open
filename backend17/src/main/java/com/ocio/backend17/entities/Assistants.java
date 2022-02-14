@@ -13,7 +13,6 @@ public class Assistants {
     @Id
     @Column(name = "event_id", nullable = false, precision = 0)
     private double event_id;
-
     @Id
     @Column(name = "assistant", nullable = false, length = 200)
     private String assistant;

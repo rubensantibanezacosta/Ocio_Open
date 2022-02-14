@@ -5,17 +5,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.Base64;
-import java.util.Collection;
-import java.util.List;
 
 @Component
 public class ExtractHeaderData {
@@ -27,7 +19,6 @@ public class ExtractHeaderData {
 
         try {
             String headerAuthDataEncoded = headers.getValuesAsList("Authorization").get(0).toString().substring(6);
-            System.out.println(new String(Base64.getDecoder().decode(headerAuthDataEncoded)));
             if (headerAuthDataEncoded != null) {
                 String[] decodedData = new String(Base64.getDecoder().decode(headerAuthDataEncoded)).split(":");
 

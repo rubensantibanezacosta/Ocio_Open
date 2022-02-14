@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @Entity
 public class Users {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
     @Column(name = "email", nullable = false, length = 200)
     private String email;
@@ -22,7 +22,7 @@ public class Users {
     private String surname;
     @Basic
     @Column(name = "image_url", nullable = false, length = 2000)
-    private String imageUrl;
+    private String image_url;
     @Basic
     @Column(name = "role", nullable = false, length = 50)
     private String role;
@@ -42,7 +42,7 @@ public class Users {
     @OneToMany(mappedBy = "user")
     private Collection<Assistants> assistantsByEmail;
     @JsonIgnore
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "user")
     private Collection<Comments> commentsByEmail;
     @JsonIgnore
     @OneToMany(mappedBy = "organizerdata")
@@ -75,12 +75,12 @@ public class Users {
         this.surname = surname;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImage_url() {
+        return image_url;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage_url(String imageUrl) {
+        this.image_url = imageUrl;
     }
 
     public String getRole() {
@@ -128,12 +128,12 @@ public class Users {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Users users = (Users) o;
-        return Double.compare(users.punctuation_avg, punctuation_avg) == 0 && Objects.equals(email, users.email) && Objects.equals(name, users.name) && Objects.equals(surname, users.surname) && Objects.equals(imageUrl, users.imageUrl) && Objects.equals(role, users.role) && Objects.equals(createdAt, users.createdAt) && Objects.equals(lastconnection, users.lastconnection) && Objects.equals(updatedAt, users.updatedAt);
+        return Double.compare(users.punctuation_avg, punctuation_avg) == 0 && Objects.equals(email, users.email) && Objects.equals(name, users.name) && Objects.equals(surname, users.surname) && Objects.equals(image_url, users.image_url) && Objects.equals(role, users.role) && Objects.equals(createdAt, users.createdAt) && Objects.equals(lastconnection, users.lastconnection) && Objects.equals(updatedAt, users.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, name, surname, imageUrl, role, punctuation_avg, createdAt, lastconnection, updatedAt);
+        return Objects.hash(email, name, surname, image_url, role, punctuation_avg, createdAt, lastconnection, updatedAt);
     }
 
     public Collection<Assistants> getAssistantsByEmail() {

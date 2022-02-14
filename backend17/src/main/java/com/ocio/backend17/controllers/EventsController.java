@@ -37,7 +37,7 @@ public class EventsController {
             throws JsonProcessingException {
         ObjectMapper om = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         Events event = om.readValue(jsonEvent, Events.class);
-        if (!(event.getTittle()).equals("") || !(event.getPlace()).equals("") || !(event.getZone()).equals("")) {
+        if (event.getTittle().isEmpty() || event.getPlace().isEmpty() || event.getZone().isEmpty()) {
             return new ResponseEntity<>(new ResponseMessage("Fields cannot be empty"), HttpStatus.BAD_REQUEST);
         } else {
             event.setOrganizer(extractHeaderData.extractJWTUsername(headers));
@@ -63,10 +63,7 @@ public class EventsController {
     @GetMapping("/api/events/bydate/{date}")
     @ResponseBody
     ResponseEntity<?> findAllEventsByDate(@PathVariable("date") String stringdate) {
-
-        System.out.println(stringdate);
         Date date = dateFormatterSQL.dateToSQLFormat(stringdate);
-        System.out.println(date);
         return new ResponseEntity<>(eventsImpl.findAllByDate(date), HttpStatus.OK);
     }
 
@@ -103,7 +100,7 @@ public class EventsController {
             throws JsonProcessingException {
         ObjectMapper om = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         Events event = om.readValue(jsonEvent, Events.class);
-        if (!(event.getTittle()).equals("") || !(event.getPlace()).equals("") || !(event.getZone()).equals("")) {
+        if (event.getTittle().isEmpty() || event.getPlace().isEmpty() || event.getZone().isEmpty()) {
             return new ResponseEntity<>(new ResponseMessage("Fields cannot be empty"), HttpStatus.BAD_REQUEST);
         } else {
             event.setOrganizer(extractHeaderData.extractJWTUsername(headers));
@@ -118,7 +115,7 @@ public class EventsController {
             throws JsonProcessingException {
         ObjectMapper om = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         Events event = om.readValue(jsonEvent, Events.class);
-        if (!(event.getTittle()).equals("") || !(event.getPlace()).equals("") || !(event.getZone()).equals("")) {
+        if (event.getTittle().isEmpty() || event.getPlace().isEmpty() || event.getZone().isEmpty()) {
             return new ResponseEntity<>(new ResponseMessage("Fields cannot be empty"), HttpStatus.BAD_REQUEST);
         } else {
             return new ResponseEntity<>(eventsImpl.updateEvent(event), HttpStatus.OK);
@@ -133,12 +130,12 @@ public class EventsController {
 
             Events events = eventsImpl.findEventById(id).get();
             if (events.getOrganizer().equals(extractHeaderData.extractJWTUsername(headers))) {
-                return new ResponseEntity<>(eventsImpl.findEventById(id).get(), HttpStatus.OK);
+                return new ResponseEntity<>(eventsImpl.deleteEvent(id), HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(new ResponseMessage("Only organizer cans delete his events"), HttpStatus.UNAUTHORIZED);
             }
         }
-        return new ResponseEntity<>(new ResponseMessage("Event not found"), HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(new ResponseMessage("Event not found"), HttpStatus.OK);
     }
 
     @PreAuthorize("hasAuthority('admindelete:events')")
@@ -146,15 +143,10 @@ public class EventsController {
     @ResponseBody
     ResponseEntity<?> deleteByIdAdmin(@PathVariable("event_id") Double id, @RequestHeader HttpHeaders headers) {
         if (eventsImpl.findEventById(id).isPresent()) {
-
             Events events = eventsImpl.findEventById(id).get();
-            if (events.getOrganizer().equals(extractHeaderData.extractJWTUsername(headers))) {
-                return new ResponseEntity<>(eventsImpl.findEventById(id).get(), HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(new ResponseMessage("Only organizer cans delete his events"), HttpStatus.UNAUTHORIZED);
-            }
+                return new ResponseEntity<>(eventsImpl.deleteEvent(id), HttpStatus.OK);
         }
-        return new ResponseEntity<>(new ResponseMessage("Event not found"), HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(new ResponseMessage("Event not found"), HttpStatus.OK);
     }
 
 }

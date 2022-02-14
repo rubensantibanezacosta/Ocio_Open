@@ -28,11 +28,17 @@ public class CommentsImpl implements IComments {
 
     @Override
     public List<Comments> findByEventId(Double event_id) {
-        return null;
+
+        return commentsDao.findByEvent_id(event_id);
     }
 
     @Override
     public int deleteById(Double id) {
+        if (commentsDao.existsById(id)) {
+            commentsDao.deleteById(id);
+            return 1;
+        }
+
         return 0;
     }
 

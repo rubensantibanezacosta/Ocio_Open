@@ -36,10 +36,10 @@ function asisstantRoutes(app) {
         scopesValidationHandler(['read:assistants']),
         assistantsController.findAllAsisstants);
 
-     /*    router.get("/count/:assistant",
+         router.get("/count/:assistant",
         passport.authenticate("jwt", { session: false }),
         scopesValidationHandler(['read:assistants']),
-        assistantsController.countAttendance); */
+        assistantsController.countAttendance); 
 
     router.put("/",
         passport.authenticate("jwt", { session: false }),
