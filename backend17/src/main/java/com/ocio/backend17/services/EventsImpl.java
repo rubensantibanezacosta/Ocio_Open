@@ -11,6 +11,7 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -60,6 +61,18 @@ public class EventsImpl implements IEvents {
     @Override
     public List<Events> findEventsByOrganizerDesc(String organizer) {
         return eventsDao.findAllByOrganizerOrderByDateDesc(organizer);
+    }
+
+    @Override
+    public List<Events> findEventsByZone(String zone) {
+        List<Events> eventsByZone = eventsDao.findAllByZone(zone);
+        List<Events> pastEventsByZone = new ArrayList<>();
+        for (int i = 0; i < eventsByZone.size(); i++) {
+            if(eventsByZone.get(i).getDate().before(new Timestamp(new Date().getTime()))){
+                pastEventsByZone.add(eventsByZone.get(i));
+            }
+        }
+        return pastEventsByZone;
     }
 
     @Override

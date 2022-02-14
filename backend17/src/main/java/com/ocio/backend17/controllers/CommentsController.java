@@ -48,20 +48,20 @@ public class CommentsController {
     }
 
     @PreAuthorize("hasAuthority('delete:comments')")
-    @DeleteMapping("/api/user/{comment_id}/{index}")
+    @DeleteMapping("/api/comments/{comment_id}/{index}")
     @ResponseBody
     ResponseEntity<?> deleteByEmail(@PathVariable("comment_id") Double id, @PathVariable("index") int index,
-            @RequestHeader HttpHeaders headers) {
+                                    @RequestHeader HttpHeaders headers) {
         if (commentsImpl.findbyId(id).isPresent() && commentsImpl.findbyId(id).get().getAssistant()
                 .equals(extractHeaderData.extractJWTUsername(headers))) {
-            commentsImpl.deleteById(id);
-            return new ResponseEntity<>(new ResponseMessageWithIndex("User deleted", index), HttpStatus.NO_CONTENT);
+
+            return new ResponseEntity<>(new ResponseMessageWithIndex(String.valueOf(commentsImpl.deleteById(id)), index), HttpStatus.OK);
         } else if (commentsImpl.findbyId(id).isPresent() && !(commentsImpl.findbyId(id).get().getAssistant()
                 .equals(extractHeaderData.extractJWTUsername(headers)))) {
             return new ResponseEntity<>(new ResponseMessage("Only author cans delete his own comments"),
                     HttpStatus.UNAUTHORIZED);
         }
-        return new ResponseEntity<>(new ResponseMessage("Comment id not found"), HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(new ResponseMessage("Comment id not found"), HttpStatus.OK);
     }
 
 }

@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,15 +26,16 @@ public class PunctuationsImpl implements IPunctuations {
 
     @Autowired
     DateFormatterSQL dateFormatterSQL;
+
     @Override
     public Punctuations createOrUpdate(Punctuations punctuation) {
-        if(punctuationsDao.findById(new PunctuationsPK(punctuation.getEvent_id(),punctuation.getAssistant())).isPresent()){
-            Punctuations oldPunctuation=punctuationsDao.findById(new PunctuationsPK(punctuation.getEvent_id(),punctuation.getAssistant())).get();
+        if (punctuationsDao.findById(new PunctuationsPK(punctuation.getEvent_id(), punctuation.getAssistant())).isPresent()) {
+            Punctuations oldPunctuation = punctuationsDao.findById(new PunctuationsPK(punctuation.getEvent_id(), punctuation.getAssistant())).get();
             oldPunctuation.setPunctuation(punctuation.getPunctuation());
             oldPunctuation.setUpdatedAt(dateFormatterSQL.todaySQLFormat());
             return punctuationsDao.save(oldPunctuation);
-        }else{
-            Punctuations punctuationToSave=punctuation;
+        } else {
+            Punctuations punctuationToSave = punctuation;
             punctuationToSave.setCreatedAt(dateFormatterSQL.todaySQLFormat());
             punctuationToSave.setUpdatedAt(dateFormatterSQL.todaySQLFormat());
             return punctuationsDao.save(punctuationToSave);
@@ -56,7 +59,9 @@ public class PunctuationsImpl implements IPunctuations {
         List<Events> eventsByOrganizer = iEvents.findEventsByOrganizerAsc(email);
         List<Punctuations> punctuations = new ArrayList<>();
         for (Events events : eventsByOrganizer) {
-            punctuations.addAll(punctuationsDao.findPunctuationsByEvent_id(events.getEvent_id()));
+            if (events.getDate().before(new Timestamp(new Date().getTime()))) {
+                punctuations.addAll(punctuationsDao.findPunctuationsByEvent_id(events.getEvent_id()));
+            }
         }
         return punctuations;
     }
@@ -68,7 +73,7 @@ public class PunctuationsImpl implements IPunctuations {
 
     @Override
     public int deleteByPk(PunctuationsPK punctuationsPK) {
-        if(punctuationsDao.findById(punctuationsPK).isPresent()){
+        if (punctuationsDao.findById(punctuationsPK).isPresent()) {
             punctuationsDao.deleteById(punctuationsPK);
             return 1;
         }

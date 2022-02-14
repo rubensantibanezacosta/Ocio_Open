@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,8 +19,9 @@ public class ImageImpl implements IImages {
     ImagesDao imagesDao;
     @Autowired
     DateFormatterSQL dateFormatterSQL;
+
     @Override
-    public Optional<Images> getById(Double id) {
+    public Optional<Images> getById(int id) {
         return imagesDao.findById(id);
     }
 
@@ -32,7 +32,7 @@ public class ImageImpl implements IImages {
 
     @Transactional
     @Override
-    public int deleteById(Double id) {
+    public int deleteById(int id) {
         if (imagesDao.findById(id).isPresent()) {
             imagesDao.deleteById(id);
             return 1;
@@ -49,7 +49,7 @@ public class ImageImpl implements IImages {
         return imagesDao.save(image);
     }
 
-    public Resource downloadImage(Double id) {
+    public Resource downloadImage(int id) {
         return null;
     }
 }

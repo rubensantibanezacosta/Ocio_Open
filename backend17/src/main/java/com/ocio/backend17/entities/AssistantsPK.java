@@ -1,8 +1,6 @@
 package com.ocio.backend17.entities;
 
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
@@ -10,14 +8,10 @@ import java.util.Objects;
 public class AssistantsPK implements Serializable {
     @Column(name = "event_id", nullable = false, precision = 0)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private double event_id;
-
     @Column(name = "assistant", nullable = false, length = 200)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String assistant;
-
 
     public AssistantsPK(double eventId, String assistant) {
         this.event_id = eventId;

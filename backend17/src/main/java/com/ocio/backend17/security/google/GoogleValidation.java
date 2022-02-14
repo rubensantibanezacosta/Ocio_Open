@@ -3,7 +3,6 @@ package com.ocio.backend17.security.google;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ocio.backend17.config.IConfigImpl;
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpRequest;
 import org.apache.http.client.ClientProtocolException;
@@ -12,7 +11,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
@@ -47,12 +45,11 @@ public class GoogleValidation {
                 ObjectMapper om = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
                         false);
                 GoogleResponseDto googleResponseDto = om.readValue(str, GoogleResponseDto.class);
-                System.out.println(googleResponseDto.getEmail());
                 return googleResponseDto;
 
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
         return null;
     }
@@ -62,7 +59,7 @@ public class GoogleValidation {
         return new CloseableHttpClient() {
             @Override
             protected CloseableHttpResponse doExecute(HttpHost httpHost, HttpRequest httpRequest,
-                    HttpContext httpContext) throws IOException, ClientProtocolException {
+                                                      HttpContext httpContext) throws IOException, ClientProtocolException {
                 return null;
             }
 

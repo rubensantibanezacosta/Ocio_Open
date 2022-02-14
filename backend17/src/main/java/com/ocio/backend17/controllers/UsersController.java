@@ -34,8 +34,6 @@ public class UsersController {
     @PreAuthorize("hasAuthority('read:users')")
     @GetMapping("/api/user/{email}")
     public ResponseEntity<?> getByEmail(@PathVariable("email") String email) {
-        System.out.println("por email request by id");
-        System.out.println(email);
         if (usersImpl.getById(email).isPresent()) {
             return new ResponseEntity<>(new UsersDto(usersImpl.getById(email).get()), HttpStatus.OK);
         } else {
@@ -55,9 +53,9 @@ public class UsersController {
     ResponseEntity<ResponseMessage> deleteByEmail(@PathVariable("email") String email) {
         if (usersImpl.getById(email).isPresent()) {
             usersImpl.deleteById(email);
-            return new ResponseEntity<>(new ResponseMessage("User deleted"), HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(new ResponseMessage("User deleted"), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(new ResponseMessage("User not found"), HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(new ResponseMessage("User not found"), HttpStatus.OK);
         }
     }
 

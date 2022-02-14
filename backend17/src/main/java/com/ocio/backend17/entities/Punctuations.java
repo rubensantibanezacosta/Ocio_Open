@@ -9,11 +9,11 @@ import java.util.Objects;
 @Entity
 @IdClass(PunctuationsPK.class)
 public class Punctuations {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
     @Column(name = "event_id", nullable = false, precision = 0)
     private double event_id;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
     @Column(name = "assistant", nullable = false, length = 200)
     private String assistant;

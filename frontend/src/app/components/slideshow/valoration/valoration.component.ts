@@ -33,20 +33,21 @@ export class ValorationComponent implements OnInit {
   assistedValidation() {
     return this.assistantService.getAssistantByPk(this.event_id, this.userEmail)
       .subscribe((assistant) => {
-        console.log(this.event_id, this.userEmail)
-      
-        if (assistant[0] && assistant.attendance) {
-          if (assistant[0].attendance)
+        console.log(assistant)
+
+        if (assistant && assistant[0]) {
+          if (assistant[0].attendance) {
             this.assisted = true;
-          this.loadPunctuationByPk();
+            this.loadPunctuationByPk();
+          }
         }
       },
-      (error) => {
+        (error) => {
 
-        this.ErrorMessage=error.error;
-        this.createModal();
-  
-      })
+          this.ErrorMessage = error.error;
+          this.createModal();
+
+        })
   }
 
   loadPunctuationByPk() {
@@ -56,11 +57,11 @@ export class ValorationComponent implements OnInit {
           return this.myPunctuation = Punctuation[0].punctuation;
         }
       },
-      (error) => {
-        this.ErrorMessage=error.error;
-        this.createModal();
-  
-      })
+        (error) => {
+          this.ErrorMessage = error.error;
+          this.createModal();
+
+        })
   }
 
   createOrUpdatePunctuation(value: number) {
@@ -72,11 +73,11 @@ export class ValorationComponent implements OnInit {
     this.punctuationService.createOrUpdatePunctuation(punctuation).subscribe(() => {
       this.loadPunctuationByPk();
     },
-    (error) => {
-      this.ErrorMessage=error.error;
-      this.createModal();
+      (error) => {
+        this.ErrorMessage = error.error;
+        this.createModal();
 
-    })
+      })
   }
 
 

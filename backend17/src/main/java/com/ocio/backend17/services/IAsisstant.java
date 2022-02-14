@@ -21,4 +21,6 @@ public interface IAsisstant {
 
     int deleteAssistant(AssistantsPK assistantsPK);
 
+    int countAttendees(String email, Boolean attendee);
+
 }

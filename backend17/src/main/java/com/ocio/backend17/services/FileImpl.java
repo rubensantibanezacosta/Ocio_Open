@@ -4,15 +4,13 @@ import com.ocio.backend17.entities.Images;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
-import java.io.IOException;
-import java.net.MalformedURLException;
+import java.io.FileNotFoundException;
+import java.io.IOException;;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -39,13 +37,13 @@ public class FileImpl implements IFile {
     @Override
     public Images saveImageFile(MultipartFile file) {
         try {
-            String extension = file.getOriginalFilename().split(".")[(file.getOriginalFilename().split(".").length) - 1];
+            String extension = file.getOriginalFilename().split("\\.")[(file.getOriginalFilename().split("\\.").length) - 1];
             if (extension.equals("jpg") || extension.equals("jpeg") || extension.equals("png") || extension.equals("png")) {
                 Images imageCreated = new Images();
                 String setName = System.currentTimeMillis() + "." + extension;
                 imageCreated.setUrl(setName);
 
-                Files.copy(file.getInputStream(), this.root.resolve(setName));
+                Files.copy(file.getInputStream(), Path.of(System.getProperty("user.dir") + "/src/" + this.root.resolve(setName)));
                 return image.updloadImage(imageCreated);
             } else {
                 logger.error("Extension not allowed!");
@@ -61,17 +59,22 @@ public class FileImpl implements IFile {
     }
 
     @Override
-    public Resource load(String filename) {
-        try {
-            Path file = root.resolve(filename);
-            Resource resource = (Resource) new UrlResource(file.toUri());
-            return resource;
-        } catch (MalformedURLException e) {
-            logger.error("Error reading image" + e.getMessage());
-            throw new RuntimeException("Error reading image!" + e.getMessage());
+    public byte[] load(int id) {
+
+        if (image.getById(id).isPresent()) {
+            try {
+
+                Path file = Path.of(System.getProperty("user.dir") + "/src/" + root.resolve(image.getById(id).get().getUrl()));
+                return Files.readAllBytes(file);
+            } catch (FileNotFoundException e) {
+                logger.error("File not found: " + e.getMessage());
+                throw new RuntimeException("File not found! " + e.getMessage());
+            } catch (IOException e) {
+                logger.error("Error reading image: " + e.getMessage());
+                throw new RuntimeException("Error reading image! " + e.getMessage());
+            }
         }
-
-
+        throw new RuntimeException("This image does not exist!");
     }
 
     @Override
@@ -85,13 +88,17 @@ public class FileImpl implements IFile {
     }
 
     @Override
-    public String deleteFile(String filename) {
-        try {
-            Boolean delete = Files.deleteIfExists(this.root.resolve(filename));
-            return "Image deleted";
-        } catch (IOException e) {
-            logger.error(e.getMessage());
-            throw new RuntimeException(e.getMessage());
+    public int deleteFile(int id) {
+        if (image.getById(id).isPresent()) {
+
+            try {
+                Boolean delete = Files.deleteIfExists(Path.of(System.getProperty("user.dir") + "/src/" + this.root.resolve(image.getById(id).get().getUrl())));
+                return 1;
+            } catch (IOException e) {
+                logger.error(e.getMessage());
+                throw new RuntimeException(e.getMessage());
+            }
         }
+        return 0;
     }
 }

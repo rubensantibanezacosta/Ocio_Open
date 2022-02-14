@@ -8,4 +8,3 @@ export class User {
     punctuation_avg:number;
 }
 
-

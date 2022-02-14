@@ -80,4 +80,11 @@ public class AssistantImpl implements IAsisstant {
             return 0;
         }
     }
+
+    @Override
+    public int countAttendees(String email, Boolean attendee) {
+        return assistantDao.countAllByAssistantAndAndAttendance(email, true);
+    }
+
+
 }

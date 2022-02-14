@@ -1,8 +1,6 @@
 package com.ocio.backend17.entities;
 
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
@@ -10,11 +8,9 @@ import java.util.Objects;
 public class PunctuationsPK implements Serializable {
     @Column(name = "event_id", nullable = false, precision = 0)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private double event_id;
     @Column(name = "assistant", nullable = false, length = 200)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String assistant;
 
     public PunctuationsPK(double event_id, String assistant) {

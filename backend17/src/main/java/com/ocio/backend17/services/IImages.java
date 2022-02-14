@@ -6,9 +6,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IImages {
-    Optional<Images> getById(Double id);
+    Optional<Images> getById(int id);
+
     List<Images> getAll();
-    int deleteById(Double id);
+
+    int deleteById(int id);
+
     Images updloadImage(Images image);
 
 }

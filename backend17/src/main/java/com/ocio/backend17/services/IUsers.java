@@ -16,4 +16,8 @@ public interface IUsers {
 
     int getUserPosition(String email);
 
+    void updateAvgPunctuation(Double punctuation_avg, String id);
+
+    void updateLastConnection(String email);
+
 }
