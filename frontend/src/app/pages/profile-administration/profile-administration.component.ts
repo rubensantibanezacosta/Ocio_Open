@@ -37,6 +37,7 @@ export class ProfileAdministrationComponent implements OnInit {
   getUser() {
     this.userService.getUserByEmail(this.userEmail).subscribe((res) => {
       this.user = res;
+      console.log(res);
     },
     (error) => {
       
