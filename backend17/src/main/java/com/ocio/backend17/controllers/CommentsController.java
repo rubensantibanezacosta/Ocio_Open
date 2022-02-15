@@ -8,6 +8,7 @@ import com.ocio.backend17.entities.Comments;
 
 import com.ocio.backend17.security.ExtractHeaderData;
 import com.ocio.backend17.services.CommentsImpl;
+import com.ocio.backend17.websocket.ChatController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,8 @@ public class CommentsController {
     CommentsImpl commentsImpl;
     @Autowired
     ExtractHeaderData extractHeaderData;
+    @Autowired
+    ChatController chatController;
 
     @PreAuthorize("hasAuthority('create:comments')")
     @PostMapping(value = "/api/comments", consumes = "application/json")
@@ -36,6 +39,7 @@ public class CommentsController {
             return new ResponseEntity<>(new ResponseMessage("Fields cannot be empty"), HttpStatus.BAD_REQUEST);
         } else {
             comment.setAssistant(extractHeaderData.extractJWTUsername(headers));
+            chatController.sendComment(comment, comment.getEvent_id());
             return new ResponseEntity<>(commentsImpl.addComment(comment), HttpStatus.CREATED);
         }
     }

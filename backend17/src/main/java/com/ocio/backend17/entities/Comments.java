@@ -3,12 +3,14 @@ package com.ocio.backend17.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-public class Comments {
+public class Comments implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "comment_id", nullable = false, precision = 0)
     private double comment_id;

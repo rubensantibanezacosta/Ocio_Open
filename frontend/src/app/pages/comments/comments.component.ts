@@ -32,8 +32,8 @@ export class CommentsComponent implements OnInit {
     if (!this.comments[0]) {
       console.log(!this.comments)
       this.getCommentsByEvent();
-      this.webSocketService.io.on(this.event_id.toString(), (comment) => {
-        
+      this.webSocketService.io.on("/55", (comment) => {
+        console.log("Hola")
         comment?this.comments.unshift(comment):null;
       })
       this.webSocketService.io.on(this.event_id.toString()+"_delete", (deleteindex) => {
