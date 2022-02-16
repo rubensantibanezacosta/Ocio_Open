@@ -29,9 +29,8 @@ export class CommentsComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private commentsService: CommentsService, private errorHandlerService: ErrorHandlerService, private webSocketService: WebSocketService) { }
 
   ngOnInit(): void {
-   
     if (!this.comments[0]) {
-      console.log(!this.comments)
+    
       this.getCommentsByEvent();
       this.webSocketService.io.on(this.event_id.toString(), (comment) => {
         console.log(comment)

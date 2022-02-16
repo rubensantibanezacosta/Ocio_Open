@@ -8,8 +8,9 @@ import { io } from 'socket.io-client';
 })
 export class WebSocketService {
   bearerToken = localStorage.getItem("ocioToken");
-  io = io(this.variablesService.variables.socket+"?token=abc123",{
-    transports: ['polling'],
+  io = io(this.variablesService.variables.socket,{
+    transports: ['websocket'],
+    upgrade:false,
     
     /* withCredentials:true, */
     autoConnect: true,
@@ -18,7 +19,7 @@ export class WebSocketService {
   })
 
   constructor(private variablesService:VariablesService) {
-   
+    this.io.on("connection",(socket)=>console.log(socket.id))
   
   
   }
