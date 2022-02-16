@@ -10,7 +10,7 @@ import java.util.Objects;
 @Entity
 public class Comments implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(name = "comment_id", nullable = false, precision = 0)
     private double comment_id;

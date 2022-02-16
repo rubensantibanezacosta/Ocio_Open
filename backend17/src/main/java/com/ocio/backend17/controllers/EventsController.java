@@ -10,7 +10,6 @@ import com.ocio.backend17.security.ExtractHeaderData;
 import com.ocio.backend17.services.EventsImpl;
 import com.ocio.backend17.utils.DateFormatterSQL;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.datetime.DateFormatter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

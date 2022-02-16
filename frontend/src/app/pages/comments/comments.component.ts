@@ -29,15 +29,15 @@ export class CommentsComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private commentsService: CommentsService, private errorHandlerService: ErrorHandlerService, private webSocketService: WebSocketService) { }
 
   ngOnInit(): void {
+   
     if (!this.comments[0]) {
       console.log(!this.comments)
       this.getCommentsByEvent();
-      this.webSocketService.io.on("/55", (comment) => {
-        console.log("Hola")
+      this.webSocketService.io.on("55.0", (comment) => {
+        console.log(comment)
         comment?this.comments.unshift(comment):null;
       })
       this.webSocketService.io.on(this.event_id.toString()+"_delete", (deleteindex) => {
-        console.log("emmitted",deleteindex)
         deleteindex?this.comments.splice(deleteindex, 1):null;
       })
     }

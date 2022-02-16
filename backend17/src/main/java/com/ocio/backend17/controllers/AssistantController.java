@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class AssistantController {
     AssistantImpl iAsisstantImpl;
     @Autowired
     ExtractHeaderData extractHeaderData;
+  
 
     @PreAuthorize("hasAuthority('create:assistants')")
     @PostMapping(value = "/api/assistant", consumes = "application/json")
@@ -37,6 +39,7 @@ public class AssistantController {
             return new ResponseEntity<>(new ResponseMessage("Fields cannot be empty"), HttpStatus.BAD_REQUEST);
         } else {
             assistant.setAssistant(extractHeaderData.extractJWTUsername(headers));
+            
             return new ResponseEntity<>(iAsisstantImpl.add(assistant), HttpStatus.CREATED);
         }
     }
