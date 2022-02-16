@@ -43,8 +43,8 @@ public class Backend17Application{
 
             @Override
             public void onConnect(SocketIOClient client) {
-                log.debug(client.getHandshakeData() + " Connected");
-                System.out.println(client.getHandshakeData() + " Connected");
+                log.debug(client.getHandshakeData().getUrl() + " Connected");
+                System.out.println(client.getHandshakeData().getUrl() + " Connected");
             }
         });
 
@@ -52,8 +52,8 @@ public class Backend17Application{
 
             @Override
             public void onDisconnect(SocketIOClient client) {
-                log.debug(client.getHandshakeData() + " Disconnected");
-                System.out.println(client.getHandshakeData() + " Disconnected");
+                log.debug(client.getHandshakeData().getUrl() + " Disconnected");
+                System.out.println(client.getHandshakeData().getUrl() + " Disconnected");
             }
         });
 
