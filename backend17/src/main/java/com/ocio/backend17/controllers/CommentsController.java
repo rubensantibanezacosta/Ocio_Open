@@ -8,6 +8,7 @@ import com.ocio.backend17.entities.Comments;
 
 import com.ocio.backend17.security.ExtractHeaderData;
 import com.ocio.backend17.services.CommentsImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,9 @@ public class CommentsController {
     CommentsImpl commentsImpl;
     @Autowired
     ExtractHeaderData extractHeaderData;
+
+
+
 
     @PreAuthorize("hasAuthority('create:comments')")
     @PostMapping(value = "/api/comments", consumes = "application/json")
@@ -50,11 +54,10 @@ public class CommentsController {
     @PreAuthorize("hasAuthority('delete:comments')")
     @DeleteMapping("/api/comments/{comment_id}/{index}")
     @ResponseBody
-    ResponseEntity<?> deleteByEmail(@PathVariable("comment_id") Double id, @PathVariable("index") int index,
+    ResponseEntity<?> deleteByEmail(@PathVariable("comment_id") long id, @PathVariable("index") int index,
                                     @RequestHeader HttpHeaders headers) {
         if (commentsImpl.findbyId(id).isPresent() && commentsImpl.findbyId(id).get().getAssistant()
                 .equals(extractHeaderData.extractJWTUsername(headers))) {
-
             return new ResponseEntity<>(new ResponseMessageWithIndex(String.valueOf(commentsImpl.deleteById(id)), index), HttpStatus.OK);
         } else if (commentsImpl.findbyId(id).isPresent() && !(commentsImpl.findbyId(id).get().getAssistant()
                 .equals(extractHeaderData.extractJWTUsername(headers)))) {

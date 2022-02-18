@@ -3,15 +3,18 @@ package com.ocio.backend17.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-public class Comments {
+public class Comments implements Serializable {
 
+    
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_id", nullable = false, precision = 0)
-    private double comment_id;
+    private long comment_id;
     @Basic
     @Column(name = "event_id", nullable = false, precision = 0)
     private double event_id;
@@ -32,11 +35,11 @@ public class Comments {
     @JoinColumn(name = "assistant", referencedColumnName = "email", nullable = false, updatable = false, insertable = false)
     private Users user;
 
-    public double getComment_id() {
+    public long getComment_id() {
         return comment_id;
     }
 
-    public void setComment_id(double commentId) {
+    public void setComment_id(long commentId) {
         this.comment_id = commentId;
     }
 

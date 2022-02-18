@@ -34,7 +34,7 @@ public class GoogleValidation {
 
     public GoogleResponseDto validateToken(String token) {
         try {
-            GoogleRequestDto googleRequestDto = new GoogleRequestDto(iConfig.googleApiUrl(), token);
+            GoogleRequestDto googleRequestDto = new GoogleRequestDto(iConfig.getGoogleApiUrl(), token);
             CloseableHttpClient httpClient = HttpClients.createDefault();
             HttpGet httpGet = new HttpGet(googleRequestDto.getRequestCompleteUrl());
             CloseableHttpResponse response = httpClient.execute(httpGet);

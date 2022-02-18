@@ -18,7 +18,29 @@ public class Config {
     private String acceptedDomains;
     @Value("${value.google.url.tokenvalidation}")
     private String googleApiUrl;
+    @Value("${value.frontend.host}")
+    private String frontendHost;
+    @Value("${value.google.mail}")
+    private String mail;
+    @Value("${value.google.mail.password}")
+    private String password;
 
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public Config() {
     }
@@ -61,5 +83,13 @@ public class Config {
 
     public void setAcceptedDomains(String acceptedDomains) {
         this.acceptedDomains = acceptedDomains;
+    }
+
+    public String getFrontendHost() {
+        return frontendHost;
+    }
+
+    public void setFrontendHost(String frontendHost) {
+        this.frontendHost = frontendHost;
     }
 }

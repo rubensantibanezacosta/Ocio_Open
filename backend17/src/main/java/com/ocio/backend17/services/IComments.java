@@ -10,7 +10,7 @@ public interface IComments {
 
     List<Comments> findByEventId(Double event_id);
 
-    int deleteById(Double id);
+    int deleteById(long id);
 
-    Optional<Comments> findbyId(Double id);
+    Optional<Comments> findbyId(long id);
 }
