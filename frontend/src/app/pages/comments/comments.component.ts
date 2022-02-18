@@ -34,10 +34,11 @@ export class CommentsComponent implements OnInit, OnDestroy {
     if (!this.comments[0]) {
       /* this.webSocketService */
       this.getCommentsByEvent().then(() => {
+
         setTimeout(() => {
-          window.location.hash = "";
-          window.location.hash = "id_" + this.comments[this.comments.length - 1].comment_id.toString();
-        }, 1000);
+          let mainContainer = document.querySelector(".main");
+          mainContainer.scrollTop = mainContainer.scrollHeight;
+        }, 500);
       });
 
       this.webSocketService.client.onConnect = ((frame: IFrame) => {
@@ -46,13 +47,15 @@ export class CommentsComponent implements OnInit, OnDestroy {
           let comment: Comment = JSON.parse(frame.body) as Comment;
           comment ? this.comments.push(comment) : null;
           setTimeout(() => {
-            comment ? window.location.hash = "id_" + comment.comment_id.toString() : null
-          }, 500);
+            let mainContainer = document.querySelector(".main");
+            mainContainer.scrollTop = mainContainer.scrollHeight;
+          }, 200);
         })
 
         this.webSocketService.client.subscribe(`/comments-chat/delete_${this.event_id}`, (frame) => {
           let deleteindex: number = JSON.parse(frame.body) as number;
           deleteindex ? this.comments.splice(deleteindex, 1) : null;
+          deleteindex==0?this.comments=[]:null;
         })
       })
 

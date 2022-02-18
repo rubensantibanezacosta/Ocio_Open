@@ -13,6 +13,7 @@ export class BackIconComponent implements OnInit {
   }
 
   back(){
+    
     window.history.back();
   }
 }
