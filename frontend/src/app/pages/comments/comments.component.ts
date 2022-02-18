@@ -51,8 +51,8 @@ export class CommentsComponent implements OnInit, OnDestroy {
         })
 
         this.webSocketService.client.subscribe(`/comments-chat/delete_${this.event_id}`, (frame) => {
-          let deleteindex:number = JSON.parse(frame.body) as number;
-          deleteindex?this.comments.splice(deleteindex, 1):null;
+          let deleteindex: number = JSON.parse(frame.body) as number;
+          deleteindex ? this.comments.splice(deleteindex, 1) : null;
         })
       })
 
@@ -71,9 +71,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
     }
   }
 
-  scroll() {
-    document.getElementById("commentcontainer").scrollTo(0, parseInt(document.getElementById("commentcontainer").style.height.split("p")[0]));
-  };
+
   ngOnDestroy() {
     this.webSocketService.client.deactivate();
   }
@@ -81,7 +79,6 @@ export class CommentsComponent implements OnInit, OnDestroy {
   async getCommentsByEvent() {
     return this.commentsService.getCommentsByEvent(this.event_id).subscribe((comments) => {
       this.comments = comments;
-      console.log(parseInt(document.getElementById("commentcontainer").style.height.split("p")[0]))
 
 
       /* this.connectSocket(this.event_id);   */
@@ -111,13 +108,13 @@ export class CommentsComponent implements OnInit, OnDestroy {
   }
 
   deleteComment(comment_id: number, index) {
-      const commentToDelete={
-            id:comment_id,
-            index:index
-      }
+    const commentToDelete = {
+      id: comment_id,
+      index: index
+    }
     this.webSocketService.client.publish({ destination: "/app/message_delete", body: JSON.stringify(commentToDelete) })
 
-    
+
   }
 
   formatTime = (date: Date) => { return moment(date).format("DD.MM.YY HH:mm:ss") }
