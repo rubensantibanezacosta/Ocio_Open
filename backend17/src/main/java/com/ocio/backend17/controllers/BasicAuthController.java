@@ -51,7 +51,7 @@ public class BasicAuthController {
     public ResponseEntity<?> login(@RequestHeader HttpHeaders headers, @RequestBody String jsonUser) {
         try {
             BasicAuthRequest basicAuthRequest = extractHeaderData.extractBasicAuthCredentials(headers);
-            if (iConfig.acceptedDomains().contains(basicAuthRequest.getUsername().split("@")[1])) {
+            if (iConfig.getAcceptedDomains().contains(basicAuthRequest.getUsername().split("@")[1])) {
                 ObjectMapper om = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
                         false);
                 Users user = om.readValue(jsonUser, Users.class);

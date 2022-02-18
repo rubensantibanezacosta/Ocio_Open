@@ -5,10 +5,10 @@
         <p class="quantity">{{comments.length}}</p>
     </div>
 
-    <div class="comment" *ngFor="let comment of comments, let i=index">
+    <div class="comment" *ngFor="let comment of comments, let i=index" id="commentcontainer">
         <div class="comment-data-container" *ngIf="comments">
-            <div class="comment-data">
-                <p class="comment-author" title="{{comment.assistant}}">{{comment.user.name}}  {{comment.user.surname}}</p>
+            <div class="comment-data" id="id_{{comment.comment_id}}">
+                <p class="comment-author" title="{{comment.assistant}}">{{comment.user.name}}{{comment.user.surname}}</p>
                 <p class="comment-date">{{formatTime(comment.date)}}</p>
             </div>
             <div class="delete-icon-container" (click)="deleteComment(comment.comment_id, i)" *ngIf="userEmail==comment.assistant">

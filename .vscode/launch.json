@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Backend17Application<backend17>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.ocio.backend17.Backend17Application",
+            "projectName": "backend17",
+            "args": ""
+        }
+    ]
+}

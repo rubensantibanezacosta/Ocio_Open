@@ -24,12 +24,17 @@ public class IConfigImpl implements IConfig {
     }
 
     @Override
-    public String acceptedDomains() {
+    public String getAcceptedDomains() {
         return config.getAcceptedDomains();
     }
 
     @Override
-    public String googleApiUrl() {
+    public String getGoogleApiUrl() {
         return config.getGoogleApiUrl();
+    }
+
+    @Override
+    public String getFrontendHost() {
+        return config.getFrontendHost();
     }
 }
