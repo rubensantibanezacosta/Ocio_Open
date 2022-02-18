@@ -23,7 +23,6 @@ public class ChatController {
 
         Comments savedComment = commentsImpl.addComment(comment);
         Comments commentToSend = commentsImpl.findbyId(savedComment.getComment_id()).get();
-        System.out.println(commentToSend.getComment_id());
         simpMessagingTemplate.convertAndSend("/comments-chat/" + (int) comment.getEvent_id(), commentToSend);
     }
 

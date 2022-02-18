@@ -43,7 +43,7 @@
         <div class="place-div">
             <label for="place" placeholder="Introduce la dirección">Ubicación o URL</label>
             <input type="text" [(ngModel)]="myEvent.place" name="place" #place="ngModel" required minlength="4"
-                maxlength="50" placeholder="Dirección..." />
+                maxlength="200" placeholder="Dirección..." />
             <div *ngIf="place.invalid && place.dirty">
                 <div *ngIf="place.errors?.required">Campo requerido</div>
                 <div *ngIf="place.errors?.minlength">Mínimo 4 caracteres</div>
@@ -51,7 +51,7 @@
         </div>
 
         <div class="image-div">
-            <label for="image">Imagen (Opcional)</label>
+            <label for="image">Imagen</label>
             <div class="buttons">
                 <div class="image-mini" *ngIf="myEvent.image_id>0">
                     <app-image-viewer  [imageId]="myEvent.image_id"></app-image-viewer>
