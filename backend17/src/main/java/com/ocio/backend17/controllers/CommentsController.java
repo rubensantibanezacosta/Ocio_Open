@@ -2,7 +2,6 @@ package com.ocio.backend17.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ocio.backend17.ServerCommandLineRunner;
 import com.ocio.backend17.dto.ResponseMessage;
 import com.ocio.backend17.dto.ResponseMessageWithIndex;
 import com.ocio.backend17.entities.Comments;
@@ -26,9 +25,7 @@ public class CommentsController {
     CommentsImpl commentsImpl;
     @Autowired
     ExtractHeaderData extractHeaderData;
-  
-    @Autowired
-    ServerCommandLineRunner socket;
+
 
 
 
@@ -43,8 +40,8 @@ public class CommentsController {
             return new ResponseEntity<>(new ResponseMessage("Fields cannot be empty"), HttpStatus.BAD_REQUEST);
         } else {
             comment.setAssistant(extractHeaderData.extractJWTUsername(headers));
+           
             System.out.println(String.valueOf((int)comment.getEvent_id()));
-            socket.emitComment(String.valueOf((int)comment.getEvent_id()),comment); 
             return new ResponseEntity<>(commentsImpl.addComment(comment), HttpStatus.CREATED);
         }
     }
@@ -63,7 +60,6 @@ public class CommentsController {
                                     @RequestHeader HttpHeaders headers) {
         if (commentsImpl.findbyId(id).isPresent() && commentsImpl.findbyId(id).get().getAssistant()
                 .equals(extractHeaderData.extractJWTUsername(headers))) {
-                    socket.emitIndex(String.valueOf((int)commentsImpl.findbyId(id).get().getEvent_id())+"_delete",index); 
             return new ResponseEntity<>(new ResponseMessageWithIndex(String.valueOf(commentsImpl.deleteById(id)), index), HttpStatus.OK);
         } else if (commentsImpl.findbyId(id).isPresent() && !(commentsImpl.findbyId(id).get().getAssistant()
                 .equals(extractHeaderData.extractJWTUsername(headers)))) {

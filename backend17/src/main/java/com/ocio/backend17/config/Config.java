@@ -18,6 +18,8 @@ public class Config {
     private String acceptedDomains;
     @Value("${value.google.url.tokenvalidation}")
     private String googleApiUrl;
+    @Value("${value.frontend.host}")
+    private String frontendHost;
 
 
     public Config() {
@@ -61,5 +63,13 @@ public class Config {
 
     public void setAcceptedDomains(String acceptedDomains) {
         this.acceptedDomains = acceptedDomains;
+    }
+
+    public String getFrontendHost() {
+        return frontendHost;
+    }
+
+    public void setFrontendHost(String frontendHost) {
+        this.frontendHost = frontendHost;
     }
 }

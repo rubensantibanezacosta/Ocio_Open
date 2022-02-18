@@ -7,7 +7,9 @@ public interface IConfig {
 
     int getExpirationTime();
 
-    String acceptedDomains();
+    String getAcceptedDomains();
 
-    String googleApiUrl();
+    String getGoogleApiUrl();
+
+    String getFrontendHost();
 }

@@ -1,5 +1,6 @@
+import { Client, IFrame } from '@stomp/stompjs';
 import { WebSocketService } from './../../services/web-socket.service';
-import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { CommentsService } from 'src/app/services/comments.service';
 import { getDataFromToken } from 'src/app/utils/jwtparser';
@@ -13,7 +14,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './comments.component.html',
   styleUrls: ['./comments.component.scss']
 })
-export class CommentsComponent implements OnInit {
+export class CommentsComponent implements OnInit, OnDestroy {
   event_id: number = this.activatedRoute.snapshot.params.event_id;
   userEmail: string = getDataFromToken().username;
   image = '../../../assets/icons/comments-icon.png';
@@ -29,23 +30,42 @@ export class CommentsComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private commentsService: CommentsService, private errorHandlerService: ErrorHandlerService, private webSocketService: WebSocketService) { }
 
   ngOnInit(): void {
+    this.webSocketService.client.activate();
     if (!this.comments[0]) {
-    
+    /* this.webSocketService */
       this.getCommentsByEvent();
-      this.webSocketService.io.on(this.event_id.toString(), (comment) => {
+      this.webSocketService.client.onConnect=((frame:IFrame)=>{
+        console.log(this.webSocketService.client.active)
+        this.webSocketService.client.subscribe(`/comments-chat/52`, (res)=>{
+          console.log(res)
+          let comment:Comment=JSON.parse(res.body) as Comment;
+          comment?this.comments.unshift(comment):null;
+        })
+      })
+     
+       
+      
+       
+      
+     
+     
+     /* this.webSocketService.io.on(this.event_id.toString(), (comment) => {
         console.log(comment)
         comment?this.comments.unshift(comment):null;
       })
       this.webSocketService.io.on(this.event_id.toString()+"_delete", (deleteindex) => {
         deleteindex?this.comments.splice(deleteindex, 1):null;
-      })
+      })*/
      
      
       
     }
   }
+  ngOnDestroy() {
+    this.webSocketService.client.deactivate();
+  }
 
-  getCommentsByEvent() {
+ async getCommentsByEvent() {
     return this.commentsService.getCommentsByEvent(this.event_id).subscribe((comments) => {
       this.comments = comments;
       /* this.connectSocket(this.event_id);   */
@@ -64,6 +84,7 @@ export class CommentsComponent implements OnInit {
     comment.comment = text;
 
     this.commentsService.createComment(comment).subscribe((res) => {
+      this.webSocketService.client.publish({destination:"/app/message",body:JSON.stringify(comment)})
       this.textComment = "";
       this.ngOnInit()
     },
@@ -106,9 +127,5 @@ export class CommentsComponent implements OnInit {
         //your logic
       });
   }
-  connectSocket(event_id) {
-    /*   this.commentsService.connectEventCommentSocket(event_id).then((data)=>{
-        data?this.comments.push(data):null;
-      }) */
-  }
+
 }
