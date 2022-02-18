@@ -37,4 +37,14 @@ public class IConfigImpl implements IConfig {
     public String getFrontendHost() {
         return config.getFrontendHost();
     }
+
+    @Override
+    public String getGoogleMail() {
+       return config.getMail();
+    }
+
+    @Override
+    public String getGooglePassword() {
+        return config.getPassword();
+    }
 }

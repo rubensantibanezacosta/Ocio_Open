@@ -94,6 +94,7 @@ public class EventsImpl implements IEvents {
             oldEvent.setPlace(event.getPlace());
             oldEvent.setZone(event.getZone());
             oldEvent.setUpdatedAt(dateFormatterSQL.todaySQLFormat());
+            oldEvent.setDescription(event.getDescription());
             eventsDao.save(oldEvent);
             return 1;
 

@@ -12,4 +12,8 @@ public interface IConfig {
     String getGoogleApiUrl();
 
     String getFrontendHost();
+
+    String getGoogleMail();
+
+    String getGooglePassword();
 }
