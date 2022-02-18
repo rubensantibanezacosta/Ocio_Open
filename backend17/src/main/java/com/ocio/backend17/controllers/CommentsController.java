@@ -40,8 +40,6 @@ public class CommentsController {
             return new ResponseEntity<>(new ResponseMessage("Fields cannot be empty"), HttpStatus.BAD_REQUEST);
         } else {
             comment.setAssistant(extractHeaderData.extractJWTUsername(headers));
-           
-            System.out.println(String.valueOf((int)comment.getEvent_id()));
             return new ResponseEntity<>(commentsImpl.addComment(comment), HttpStatus.CREATED);
         }
     }
@@ -56,7 +54,7 @@ public class CommentsController {
     @PreAuthorize("hasAuthority('delete:comments')")
     @DeleteMapping("/api/comments/{comment_id}/{index}")
     @ResponseBody
-    ResponseEntity<?> deleteByEmail(@PathVariable("comment_id") Double id, @PathVariable("index") int index,
+    ResponseEntity<?> deleteByEmail(@PathVariable("comment_id") long id, @PathVariable("index") int index,
                                     @RequestHeader HttpHeaders headers) {
         if (commentsImpl.findbyId(id).isPresent() && commentsImpl.findbyId(id).get().getAssistant()
                 .equals(extractHeaderData.extractJWTUsername(headers))) {

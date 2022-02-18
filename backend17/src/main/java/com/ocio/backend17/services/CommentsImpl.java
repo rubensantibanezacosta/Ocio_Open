@@ -32,7 +32,7 @@ public class CommentsImpl implements IComments {
     }
 
     @Override
-    public int deleteById(Double id) {
+    public int deleteById(long id) {
         if (commentsDao.existsById(id)) {
             commentsDao.deleteById(id);
             return 1;
@@ -42,7 +42,7 @@ public class CommentsImpl implements IComments {
     }
 
     @Override
-    public Optional<Comments> findbyId(Double id) {
+    public Optional<Comments> findbyId(long id) {
         return commentsDao.findById(id);
     }
 }

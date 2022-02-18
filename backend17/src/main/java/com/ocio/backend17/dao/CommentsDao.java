@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CommentsDao extends CrudRepository<Comments, Double> {
+public interface CommentsDao extends CrudRepository<Comments, Long> {
     @Query("Select u from Comments u where u.event_id=?1")
     List<Comments> findByEvent_id(Double event_id);
 }
