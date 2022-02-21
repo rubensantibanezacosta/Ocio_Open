@@ -85,7 +85,7 @@ public class BasicAuthController {
             return new ResponseEntity<>(new ResponseMessage("Bad Credentials Null"), HttpStatus.UNAUTHORIZED);
         } catch (Exception e) {
             logger.error(e.getMessage());
-            return new ResponseEntity<>(new ResponseMessage("Unknown error"), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(new ResponseMessage("Unknown error: " + e.getMessage()), HttpStatus.UNAUTHORIZED);
         }
 
     }

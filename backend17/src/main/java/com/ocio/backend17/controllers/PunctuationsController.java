@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class PunctuationsController {
     AvgPunctuationUpdater avgPunctuationUpdater;
 
     @PreAuthorize("hasAnyAuthority('create:punctuations','update:punctuations')")
+    @Transactional
     @PostMapping(value = "/api/punctuations", consumes = "application/json")
     @ResponseBody
     ResponseEntity<?> createOrUpdatePuntuation(@RequestBody String jsonPunctuation, @RequestHeader HttpHeaders headers)

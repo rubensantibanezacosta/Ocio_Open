@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.transaction.Transactional;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -22,6 +24,7 @@ public class ImagesController {
     FileImpl fileImpl;
 
     @PreAuthorize("hasAuthority('create:images')")
+    @Transactional
     @PostMapping(value = "/api/images", consumes = "multipart/form-data")
     @ResponseBody
     ResponseEntity<?> uploadImage(@RequestParam("uploadedImage") List<MultipartFile> forms, @RequestHeader HttpHeaders headers) {
@@ -57,6 +60,7 @@ public class ImagesController {
     }
 
     @PreAuthorize("hasAuthority('delete:images')")
+    @Transactional
     @DeleteMapping("/api/images/{id}")
     ResponseEntity<?> deleteImage(@PathVariable int id) {
         try {
