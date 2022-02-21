@@ -1,4 +1,3 @@
-
 #Data source
 #Indica el driver/lib para conectar java a mysql
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
@@ -26,7 +25,12 @@ value.userrolekey=
 value.jwtsecret=secret
 #Tiempo de expiraciï¿½n en minutos
 value.expirationTime=600
-#Dominios aceptados
+#Dominios aceptados separados por comas, sin espacios
 value.accepted.domains=
 #Value
 value.google.url.tokenvalidation=https://oauth2.googleapis.com/tokeninfo?id_token=
+
+#mailing account
+value.google.mail=
+value.google.mail.password
+
